@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <LangVersion>7.1</LangVersion>
+    <Description>Contains default page objects for NopCommerce sites.</Description>
+    <FileVersion>1.0.1.0</FileVersion>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\alexc\Documents\GitHub\ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ApertureLabs.Selenium" Version="1.0.41" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Nop_3_5\" />
+    <Folder Include="Nop_3_7\" />
+    <Folder Include="Nop_3_8\" />
+    <Folder Include="Nop_4_1\" />
+    <Folder Include="Shared\" />
+  </ItemGroup>
+
+</Project>
