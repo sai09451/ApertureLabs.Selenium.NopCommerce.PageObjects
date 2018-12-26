@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ApertureLabs.Selenium.NopCommerce.PageObjects/bin
+/ApertureLabs.Selenium.NopCommerce.PageObjects/obj

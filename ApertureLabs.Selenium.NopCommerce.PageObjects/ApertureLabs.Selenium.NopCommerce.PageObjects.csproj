@@ -1,15 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>7.1</LangVersion>
     <Description>Contains default page objects for NopCommerce sites.</Description>
     <FileVersion>1.0.1.0</FileVersion>
     <Version>1.0.1</Version>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <Company>Aperture Labs</Company>
+    <Authors>alex.hayes@aperturelabs.biz</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\alexc\Documents\GitHub\ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\alexc\Documents\GitHub\ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects.xml</DocumentationFile>
   </PropertyGroup>
 
@@ -22,7 +29,6 @@
     <Folder Include="Nop_3_7\" />
     <Folder Include="Nop_3_8\" />
     <Folder Include="Nop_4_1\" />
-    <Folder Include="Shared\" />
   </ItemGroup>
 
 </Project>
