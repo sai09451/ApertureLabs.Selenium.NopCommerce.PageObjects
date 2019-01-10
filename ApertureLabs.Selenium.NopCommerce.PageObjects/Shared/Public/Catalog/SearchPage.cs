@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Factories;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog;
@@ -13,7 +14,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// <summary>
     /// SearchPage.
     /// </summary>
-    public class SearchPage : BasePage
+    public class SearchPage : HomePage
     {
         #region Fields
 
@@ -22,7 +23,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         private readonly By searchTermInputSelector = By.CssSelector("#q");
         private readonly By advancedSearchSelector = By.CssSelector("#adv");
         private readonly By categorySelector = By.CssSelector("#cid");
-        private readonly By searchSubCatSelector = By.CssSelector("isc");
+        private readonly By searchSubCatSelector = By.CssSelector("#isc");
         private readonly By priceFromSelector = By.CssSelector("#pf");
         private readonly By priceToSelector = By.CssSelector("#pt");
         private readonly By searchInProductDescSelector = By.CssSelector("#sid");
