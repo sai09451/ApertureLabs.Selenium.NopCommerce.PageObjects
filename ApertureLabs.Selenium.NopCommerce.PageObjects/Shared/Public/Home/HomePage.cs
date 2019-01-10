@@ -18,10 +18,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
         /// <summary>
         /// Ctor.
         /// </summary>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="driver"></param>
         /// <param name="pageSettings"></param>
-        public HomePage(IWebDriver driver, PageSettings pageSettings)
-            : base(driver, pageSettings)
+        public HomePage(IPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(pageObjectFactory, driver, pageSettings)
         { }
 
         #endregion
@@ -37,12 +40,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
         {
             WrappedDriver.Navigate().GoToUrl(Uri);
             return Load();
-        }
-
-        /// <inheritdoc/>
-        public override ILoadableComponent Load()
-        {
-            return base.Load();
         }
 
         #endregion

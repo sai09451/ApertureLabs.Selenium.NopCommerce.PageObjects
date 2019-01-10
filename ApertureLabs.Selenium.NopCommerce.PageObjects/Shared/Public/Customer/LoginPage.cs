@@ -29,10 +29,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <summary>
         /// Ctor.
         /// </summary>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="driver"></param>
         /// <param name="pageSettings"></param>
-        public LoginPage(IWebDriver driver, PageSettings pageSettings)
-            : base(driver, pageSettings)
+        public LoginPage(IPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(pageObjectFactory,
+                  driver,
+                  pageSettings)
         {
             Uri = new Uri(Uri.ToString() + "login", UriKind.Absolute);
             emailSelector = By.CssSelector(".email");
@@ -168,8 +173,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             }
             else
             {
-                var homePage = new HomePage(WrappedDriver, null);
-                homePage.Load();
+                var homePage = PageObjectFactory.PreparePage<HomePage>();
                 success(homePage);
             }
         }

@@ -10,9 +10,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
     {
         #region Fields
 
-        private static IPageObjectFactory PageObjectFactory;
         private static IWebDriver Driver;
         private static WebDriverFactory WebDriverFactory;
+
+        private IPageObjectFactory pageObjectFactory;
 
         #endregion
 
@@ -21,11 +22,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [ClassInitialize]
         public static void Setup(TestContext testContext)
         {
-            PageObjectFactory = new PageObjectFactory();
             WebDriverFactory = new WebDriverFactory();
             Driver = WebDriverFactory.CreateDriver(
                 MajorWebDriver.Chrome,
                 WindowSize.DefaultDesktop);
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            pageObjectFactory = new PageObjectFactory(Driver);
         }
 
         #endregion

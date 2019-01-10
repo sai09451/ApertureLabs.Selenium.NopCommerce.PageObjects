@@ -1,11 +1,10 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Factories;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.ProductBreadCrumb
 {
@@ -22,6 +21,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Produc
 
         #endregion
 
+        private readonly IPageObjectFactory pageObjectFactory;
         private readonly PageSettings pageSettings;
 
         #endregion
@@ -33,12 +33,21 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Produc
         /// </summary>
         /// <param name="pageSettings"></param>
         /// <param name="driver"></param>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="selector"></param>
-        public ProductBreadCrumbComponent(PageSettings pageSettings,
+        public ProductBreadCrumbComponent(
+            IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
+            PageSettings pageSettings,
             By selector = null)
             : base(driver, selector ?? By.CssSelector(".breadcrumb"))
         {
+            if (pageSettings == null)
+                throw new ArgumentNullException(nameof(pageSettings));
+            else if (pageObjectFactory == null)
+                throw new ArgumentNullException(nameof(pageObjectFactory));
+
+            this.pageObjectFactory = pageObjectFactory;
             this.pageSettings = pageSettings;
         }
 
@@ -88,14 +97,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Produc
                     StringComparison.OrdinalIgnoreCase))
                 .Click();
 
-            return new CustomPageObjectFactory()
-                .PreparePage(new SearchPage(WrappedDriver, pageSettings));
-        }
-
-        /// <inheritdoc/>
-        public override bool IsStale()
-        {
-            throw new NotImplementedException();
+            return pageObjectFactory.PreparePage<SearchPage>();
         }
 
         #endregion

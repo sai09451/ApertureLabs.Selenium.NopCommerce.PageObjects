@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Factories;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog;
@@ -14,7 +13,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// <summary>
     /// SearchPage.
     /// </summary>
-    public class SearchPage : HomePage
+    public class SearchPage : SearchResultsTemplatePage
     {
         #region Fields
 
@@ -28,11 +27,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         private readonly By priceToSelector = By.CssSelector("#pt");
         private readonly By searchInProductDescSelector = By.CssSelector("#sid");
         private readonly By searchButtonSelector = By.CssSelector(".buttons input[type=\"submit\"]");
-        private readonly By searchResultsSelector = By.CssSelector(".item-box");
 
         #endregion
-
-        private readonly CustomPageObjectFactory pageObjectFactory;
 
         #endregion
 
@@ -43,11 +39,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="settings"></param>
-        public SearchPage(IWebDriver driver, PageSettings settings)
-            : base(driver, settings)
-        {
-            pageObjectFactory = new CustomPageObjectFactory();
-        }
+        /// <param name="pageObjectFactory"></param>
+        public SearchPage(CustomPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings settings)
+            : base(pageObjectFactory,
+                  driver,
+                  settings)
+        { }
 
         #endregion
 
@@ -58,7 +57,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         private PagerComponent PagerComponent => new PagerComponent(WrappedDriver, By.CssSelector(".pager"));
         private CatalogPagingFilterComponent PagingFilterComponent => new CatalogPagingFilterComponent(WrappedDriver, By.CssSelector(".search-input"));
         private IWebElement SearchButtonElement => WrappedDriver.FindElement(searchButtonSelector);
-        private IList<IWebElement> SearchResultItemElements => WrappedDriver.FindElements(searchResultsSelector);
 
         #endregion
 
@@ -83,21 +81,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             Load();
 
             return this;
-        }
-
-        /// <summary>
-        /// Retrieves the items listed.
-        /// </summary>
-        /// <returns></returns>
-        public virtual IList<SearchResult> GetResults()
-        {
-            return SearchResultItemElements
-                .Select(element => pageObjectFactory
-                    .PrepareComponent(new SearchResult(
-                        searchResultsSelector,
-                        element,
-                        PageSettings)))
-                .ToList();
         }
 
         #endregion

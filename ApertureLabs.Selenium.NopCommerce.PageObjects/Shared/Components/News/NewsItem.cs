@@ -81,7 +81,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News
         /// <returns></returns>
         public string GetDescription()
         {
-            return PanelBodyElement.GetTextHelper().InnerHtml;
+            return PanelBodyElement.TextHelper().InnerHtml;
         }
 
         /// <summary>

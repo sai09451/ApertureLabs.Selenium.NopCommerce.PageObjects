@@ -66,11 +66,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         {
             LinkToAdministrationElement.Click();
 
-            return pageObjectFactory.PreparePage(
-                new HomePage(
-                    WrappedDriver,
-                    pageSettings,
-                    pageObjectFactory));
+            return pageObjectFactory.PreparePage<HomePage>();
         }
 
         /// <summary>

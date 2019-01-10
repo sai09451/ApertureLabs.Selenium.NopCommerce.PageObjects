@@ -16,6 +16,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
     {
         #region Fields
 
+        private readonly IPageObjectFactory pageObjectFactory;
+
         #region Selectors
 
         private readonly By CustomerInfoSelector = By.CssSelector(".ico-account");
@@ -41,10 +43,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// <summary>
         /// Ctor.
         /// </summary>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="driver"></param>
-        public HeaderLinksComponent(IWebDriver driver)
+        public HeaderLinksComponent(IPageObjectFactory pageObjectFactory,
+            IWebDriver driver)
             : base(driver, By.CssSelector(".header-links"))
-        { }
+        {
+            this.pageObjectFactory = pageObjectFactory;
+        }
 
         #endregion
 
@@ -68,37 +74,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
 
         #endregion
 
-        /// <inheritdoc/>
-        public HeaderLinksModel ViewModel
-        {
-            get
-            {
-                var wait = WrappedDriver.Wait(TimeSpan.FromSeconds(30));
-
-                var isLoggedIn = wait.Exists(LogoutSelector.ToString());
-                var hasShoppingCartItems = wait.Exists(ShoppingCartSelector);
-                var hasPrivateMessages = wait.Exists(PrivateMessagesSelector);
-
-                var model = new HeaderLinksModel
-                {
-                    IsAuthenticated = isLoggedIn,
-                    CustomerName = isLoggedIn
-                        ? CustomerInfoElement.Text
-                        : null,
-                    ShoppingCartEnabled = hasShoppingCartItems,
-                    ShoppingCartItems = hasShoppingCartItems
-                        ? ShoppingCartQtyElement.GetTextHelper().ExtractInteger()
-                        : 0,
-                    AllowPrivateMessages = hasPrivateMessages,
-                    UnreadPrivateMessages = hasPrivateMessages
-                        ? PrivateMessageLabelElement.Text
-                        : null
-                };
-
-                return model;
-            }
-        }
-
         /// <summary>
         /// Returns true if a user is signed into the site.
         /// </summary>
@@ -107,6 +82,34 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         #endregion
 
         #region Methods
+
+        /// <inheritdoc/>
+        public HeaderLinksModel ViewModel()
+        {
+            var wait = WrappedDriver.Wait(TimeSpan.FromSeconds(30));
+
+            var isLoggedIn = wait.Exists(LogoutSelector.ToString());
+            var hasShoppingCartItems = wait.Exists(ShoppingCartSelector);
+            var hasPrivateMessages = wait.Exists(PrivateMessagesSelector);
+
+            var model = new HeaderLinksModel
+            {
+                IsAuthenticated = isLoggedIn,
+                CustomerName = isLoggedIn
+                    ? CustomerInfoElement.Text
+                    : null,
+                ShoppingCartEnabled = hasShoppingCartItems,
+                ShoppingCartItems = hasShoppingCartItems
+                    ? ShoppingCartQtyElement.TextHelper().ExtractInteger()
+                    : 0,
+                AllowPrivateMessages = hasPrivateMessages,
+                UnreadPrivateMessages = hasPrivateMessages
+                    ? PrivateMessageLabelElement.Text
+                    : null
+            };
+
+            return model;
+        }
 
         /// <summary>
         /// Logs in.
@@ -121,8 +124,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
 
             HomePage homePage = null;
 
-            var loginPage = new LoginPage(WrappedDriver, null);
-            loginPage.Load(true);
+            var loginPage = pageObjectFactory.PreparePage<LoginPage>();
 
             //loginPage.EnterEmail($"++{email}");
             loginPage.EnterEmail(email);
@@ -130,8 +132,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
             loginPage.ClickLogin(
                 _homePage => homePage = _homePage, // On success handler
                 _loginPage => throw new Exception( // On error handler
-                    String.Join(", ",
-                    _loginPage.Errors)));
+                    String.Join(", ", _loginPage.Errors)));
 
             return homePage;
         }

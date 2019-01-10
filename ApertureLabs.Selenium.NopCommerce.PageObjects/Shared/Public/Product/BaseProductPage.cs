@@ -38,8 +38,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
 
         #endregion
 
-        private readonly IPageObjectFactory pageObjectFactory;
-
         #endregion
 
         #region Constructor
@@ -47,13 +45,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Ctor.
         /// </summary>
+        /// <param name="customPageObjectFactory"></param>
         /// <param name="driver"></param>
         /// <param name="settings"></param>
-        public BaseProductPage(IWebDriver driver, PageSettings settings)
-            : base(driver, settings)
-        {
-            pageObjectFactory = new CustomPageObjectFactory();
-        }
+        public BaseProductPage(CustomPageObjectFactory customPageObjectFactory,
+            IWebDriver driver,
+            PageSettings settings)
+            : base(customPageObjectFactory,
+                  driver,
+                  settings)
+        { }
 
         #endregion
 
@@ -97,35 +98,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         #endregion
 
         /// <summary>
-        /// ViewModel.
-        /// </summary>
-        public ProductDetailsModel ViewModel
-        {
-            get
-            {
-                var model = new ProductDetailsModel
-                {
-                    Name = ProductNameElement.Text.Trim(),
-                    ShortDescription = ShortDescriptionElement.Text.Trim(),
-                    FullDescription = FullDescriptionElement.Text.Trim(),
-                    MetaDescription = MetaDescriptionElement.Content,
-                    MetaKeywords = MetaKeywordsElement.Content,
-                    SeName = ProductFormElement.GetAttribute("action")
-                };
-
-                return model;
-            }
-        }
-
-        /// <summary>
         /// Retrieves the bread crumb.
         /// </summary>
         public ProductBreadCrumbComponent BreadCrumb
         {
             get
             {
-                return pageObjectFactory.PrepareComponent(
-                    new ProductBreadCrumbComponent(PageSettings, WrappedDriver));
+                return PageObjectFactory.PrepareComponent(
+                    new ProductBreadCrumbComponent(PageObjectFactory,
+                        WrappedDriver,
+                        PageSettings));
             }
         }
 
@@ -150,7 +132,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         {
             get
             {
-                return pageObjectFactory.PrepareComponent(
+                return PageObjectFactory.PrepareComponent(
                     new ChallengeCodeComponent(
                         WrappedDriver,
                         By.CssSelector(".coupon-box")));
@@ -160,6 +142,24 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// ViewModel.
+        /// </summary>
+        public ProductDetailsModel ViewModel()
+        {
+            var model = new ProductDetailsModel
+            {
+                Name = ProductNameElement.Text.Trim(),
+                ShortDescription = ShortDescriptionElement.Text.Trim(),
+                FullDescription = FullDescriptionElement.Text.Trim(),
+                MetaDescription = MetaDescriptionElement.Content,
+                MetaKeywords = MetaKeywordsElement.Content,
+                SeName = ProductFormElement.GetAttribute("action")
+            };
+
+            return model;
+        }
 
         /// <summary>
         /// Retrieves a list of all payment plan options.

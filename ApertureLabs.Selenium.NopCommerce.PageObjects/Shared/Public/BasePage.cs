@@ -31,6 +31,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// </summary>
         public readonly PageSettings PageSettings;
 
+        /// <summary>
+        /// The page object factory.
+        /// </summary>
+        public readonly IPageObjectFactory PageObjectFactory;
+
         #endregion
 
         #region Constructor
@@ -38,13 +43,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// <summary>
         /// Ctor.
         /// </summary>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="driver"></param>
         /// <param name="pageSettings"></param>
-        public BasePage(IWebDriver driver, PageSettings pageSettings) : base(driver)
+        public BasePage(
+            IPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver)
         {
-            this.PageSettings = pageSettings;
+            PageObjectFactory = pageObjectFactory;
+            PageSettings = pageSettings;
             Uri = new Uri(pageSettings.BaseUrl, UriKind.Absolute);
-            headerLinks = new HeaderLinksComponent(WrappedDriver);
+            headerLinks = new HeaderLinksComponent(pageObjectFactory, WrappedDriver);
         }
 
         #endregion
@@ -81,7 +92,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
                 WrappedDriver.Navigate().GoToUrl(logoutUrl);
             }
 
-            var homePage = new HomePage(WrappedDriver, null);
+            var homePage = PageObjectFactory.PreparePage<HomePage>();
             homePage.Load(true);
 
             return homePage;
@@ -120,9 +131,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
             SearchBoxElement.SetValue(searchFor);
             SearchBoxButtonElement.Click();
 
-            var searchPage = new SearchPage(WrappedDriver, PageSettings);
-            searchPage.Load();
-            return searchPage;
+            return PageObjectFactory.PreparePage<SearchPage>();
         }
 
         /// <summary>

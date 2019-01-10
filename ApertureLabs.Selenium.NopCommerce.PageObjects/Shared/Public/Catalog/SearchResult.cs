@@ -22,6 +22,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
 
         #endregion
 
+        private readonly IPageObjectFactory pageObjectFactory;
         private readonly PageSettings pageSettings;
 
         #endregion
@@ -32,13 +33,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Ctor.
         /// </summary>
         /// <param name="selector"></param>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="element"></param>
         /// <param name="pageSettings"></param>
         public SearchResult(By selector,
+            IPageObjectFactory pageObjectFactory,
             IWebElement element,
             PageSettings pageSettings)
         {
             this.By = selector;
+            this.pageObjectFactory = pageObjectFactory;
             this.pageSettings = pageSettings;
             this.WrappedDriver = element.GetDriver();
             this.WrappedElement = element;
@@ -73,7 +77,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Price of the product.
         /// </summary>
-        public decimal Price => PriceElement.GetTextHelper().ExtractPrice();
+        public decimal Price => PriceElement.TextHelper().ExtractPrice();
 
         /// <summary>
         /// Url of the image.
@@ -99,24 +103,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             var link = WrappedElement.FindElement(nameSelector);
             link.Click();
 
-            var page = new BaseProductPage(WrappedDriver, pageSettings);
-            page.Load();
-
-            return page;
+            return pageObjectFactory.PreparePage<BaseProductPage>();
         }
 
         /// <inheritdoc/>
         public bool IsStale()
         {
-            try
-            {
-                WrappedElement.GetAttribute("any");
-                return false;
-            }
-            catch
-            {
-                return true;
-            }
+            return WrappedElement.IsStale();
         }
 
         #endregion
