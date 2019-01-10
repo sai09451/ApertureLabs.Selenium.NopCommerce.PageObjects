@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog
+﻿namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog
 {
     /// <summary>
     /// SearchModel.
@@ -10,14 +6,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.
     public class SearchModel
     {
         /// <summary>
-        /// Query string
+        /// Query string.
         /// </summary>
         public string SearchTerm { get; set; }
 
         /// <summary>
-        /// Category ID
+        /// Category name.
         /// </summary>
-        public int Category { get; set; }
+        public string Category { get; set; }
 
         /// <summary>
         /// Include subcategories.
@@ -25,37 +21,37 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.
         public bool IncludeSubCategories { get; set; }
 
         /// <summary>
-        /// Manufacturer ID
+        /// Manufacturer name.
         /// </summary>
-        public int Manufacturer { get; set; }
+        public string Manufacturer { get; set; }
 
         /// <summary>
-        /// Vendor ID
+        /// Vendor name.
         /// </summary>
-        public int Vendor { get; set; }
+        public string Vendor { get; set; }
 
         /// <summary>
-        /// Price - From 
+        /// Price - From.
         /// </summary>
-        public string PriceFrom { get; set; }
+        public decimal? PriceFrom { get; set; }
 
         /// <summary>
-        /// Price - To
+        /// Price - To.
         /// </summary>
-        public string PriceTo { get; set; }
+        public decimal? PriceTo { get; set; }
 
         /// <summary>
-        /// A value indicating whether to search in descriptions
+        /// A value indicating whether to search in descriptions.
         /// </summary>
         public bool SearchInDescriptions { get; set; }
 
         /// <summary>
-        /// A value indicating whether "advanced search" is enabled
+        /// A value indicating whether "advanced search" is enabled.
         /// </summary>
         public bool AdvancedSearch { get; set; }
 
         /// <summary>
-        /// A value indicating whether "allow search by vendor" is enabled
+        /// A value indicating whether "allow search by vendor" is enabled.
         /// </summary>
         public bool AllowSearchByVendor { get; set; }
     }

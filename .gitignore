@@ -5,3 +5,4 @@
 /.vs
 /ApertureLabs.Selenium.NopCommerce.PageObjects/bin
 /ApertureLabs.Selenium.NopCommerce.PageObjects/obj
+/ApertureLabs.Selenium.NopCommerce.PO.Tests/obj

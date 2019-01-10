@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApertureLabs.Selenium.NopCommerce.PageObjects", "ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects.csproj", "{3F084246-33D2-42E4-8A2F-4E2ADD316323}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApertureLabs.Selenium.NopCommerce.PageObjects", "ApertureLabs.Selenium.NopCommerce.PageObjects\ApertureLabs.Selenium.NopCommerce.PageObjects.csproj", "{3F084246-33D2-42E4-8A2F-4E2ADD316323}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApertureLabs.Selenium.NopCommerce.PO.Tests", "ApertureLabs.Selenium.NopCommerce.PO.Tests\ApertureLabs.Selenium.NopCommerce.PO.Tests.csproj", "{453CA96A-2289-4E1F-8B49-0B944538185E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3F084246-33D2-42E4-8A2F-4E2ADD316323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F084246-33D2-42E4-8A2F-4E2ADD316323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F084246-33D2-42E4-8A2F-4E2ADD316323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{453CA96A-2289-4E1F-8B49-0B944538185E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{453CA96A-2289-4E1F-8B49-0B944538185E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{453CA96A-2289-4E1F-8B49-0B944538185E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{453CA96A-2289-4E1F-8B49-0B944538185E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

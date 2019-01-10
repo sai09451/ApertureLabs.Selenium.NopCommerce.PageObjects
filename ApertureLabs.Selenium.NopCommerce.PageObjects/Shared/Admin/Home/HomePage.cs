@@ -1,9 +1,6 @@
 ﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
 {
@@ -34,10 +31,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         /// <param name="pageObjectFactory"></param>
         public HomePage(IWebDriver driver,
             PageSettings pageSettings,
-            PageObjectFactory pageObjectFactory = null)
+            IPageObjectFactory pageObjectFactory)
             : base(driver, pageSettings)
         {
-            pageObjectFactory = new PageObjectFactory();
+            this.pageObjectFactory = pageObjectFactory;
         }
 
         #endregion

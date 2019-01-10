@@ -1,4 +1,6 @@
-﻿using ApertureLabs.Selenium.PageObjects;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using System;
 using System.Linq;
@@ -12,6 +14,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
     {
         #region Fields
 
+        private readonly IPageObjectFactory pageObjectFactory;
+        private readonly PageSettings pageSettings;
+
         #region Selectors
 
         private readonly By LinkToAdministrationSelector = By.CssSelector(".administration");
@@ -24,12 +29,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         #region Contructor
 
         /// <summary>
-        /// Ctor
+        /// Ctor.
         /// </summary>
         /// <param name="driver"></param>
-        public AdminHeaderLinksComponent(IWebDriver driver)
+        /// <param name="pageSettings"></param>
+        /// <param name="pageObjectFactory"></param>
+        public AdminHeaderLinksComponent(IWebDriver driver,
+            PageSettings pageSettings,
+            IPageObjectFactory pageObjectFactory)
             : base(driver, By.CssSelector(".admin-header-links"))
-        { }
+        {
+            this.pageSettings = pageSettings;
+            this.pageObjectFactory = pageObjectFactory;
+        }
 
         #endregion
 
@@ -46,22 +58,36 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
 
         #region Methods
 
-        public PageObject GoToAdmin()
+        /// <summary>
+        /// Goes to the admin page.
+        /// </summary>
+        /// <returns></returns>
+        public virtual HomePage GoToAdmin()
         {
             LinkToAdministrationElement.Click();
+
+            return pageObjectFactory.PreparePage(
+                new HomePage(
+                    WrappedDriver,
+                    pageSettings,
+                    pageObjectFactory));
         }
 
         /// <summary>
         /// Checks if the 'Manage Page' link is available.
         /// </summary>
         /// <returns></returns>
-        public bool CanManagePage()
+        public virtual bool CanManagePage()
         {
             return WrappedElement.FindElements(LinkToManagePageSelector).Any();
         }
 
-        /// <inheritdoc/>
-        public override bool IsStale()
+        /// <summary>
+        /// Navigates to the edit product page on the admin.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual PageObject ManagePage()
         {
             throw new NotImplementedException();
         }
