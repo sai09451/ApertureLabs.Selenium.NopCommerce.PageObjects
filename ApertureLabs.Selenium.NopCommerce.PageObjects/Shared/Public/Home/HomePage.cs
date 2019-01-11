@@ -1,4 +1,5 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -9,10 +10,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
     /// </summary>
     public class HomePage : BasePage
     {
-        #region Fields
-
-        #endregion
-
         #region Constructor
 
         /// <summary>

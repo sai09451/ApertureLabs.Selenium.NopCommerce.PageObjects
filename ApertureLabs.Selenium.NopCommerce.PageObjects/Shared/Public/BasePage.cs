@@ -1,4 +1,5 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
@@ -16,6 +17,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
     public abstract class BasePage : PageObject
     {
         #region Fields
+
+        private readonly AdminHeaderLinksComponent adminHeaderLinks;
 
         #region Selectors
 
@@ -56,11 +59,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
             PageSettings = pageSettings;
             Uri = new Uri(pageSettings.BaseUrl, UriKind.Absolute);
             headerLinks = new HeaderLinksComponent(pageObjectFactory, WrappedDriver);
+            adminHeaderLinks = new AdminHeaderLinksComponent(
+                WrappedDriver,
+                PageSettings,
+                PageObjectFactory);
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets the admin header links.
+        /// </summary>
+        public AdminHeaderLinksComponent AdminHeaderLinks => PageObjectFactory.PrepareComponent(adminHeaderLinks);
 
         #region Elements
 
@@ -76,8 +88,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// <inheritdoc/>
         public override ILoadableComponent Load()
         {
+            base.Load();
             headerLinks.Load();
-            return base.Load();
+
+            return this;
         }
 
         /// <summary>

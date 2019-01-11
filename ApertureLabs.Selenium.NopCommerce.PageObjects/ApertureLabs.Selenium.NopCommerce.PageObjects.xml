@@ -518,6 +518,11 @@
             <param name="driver"></param>
             <param name="pageSettings"></param>
         </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage.Load">
             <inheritdoc/>
         </member>
@@ -571,6 +576,12 @@
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage.GetCategories">
             <summary>
             Gets the categories.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage.GetCurrentCategory">
+            <summary>
+            Gets the current category.
             </summary>
             <returns></returns>
         </member>
@@ -658,6 +669,20 @@
             <param name="manufacturer">The manufacturer.</param>
             <param name="stringComparison">The string comparison.</param>
             <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.ProductsByCategoryPage">
+            <summary>
+            Corresponds to the view CategoryTemplate.ProductsInGridOrLines.cshtml.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultsTemplatePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.ProductsByCategoryPage.#ctor(ApertureLabs.Selenium.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.ProductsByCategoryPage"/> class.
+            </summary>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.ProductsByManufacturerPage">
             <summary>

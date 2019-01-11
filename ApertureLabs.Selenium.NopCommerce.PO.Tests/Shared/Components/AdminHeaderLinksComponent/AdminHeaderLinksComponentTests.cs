@@ -1,5 +1,8 @@
 ﻿using System;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 
@@ -10,10 +13,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
     {
         #region Fields
 
-        private static IWebDriver Driver;
         private static WebDriverFactory WebDriverFactory;
 
         private IPageObjectFactory pageObjectFactory;
+        private IWebDriver driver;
 
         #endregion
 
@@ -23,15 +26,36 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         public static void Setup(TestContext testContext)
         {
             WebDriverFactory = new WebDriverFactory();
-            Driver = WebDriverFactory.CreateDriver(
-                MajorWebDriver.Chrome,
-                WindowSize.DefaultDesktop);
+        }
+
+        [ClassCleanup]
+        public static void Cleanup()
+        {
+            WebDriverFactory.Dispose();
         }
 
         [TestInitialize]
         public void TestInitialize()
         {
-            pageObjectFactory = new PageObjectFactory(Driver);
+            driver = WebDriverFactory.CreateDriver(
+                MajorWebDriver.Chrome,
+                WindowSize.DefaultDesktop);
+
+            var serviceCollection = new ServiceCollection();
+
+            serviceCollection.AddSingleton(driver);
+            serviceCollection.AddSingleton(new PageSettings
+            {
+                BaseUrl = "http://local.aperturelabs.nop-demo-store-a.biz"
+            });
+
+            pageObjectFactory = new PageObjectFactory(serviceCollection);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            driver.Dispose();
         }
 
         #endregion
@@ -41,7 +65,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [TestMethod]
         public void AdminHeaderLinksComponentTest()
         {
-            throw new NotImplementedException();
+            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            homePage.Login("alex.hayes@aperturelabs.biz", "password");
+            var headerLinks = homePage.AdminHeaderLinks;
+
+            Assert.IsNotNull(headerLinks);
         }
 
         [TestMethod]
