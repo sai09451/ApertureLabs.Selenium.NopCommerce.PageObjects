@@ -49,5 +49,15 @@
         /// AlertMessage.
         /// </summary>
         public string AlertMessage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the currency.
+        /// </summary>
+        public string Currency { get; set; }
+
+        /// <summary>
+        /// Gets or sets the language.
+        /// </summary>
+        public string Language { get; set; }
     }
 }

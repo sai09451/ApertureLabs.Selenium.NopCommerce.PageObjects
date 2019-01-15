@@ -6,6 +6,7 @@ using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using System;
 using System.Linq;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks
 {
@@ -33,6 +34,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         private readonly By ShoppingCartSelector = By.CssSelector(".ico-cart");
         private readonly By ShoppingCartLabelSelector = By.CssSelector(".ico-cart + .cart-label");
         private readonly By ShoppingCartQtySelector = By.CssSelector(".ico-cart + .cart-qty");
+        private readonly By CurrencySelector = By.CssSelector(".currency-selector > #customerCurrency");
+        private readonly By LanguageSelector = By.CssSelector(".language-selector > #customerlanguage");
 
         #endregion
 
@@ -71,6 +74,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         private IWebElement ShoppingCartElement => WrappedDriver.FindElement(ShoppingCartSelector);
         private IWebElement ShoppingCartLabelElement => ShoppingCartElement.FindElement(ShoppingCartLabelSelector);
         private IWebElement ShoppingCartQtyElement => ShoppingCartElement.FindElement(ShoppingCartQtySelector);
+        private SelectElement CurrencyElement => new SelectElement(WrappedElement.FindElement(CurrencySelector));
+        private SelectElement LanguageElement => new SelectElement(WrappedElement.FindElement(LanguageSelector));
 
         #endregion
 
@@ -91,6 +96,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
             var isLoggedIn = wait.Exists(LogoutSelector.ToString());
             var hasShoppingCartItems = wait.Exists(ShoppingCartSelector);
             var hasPrivateMessages = wait.Exists(PrivateMessagesSelector);
+            var hasWishList = WrappedDriver.FindElements(WishListSelector).Any();
 
             var model = new HeaderLinksModel
             {
@@ -105,10 +111,100 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
                 AllowPrivateMessages = hasPrivateMessages,
                 UnreadPrivateMessages = hasPrivateMessages
                     ? PrivateMessageLabelElement.Text
-                    : null
+                    : null,
+                WishlistEnabled = hasWishList,
+                WishlistItems = hasWishList
+                    ? WishListQtyElement.TextHelper().ExtractInteger()
+                    : 0,
+                Currency = CurrencyElement.SelectedOption.TextHelper().InnerText,
+                Language = LanguageElement.SelectedOption.TextHelper().InnerText
             };
 
             return model;
+        }
+
+        /// <summary>
+        /// Sets the currency.
+        /// </summary>
+        /// <param name="currency">The currency.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        /// <returns></returns>
+        /// <exception cref="NoSuchElementException"></exception>
+        public HeaderLinksComponent SetCurrency(string currency,
+            StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            var alreadySelected = String.Equals(
+                CurrencyElement.SelectedOption.TextHelper().InnerText,
+                currency,
+                stringComparison);
+
+            if (alreadySelected)
+                return this;
+
+            var newEl = CurrencyElement.Options
+                .Select((element, index) => new { element, index })
+                .FirstOrDefault(opt => String.Equals(
+                    opt.element.TextHelper().InnerText,
+                    currency,
+                    stringComparison));
+
+            if (newEl == null)
+                throw new NoSuchElementException();
+
+            CurrencyElement.SelectByIndex(newEl.index);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Gets the currency.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCurrency()
+        {
+            return CurrencyElement.SelectedOption.TextHelper().InnerText;
+        }
+
+        /// <summary>
+        /// Sets the language.
+        /// </summary>
+        /// <param name="language">The language.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        /// <returns></returns>
+        /// <exception cref="NoSuchElementException"></exception>
+        public HeaderLinksComponent SetLanguage(string language,
+            StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            var alreadySelected = String.Equals(
+                LanguageElement.SelectedOption.TextHelper().InnerText,
+                language,
+                stringComparison);
+
+            if (alreadySelected)
+                return this;
+
+            var newEl = LanguageElement.Options
+                .Select((element, index) => new { element, index })
+                .FirstOrDefault(opt => String.Equals(
+                    opt.element.TextHelper().InnerText,
+                    language,
+                    stringComparison));
+
+            if (newEl == null)
+                throw new NoSuchElementException();
+
+            LanguageElement.SelectByIndex(newEl.index);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Gets the language.
+        /// </summary>
+        /// <returns></returns>
+        public string GetLanguage()
+        {
+            return LanguageElement.SelectedOption.TextHelper().InnerText;
         }
 
         /// <summary>
@@ -119,10 +215,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// <returns></returns>
         public HomePage Login(string email, string password)
         {
-            var cookie = WrappedDriver.Manage().Cookies
-                .GetCookieNamed("Nop.Customer");
+            //var cookie = WrappedDriver.Manage().Cookies
+            //    .GetCookieNamed("Nop.Authentication");
 
             HomePage homePage = null;
+
+            if (IsLoggedIn)
+                LogoutElement.Click();
+
+            if (!WrappedDriver.Url.EndsWith("login"))
+                LoginElement.Click();
 
             var loginPage = pageObjectFactory.PreparePage<LoginPage>();
 
@@ -135,12 +237,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
                     String.Join(", ", _loginPage.Errors)));
 
             return homePage;
-        }
-
-        /// <inheritdoc/>
-        public override bool IsStale()
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

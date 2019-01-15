@@ -40,7 +40,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <param name="driver"></param>
         /// <param name="settings"></param>
         /// <param name="pageObjectFactory"></param>
-        public SearchPage(CustomPageObjectFactory pageObjectFactory,
+        public SearchPage(IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings settings)
             : base(pageObjectFactory,

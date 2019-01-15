@@ -116,7 +116,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         }
 
         /// <summary>
-        /// Gets the display options.
+        /// Gets all 'Display per page' options.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<int> GetDisplayOptions()
@@ -128,7 +128,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         }
 
         /// <summary>
-        /// Gets the current display option.
+        /// Gets the current 'Display per page' value.
         /// </summary>
         /// <returns></returns>
         public int GetCurrentDisplayOption()
@@ -139,7 +139,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         }
 
         /// <summary>
-        /// Selects the display option.
+        /// Selects the 'Display per page' option.
         /// </summary>
         /// <param name="display">The display.</param>
         public void SetDisplayOption(int display)

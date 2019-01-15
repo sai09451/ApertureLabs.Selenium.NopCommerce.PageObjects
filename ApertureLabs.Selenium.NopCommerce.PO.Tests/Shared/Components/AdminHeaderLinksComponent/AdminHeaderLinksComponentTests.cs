@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
@@ -46,7 +47,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
             serviceCollection.AddSingleton(driver);
             serviceCollection.AddSingleton(new PageSettings
             {
-                BaseUrl = "http://local.aperturelabs.nop-demo-store-a.biz"
+                BaseUrl = "http://nopcommerce410.local/"
             });
 
             pageObjectFactory = new PageObjectFactory(serviceCollection);
@@ -66,7 +67,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         public void AdminHeaderLinksComponentTest()
         {
             var homePage = pageObjectFactory.PreparePage<HomePage>();
-            homePage.Login("alex.hayes@aperturelabs.biz", "password");
+            homePage.Login("admin@yourstore.com", "admin");
             var headerLinks = homePage.AdminHeaderLinks;
 
             Assert.IsNotNull(headerLinks);
@@ -75,19 +76,37 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [TestMethod]
         public void GoToAdminTest()
         {
-            throw new NotImplementedException();
+            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            homePage.Login("admin@yourstore.com", "admin");
+            var adminHomePage = homePage.AdminHeaderLinks.GoToAdmin();
+
+            Assert.IsNotNull(adminHomePage);
         }
 
         [TestMethod]
         public void CanManagePageTest()
         {
-            throw new NotImplementedException();
+            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            homePage.Login("admin@yourstore.com", "admin");
+            var canManageHomePage = homePage.AdminHeaderLinks.CanManagePage();
+
+            Assert.IsFalse(canManageHomePage);
         }
 
         [TestMethod]
         public void ManagePageTest()
         {
-            throw new NotImplementedException();
+            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            var adminProductPage = homePage
+                .Login("admin@yourstore.com", "admin")
+                .Search("leica")
+                .GetResults()
+                .First()
+                .GoToProductPage()
+                .AdminHeaderLinks
+                .ManagePage();
+
+            Assert.IsNotNull(adminProductPage);
         }
 
         #endregion

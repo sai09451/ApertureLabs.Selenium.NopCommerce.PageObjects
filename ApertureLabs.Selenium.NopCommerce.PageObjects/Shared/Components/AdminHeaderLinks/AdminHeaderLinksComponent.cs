@@ -1,4 +1,5 @@
 ﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
@@ -8,7 +9,8 @@ using System.Linq;
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks
 {
     /// <summary>
-    /// Represents the '.admin-header-links' element.
+    /// Represents the '.admin-header-links' element on the public pages. This
+    /// should only appear if the current customer is admin accessible.
     /// </summary>
     public class AdminHeaderLinksComponent : PageComponent
     {
@@ -82,10 +84,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         /// Navigates to the edit product page on the admin.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public virtual PageObject ManagePage()
+        public virtual EditPage ManagePage()
         {
-            throw new NotImplementedException();
+            LinkToManagePageElement.Click();
+
+            return pageObjectFactory.PreparePage<EditPage>();
         }
 
         #endregion

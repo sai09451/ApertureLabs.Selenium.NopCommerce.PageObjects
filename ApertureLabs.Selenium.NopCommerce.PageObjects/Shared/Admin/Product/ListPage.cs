@@ -1,12 +1,12 @@
 ﻿using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Catalog
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 {
     /// <summary>
     /// Product list page.
     /// </summary>
-    public class ProductListPage : PageObject
+    public class ListPage : PageObject
     {
         #region Fields
 
@@ -22,7 +22,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Catalog
         /// Ctor.
         /// </summary>
         /// <param name="driver"></param>
-        public ProductListPage(IWebDriver driver) : base(driver)
+        public ListPage(IWebDriver driver) : base(driver)
         { }
 
         #endregion

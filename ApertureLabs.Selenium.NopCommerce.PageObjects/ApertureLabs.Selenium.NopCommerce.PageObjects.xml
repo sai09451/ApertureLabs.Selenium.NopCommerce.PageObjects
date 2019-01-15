@@ -21,17 +21,6 @@
             <param name="driver"></param>
             <param name="pageSettings"></param>
         </member>
-        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Catalog.ProductListPage">
-            <summary>
-            Product list page.
-            </summary>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Catalog.ProductListPage.#ctor(OpenQA.Selenium.IWebDriver)">
-            <summary>
-            Ctor.
-            </summary>
-            <param name="driver"></param>
-        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage">
             <summary>
             The admin home page.
@@ -50,9 +39,86 @@
             News section of the home page.
             </summary>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage">
+            <summary>
+            Corresponds to the "Admin/Views/Product/Edit.cshtml" page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.#ctor(OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage"/> class.
+            </summary>
+            <param name="driver"></param>
+            <param name="pageSettings"></param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Settings">
+            <summary>
+            Gets the settings.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.BackToProductList">
+            <summary>
+            Backs to product list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Preview(System.Boolean)">
+            <summary>
+            Previews product and switches to the new window.
+            </summary>
+            <param name="switchToNewWindow">if set to <c>true</c> [switch to new window].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Save">
+            <summary>
+            Saves this product and returns the list.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.SaveAndContinueEdit">
+            <summary>
+            Saves the and continue edit.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.CopyProduct">
+            <summary>
+            Copies the product.
+            TODO: Create a 'CopyProductComponent' and return that instead of
+            the PageComponent.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Delete">
+            <summary>
+            Deletes the product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.GoToTab(System.String,System.StringComparison)">
+            <summary>
+            Goes to tab.
+            </summary>
+            <param name="tabName">Name of the tab.</param>
+            <param name="stringComparison"></param>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage">
+            <summary>
+            Product list page.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.#ctor(OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Ctor.
+            </summary>
+            <param name="driver"></param>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent">
             <summary>
-            Represents the '.admin-header-links' element.
+            Represents the '.admin-header-links' element on the public pages. This
+            should only appear if the current customer is admin accessible.
             </summary>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent.#ctor(OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings,ApertureLabs.Selenium.IPageObjectFactory)">
@@ -80,7 +146,45 @@
             Navigates to the edit product page on the admin.
             </summary>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1">
+            <summary>
+            Represents the '#bar-notification' element on the public pages.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1.#ctor(OpenQA.Selenium.IWebDriver,`0,OpenQA.Selenium.By)">
+            <summary>
+            Initializes a new instance of the <see cref="!:Components.BarNotificationComponent"/> class.
+            </summary>
+            <param name="driver">The driver.</param>
+            <param name="parent"></param>
+            <param name="selector">
+            The selector. Defaults to <c>By.FromCss("#bar-notification")</c>.
+            </param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1.Close">
+            <summary>
+            Closes this component and returns the parent page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1.GetContent">
+            <summary>
+            Retrieves the InnerText of the content.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1.GetLinks">
+            <summary>
+            Retrieves all link elements in the content.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1.IsSuccessNotification">
+            <summary>
+            Determines whether this bar was displayed in response to a
+            successfull action or an error action.
+            </summary>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation.CatalogBlockComponent">
             <summary>
@@ -283,6 +387,56 @@
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CommonStatistics.CommonStatisticsComponent.IsStale">
             <inheritdoc/>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent">
+            <summary>
+            The 'Settings' button available on most editor pages which will
+            determine which fields will be displayed/hidden when the view is
+            switched between 'Basic' and 'Advanced'.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponentConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.Load">
+            <inheritDoc/>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.GetMode">
+            <summary>
+            Gets the mode ("Basic" or "Advanced").
+            </summary>
+            <returns>Basic or Advanced.</returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.SetMode(System.String,System.StringComparison)">
+            <summary>
+            Sets the mode.
+            </summary>
+            <param name="mode">The mode.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponentConfiguration">
+            <summary>
+            Defines how to interact with the component.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponentConfiguration.UseKeyboardInsteadOfMouseToInteract">
+            <summary>
+            Gets or sets a value indicating whether too use the keyboard
+            instead of the mouse to interact with the component.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponentConfiguration.DefaultConfiguration">
+            <summary>
+            Returns the default configuration.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent">
             <summary>
             HeaderLinksComponent.
@@ -303,6 +457,36 @@
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.ViewModel">
             <inheritdoc/>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.SetCurrency(System.String,System.StringComparison)">
+            <summary>
+            Sets the currency.
+            </summary>
+            <param name="currency">The currency.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.GetCurrency">
+            <summary>
+            Gets the currency.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.SetLanguage(System.String,System.StringComparison)">
+            <summary>
+            Sets the language.
+            </summary>
+            <param name="language">The language.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.GetLanguage">
+            <summary>
+            Gets the language.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.Login(System.String,System.String)">
             <summary>
             Logs in.
@@ -310,9 +494,6 @@
             <param name="email"></param>
             <param name="password"></param>
             <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.IsStale">
-            <inheritdoc/>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News.NewsComponent">
             <summary>
@@ -684,6 +865,12 @@
             <param name="driver">The driver.</param>
             <param name="pageSettings">The page settings.</param>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.ProductsByCategoryPage.GetBreadcrumb">
+            <summary>
+            Gets the breadcrumb.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.ProductsByManufacturerPage">
             <summary>
             Corresponds to the ManufacturerTemplate.ProductsInGridOrLines.cshtml
@@ -745,7 +932,7 @@
             SearchPage.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Factories.CustomPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchPage.#ctor(ApertureLabs.Selenium.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
             Ctor.
             </summary>
@@ -798,6 +985,11 @@
             Url of the image.
             </summary>
         </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.Rating">
+            <summary>
+            Gets the rating. Returns a percentage.
+            </summary>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.Load">
             <inheritdoc/>
         </member>
@@ -806,6 +998,21 @@
             Navigates to the product page.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.AddToCart">
+            <summary>
+            Adds to cart.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.AddToWishList">
+            <summary>
+            Adds to wish list.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.AddToCompareList">
+            <summary>
+            Adds to compare list.
+            </summary>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.IsStale">
             <inheritdoc/>
@@ -845,19 +1052,19 @@
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultsTemplatePage.GetDisplayOptions">
             <summary>
-            Gets the display options.
+            Gets all 'Display per page' options.
             </summary>
             <returns></returns>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultsTemplatePage.GetCurrentDisplayOption">
             <summary>
-            Gets the current display option.
+            Gets the current 'Display per page' value.
             </summary>
             <returns></returns>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultsTemplatePage.SetDisplayOption(System.Int32)">
             <summary>
-            Selects the display option.
+            Selects the 'Display per page' option.
             </summary>
             <param name="display">The display.</param>
         </member>
@@ -991,11 +1198,11 @@
             Base class for the product pages.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product.BaseProductPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Factories.CustomPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product.BaseProductPage.#ctor(ApertureLabs.Selenium.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
             Ctor.
             </summary>
-            <param name="customPageObjectFactory"></param>
+            <param name="pageObjectFactory"></param>
             <param name="driver"></param>
             <param name="settings"></param>
         </member>
@@ -1246,6 +1453,16 @@
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.HeaderLinks.HeaderLinksModel.AlertMessage">
             <summary>
             AlertMessage.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.HeaderLinks.HeaderLinksModel.Currency">
+            <summary>
+            Gets or sets the currency.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.HeaderLinks.HeaderLinksModel.Language">
+            <summary>
+            Gets or sets the language.
             </summary>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings">

@@ -16,7 +16,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
     /// <summary>
     /// Base class for the product pages.
     /// </summary>
-    public partial class BaseProductPage : BasePage, IViewModel<ProductDetailsModel>
+    public class BaseProductPage : BasePage, IViewModel<ProductDetailsModel>
     {
         #region Fields
 
@@ -45,13 +45,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Ctor.
         /// </summary>
-        /// <param name="customPageObjectFactory"></param>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="driver"></param>
         /// <param name="settings"></param>
-        public BaseProductPage(CustomPageObjectFactory customPageObjectFactory,
+        public BaseProductPage(IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings settings)
-            : base(customPageObjectFactory,
+            : base(pageObjectFactory,
                   driver,
                   settings)
         { }
