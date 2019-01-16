@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
@@ -14,7 +17,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     {
         #region Fields
 
+        private readonly IPageObjectFactory pageObjectFactory;
+        private readonly EditorSettingsComponent settings;
+
         #region Selectors
+
+        private readonly By backToProductListSelector = By.CssSelector("#product-form > div.content-header.clearfix > h1 > small > a");
+        private readonly By advancedSwitchSelector = By.CssSelector(".onoffswitch");
+        private readonly By settingsBySelector = By.CssSelector("#product-editor-settings");
+        private readonly By previewButtonSelector = By.CssSelector("#product-form > div.content-header.clearfix > div > button.btn.bg-purple");
+        private readonly By saveButtonSelector = By.CssSelector("#product-form > div.content-header.clearfix > div > button:nth-child(2)");
+        private readonly By saveAndContinueEditButtonSelector = By.CssSelector("#product-form > div.content-header.clearfix > div > button:nth-child(3)");
+        private readonly By copyProductButtonSelector = By.CssSelector("#product-form > div.content-header.clearfix > div > button.btn.bg-olive");
+        private readonly By deleteButtonSelector = By.CssSelector("#product-delete");
 
         #endregion
 
@@ -25,22 +40,39 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <summary>
         /// Initializes a new instance of the <see cref="EditPage"/> class.
         /// </summary>
+        /// <param name="pageObjectFactory"></param>
         /// <param name="driver"></param>
         /// <param name="pageSettings"></param>
-        public EditPage(IWebDriver driver, PageSettings pageSettings)
+        public EditPage(IPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings pageSettings)
             : base(driver, pageSettings)
-        { }
+        {
+            this.pageObjectFactory = pageObjectFactory;
+
+            settings = new EditorSettingsComponent(advancedSwitchSelector,
+                settingsBySelector,
+                WrappedDriver,
+                EditorSettingsComponentConfiguration.DefaultConfiguration());
+        }
 
         #endregion
 
         #region Properties
 
+        #region Elements
+
         /// <summary>
         /// Gets the settings.
         /// </summary>
-        public EditorSettingsComponent Settings => throw new NotImplementedException();
+        public EditorSettingsComponent Settings => pageObjectFactory.PrepareComponent(settings);
 
-        #region Elements
+        private IWebElement BackToProductListElement => WrappedDriver.FindElement(backToProductListSelector);
+        private IWebElement PreviewButtonElement => WrappedDriver.FindElement(previewButtonSelector);
+        private IWebElement SaveButtonElement => WrappedDriver.FindElement(saveButtonSelector);
+        private IWebElement SaveAndContinueButtonElement => WrappedDriver.FindElement(saveAndContinueEditButtonSelector);
+        private IWebElement CopyProductButtonElement => WrappedDriver.FindElement(copyProductButtonSelector);
+        private IWebElement DeleteButtonElement => WrappedDriver.FindElement(deleteButtonSelector);
 
         #endregion
 
@@ -54,7 +86,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns></returns>
         public virtual ListPage BackToProductList()
         {
-            throw new NotImplementedException();
+            BackToProductListElement.Click();
+
+            return pageObjectFactory.PreparePage<ListPage>();
         }
 
         /// <summary>
@@ -64,7 +98,21 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns></returns>
         public virtual string Preview(bool switchToNewWindow = true)
         {
-            throw new NotImplementedException();
+            var oldWindowHandles = WrappedDriver.WindowHandles;
+            PreviewButtonElement.Click();
+
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(10))
+                .Until(d => d.WindowHandles.Count != oldWindowHandles.Count);
+
+            var newHandle = WrappedDriver.WindowHandles
+                .Except(oldWindowHandles)
+                .First();
+
+            if (switchToNewWindow)
+                WrappedDriver.SwitchTo().Window(newHandle);
+
+            return newHandle;
         }
 
         /// <summary>
@@ -74,7 +122,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <exception cref="NotImplementedException"></exception>
         public virtual ListPage Save()
         {
-            throw new NotImplementedException();
+            SaveButtonElement.Click();
+
+            return pageObjectFactory.PreparePage<ListPage>();
         }
 
         /// <summary>
@@ -83,7 +133,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns></returns>
         public virtual EditPage SaveAndContinueEdit()
         {
-            throw new NotImplementedException();
+            SaveAndContinueButtonElement.Click();
+
+            return pageObjectFactory.PreparePage<EditPage>();
         }
 
         /// <summary>
@@ -103,7 +155,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns></returns>
         public virtual ListPage Delete()
         {
-            throw new NotImplementedException();
+            DeleteButtonElement.Click();
+
+            return pageObjectFactory.PreparePage<ListPage>();
         }
 
         /// <summary>
@@ -111,8 +165,28 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <param name="tabName">Name of the tab.</param>
         /// <param name="stringComparison"></param>
-        protected virtual void GoToTab(string tabName,
+        public virtual void GoToTab(string tabName,
             StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the tab names.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual IEnumerable<string> GetTabNames()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gets the name of the active tab.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual string GetActiveTabName()
         {
             throw new NotImplementedException();
         }
