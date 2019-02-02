@@ -12,10 +12,14 @@ visit the site in the form of PageObjects.
 * WebElement - A class that represents an element.
 
 ## General Notes
+* Try to avoid inheritance in favor of composition (when using PageObjects).
+  * To follow this make sure each page object has a corresponding interface.
+* Try to keep all public members of PageObjects and PageComponents virtual.
 * Suffix all PageObjects with 'Page'.
 * Suffix all PageComponents with 'Component'.
 * Standard template for a PageObject:
-	public class YourPageObject : YourBasePageObject [(Optional), IViewModel<YourModel>]
+---
+	public class YourPageObject : PageObject, IYourBasePageObject [,(Optional) IViewModel<YourModel>]
 	{
 		#region Fields
 
@@ -28,14 +32,21 @@ visit the site in the form of PageObjects.
 		#endregion
 
 		// Other fields would go here
+		private readonly IYourBasePageObject yourBasePageObject;
+		private readonly YourPageSettings yourPageSettings;
 
 		#endregion
 
 		#region Constructor(s)
 
-		public YourPageObject(IWebDriver driver, YourPageSettingsClass settings)
-			: base(driver, settings)
-		{ }
+		public YourPageObject(IYourBasePageObject yourBasePageObject,
+			IWebDriver driver,
+			YourPageSettingsClass yourPageSettings)
+			: base(driver)
+		{
+			this.yourBasePageObject = yourBasePageObject;
+			this.yourPageSettings = yourPageSettings;
+		}
 
 		#endregion
 
@@ -50,7 +61,7 @@ visit the site in the form of PageObjects.
 		#endregion
 
 		// Only include if you implement the IViewModel<T> interface
-		public YourModel ViewModel
+		public virtual YourModel ViewModel
 		{
 			get
 			{
@@ -97,7 +108,7 @@ visit the site in the form of PageObjects.
 		// Other Methods
 
 		// Example implementation of a Login(...) method.
-		public LoginResultPage Login(string email, string password)
+		public virtual LoginResultPage Login(string email, string password)
 		{
 			EmailInputElement.SendKeys(email);
 			PasswordInputElement.SendKeys(password);
@@ -112,6 +123,12 @@ visit the site in the form of PageObjects.
 
 			// Could be rewritten as:
 			// return new LoginResultPage(WrappedDriver, PageSettings).Load() as LoginPageResult;
+		}
+
+		// Implementation of IYourBasePageObject via composition.
+		public virtual void BaseMethod()
+		{
+			yourBasePageObject.BaseMethod();
 		}
 
 		#endregion

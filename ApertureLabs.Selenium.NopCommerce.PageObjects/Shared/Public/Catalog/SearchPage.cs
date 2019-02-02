@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Factories;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog;
+using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
@@ -13,7 +11,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// <summary>
     /// SearchPage.
     /// </summary>
-    public class SearchPage : SearchResultsTemplatePage
+    public class SearchPage : SearchResultsTemplatePage, ISearchPage
     {
         #region Fields
 
@@ -35,18 +33,25 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="SearchPage"/> class.
         /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="settings"></param>
-        /// <param name="pageObjectFactory"></param>
-        public SearchPage(IPageObjectFactory pageObjectFactory,
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="settings">The settings.</param>
+        public SearchPage(IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings settings)
-            : base(pageObjectFactory,
+            : base(basePage,
+                  pageObjectFactory,
                   driver,
                   settings)
-        { }
+        {
+            Uri = new Uri(
+                new Uri(settings.BaseUrl),
+                "search");
+        }
 
         #endregion
 
@@ -69,7 +74,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public virtual SearchPage Search(SearchModel model)
+        public virtual ISearchPage Search(SearchModel model)
         {
             if (model == null)
                 throw new ArgumentNullException();

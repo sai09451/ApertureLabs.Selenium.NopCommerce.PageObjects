@@ -5,8 +5,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>7.1</LangVersion>
     <Description>Contains default page objects for NopCommerce sites.</Description>
-    <FileVersion>1.0.2.0</FileVersion>
-    <Version>1.0.2</Version>
+    <FileVersion>1.0.5.0</FileVersion>
+    <Version>1.0.5</Version>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <Company>Aperture Labs</Company>
     <Authors>alex.hayes@aperturelabs.biz</Authors>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ApertureLabs.Selenium" Version="1.0.47" />
+    <PackageReference Include="ApertureLabs.Selenium" Version="1.0.55" />
     <PackageReference Include="Autofac" Version="4.8.1" />
   </ItemGroup>
 

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApertureLabs.Selenium.Components.Boostrap.Navs;
 using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
@@ -9,16 +12,20 @@ using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 {
+
     /// <summary>
     /// Corresponds to the "Admin/Views/Product/Edit.cshtml" page.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage" />
-    public class EditPage : BasePage
+    public class EditPage : PageObject, IEditPage
     {
         #region Fields
 
+        private readonly IBasePage basePage;
         private readonly IPageObjectFactory pageObjectFactory;
         private readonly EditorSettingsComponent settings;
+        private readonly NavsTabComponent navsTabComponent;
+        private readonly ProductInfoComponent generalInfoComponent;
 
         #region Selectors
 
@@ -30,6 +37,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         private readonly By saveAndContinueEditButtonSelector = By.CssSelector("#product-form > div.content-header.clearfix > div > button:nth-child(3)");
         private readonly By copyProductButtonSelector = By.CssSelector("#product-form > div.content-header.clearfix > div > button.btn.bg-olive");
         private readonly By deleteButtonSelector = By.CssSelector("#product-delete");
+        private readonly By navsTabComponentSelector = By.CssSelector("#product-edit");
+        private readonly By productInfoComponentSelector = By.CssSelector("#tab-info");
 
         #endregion
 
@@ -40,20 +49,40 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <summary>
         /// Initializes a new instance of the <see cref="EditPage"/> class.
         /// </summary>
+        /// <param name="basePage"></param>
         /// <param name="pageObjectFactory"></param>
         /// <param name="driver"></param>
         /// <param name="pageSettings"></param>
-        public EditPage(IPageObjectFactory pageObjectFactory,
+        public EditPage(IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver, pageSettings)
+            : base(driver)
         {
+            this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
 
             settings = new EditorSettingsComponent(advancedSwitchSelector,
                 settingsBySelector,
                 WrappedDriver,
                 EditorSettingsComponentConfiguration.DefaultConfiguration());
+
+            navsTabComponent = new NavsTabComponent(
+                navsTabComponentSelector,
+                WrappedDriver,
+                new NavsTabComponentConfiguration
+                {
+                    ActiveTabContentElementSelector = By.CssSelector(".tab-content .tab-pane.active"),
+                    ActiveTabHeaderElementSelector = By.CssSelector(".navs-tab > .active"),
+                    ActiveTabHeaderNameSelector = By.CssSelector(".navs-tab > .active > a"),
+                    TabHeaderElementsSelector = By.CssSelector(".navs-tab > li"),
+                    TabHeaderNamesSelector = By.CssSelector(".navs-tab > li > a")
+                });
+
+            generalInfoComponent = new ProductInfoComponent(
+                this,
+                WrappedDriver,
+                productInfoComponentSelector);
         }
 
         #endregion
@@ -65,7 +94,31 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <summary>
         /// Gets the settings.
         /// </summary>
-        public EditorSettingsComponent Settings => pageObjectFactory.PrepareComponent(settings);
+        public virtual EditorSettingsComponent Settings => pageObjectFactory.PrepareComponent(settings);
+
+        /// <summary>
+        /// Gets the tabs.
+        /// </summary>
+        /// <value>
+        /// The tabs.
+        /// </value>
+        public virtual NavsTabComponent Tabs => pageObjectFactory.PrepareComponent(navsTabComponent);
+
+        /// <summary>
+        /// Gets the main side bar.
+        /// </summary>
+        /// <value>
+        /// The main side bar.
+        /// </value>
+        public virtual IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
+
+        /// <summary>
+        /// Gets the navigation bar.
+        /// </summary>
+        /// <value>
+        /// The navigation bar.
+        /// </value>
+        public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
         private IWebElement BackToProductListElement => WrappedDriver.FindElement(backToProductListSelector);
         private IWebElement PreviewButtonElement => WrappedDriver.FindElement(previewButtonSelector);
@@ -84,7 +137,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// Backs to product list.
         /// </summary>
         /// <returns></returns>
-        public virtual ListPage BackToProductList()
+        public virtual IListPage BackToProductList()
         {
             BackToProductListElement.Click();
 
@@ -120,7 +173,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual ListPage Save()
+        public virtual IListPage Save()
         {
             SaveButtonElement.Click();
 
@@ -131,7 +184,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// Saves the and continue edit.
         /// </summary>
         /// <returns></returns>
-        public virtual EditPage SaveAndContinueEdit()
+        public virtual IEditPage SaveAndContinueEdit()
         {
             SaveAndContinueButtonElement.Click();
 
@@ -153,7 +206,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// Deletes the product.
         /// </summary>
         /// <returns></returns>
-        public virtual ListPage Delete()
+        public virtual IListPage Delete()
         {
             DeleteButtonElement.Click();
 
@@ -189,6 +242,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         public virtual string GetActiveTabName()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Backs to top.
+        /// </summary>
+        public virtual void BackToTop()
+        {
+            basePage.BackToTop();
         }
 
         #endregion

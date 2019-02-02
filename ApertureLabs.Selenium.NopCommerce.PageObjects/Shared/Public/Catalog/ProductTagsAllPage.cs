@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
@@ -11,7 +12,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// The 'All Tags' page.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage" />
-    public class ProductTagsAllPage : CatalogTemplatePage
+    public class ProductTagsAllPage : CatalogTemplatePage, IProductTagsAllPage
     {
         #region Fields
 
@@ -28,14 +29,23 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductTagsAllPage"/> class.
         /// </summary>
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
-        /// <param name="pageObjectFactory">The page object factory.</param>
-        public ProductTagsAllPage(IWebDriver driver,
-            PageSettings pageSettings,
-            IPageObjectFactory pageObjectFactory)
-            : base(pageObjectFactory, driver, pageSettings)
-        { }
+        public ProductTagsAllPage(
+            IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(basePage,
+                  pageObjectFactory,
+                  driver)
+        {
+            Uri = new Uri(
+                new Uri(pageSettings.BaseUrl),
+                "producttag/all");
+        }
 
         #endregion
 
@@ -55,7 +65,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets all tags.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetAllTags()
+        public virtual IEnumerable<string> GetAllTags()
         {
             return TagElements.Select(e => e.TextHelper().InnerText);
         }
@@ -65,7 +75,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// </summary>
         /// <param name="tagName">Name of the tag.</param>
         /// <param name="stringComparison">The string comparison.</param>
-        public void SelectTag(string tagName,
+        public virtual void SelectTag(string tagName,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             TagElements.First(e => String.Equals(

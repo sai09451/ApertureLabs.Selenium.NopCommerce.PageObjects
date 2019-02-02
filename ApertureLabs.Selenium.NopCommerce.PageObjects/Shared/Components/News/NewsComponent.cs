@@ -1,23 +1,22 @@
-﻿using ApertureLabs.Selenium.Extensions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News
 {
     /// <summary>
     /// NewsComponent.
     /// </summary>
-    public class NewsComponent : PageComponent
+    public class NewsComponent : PageComponent, INewsComponent
     {
         #region Fields
 
         #region Selectors
 
-        private By ExpanderSelector = By.CssSelector("[data-widget=\"collapse\"]");
-        private By PanelHeadingSelector => By.CssSelector(".panel-heading");
+        private readonly By expanderSelector = By.CssSelector("[data-widget=\"collapse\"]");
+        private readonly By panelHeadingSelector = By.CssSelector(".panel-heading");
 
         #endregion
 
@@ -55,7 +54,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News
 
         #region Elements
 
-        private IWebElement ExpanderElement => WrappedElement.FindElement(ExpanderSelector);
+        private IWebElement ExpanderElement => WrappedElement.FindElement(expanderSelector);
 
         #endregion
 
@@ -69,7 +68,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News
         /// <returns></returns>
         public IReadOnlyList<NewsItem> NewsItems()
         {
-            return WrappedElement.FindElements(PanelHeadingSelector)
+            return WrappedElement.FindElements(panelHeadingSelector)
                 .Select(e => new NewsItem(e))
                 .ToList();
         }

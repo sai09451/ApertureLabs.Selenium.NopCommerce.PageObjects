@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
@@ -56,7 +55,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [TestCleanup]
         public void TestCleanup()
         {
-            driver.Dispose();
+            driver?.Dispose();
         }
 
         #endregion
@@ -66,7 +65,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [TestMethod]
         public void AdminHeaderLinksComponentTest()
         {
-            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            var homePage = pageObjectFactory.PreparePage<IHomePage>();
             homePage.Login("admin@yourstore.com", "admin");
             var headerLinks = homePage.AdminHeaderLinks;
 
@@ -76,7 +75,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [TestMethod]
         public void GoToAdminTest()
         {
-            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            var homePage = pageObjectFactory.PreparePage<IHomePage>();
             homePage.Login("admin@yourstore.com", "admin");
             var adminHomePage = homePage.AdminHeaderLinks.GoToAdmin();
 
@@ -86,7 +85,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [TestMethod]
         public void CanManagePageTest()
         {
-            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            var homePage = pageObjectFactory.PreparePage<IHomePage>();
             homePage.Login("admin@yourstore.com", "admin");
             var canManageHomePage = homePage.AdminHeaderLinks.CanManagePage();
 
@@ -96,7 +95,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         [TestMethod]
         public void ManagePageTest()
         {
-            var homePage = pageObjectFactory.PreparePage<HomePage>();
+            var importedModules = pageObjectFactory.GetImportedModules();
+            var homePage = pageObjectFactory.PreparePage<IHomePage>();
             var adminProductPage = homePage
                 .Login("admin@yourstore.com", "admin")
                 .Search("leica")

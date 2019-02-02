@@ -6,15 +6,25 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApertureLabs.Selenium.PageObjects;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
 {
     /// <summary>
     /// LoginPage.
     /// </summary>
-    public class LoginPage : BasePage
+    public class LoginPage : PageObject, ILoginPage
     {
         #region Fields
+
+        private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
+        private readonly PageSettings pageSettings;
+
+        #region Selectors
 
         private readonly By emailSelector;
         private readonly By emailValidatorSelector;
@@ -24,22 +34,31 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
 
         #endregion
 
+        #endregion
+
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="LoginPage"/> class.
         /// </summary>
-        /// <param name="pageObjectFactory"></param>
-        /// <param name="driver"></param>
-        /// <param name="pageSettings"></param>
-        public LoginPage(IPageObjectFactory pageObjectFactory,
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
+        public LoginPage(IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(pageObjectFactory,
-                  driver,
-                  pageSettings)
+            : base(driver)
         {
-            Uri = new Uri(Uri.ToString() + "login", UriKind.Absolute);
+            this.basePage = basePage;
+            this.pageObjectFactory = pageObjectFactory;
+            this.pageSettings = pageSettings;
+
+            Uri = new Uri(
+                new Uri(pageSettings.BaseUrl),
+                "login");
+
             emailSelector = By.CssSelector(".email");
             emailValidatorSelector = By.CssSelector(".email + .field-validation-error");
             passwordSelector = By.CssSelector(".password");
@@ -54,32 +73,32 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <summary>
         /// Email input element.
         /// </summary>
-        protected IWebElement EmailInputElement => WrappedDriver.FindElement(emailSelector);
+        protected virtual IWebElement EmailInputElement => WrappedDriver.FindElement(emailSelector);
 
         /// <summary>
         /// Email validation element.
         /// </summary>
-        protected IWebElement EmailValidationElement => WrappedDriver.FindElement(emailValidatorSelector);
+        protected virtual IWebElement EmailValidationElement => WrappedDriver.FindElement(emailValidatorSelector);
 
         /// <summary>
         /// Password input element.
         /// </summary>
-        protected IWebElement PasswordInputElement => WrappedDriver.FindElement(passwordSelector);
+        protected virtual IWebElement PasswordInputElement => WrappedDriver.FindElement(passwordSelector);
 
         /// <summary>
         /// Login button element.
         /// </summary>
-        protected IWebElement LoginButtonElement => WrappedDriver.FindElement(loginBtnSelector);
+        protected virtual IWebElement LoginButtonElement => WrappedDriver.FindElement(loginBtnSelector);
 
         /// <summary>
         /// Message error summary element.
         /// </summary>
-        protected IWebElement MessageErrorSummaryElement => WrappedDriver.FindElement(messageErrorSelector);
+        protected virtual IWebElement MessageErrorSummaryElement => WrappedDriver.FindElement(messageErrorSelector);
 
         /// <summary>
         /// A list of errors on the page.
         /// </summary>
-        public IEnumerable<string> Errors
+        public virtual IEnumerable<string> Errors
         {
             get
             {
@@ -95,6 +114,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             }
         }
 
+        /// <summary>
+        /// Gets the admin header links.
+        /// </summary>
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+
         #endregion
 
         #region Methods
@@ -103,7 +127,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Checks if the email is invalid.
         /// </summary>
         /// <returns></returns>
-        public bool HasInvalidEmail()
+        public virtual bool HasInvalidEmail()
         {
             return String.IsNullOrWhiteSpace(EmailValidationElement.Text);
         }
@@ -112,7 +136,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Checks for any errors.
         /// </summary>
         /// <returns></returns>
-        public bool HasMessageErrorSummary()
+        public virtual bool HasMessageErrorSummary()
         {
             return WrappedDriver.Select(messageErrorSelector).Any();
         }
@@ -123,7 +147,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="navigateToUrl"></param>
         /// <returns></returns>
-        public ILoadableComponent Load(bool navigateToUrl)
+        public virtual ILoadableComponent Load(bool navigateToUrl)
         {
             if (navigateToUrl)
             {
@@ -138,7 +162,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public LoginPage EnterEmail(string email)
+        public virtual ILoginPage EnterEmail(string email)
         {
             EmailInputElement.Clear();
             EmailInputElement.SendKeys(email);
@@ -151,7 +175,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        public LoginPage EnterPassword(string password)
+        public virtual ILoginPage EnterPassword(string password)
         {
             PasswordInputElement.Clear();
             PasswordInputElement.SendKeys(password);
@@ -163,7 +187,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="success"></param>
         /// <param name="error"></param>
-        public void ClickLogin(Action<HomePage> success, Action<LoginPage> error)
+        public virtual void ClickLogin(Action<HomePage> success, Action<LoginPage> error)
         {
             LoginButtonElement.Click();
 
@@ -173,9 +197,39 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             }
             else
             {
-                var homePage = PageObjectFactory.PreparePage<HomePage>();
+                var homePage = pageObjectFactory.PreparePage<HomePage>();
                 success(homePage);
             }
+        }
+
+        public ICartPage GoToShoppingCart()
+        {
+            return basePage.GoToShoppingCart();
+        }
+
+        public bool IsLoggedIn()
+        {
+            return basePage.IsLoggedIn();
+        }
+
+        public IHomePage Login(string email, string password)
+        {
+            return basePage.Login(email, password);
+        }
+
+        public T Logout<T>() where T : IPageObject
+        {
+            return basePage.Logout<T>();
+        }
+
+        public ISearchPage Search(string searchFor)
+        {
+            return basePage.Search(searchFor);
+        }
+
+        public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        {
+            return basePage.SearchAjax(searchFor);
         }
 
         #endregion

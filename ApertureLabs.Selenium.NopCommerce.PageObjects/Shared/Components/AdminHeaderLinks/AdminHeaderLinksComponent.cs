@@ -12,7 +12,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
     /// Represents the '.admin-header-links' element on the public pages. This
     /// should only appear if the current customer is admin accessible.
     /// </summary>
-    public class AdminHeaderLinksComponent : PageComponent
+    public class AdminHeaderLinksComponent : PageComponent, IAdminHeaderLinksComponent
     {
         #region Fields
 
@@ -64,7 +64,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         /// Goes to the admin page.
         /// </summary>
         /// <returns></returns>
-        public virtual HomePage GoToAdmin()
+        public virtual IHomePage GoToAdmin()
         {
             LinkToAdministrationElement.Click();
 
@@ -84,7 +84,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         /// Navigates to the edit product page on the admin.
         /// </summary>
         /// <returns></returns>
-        public virtual EditPage ManagePage()
+        public virtual IEditPage ManagePage()
         {
             LinkToManagePageElement.Click();
 

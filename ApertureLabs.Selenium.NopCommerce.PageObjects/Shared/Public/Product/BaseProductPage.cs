@@ -1,22 +1,24 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.ProductBreadCrumb;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Factories;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.ProductBreadCrumb;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog;
-using ApertureLabs.Selenium;
 using ApertureLabs.Selenium.PageObjects;
 using ApertureLabs.Selenium.WebElements.Meta;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
 {
     /// <summary>
     /// Base class for the product pages.
     /// </summary>
-    public class BaseProductPage : BasePage, IViewModel<ProductDetailsModel>
+    public class BaseProductPage : PageObject, IBaseProductPage
     {
         #region Fields
 
@@ -38,23 +40,31 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
 
         #endregion
 
+        private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
+        private readonly PageSettings pageSettings;
+
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="BaseProductPage"/> class.
         /// </summary>
-        /// <param name="pageObjectFactory"></param>
-        /// <param name="driver"></param>
-        /// <param name="settings"></param>
-        public BaseProductPage(IPageObjectFactory pageObjectFactory,
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
+        public BaseProductPage(IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
-            PageSettings settings)
-            : base(pageObjectFactory,
-                  driver,
-                  settings)
-        { }
+            PageSettings pageSettings)
+            : base(driver)
+        {
+            this.basePage = basePage;
+            this.pageObjectFactory = pageObjectFactory;
+            this.pageSettings = pageSettings;
+        }
 
         #endregion
 
@@ -100,21 +110,21 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Retrieves the bread crumb.
         /// </summary>
-        public ProductBreadCrumbComponent BreadCrumb
+        public virtual ProductBreadCrumbComponent BreadCrumb
         {
             get
             {
-                return PageObjectFactory.PrepareComponent(
-                    new ProductBreadCrumbComponent(PageObjectFactory,
+                return pageObjectFactory.PrepareComponent(
+                    new ProductBreadCrumbComponent(pageObjectFactory,
                         WrappedDriver,
-                        PageSettings));
+                        pageSettings));
             }
         }
 
         /// <summary>
         /// Checks if the product has a payment plan.
         /// </summary>
-        public bool HasPaymentPlan
+        public virtual bool HasPaymentPlan
         {
             get
             {
@@ -128,25 +138,50 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// Entering/removing codes on the product. These codes can be coupons,
         /// discounts, access codes, etc...
         /// </summary>
-        public ChallengeCodeComponent CodeHandler
+        public virtual ChallengeCodeComponent CodeHandler
         {
             get
             {
-                return PageObjectFactory.PrepareComponent(
+                return pageObjectFactory.PrepareComponent(
                     new ChallengeCodeComponent(
                         WrappedDriver,
                         By.CssSelector(".coupon-box")));
             }
         }
 
+        /// <summary>
+        /// Gets the admin header links.
+        /// </summary>
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+
         #endregion
 
         #region Methods
 
         /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+
+            basePage.Load();
+
+            return this;
+        }
+
+        /// <summary>
         /// ViewModel.
         /// </summary>
-        public ProductDetailsModel ViewModel()
+        public virtual ProductDetailsModel ViewModel()
         {
             var model = new ProductDetailsModel
             {
@@ -165,7 +200,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// Retrieves a list of all payment plan options.
         /// </summary>
         /// <returns></returns>
-        public IList<IWebElement> GetPaymentPlanOptions()
+        public virtual IList<IWebElement> GetPaymentPlanOptions()
         {
             return PaymentPlanSelectElement?.Options ?? new List<IWebElement>();
         }
@@ -183,6 +218,36 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
             AddToCartButtonElement.Click();
 
             var openedRemodals = WrappedDriver.FindElements(openRemodalSelector);
+        }
+
+        public virtual ICartPage GoToShoppingCart()
+        {
+            return basePage.GoToShoppingCart();
+        }
+
+        public virtual bool IsLoggedIn()
+        {
+            return basePage.IsLoggedIn();
+        }
+
+        public virtual IHomePage Login(string email, string password)
+        {
+            return basePage.Login(email, password);
+        }
+
+        public virtual T Logout<T>() where T : IPageObject
+        {
+            return basePage.Logout<T>();
+        }
+
+        public virtual ISearchPage Search(string searchFor)
+        {
+            return basePage.Search(searchFor);
+        }
+
+        public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        {
+            return basePage.SearchAjax(searchFor);
         }
 
         #endregion

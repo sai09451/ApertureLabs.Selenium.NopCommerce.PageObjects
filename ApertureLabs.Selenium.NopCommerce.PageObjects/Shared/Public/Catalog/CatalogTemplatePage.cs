@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
@@ -13,9 +16,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// Abstract base class for the Catalog pages.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home.HomePage" />
-    public abstract class CatalogTemplatePage : HomePage
+    public abstract class CatalogTemplatePage : PageObject, ICatalogTemplatePage
     {
         #region Fields
+
+        private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
 
         #region Selectors
 
@@ -34,14 +40,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogTemplatePage"/> class.
         /// </summary>
+        /// <param name="basePage">The base page.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
-        public CatalogTemplatePage(IPageObjectFactory pageObjectFactory,
-            IWebDriver driver,
-            PageSettings pageSettings)
-            : base(pageObjectFactory, driver, pageSettings)
-        { }
+        public CatalogTemplatePage(
+            IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
+            IWebDriver driver)
+            : base(driver)
+        {
+            this.basePage = basePage;
+            this.pageObjectFactory = pageObjectFactory;
+        }
 
         #endregion
 
@@ -49,27 +60,32 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
 
         #region Elements
 
-        private CatalogBlockComponent CategoriesComponent => PageObjectFactory.PrepareComponent(
+        private CatalogBlockComponent CategoriesComponent => pageObjectFactory.PrepareComponent(
             new CatalogBlockComponent(
                 WrappedDriver,
                 CategoryNavigationSelector));
 
-        private CatalogBlockComponent ManufacturersComponent => PageObjectFactory.PrepareComponent(
+        private CatalogBlockComponent ManufacturersComponent => pageObjectFactory.PrepareComponent(
             new CatalogBlockComponent(
                 WrappedDriver,
                 ManufacturerSelector));
 
-        private CatalogBlockComponent RecentlyViewProductsComponent => PageObjectFactory.PrepareComponent(
+        private CatalogBlockComponent RecentlyViewProductsComponent => pageObjectFactory.PrepareComponent(
             new CatalogBlockComponent(
                 WrappedDriver,
                 RecentlyViewedProductsSelector));
 
-        private CatalogBlockComponent PopularTagsComponent => PageObjectFactory.PrepareComponent(
+        private CatalogBlockComponent PopularTagsComponent => pageObjectFactory.PrepareComponent(
             new CatalogBlockComponent(
                 WrappedDriver,
                 PopularTagsSelector));
 
         #endregion
+
+        /// <summary>
+        /// Gets the admin header links.
+        /// </summary>
+        public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         #endregion
 
@@ -228,7 +244,66 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         {
             PopularTagsComponent.ViewAll();
 
-            return PageObjectFactory.PreparePage< ProductTagsAllPage>();
+            return pageObjectFactory.PreparePage< ProductTagsAllPage>();
+        }
+
+        /// <summary>
+        /// Goes to the shopping cart page.
+        /// </summary>
+        /// <returns></returns>
+        public virtual ICartPage GoToShoppingCart()
+        {
+            return basePage.GoToShoppingCart();
+        }
+
+        /// <summary>
+        /// Checks if a user is logged in.
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool IsLoggedIn()
+        {
+            return basePage.IsLoggedIn();
+        }
+
+        /// <summary>
+        /// Logs a user in.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public virtual IHomePage Login(string email, string password)
+        {
+            return basePage.Login(email, password);
+        }
+
+        /// <summary>
+        /// Logs a user out if logged in.
+        /// </summary>
+        /// <returns></returns>
+        public virtual T Logout<T>() where T : IPageObject
+        {
+            return basePage.Logout<T>();
+        }
+
+        /// <summary>
+        /// Used to search for a product.
+        /// </summary>
+        /// <param name="searchFor">Partial or full name of product.</param>
+        /// <returns></returns>
+        public virtual ISearchPage Search(string searchFor)
+        {
+            return basePage.Search(searchFor);
+        }
+
+        /// <summary>
+        /// Similar to <c>Search</c> but waits for the ajax results to resolve
+        /// and returns those items.
+        /// </summary>
+        /// <param name="searchFor">The search for.</param>
+        /// <returns></returns>
+        public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        {
+            return basePage.SearchAjax(searchFor);
         }
 
         #endregion

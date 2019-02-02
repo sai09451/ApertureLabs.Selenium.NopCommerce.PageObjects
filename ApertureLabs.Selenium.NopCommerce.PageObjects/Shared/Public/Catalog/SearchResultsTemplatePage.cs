@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -12,9 +13,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// Abstract class for any catalog search results page.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage" />
-    public abstract class SearchResultsTemplatePage : CatalogTemplatePage
+    public abstract class SearchResultsTemplatePage : CatalogTemplatePage, ISearchResultsTemplatePage
     {
         #region Fields
+
+        private readonly IPageObjectFactory pageObjectFactory;
+        private readonly PageSettings pageSettings;
 
         #region Selectors
 
@@ -33,15 +37,22 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchResultsTemplatePage"/> class.
         /// </summary>
+        /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
         public SearchResultsTemplatePage(
+            IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(pageObjectFactory, driver, pageSettings)
-        { }
+            : base(basePage,
+                  pageObjectFactory,
+                  driver)
+        {
+            this.pageObjectFactory = pageObjectFactory;
+            this.pageSettings = pageSettings;
+        }
 
         #endregion
 
@@ -65,7 +76,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets the sort options.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetSortOptions()
+        public virtual IEnumerable<string> GetSortOptions()
         {
             var sortOptions = SortByElement.Options
                 .Select(e => e.TextHelper().InnerText);
@@ -77,7 +88,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets the current sort option.
         /// </summary>
         /// <returns></returns>
-        public string GetCurrentSortOption()
+        public virtual string GetCurrentSortOption()
         {
             var currentSortOption = SortByElement.SelectedOption
                 .TextHelper()
@@ -91,7 +102,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// </summary>
         /// <param name="sortOption">The sort option.</param>
         /// <param name="stringComparison">The string comparison.</param>
-        public void SetSortOptions(string sortOption,
+        public virtual void SetSortOptions(string sortOption,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             var isAlreadySelected = !String.Equals(
@@ -119,7 +130,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets all 'Display per page' options.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<int> GetDisplayOptions()
+        public virtual IEnumerable<int> GetDisplayOptions()
         {
             var displayOptions = DisplayElement.Options
                 .Select(e => e.TextHelper().ExtractInteger());
@@ -131,7 +142,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets the current 'Display per page' value.
         /// </summary>
         /// <returns></returns>
-        public int GetCurrentDisplayOption()
+        public virtual int GetCurrentDisplayOption()
         {
             return DisplayElement.SelectedOption
                 .TextHelper()
@@ -142,7 +153,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Selects the 'Display per page' option.
         /// </summary>
         /// <param name="display">The display.</param>
-        public void SetDisplayOption(int display)
+        public virtual void SetDisplayOption(int display)
         {
             if (GetCurrentDisplayOption() != display)
             {
@@ -157,7 +168,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets the view modes.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetViewModes()
+        public virtual IEnumerable<string> GetViewModes()
         {
             var viewModes = ViewModeElements.Select(e => e.GetAttribute("title"));
 
@@ -168,7 +179,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets the active view mode.
         /// </summary>
         /// <returns></returns>
-        public string GetActiveViewMode()
+        public virtual string GetActiveViewMode()
         {
             return ActiveViewModeElement.GetAttribute("title");
         }
@@ -178,7 +189,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// </summary>
         /// <param name="viewMode">The view mode.</param>
         /// <param name="stringComparison">The string comparison.</param>
-        public void SetActiveViewMode(string viewMode,
+        public virtual void SetActiveViewMode(string viewMode,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             var alreadySelected = String.Equals(
@@ -206,12 +217,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         public virtual IList<SearchResult> GetResults()
         {
             return SearchResultItemElements
-                .Select(element => PageObjectFactory
+                .Select(element => pageObjectFactory
                     .PrepareComponent(new SearchResult(
                         SearchResultsSelector,
-                        PageObjectFactory,
+                        pageObjectFactory,
                         element,
-                        PageSettings)))
+                        pageSettings)))
                 .ToList();
         }
 

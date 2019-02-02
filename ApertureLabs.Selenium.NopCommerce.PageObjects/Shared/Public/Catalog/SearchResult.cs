@@ -74,40 +74,40 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         #endregion
 
         /// <inheritdoc/>
-        public IWebDriver WrappedDriver { get; private set; }
+        public virtual IWebDriver WrappedDriver { get; private set; }
 
         /// <inheritdoc/>
-        public IWebElement WrappedElement { get; private set; }
+        public virtual IWebElement WrappedElement { get; private set; }
 
         /// <inheritdoc/>
-        public By By { get; private set; }
+        public virtual By By { get; private set; }
 
         /// <summary>
         /// Name of the product.
         /// </summary>
-        public string Name => NameElement.Text;
+        public virtual string Name => NameElement.Text;
 
         /// <summary>
         /// Price of the product.
         /// </summary>
-        public decimal Price => PriceElement.TextHelper().ExtractPrice();
+        public virtual decimal Price => PriceElement.TextHelper().ExtractPrice();
 
         /// <summary>
         /// Url of the image.
         /// </summary>
-        public string ImageUrl => ImageElement.GetAttribute("href");
+        public virtual string ImageUrl => ImageElement.GetAttribute("href");
 
         /// <summary>
         /// Gets the rating. Returns a percentage.
         /// </summary>
-        public double Rating { get; private set; }
+        public virtual double Rating { get; private set; }
 
         #endregion
 
         #region Methods
 
         /// <inheritdoc/>
-        public ILoadableComponent Load()
+        public virtual ILoadableComponent Load()
         {
             var widthCssValue = RatingElement.GetCssValue("width");
             Rating = new CssDimension(widthCssValue).Number;
@@ -119,18 +119,18 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Navigates to the product page.
         /// </summary>
         /// <returns></returns>
-        public BaseProductPage GoToProductPage()
+        public virtual IBaseProductPage GoToProductPage()
         {
             var link = WrappedElement.FindElement(nameSelector);
             link.Click();
 
-            return pageObjectFactory.PreparePage<BaseProductPage>();
+            return pageObjectFactory.PreparePage<IBaseProductPage>();
         }
 
         /// <summary>
         /// Adds to cart.
         /// </summary>
-        public BarNotificationComponent<SearchResult> AddToCart()
+        public virtual BarNotificationComponent<SearchResult> AddToCart()
         {
             AddToCartElement.Click();
 
@@ -150,7 +150,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Adds to wish list.
         /// </summary>
-        public void AddToWishList()
+        public virtual void AddToWishList()
         {
             AddToWishListElement.Click();
         }
@@ -158,13 +158,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Adds to compare list.
         /// </summary>
-        public void AddToCompareList()
+        public virtual void AddToCompareList()
         {
             AddToCompareListElement.Click();
         }
 
         /// <inheritdoc/>
-        public bool IsStale()
+        public virtual bool IsStale()
         {
             return WrappedElement.IsStale();
         }

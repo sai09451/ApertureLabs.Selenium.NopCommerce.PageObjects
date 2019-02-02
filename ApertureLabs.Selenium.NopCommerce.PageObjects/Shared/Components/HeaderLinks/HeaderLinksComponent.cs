@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using System;
 using System.Linq;
 using OpenQA.Selenium.Support.UI;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks
 {
@@ -44,10 +45,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="HeaderLinksComponent"/> class.
         /// </summary>
-        /// <param name="pageObjectFactory"></param>
-        /// <param name="driver"></param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
         public HeaderLinksComponent(IPageObjectFactory pageObjectFactory,
             IWebDriver driver)
             : base(driver, By.CssSelector(".header-links"))

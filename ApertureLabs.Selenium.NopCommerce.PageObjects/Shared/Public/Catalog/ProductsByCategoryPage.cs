@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
@@ -12,7 +12,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// Corresponds to the view CategoryTemplate.ProductsInGridOrLines.cshtml.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultsTemplatePage" />
-    public class ProductsByCategoryPage : SearchResultsTemplatePage
+    public class ProductsByCategoryPage : SearchResultsTemplatePage, IProductsByCategoryPage
     {
         #region Fields
 
@@ -29,15 +29,22 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductsByCategoryPage"/> class.
         /// </summary>
+        /// <param name="basePage">basePage</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
         public ProductsByCategoryPage(
+            IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(pageObjectFactory, driver, pageSettings)
-        { }
+            : base(basePage,
+                  pageObjectFactory,
+                  driver,
+                  pageSettings)
+        {
+            Uri = new Uri(pageSettings.BaseUrl);
+        }
 
         #endregion
 
@@ -57,7 +64,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets the breadcrumb.
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<string> GetBreadcrumb()
+        public virtual IReadOnlyList<string> GetBreadcrumb()
         {
             return BreadcrumbElements
                 .Select(e => e.TextHelper().InnerText)
