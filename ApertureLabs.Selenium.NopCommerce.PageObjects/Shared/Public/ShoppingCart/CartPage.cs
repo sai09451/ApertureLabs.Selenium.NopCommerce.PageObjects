@@ -52,6 +52,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
 
         #region Elements
 
+        #endregion
+
         /// <summary>
         /// Gets the order summary.
         /// </summary>
@@ -59,8 +61,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// The order summary.
         /// </value>
         public virtual OrderSummaryComponent OrderSummary { get; private set; }
-
-        #endregion
 
         public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 

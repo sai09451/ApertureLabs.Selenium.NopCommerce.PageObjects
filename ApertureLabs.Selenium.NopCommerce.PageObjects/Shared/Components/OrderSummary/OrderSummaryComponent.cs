@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.DiscountBox;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBox;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderTotals;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout;
@@ -56,17 +58,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
 
         #region Properties
 
-        public object TaxShippingInfo { get; private set; }
+        public virtual object TaxShippingInfo { get; private set; }
 
-        public object CheckoutAttributes { get; private set; }
+        public virtual object CheckoutAttributes { get; private set; }
 
-        public object DiscountBox { get; private set; }
+        public virtual DiscountBoxComponent DiscountBox { get; private set; }
 
-        public object GiftCardBox { get; private set; }
+        public virtual GiftCardBoxComponent GiftCardBox { get; private set; }
 
-        public object EstimateShipping { get; private set; }
+        public virtual object EstimateShipping { get; private set; }
 
-        public OrderTotalsComponent OrderTotals { get; private set; }
+        public virtual OrderTotalsComponent OrderTotals { get; private set; }
 
         #region Elements
 
@@ -87,51 +89,61 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         {
             base.Load();
 
+            // Tax shipping info.
 
+            // Checkout attributes.
+
+            // Discount.
+
+            // Giftcard.
+
+            // Estimate shipping.
+
+            // Order totals.
 
             return this;
         }
 
-        public IList<OrderSummaryRowPageComponent> GetCartItems()
+        public virtual IList<OrderSummaryRowPageComponent> GetCartItems()
         {
             throw new NotImplementedException();
         }
 
-        public object GetCartItem(int index)
+        public virtual object GetCartItem(int index)
         {
             throw new NotImplementedException();
         }
 
-        public object GetCartItem(string productName,
+        public virtual object GetCartItem(string productName,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveProduct(int index)
+        public virtual void RemoveProduct(int index)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveProduct(string productName,
+        public virtual void RemoveProduct(string productName,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateShoppingCart()
+        public virtual void UpdateShoppingCart()
         {
             // Reload the page.
             Load();
             throw new NotImplementedException();
         }
 
-        public CatalogTemplatePage ContinueShopping()
+        public virtual CatalogTemplatePage ContinueShopping()
         {
             throw new NotImplementedException();
         }
 
-        public OrderSummaryComponent AcceptTermsAndConditions(bool accept)
+        public virtual OrderSummaryComponent AcceptTermsAndConditions(bool accept)
         {
             // Check if terms and conditions are present.
             if (WrappedDriver.FindElements(termsOfServiceSelector).Any())
@@ -140,7 +152,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
             return this;
         }
 
-        public void CheckoutOpc(
+        public virtual void CheckoutOpc(
             Action<IOnePageCheckoutPage> resolve,
             Action<OrderSummaryComponent> reject)
         {
@@ -180,6 +192,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
             else
                 resolve(opcPage);
         }
+
+        public virtual void Checkout()
+        { }
 
         #endregion
     }

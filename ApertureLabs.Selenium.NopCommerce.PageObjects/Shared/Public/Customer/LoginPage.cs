@@ -129,7 +129,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <returns></returns>
         public virtual bool HasInvalidEmail()
         {
-            return String.IsNullOrWhiteSpace(EmailValidationElement.Text);
+            if (WrappedDriver.FindElements(emailValidatorSelector).Any())
+                return String.IsNullOrWhiteSpace(EmailValidationElement.Text);
+
+            return false;
         }
 
         /// <summary>
@@ -138,7 +141,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <returns></returns>
         public virtual bool HasMessageErrorSummary()
         {
-            return WrappedDriver.Select(messageErrorSelector).Any();
+            return WrappedDriver.FindElements(messageErrorSelector).Any();
         }
 
         /// <summary>

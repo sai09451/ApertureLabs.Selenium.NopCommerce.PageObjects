@@ -1129,6 +1129,12 @@
             <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderTotals.OrderTotalsComponent">
+            <summary>
+            OrderTotalsComponent.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager.PagerComponent">
             <summary>
             Represents the pager component found on the public catalog page.
@@ -1920,6 +1926,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutBillingAddressPage">
+            <summary>
+            CheckoutBillingAddressPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IOnePageCheckoutPage">
+            <summary>
+            OnePageCheckout.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ILoginPage">
             <summary>
             LoginPage.
@@ -2315,12 +2333,13 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.CartPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,OpenQA.Selenium.IWebDriver)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.CartPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.CartPage"/> class.
             </summary>
             <param name="basePage">The base page.</param>
             <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.CartPage.OrderSummary">
             <summary>

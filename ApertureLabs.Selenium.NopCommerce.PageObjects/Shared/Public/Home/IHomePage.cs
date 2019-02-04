@@ -20,5 +20,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
         /// </summary>
         /// <returns></returns>
         IReadOnlyCollection<IWebElement> GetNews();
+
+        /// <summary>
+        /// Gets the top menu categories.
+        /// </summary>
+        /// <returns></returns>
+        IReadOnlyCollection<IWebElement> GetTopMenuCategories();
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
@@ -6,10 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.Tests
+namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.Home
 {
     [TestClass]
-    public class AdminHeaderLinksComponentTests
+    public class HomePageTests
     {
         #region Fields
 
@@ -48,7 +50,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
             serviceCollection.AddSingleton(driver);
             serviceCollection.AddSingleton(new PageSettings
             {
-                BaseUrl = "http://nopcommerce410.local/"
+                //BaseUrl = "http://nopcommerce410.local/"
+                BaseUrl = "http://localhost:15536/"
             });
 
             pageObjectFactory = new PageObjectFactory(serviceCollection);
@@ -65,50 +68,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         #region Tests
 
         [TestMethod]
-        public void AdminHeaderLinksComponentTest()
+        public void GetFeaturedProductsTests()
         {
             var homePage = pageObjectFactory.PreparePage<IHomePage>();
-            homePage.Login("admin@yourstore.com", "admin");
-            var headerLinks = homePage.AdminHeaderLinks;
-
-            Assert.IsNotNull(headerLinks);
+            var featuredProducts = homePage.GetFeaturedProducts();
+            throw new NotImplementedException();
         }
 
         [TestMethod]
-        public void GoToAdminTest()
+        public void GetNewsTest()
         {
-            var homePage = pageObjectFactory.PreparePage<IHomePage>();
-            homePage.Login("admin@yourstore.com", "admin");
-            var adminHomePage = homePage.AdminHeaderLinks.GoToAdmin();
-
-            Assert.IsNotNull(adminHomePage);
-        }
-
-        [TestMethod]
-        public void CanManagePageTest()
-        {
-            var homePage = pageObjectFactory.PreparePage<IHomePage>();
-            homePage.Login("admin@yourstore.com", "admin");
-            var canManageHomePage = homePage.AdminHeaderLinks.CanManagePage();
-
-            Assert.IsFalse(canManageHomePage);
-        }
-
-        [TestMethod]
-        public void ManagePageTest()
-        {
-            var importedModules = pageObjectFactory.GetImportedModules();
-            var homePage = pageObjectFactory.PreparePage<IHomePage>();
-            var adminProductPage = homePage
-                .Login("admin@yourstore.com", "admin")
-                .Search("leica")
-                .GetResults()
-                .First()
-                .GoToProductPage()
-                .AdminHeaderLinks
-                .ManagePage();
-
-            Assert.IsNotNull(adminProductPage);
+            throw new NotImplementedException();
         }
 
         #endregion

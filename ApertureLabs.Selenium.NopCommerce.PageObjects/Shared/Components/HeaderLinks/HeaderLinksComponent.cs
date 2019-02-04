@@ -1,13 +1,12 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer;
+﻿using System;
+using System.Linq;
+using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.HeaderLinks;
-using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
-using System;
-using System.Linq;
 using OpenQA.Selenium.Support.UI;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks
 {
