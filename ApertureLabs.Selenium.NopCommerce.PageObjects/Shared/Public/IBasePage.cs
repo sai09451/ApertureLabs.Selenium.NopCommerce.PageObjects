@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
@@ -57,5 +58,24 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// </summary>
         /// <param name="searchFor">The search for.</param>
         IReadOnlyCollection<IWebElement> SearchAjax(string searchFor);
+
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
+        bool HasNotifications();
+
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        void HandleNotification(Action<IWebElement> element);
+
+        /// <summary>
+        /// Dismisses the notifications.
+        /// </summary>
+        void DismissNotifications();
     }
 }

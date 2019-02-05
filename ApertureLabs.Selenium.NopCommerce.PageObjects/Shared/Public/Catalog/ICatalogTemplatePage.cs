@@ -10,6 +10,24 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     public interface ICatalogTemplatePage : IBasePage
     {
         /// <summary>
+        /// Selects the category.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        /// <returns></returns>
+        IProductsByCategoryPage SelectCategory(string category,
+            StringComparison stringComparison = StringComparison.Ordinal);
+
+        /// <summary>
+        /// Selects a parent category.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        /// <returns></returns>
+        IParentCategoryPage SelectParentCategory(string category,
+            StringComparison stringComparison = StringComparison.Ordinal);
+
+        /// <summary>
         /// Gets the categories.
         /// </summary>
         /// <returns></returns>
@@ -38,13 +56,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// </summary>
         /// <returns></returns>
         IEnumerable<string> GetRecentlyViewedProducts();
-
-        /// <summary>
-        /// Selects the category.
-        /// </summary>
-        /// <param name="category">The category.</param>
-        /// <param name="stringComparison">The string comparison.</param>
-        void SelectCategory(string category, StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
         /// Selects the manufacturers.

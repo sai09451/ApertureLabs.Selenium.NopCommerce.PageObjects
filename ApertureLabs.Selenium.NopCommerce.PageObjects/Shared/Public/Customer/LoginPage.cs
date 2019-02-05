@@ -235,6 +235,21 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             return basePage.SearchAjax(searchFor);
         }
 
+        public bool HasNotifications()
+        {
+            return basePage.HasNotifications();
+        }
+
+        public void HandleNotification(Action<IWebElement> element)
+        {
+            basePage.HandleNotification(element);
+        }
+
+        public void DismissNotifications()
+        {
+            basePage.DismissNotifications();
+        }
+
         #endregion
     }
 }

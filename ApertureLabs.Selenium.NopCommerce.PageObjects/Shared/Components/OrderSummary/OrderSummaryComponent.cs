@@ -8,6 +8,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBo
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderTotals;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order;
 using ApertureLabs.Selenium.PageObjects;
 using ApertureLabs.Selenium.WebElements.Inputs;
 using OpenQA.Selenium;
@@ -26,7 +27,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         #region Selectors
 
         private readonly By errorMessagesSelector = By.CssSelector(".message-error li");
-        private readonly By cartRowSelectors = By.CssSelector("#shopping-cart-form tbody tr");
+        private readonly By cartRowSelectors = By.CssSelector("#shopping-cart-form .cart tbody tr");
         private readonly By continueShoppingSelector = By.CssSelector("input[name='continueshopping']");
         private readonly By updateShoppingCartSelector = By.CssSelector("input[name='updatecart']");
         private readonly By termsOfServiceSelector = By.CssSelector("#termsofservice");
@@ -85,6 +86,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
 
         #region Methods
 
+        /// <summary>
+        /// If overloaded don't forget to call base.Load() or make sure to
+        /// assign the WrappedElement.
+        /// </summary>
+        /// <returns></returns>
         public override ILoadableComponent Load()
         {
             base.Load();
@@ -104,45 +110,81 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
             return this;
         }
 
+        /// <summary>
+        /// Gets the cart items.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public virtual IList<OrderSummaryRowPageComponent> GetCartItems()
         {
-            throw new NotImplementedException();
+            var rowComponents = CartRowElements
+                .Select(e => pageObjectFactory.PrepareComponent(
+                    new OrderSummaryRowPageComponent(
+                        ByElement.FromElement(e),
+                        pageObjectFactory,
+                        WrappedDriver)))
+                .ToList();
+
+            return rowComponents;
         }
 
-        public virtual object GetCartItem(int index)
+        /// <summary>
+        /// Gets the cart item.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
+        public virtual OrderSummaryRowPageComponent GetCartItem(int index)
         {
-            throw new NotImplementedException();
+            var el = CartRowElements.ElementAt(index);
+            var component = pageObjectFactory.PrepareComponent(
+                new OrderSummaryRowPageComponent(
+                    ByElement.FromElement(el),
+                    pageObjectFactory,
+                    WrappedDriver));
+
+            return component;
         }
 
-        public virtual object GetCartItem(string productName,
-            StringComparison stringComparison = StringComparison.Ordinal)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Removes the product.
+        /// </summary>
+        /// <param name="index">The index.</param>
         public virtual void RemoveProduct(int index)
         {
-            throw new NotImplementedException();
+            var item = GetCartItem(index);
+            item.MarkForRemoval(true);
+
+            UpdateShoppingCart();
         }
 
-        public virtual void RemoveProduct(string productName,
-            StringComparison stringComparison = StringComparison.Ordinal)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Updates the shopping cart.
+        /// </summary>
         public virtual void UpdateShoppingCart()
         {
+            UpdateShoppintCartElement.Click();
+
             // Reload the page.
             Load();
-            throw new NotImplementedException();
         }
 
-        public virtual CatalogTemplatePage ContinueShopping()
+        /// <summary>
+        /// Continues shopping.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public virtual T ContinueShopping<T>() where T : ICatalogTemplatePage
         {
-            throw new NotImplementedException();
+            ContinueShoppingElement.Click();
+
+            return pageObjectFactory.PreparePage<T>();
         }
 
+        /// <summary>
+        /// Accepts the terms and conditions.
+        /// </summary>
+        /// <param name="accept">if set to <c>true</c> [accept].</param>
+        /// <returns></returns>
         public virtual OrderSummaryComponent AcceptTermsAndConditions(bool accept)
         {
             // Check if terms and conditions are present.
@@ -152,6 +194,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
             return this;
         }
 
+        /// <summary>
+        /// Checkouts the opc.
+        /// </summary>
+        /// <param name="resolve">The resolve.</param>
+        /// <param name="reject">The reject.</param>
+        /// <exception cref="ArgumentNullException">
+        /// resolve
+        /// or
+        /// reject
+        /// </exception>
         public virtual void CheckoutOpc(
             Action<IOnePageCheckoutPage> resolve,
             Action<OrderSummaryComponent> reject)
@@ -193,8 +245,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
                 resolve(opcPage);
         }
 
-        public virtual void Checkout()
-        { }
+        /// <summary>
+        /// Attempts to perform the full checkout process.
+        /// </summary>
+        public virtual IOrderDetailsPage FullCheckout()
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

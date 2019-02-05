@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,6 +65,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.ShoppingCart
         #endregion
 
         #region Tests
+
+        [TestMethod]
+        public void OrderSummaryTest()
+        {
+            var homePage = pageObjectFactory.PreparePage<IHomePage>();
+            homePage.Login("admin@yourstore.com", "admin");
+            var shoppingCart = homePage.GoToShoppingCart();
+            var orderSummary = shoppingCart.OrderSummary;
+
+            Assert.IsNotNull(orderSummary);
+        }
 
         #endregion
     }

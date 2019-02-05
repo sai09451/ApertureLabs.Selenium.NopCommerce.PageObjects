@@ -29,19 +29,72 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         bool HasPaymentPlan { get; }
 
         /// <summary>
-        /// Adds the product to the cart.
+        /// Sets the attribute.
         /// </summary>
-        /// <param name="productAttributesCommand">
-        /// An action that will be passed the modal body that appears after
-        /// clicking 'Add to cart' that appears asking the user to enter
-        /// additional information. If null then the default handler is used.
-        /// </param>
-        void AddToCart(Func<IWebElement, IList<string>> productAttributesCommand = null);
+        /// <param name="attributeName">Name of the attribute.</param>
+        /// <param name="attributeElementHandler">The attribute element handler.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        IBaseProductPage SetAttribute(string attributeName,
+            Action<IWebElement> attributeElementHandler,
+            StringComparison stringComparison = StringComparison.Ordinal);
+
+        /// <summary>
+        /// Sets the attribute. The termPredicate will be passed in the term
+        /// element (dt) of each term to determine which attribute to set.
+        /// </summary>
+        /// <param name="termPredicate">The term predicate.</param>
+        /// <param name="attributeElementHandler">The attribute element handler.</param>
+        /// <returns></returns>
+        IBaseProductPage SetAttribute(Predicate<IWebElement> termPredicate,
+            Action<IWebElement> attributeElementHandler);
+
+        /// <summary>
+        /// Adds the product to the cart. Throws an exception if it fails to
+        /// add the product to the cart.
+        /// </summary>
+        IBaseProductPage AddToCart();
+
+        /// <summary>
+        /// Adds to cart and calls resolve/reject if the product was or wasn't
+        /// added to the cart.
+        /// </summary>
+        /// <param name="resolve">The resolve.</param>
+        /// <param name="reject">The reject.</param>
+        /// <returns></returns>
+        IBaseProductPage AddToCart(
+            Action<IBaseProductPage> resolve,
+            Action<IBaseProductPage> reject);
 
         /// <summary>
         /// Retrieves a list of all payment plan options.
         /// </summary>
         /// <returns></returns>
         IList<IWebElement> GetPaymentPlanOptions();
+
+        /// <summary>
+        /// Gets the full description.
+        /// </summary>
+        /// <returns></returns>
+        string GetFullDescription();
+
+        /// <summary>
+        /// Gets the short description.
+        /// </summary>
+        /// <returns></returns>
+        string GetShortDescription();
+
+        /// <summary>
+        /// Gets the product tags.
+        /// </summary>
+        /// <returns></returns>
+
+        IEnumerable<string> GetProductTags();
+
+        /// <summary>
+        /// Sets the quantity.
+        /// </summary>
+        /// <param name="quantity">The quantity.</param>
+        /// <returns></returns>
+        IBaseProductPage SetQuantity(int quantity);
     }
 }

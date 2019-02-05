@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
 {
     /// <summary>
-    /// HomePage.
+    /// OnePageCheckoutPage.
     /// </summary>
-    public class HomePage : PageObject, IHomePage
+    /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
+    /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage" />
+    public class OnePageCheckoutPage : PageObject, IOnePageCheckoutPage
     {
         #region Fields
 
@@ -23,34 +25,35 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
 
         private readonly IBasePage basePage;
         private readonly IPageObjectFactory pageObjectFactory;
-        private readonly PageSettings pageSettings;
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HomePage"/> class.
+        /// Initializes a new instance of the <see cref="OnePageCheckoutPage"/> class.
         /// </summary>
+        /// <param name="selector">The selector.</param>
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
-        /// <param name="pageSettings">The page settings.</param>
-        public HomePage(IBasePage basePage,
+        public OnePageCheckoutPage(By selector,
+            IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver,
-            PageSettings pageSettings)
+            IWebDriver driver)
             : base(driver)
         {
-            this.Uri = new Uri(pageSettings.BaseUrl);
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
-            this.pageSettings = pageSettings;
         }
 
         #endregion
 
         #region Properties
+
+        #region Elements
+
+        #endregion
 
         public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
@@ -58,22 +61,57 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
 
         #region Methods
 
+        public void Confirm()
+        {
+            throw new NotImplementedException();
+        }
+
         public void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
 
-        public IReadOnlyCollection<IWebElement> GetFeaturedProducts()
+        public void EnterBillingAddress(AddressModel address)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public IReadOnlyCollection<IWebElement> GetNews()
+        public void EnterPaymentInformation()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public IReadOnlyCollection<IWebElement> GetTopMenuCategories()
+        public void EnterShippingAddress(AddressModel address)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AddressModel GetBillingAddress()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCurrentStep()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetPaymentInformation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetPaymentMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+        public AddressModel GetShippingAddress()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetShippingMethod()
         {
             throw new NotImplementedException();
         }
@@ -116,6 +154,21 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
         public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
+        }
+
+        public void SelectPaymentMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SelectShippingMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TryGoToStep(int step, Action<IOnePageCheckoutPage> resolve, Action<IOnePageCheckoutPage> reject)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

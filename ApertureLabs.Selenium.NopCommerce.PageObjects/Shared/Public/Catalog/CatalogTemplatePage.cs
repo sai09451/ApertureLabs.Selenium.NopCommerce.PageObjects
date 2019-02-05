@@ -119,23 +119,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         }
 
         /// <summary>
-        /// Selects the category.
-        /// </summary>
-        /// <param name="category">The category.</param>
-        /// <param name="stringComparison">The string comparison.</param>
-        public virtual void SelectCategory(string category,
-            StringComparison stringComparison = StringComparison.Ordinal)
-        {
-            CategoriesComponent
-                .GetItems()
-                .First(e => String.Equals(
-                    category,
-                    e.FindElement(LinkSelector).TextHelper().InnerText,
-                    stringComparison))
-                .Click();
-        }
-
-        /// <summary>
         /// Gets the manufacturers.
         /// </summary>
         /// <returns></returns>
@@ -304,6 +287,89 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
+        }
+
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasNotifications()
+        {
+            return basePage.HasNotifications();
+        }
+
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        public void HandleNotification(Action<IWebElement> element)
+        {
+            basePage.HandleNotification(element);
+        }
+
+        /// <summary>
+        /// Dismisses the notifications.
+        /// </summary>
+        public void DismissNotifications()
+        {
+            basePage.DismissNotifications();
+        }
+
+        /// <summary>
+        /// Selects the category.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        /// <returns></returns>
+        public IProductsByCategoryPage SelectCategory(string category,
+            StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            SelectCategoryHelper(category, stringComparison);
+
+            return pageObjectFactory.PreparePage<IProductsByCategoryPage>();
+        }
+
+        /// <summary>
+        /// Selects a parent category.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        /// <returns></returns>
+        public IParentCategoryPage SelectParentCategory(string category,
+            StringComparison stringComparison = StringComparison.Ordinal)
+        {
+            SelectCategoryHelper(category, stringComparison);
+
+            return pageObjectFactory.PreparePage<IParentCategoryPage>();
+        }
+
+        private void SelectCategoryHelper(string category,
+            StringComparison stringComparison)
+        {
+            var foundItem = false;
+            var links = CategoriesComponent.GetItems()
+                .Select(e => e.FindElement(By.CssSelector("a")));
+
+            foreach (var item in links)
+            {
+                var text = item.TextHelper().InnerText;
+                var matches = String.Equals(
+                    category,
+                    text,
+                    stringComparison);
+
+                if (matches)
+                {
+                    foundItem = true;
+                    item.Click();
+                    break;
+                }
+            }
+
+            if (!foundItem)
+                throw new NoSuchElementException();
         }
 
         #endregion

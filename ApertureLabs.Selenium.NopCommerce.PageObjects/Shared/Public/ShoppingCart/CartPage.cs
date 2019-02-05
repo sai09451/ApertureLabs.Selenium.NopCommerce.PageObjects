@@ -7,6 +7,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart
 {
@@ -32,9 +33,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Initializes a new instance of the <see cref="CartPage"/> class.
         /// </summary>
         /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
         public CartPage(IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
             : base(driver)
@@ -44,6 +47,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
             Uri = new Uri(
                 new Uri(pageSettings.BaseUrl),
                 "cart");
+
+            OrderSummary = new OrderSummaryComponent(
+                pageObjectFactory,
+                WrappedDriver);
         }
 
         #endregion
@@ -67,6 +74,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         #endregion
 
         #region Methods
+
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+
+            OrderSummary.Load();
+            basePage.Load();
+
+            return this;
+        }
 
         public virtual ICartPage GoToShoppingCart()
         {
@@ -96,6 +113,21 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
+        }
+
+        public bool HasNotifications()
+        {
+            return basePage.HasNotifications();
+        }
+
+        public void HandleNotification(Action<IWebElement> element)
+        {
+            basePage.HandleNotification(element);
+        }
+
+        public void DismissNotifications()
+        {
+            basePage.DismissNotifications();
         }
 
         #endregion

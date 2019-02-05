@@ -56,6 +56,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
                 .RegisterType<Public.BasePage>()
                 .As<Public.IBasePage>()
                 .SingleInstance();
+            builder.RegisterType<Public.Catalog.ParentCategoryPage>()
+                .As<Public.Catalog.IParentCategoryPage>()
+                .SingleInstance();
             builder
                 .RegisterType<Public.Catalog.ProductTagsAllPage>()
                 .As<Public.Catalog.IProductTagsAllPage>()
@@ -98,6 +101,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
             builder
                 .RegisterType<Public.ShoppingCart.CartPage>()
                 .As<Public.ShoppingCart.ICartPage>()
+                .SingleInstance();
+            builder.RegisterType<Public.Checkout.OnePageCheckoutPage>()
+                .As<Public.Checkout.IOnePageCheckoutPage>()
                 .SingleInstance();
 
             #endregion
