@@ -205,7 +205,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// reject
         /// </exception>
         public virtual void CheckoutOpc(
-            Action<IOnePageCheckoutPage> resolve,
+            Action<ICheckoutStepPage> resolve,
             Action<OrderSummaryComponent> reject)
         {
             if (resolve == null)
@@ -213,30 +213,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
             else if (reject == null)
                 throw new ArgumentNullException(nameof(reject));
 
-            CheckoutElement.Click();
-
-            // Check if terms and conditions warning popup appears.
-            var foundTermsWarning = WrappedDriver
-                .Wait(
-                    TimeSpan.FromSeconds(2),
-                    new[] { typeof(TimeoutException) })
-                .Until(d => d.FindElements(termsOfServiceSelector).Any());
-
-            if (foundTermsWarning)
-            {
+            if (!TryToProceedToCheckout())
                 reject(this);
-                return;
-            }
 
-            // Check if redirected to same page.
-            if (!IsStale())
-            {
-                reject(this);
-                return;
-            }
+            // TODO: Check if we're on the 'Confirm guest checkout page'.
 
             // Assume we've made it to the opc checkout page.
-            var opcPage = pageObjectFactory.PreparePage<IOnePageCheckoutPage>();
+            var opcPage = pageObjectFactory.PreparePage<ICheckoutStepPage>();
 
             // Check that we are in fact on the right page.
             if (opcPage.IsStale())
@@ -250,7 +233,56 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// </summary>
         public virtual IOrderDetailsPage FullCheckout()
         {
+            if (!TryToProceedToCheckout())
+                throw new Exception("Unable to proceed to the checkout page.");
+
+            var checkoutPage = pageObjectFactory.PreparePage<ICheckoutPage>();
+
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Proceeds to a custom checkout page.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public virtual T ProceedToCheckout<T>() where T : ICheckoutPage
+        {
+            if (!TryToProceedToCheckout())
+                throw new Exception("Unable to proceed to the checkout page.");
+
+            return pageObjectFactory.PreparePage<T>();
+        }
+
+        /// <summary>
+        /// Proceeds to checkout.
+        /// </summary>
+        /// <returns></returns>
+        public virtual ICheckoutPage ProceedToCheckout()
+        {
+            if (!TryToProceedToCheckout())
+                throw new Exception("Unable to proceed to the checkout page.");
+
+            return ProceedToCheckout<ICheckoutPage>();
+        }
+
+        private bool TryToProceedToCheckout()
+        {
+            CheckoutElement.Click();
+
+            // Check if terms and conditions warning popup appears.
+            var foundTermsWarning = WrappedDriver
+                .Wait(TimeSpan.FromSeconds(2))
+                .Exists(termsOfServiceSelector);
+
+            if (foundTermsWarning)
+                return false;
+
+            // Check if redirected to same page.
+            if (!IsStale())
+                return false;
+
+            return true;
         }
 
         #endregion

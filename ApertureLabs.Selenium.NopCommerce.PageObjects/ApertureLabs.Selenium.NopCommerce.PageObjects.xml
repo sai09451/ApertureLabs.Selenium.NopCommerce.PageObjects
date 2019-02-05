@@ -1224,7 +1224,7 @@
             <param name="accept">if set to <c>true</c> [accept].</param>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryComponent.CheckoutOpc(System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IOnePageCheckoutPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryComponent})">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryComponent.CheckoutOpc(System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryComponent})">
             <summary>
             Checkouts the opc.
             </summary>
@@ -1240,6 +1240,19 @@
             <summary>
             Attempts to perform the full checkout process.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryComponent.ProceedToCheckout``1">
+            <summary>
+            Proceeds to a custom checkout page.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryComponent.ProceedToCheckout">
+            <summary>
+            Proceeds to checkout.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent">
             <summary>
@@ -2232,11 +2245,22 @@
             CheckoutPage.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.EnterBillingAddress(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.AddressModel)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.EnterBillingAddress(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.AddressModel,System.Boolean)">
             <summary>
             Enters the billing address.
             </summary>
             <param name="address">The address.</param>
+            <param name="shipToSameAddress">
+            Whether or not to ship to the same address.
+            </param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.UseExistingBillingAddress(System.Boolean)">
+            <summary>
+            Uses an existing billing address.
+            </summary>
+            <param name="shipToSameAddress">
+            if set to <c>true</c> [ship to same address].
+            </param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetBillingAddress">
             <summary>
@@ -2250,49 +2274,124 @@
             </summary>
             <param name="address">The address.</param>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.UseExistingShippingAddress">
+            <summary>
+            Uses an existing shipping address.
+            </summary>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetShippingAddress">
             <summary>
             Gets the shipping address.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.SelectShippingMethod">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.SelectShippingMethod(System.String,System.StringComparison)">
             <summary>
             Selects the shipping method.
             </summary>
+            <param name="shippingMethod">The name of the shipping method.</param>
+            <param name="stringComparison">The string comparison.</param>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetShippingMethod">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetSelectedShippingMethod">
             <summary>
             Gets the shipping method.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.SelectPaymentMethod">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetShippingMethods">
+            <summary>
+            Gets the shipping methods.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.SelectPaymentMethod(System.String,System.StringComparison)">
             <summary>
             Selects the payment method.
             </summary>
+            <param name="paymentMethodName">The payment method name.</param>
+            <param name="stringComparison">The string comparison.</param>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetPaymentMethod">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetSelectedPaymentMethod">
             <summary>
-            Gets the payment method.
+            Gets the names of payment methods listed on the page.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.EnterPaymentInformation">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetPaymentMethods">
+            <summary>
+            Gets the payment methods.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.EnterPaymentInformation(OpenQA.Selenium.IWebElement)">
             <summary>
             Enters the payment information.
             </summary>
+            <param name="containerElement">
+            The element containing the payment information details.
+            </param>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.GetPaymentInformation">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.TryConfirm(System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICompletedPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage})">
             <summary>
-            Gets the payment information.
+            Finalizes and confirms the order.
             </summary>
-            <returns></returns>
+            <param name="resolve">Called if </param>
+            <param name="reject"></param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.Confirm">
             <summary>
             Finalizes and confirms the order.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage">
+            <summary>
+            OnePageCheckout.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage.GetCurrentStep">
+            <summary>
+            Gets the current step (zero based).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage.GetTotalSteps">
+            <summary>
+            Gets the total steps.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage.GetCurrentStepName">
+            <summary>
+            Gets the name of the current step.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage.GetAllStepNames">
+            <summary>
+            Gets all step names.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage.TryGoToStep(System.Int32,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage})">
+            <summary>
+            Tries the go to step.
+            </summary>
+            <param name="step">The step (zero based).</param>
+            <param name="resolve">The resolve.</param>
+            <param name="reject">The reject.</param>
+            <returns>The operation success status.</returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage.TryGoToStep(System.String,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage},System.StringComparison)">
+            <summary>
+            Tries the go to step.
+            </summary>
+            <param name="stepName">Name of the step.</param>
+            <param name="resolve">The resolve.</param>
+            <param name="reject">The reject.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns>The operation success status.</returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICompletedPage">
             <summary>
@@ -2317,25 +2416,30 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IOnePageCheckoutPage">
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IPaymentMethodHandler">
             <summary>
-            OnePageCheckout.
+            Used to define payment method handlers. These will be auto-registered
+            in the <c>Resources.AutofacStartup</c> class. Make sure any arguments
+            need to construct these handlers are registered with the dependency
+            injector. Note: The class should also be public.
             </summary>
-            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IOnePageCheckoutPage.GetCurrentStep">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IPaymentMethodHandler.CanOperateOn(System.String)">
             <summary>
-            Gets the current step.
+            Determines whether this instance can operate on the specified
+            payment method.
             </summary>
-            <returns></returns>
+            <param name="paymentMethodName">Name of the payment method.</param>
+            <returns>
+              <c>true</c> if this instance can operate on the specified payment
+              method; otherwise, <c>false</c>.
+            </returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IOnePageCheckoutPage.TryGoToStep(System.Int32,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IOnePageCheckoutPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IOnePageCheckoutPage})">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IPaymentMethodHandler.EnterInformation(OpenQA.Selenium.IWebElement)">
             <summary>
-            Tries the go to step.
+            Enters the information into the container element.
             </summary>
-            <param name="step">The step.</param>
-            <param name="resolve">The resolve.</param>
-            <param name="reject">The reject.</param>
+            <param name="containerElement">The container element.</param>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage">
             <summary>
@@ -2344,14 +2448,268 @@
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
             <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,System.Collections.Generic.IEnumerable{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IPaymentMethodHandler},OpenQA.Selenium.IWebDriver)">
             <summary>
-            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage"/> class.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage"/>
+            class.
             </summary>
-            <param name="selector">The selector.</param>
             <param name="basePage">The base page.</param>
             <param name="pageObjectFactory">The page object factory.</param>
+            <param name="paymentMethodHandlers">
+            The payment method handlers.
+            </param>
             <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.Confirm">
+            <summary>
+            Finalizes and confirms the order.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.EnterBillingAddress(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.AddressModel,System.Boolean)">
+            <summary>
+            Enters the billing address.
+            </summary>
+            <param name="address">The address.</param>
+            <param name="shipToSameAddress">Whether or not to ship to the same address.</param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.EnterPaymentInformation(OpenQA.Selenium.IWebElement)">
+            <summary>
+            Enters the payment information.
+            </summary>
+            <param name="containerElement">The element containing the payment information details.</param>
+            <exception cref="T:System.Exception">
+            Couldn't determine payment method name.
+            or
+            No payment handler registered that can " +
+                                $"operate on {paymentMethodName}
+            </exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.EnterShippingAddress(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.AddressModel)">
+            <summary>
+            Enters the shipping address.
+            </summary>
+            <param name="address">The address.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetBillingAddress">
+            <summary>
+            Gets the billing address.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetCurrentStep">
+            <summary>
+            Gets the current step.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetCurrentStepName">
+            <summary>
+            Gets the name of the current step.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetSelectedPaymentMethod">
+            <summary>
+            Gets the names of payment methods listed on the page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetShippingAddress">
+            <summary>
+            Gets the shipping address.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetSelectedShippingMethod">
+            <summary>
+            Gets the shipping method.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetShippingMethods">
+            <summary>
+            Gets the shipping methods.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetTotalSteps">
+            <summary>
+            Gets the total steps.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetAllStepNames">
+            <summary>
+            Gets all step names.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.SelectPaymentMethod(System.String,System.StringComparison)">
+            <summary>
+            Selects the payment method.
+            </summary>
+            <param name="paymentMethodName">The payment method name.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.SelectShippingMethod(System.String,System.StringComparison)">
+            <summary>
+            Selects the shipping method.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.TryConfirm(System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICompletedPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage})">
+            <summary>
+            Finalizes and confirms the order.
+            </summary>
+            <param name="resolve">Called if</param>
+            <param name="reject"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.TryGoToStep(System.Int32,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage})">
+            <summary>
+            Tries the go to step.
+            </summary>
+            <param name="step">The step (zero based).</param>
+            <param name="resolve">The resolve.</param>
+            <param name="reject">The reject.</param>
+            <returns>
+            The operation success status.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">step</exception>
+            <exception cref="T:System.ArgumentNullException">
+            resolve
+            or
+            reject
+            </exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.UseExistingBillingAddress(System.Boolean)">
+            <summary>
+            Uses an existing billing address.
+            </summary>
+            <param name="shipToSameAddress">if set to <c>true</c> [ship to same address].</param>
+            <exception cref="T:System.Exception">
+            Not on correct step.
+            or
+            No existing addresses to choose from.
+            </exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.UseExistingShippingAddress">
+            <summary>
+            Uses an existing shipping address.
+            </summary>
+            <exception cref="T:System.Exception">
+            Not on correct step.
+            or
+            No existing addresses to choose from.
+            </exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.GetPaymentMethods">
+            <summary>
+            Gets the payment methods.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.TryGoToStep(System.String,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutStepPage},System.StringComparison)">
+            <summary>
+            Tries the go to step.
+            </summary>
+            <param name="stepName">Name of the step.</param>
+            <param name="resolve">The resolve.</param>
+            <param name="reject">The reject.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns>
+            The operation success status.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            resolve
+            or
+            reject
+            </exception>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ILoginPage">
             <summary>
@@ -3336,6 +3694,63 @@
             The BaseUrl of the site.
             </summary>
             <example>http://localhost:15536</example>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCheckPaymentHandler">
+            <summary>
+            NopCheckPaymentHandler.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IPaymentMethodHandler" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCheckPaymentHandler.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCheckPaymentHandler"/> class.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCheckPaymentHandler.CanOperateOn(System.String)">
+            <summary>
+            Determines whether this instance can operate on the specified
+            payment method.
+            </summary>
+            <param name="paymentMethodName">Name of the payment method.</param>
+            <returns>
+            <c>true</c> if this instance can operate on the specified payment
+            method; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCheckPaymentHandler.EnterInformation(OpenQA.Selenium.IWebElement)">
+            <summary>
+            Enters the information into the container element.
+            </summary>
+            <param name="containerElement">The container element.</param>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCreditCardPaymentHandler">
+            <summary>
+            NopCreditCardPaymentHandler.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.IPaymentMethodHandler" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCreditCardPaymentHandler.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCreditCardPaymentHandler"/> class.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCreditCardPaymentHandler.CanOperateOn(System.String)">
+            <summary>
+            Determines whether this instance can operate on the specified
+            payment method.
+            </summary>
+            <param name="paymentMethodName">Name of the payment method.</param>
+            <returns>
+            <c>true</c> if this instance can operate on the specified payment
+            method; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.PaymentHandlers.NopCreditCardPaymentHandler.EnterInformation(OpenQA.Selenium.IWebElement)">
+            <summary>
+            Enters the information into the container element.
+            </summary>
+            <param name="containerElement">The container element.</param>
+            <exception cref="T:System.NotImplementedException"></exception>
         </member>
     </members>
 </doc>

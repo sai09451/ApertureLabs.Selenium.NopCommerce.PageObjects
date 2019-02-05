@@ -6,7 +6,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
     /// <summary>
     /// ICompletedPage.
     /// </summary>
-    public interface ICompletedPage
+    public interface ICompletedPage : IBasePage
     {
         /// <summary>
         /// Gets the order number.

@@ -1,4 +1,7 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+﻿using System;
+using System.Collections.Generic;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
 {
@@ -11,7 +14,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Enters the billing address.
         /// </summary>
         /// <param name="address">The address.</param>
-        void EnterBillingAddress(AddressModel address);
+        /// <param name="shipToSameAddress">
+        /// Whether or not to ship to the same address.
+        /// </param>
+        void EnterBillingAddress(AddressModel address,
+            bool shipToSameAddress = true);
+
+        /// <summary>
+        /// Uses an existing billing address.
+        /// </summary>
+        /// <param name="shipToSameAddress">
+        /// if set to <c>true</c> [ship to same address].
+        /// </param>
+        void UseExistingBillingAddress(bool shipToSameAddress = true);
 
         /// <summary>
         /// Gets the billing address.
@@ -26,6 +41,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         void EnterShippingAddress(AddressModel address);
 
         /// <summary>
+        /// Uses an existing shipping address.
+        /// </summary>
+        void UseExistingShippingAddress();
+
+        /// <summary>
         /// Gets the shipping address.
         /// </summary>
         /// <returns></returns>
@@ -34,39 +54,63 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Selects the shipping method.
         /// </summary>
-        void SelectShippingMethod();
+        /// <param name="shippingMethod">The name of the shipping method.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        void SelectShippingMethod(string shippingMethod,
+            StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
         /// Gets the shipping method.
         /// </summary>
         /// <returns></returns>
-        string GetShippingMethod();
+        string GetSelectedShippingMethod();
+
+        /// <summary>
+        /// Gets the shipping methods.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<string> GetShippingMethods();
 
         /// <summary>
         /// Selects the payment method.
         /// </summary>
-        void SelectPaymentMethod();
+        /// <param name="paymentMethodName">The payment method name.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        void SelectPaymentMethod(string paymentMethodName,
+            StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
-        /// Gets the payment method.
+        /// Gets the names of payment methods listed on the page.
         /// </summary>
         /// <returns></returns>
-        string GetPaymentMethod();
+        string GetSelectedPaymentMethod();
+
+        /// <summary>
+        /// Gets the payment methods.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<string> GetPaymentMethods();
 
         /// <summary>
         /// Enters the payment information.
         /// </summary>
-        void EnterPaymentInformation();
-
-        /// <summary>
-        /// Gets the payment information.
-        /// </summary>
-        /// <returns></returns>
-        object GetPaymentInformation();
+        /// <param name="containerElement">
+        /// The element containing the payment information details.
+        /// </param>
+        void EnterPaymentInformation(IWebElement containerElement);
 
         /// <summary>
         /// Finalizes and confirms the order.
         /// </summary>
-        void Confirm();
+        /// <param name="resolve">Called if </param>
+        /// <param name="reject"></param>
+        bool TryConfirm(Action<ICompletedPage> resolve,
+            Action<ICheckoutPage> reject);
+
+        /// <summary>
+        /// Finalizes and confirms the order.
+        /// </summary>
+        /// <returns></returns>
+        ICompletedPage Confirm();
     }
 }

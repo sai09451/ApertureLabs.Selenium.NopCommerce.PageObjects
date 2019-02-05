@@ -1,4 +1,6 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
+﻿using System;
+using System.Linq;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using Autofac;
 
@@ -27,7 +29,27 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
         /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(new PageSettings());
+            // Shouldn't register PageSettings here.
+            //builder.RegisterInstance(new PageSettings());
+
+            // Register all payment method handlers here.
+            var paymentMethodHandlerTypes = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(t => t.IsAssignableTo<Public.Checkout.IPaymentMethodHandler>()
+                    && !t.IsAbstract
+                    && t.IsClass
+                    && t.IsVisible
+                    && t.IsPublic)
+                .ToArray();
+
+            foreach (var type in paymentMethodHandlerTypes)
+            {
+                builder.RegisterTypes(type)
+                    .As<Public.Checkout.IPaymentMethodHandler>()
+                    .FindConstructorsWith(t => t.GetConstructors())
+                    .InstancePerLifetimeScope();
+            }
 
             #region Admin Pages
 
@@ -103,7 +125,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
                 .As<Public.ShoppingCart.ICartPage>()
                 .SingleInstance();
             builder.RegisterType<Public.Checkout.OnePageCheckoutPage>()
-                .As<Public.Checkout.IOnePageCheckoutPage>()
+                .As<Public.Checkout.ICheckoutStepPage>()
+                .As<Public.Checkout.ICheckoutPage>()
                 .SingleInstance();
 
             #endregion

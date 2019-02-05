@@ -113,8 +113,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Components.OrderSumm
             if (cartPage != null)
             {
                 driver
-                .Navigate()
-                .GoToUrl(cartPage.Uri);
+                    .Navigate()
+                    .GoToUrl(cartPage.Uri);
 
                 cartPage.Load();
                 var cartItems = cartPage.OrderSummary.GetCartItems();
