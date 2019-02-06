@@ -235,6 +235,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.Checkout
             checkoutPage.EnterShippingAddress(address);
         }
 
+        [TestMethod]
+        public void UseExistingShippingAddressTest()
+        {
+            EnterBillingAddressTest();
+            checkoutPage.TryGoToStep("Shipping address");
+            checkoutPage.UseExistingShippingAddress();
+            var address = checkoutPage.GetShippingAddress();
+
+            Assert.IsFalse(String.IsNullOrEmpty(address.Address1));
+        }
+
         #endregion
     }
 }

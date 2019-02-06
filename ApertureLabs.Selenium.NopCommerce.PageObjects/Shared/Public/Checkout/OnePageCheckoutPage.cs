@@ -349,7 +349,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
                 // Select the new address option.
                 ShippingAddressDropDownElement.SelectByText("New Address");
             }
-
+            
             // First name.
             ShippingAddressFirstNameElement.SetValue(address.FirstName);
 
@@ -373,8 +373,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
                     .Wait(TimeSpan.FromSeconds(30))
                     .TrySequentialWait(
                         out var exc,
-                        d => BillingAddressStateProvinceLoadingElement.Displayed,
-                        d => !BillingAddressStateProvinceLoadingElement.Displayed);
+                        d => ShippingAddressPleaseWaitElement.Displayed,
+                        d => !ShippingAddressPleaseWaitElement.Displayed);
             }
 
             // State/province.
