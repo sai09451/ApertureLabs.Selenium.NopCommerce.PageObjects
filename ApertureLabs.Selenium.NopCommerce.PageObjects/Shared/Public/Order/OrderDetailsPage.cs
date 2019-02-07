@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using ApertureLabs.Selenium.Extensions;
@@ -35,6 +37,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         private readonly By productRowsSelector = By.CssSelector(".products tbody tr");
         private readonly By shippingAddressSelector = By.CssSelector(".shipping-info .info-list");
         private readonly By shippingMethodSelector = By.CssSelector(".shipping-method .value");
+        private readonly By shippingStatusSelector = By.CssSelector(".shipping-status .value");
+        private readonly By cartTotalColsSelector = By.CssSelector(".cart-total tbody tr td");
+        private readonly By selectedCheckoutAttributesSelector = By.CssSelector(".selected-checkout-attributes");
+        private readonly By reorderButtonSelector = By.CssSelector(".action .re-order-button");
+        private readonly By pdfInvoiceButtonSelector = By.CssSelector(".pdf-invoice-button");
 
         #endregion
 
@@ -75,6 +82,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         private IWebElement OrderTotalElement => WrappedDriver.FindElement(orderTotalSelector);
         private IWebElement ShippingAddressElement => WrappedDriver.FindElement(shippingAddressSelector);
         private IWebElement ShippingMethodElement => WrappedDriver.FindElement(shippingMethodSelector);
+        private IWebElement ShippingStatusElement => WrappedDriver.FindElement(shippingStatusSelector);
+        private IReadOnlyCollection<IWebElement> CartTotalColElements => WrappedDriver.FindElements(cartTotalColsSelector);
+        private IWebElement SelectedCheckoutAttributeElement => WrappedDriver.FindElement(selectedCheckoutAttributesSelector);
+        private IWebElement ReorderButtonElement => WrappedDriver.FindElement(reorderButtonSelector);
+        private IWebElement PdfInvoiceButtonElement => WrappedDriver.FindElement(pdfInvoiceButtonSelector);
 
         #endregion
 
@@ -186,86 +198,203 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
             return ExtractAddressFromContainer(ShippingAddressElement);
         }
 
+        /// <summary>
+        /// Gets the shipping method.
+        /// </summary>
+        /// <returns></returns>
         public string GetShippingMethod()
         {
-            throw new NotImplementedException();
+            return ShippingMethodElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the shipping status.
+        /// </summary>
+        /// <returns></returns>
         public string GetShippingStatus()
         {
-            throw new NotImplementedException();
+            return ShippingStatusElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the sub total.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetSubTotal()
         {
-            throw new NotImplementedException();
+            return GetCartTotalRowValue("Sub-Total")
+                .TextHelper()
+                .ExtractPrice();
         }
 
+        /// <summary>
+        /// Gets the tax.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetTax()
         {
-            throw new NotImplementedException();
+            return GetCartTotalRowValue("Tax")
+                .TextHelper()
+                .ExtractPrice();
         }
 
-        public decimal GiftCard()
+        /// <summary>
+        /// Gifts the card.
+        /// </summary>
+        /// <returns></returns>
+        public decimal? GiftCard()
         {
-            throw new NotImplementedException();
+            return GetCartTotalRowValue("Gift")
+                ?.TextHelper()
+                .ExtractPrice();
         }
 
+        /// <summary>
+        /// Goes to the shopping cart page.
+        /// </summary>
+        /// <returns></returns>
         public ICartPage GoToShoppingCart()
         {
             return basePage.GoToShoppingCart();
         }
 
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
         public void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
 
+        /// <summary>
+        /// Determines whether [has gift wrapping].
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if [has gift wrapping]; otherwise, <c>false</c>.
+        /// </returns>
         public bool HasGiftWrapping()
         {
-            throw new NotImplementedException();
+            return SelectedCheckoutAttribute("Gift wrapping") == "Yes";
         }
 
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
         public bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
 
+        /// <summary>
+        /// Checks if a user is logged in.
+        /// </summary>
+        /// <returns></returns>
         public bool IsLoggedIn()
         {
             return basePage.IsLoggedIn();
         }
 
+        /// <summary>
+        /// Logs a user in.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public IHomePage Login(string email, string password)
         {
             return basePage.Login(email, password);
         }
 
+        /// <summary>
+        /// Logs a user out if logged in.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Logout<T>() where T : IPageObject
         {
             return basePage.Logout<T>();
         }
 
+        /// <summary>
+        /// Downloads a pdf of the order details.
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
         public void PdfInvoice()
         {
-            throw new NotImplementedException();
+            PdfInvoiceButtonElement.Click();
+
+            // TODO: Get downloads folder location.
+            var downLoadPath = Path.Combine(
+                "",
+                $"order_{GetOrderNumber()}.pdf");
+
+            WrappedDriver
+                .Wait(TimeSpan.FromMinutes(1))
+                .Until(d => File.Exists(downLoadPath));
         }
 
+        /// <summary>
+        /// Prints the order details.
+        /// </summary>
         public void Print()
         {
-            throw new NotImplementedException();
+            var tabHelper = WrappedDriver.TabHelper();
+            var initialTabs = tabHelper.GetNumberOfTabs();
+            var initialTab = WrappedDriver.CurrentWindowHandle;
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(30))
+                .Until(
+                    d => tabHelper.GetNumberOfTabs().Count > initialTabs.Count);
+
+            WrappedDriver
+                .SwitchTo()
+                .Window(tabHelper
+                    .GetNumberOfTabs()
+                    .Except(initialTabs)
+                    .First());
+
+            var printWindowHandle = WrappedDriver.CurrentWindowHandle;
+            WrappedDriver.WaitForUserSignal(TimeSpan.FromMinutes(5));
+
+            // Close the tab if it's still open.
+            if (WrappedDriver.CurrentWindowHandle == printWindowHandle)
+                WrappedDriver.Close();
+
+            // Switch back to the initial window handle.
+            WrappedDriver.SwitchTo().Window(initialTab);
         }
 
+        /// <summary>
+        /// Re-orders the order.
+        /// </summary>
+        /// <returns></returns>
         public ICartPage ReOrder()
         {
-            throw new NotImplementedException();
+            ReorderButtonElement.Click();
+
+            return pageObjectFactory.PreparePage<ICartPage>();
         }
 
+        /// <summary>
+        /// Used to search for a product.
+        /// </summary>
+        /// <param name="searchFor">Partial or full name of product.</param>
+        /// <returns></returns>
         public ISearchPage Search(string searchFor)
         {
             return basePage.Search(searchFor);
         }
 
+        /// <summary>
+        /// Similar to <c>Search</c> but waits for the ajax results to resolve
+        /// and returns those items.
+        /// </summary>
+        /// <param name="searchFor">The search for.</param>
+        /// <returns></returns>
         public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
@@ -320,6 +449,45 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
             model.Country = countryEl.TextHelper().InnerText;
 
             return model;
+        }
+
+        private IWebElement GetCartTotalRowValue(string label)
+        {
+            var rows = CartTotalColElements.Chunk(2);
+            var element = default(IWebElement);
+
+            foreach (var row in rows)
+            {
+                if (row[0].TextHelper().InnerText.StartsWith(label))
+                {
+                    element = row[1];
+                    break;
+                }
+            }
+
+            return element;
+        }
+
+        private string SelectedCheckoutAttribute(string label)
+        {
+            var result = default(string);
+            var matches = Regex.Matches(
+                SelectedCheckoutAttributeElement.TextHelper().InnerText,
+                @"^(.*?):\s?(.*)$");
+
+            foreach (Match match in matches)
+            {
+                var m_label = match.Groups[1].Value;
+                var m_value = match.Groups[2].Value;
+
+                if (m_label.StartsWith(label))
+                {
+                    result = m_value;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         #endregion

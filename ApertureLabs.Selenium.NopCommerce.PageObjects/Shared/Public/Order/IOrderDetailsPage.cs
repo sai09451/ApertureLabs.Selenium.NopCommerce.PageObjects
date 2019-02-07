@@ -105,7 +105,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gifts the card.
         /// </summary>
         /// <returns></returns>
-        decimal GiftCard();
+        decimal? GiftCard();
 
         /// <summary>
         /// Re-orders the order.

@@ -1272,78 +1272,97 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent">
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent">
             <summary>
-            OrderSummaryRowPageComponent.
+            OrderSummaryReadOnlyRowComponent.
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
-            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent"/> class.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent"/> class.
             </summary>
             <param name="selector">The selector.</param>
-            <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.GetQuantity">
-            <summary>
-            Gets the quantity.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.SetQuantity(System.Int32)">
-            <summary>
-            Sets the quantity.
-            </summary>
-            <param name="qty">The qty.</param>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.MarkForRemoval(System.Boolean)">
-            <summary>
-            Marks for removal.
-            </summary>
-            <param name="remove">if set to <c>true</c> [remove].</param>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.GetColumn(System.Int32)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent.GetColumn(System.Int32)">
             <summary>
             Gets the column (zero-based). Returns null if there is no such column.
             </summary>
             <param name="columnIndex">Index of the column.</param>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.GetSku">
-            <summary>
-            Gets the sku.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.GetProductName">
-            <summary>
-            Gets the name of the product.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.GetAttributes">
-            <summary>
-            Gets the attributes.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.GetPrice">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent.GetPrice">
             <summary>
             Gets the price.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.GetTotal">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent.GetProductName">
+            <summary>
+            Gets the name of the product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent.GetQuantity">
+            <summary>
+            Gets the quantity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent.GetSku">
+            <summary>
+            Gets the sku.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryReadOnlyRowComponent.GetTotal">
             <summary>
             Gets the total.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowPageComponent.Edit``1">
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent">
+            <summary>
+            OrderSummaryRowPageComponent.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent.GetQuantity">
+            <summary>
+            Gets the quantity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent.SetQuantity(System.Int32)">
+            <summary>
+            Sets the quantity.
+            </summary>
+            <param name="qty">The qty.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent.MarkForRemoval(System.Boolean)">
+            <summary>
+            Marks for removal.
+            </summary>
+            <param name="remove">if set to <c>true</c> [remove].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent.GetAttributes">
+            <summary>
+            Gets the attributes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary.OrderSummaryRowComponent.Edit``1">
             <summary>
             Edits this instance.
             </summary>
@@ -3203,6 +3222,80 @@
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.IOrderDetailsPage.ReOrder">
             <summary>
             Re-orders the order.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage">
+            <summary>
+            OrderDetailsPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.IOrderDetailsPage" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetBillingAddress">
+            <summary>
+            Gets the billing address.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetOrderDate">
+            <summary>
+            Gets the order date.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetOrderNumber">
+            <summary>
+            Gets the order number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetOrderStatus">
+            <summary>
+            Gets the order status.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetOrderTotal">
+            <summary>
+            Gets the order total.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetProducts">
+            <summary>
+            Gets the products.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetShipping">
+            <summary>
+            Gets the shipping.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.GetShippingAddress">
+            <summary>
+            Gets the shipping address.
             </summary>
             <returns></returns>
         </member>
