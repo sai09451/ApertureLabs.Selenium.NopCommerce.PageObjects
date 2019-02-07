@@ -93,7 +93,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the shipping.
         /// </summary>
         /// <returns></returns>
-        decimal GetShipping();
+        decimal GetShippingCost();
 
         /// <summary>
         /// Gets the tax.

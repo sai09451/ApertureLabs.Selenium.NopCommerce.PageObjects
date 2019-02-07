@@ -308,6 +308,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
 
             // Fax.
             BillingAddressFaxNumberElement.SetValue(address.FaxNumber);
+
+            // Not sure if this should be here...
+            //// Try and go to the next step.
+            //var stepName = shipToSameAddress
+            //    ? "Shipping method"
+            //    : "Shipping address";
+
+            //TryGoToStep(
+            //    stepName: stepName,
+            //    reject: page => throw new Exception());
         }
 
         /// <summary>

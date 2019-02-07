@@ -5,12 +5,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
     /// <summary>
     /// ICustomersOrderPage.
     /// </summary>
-    public interface ICustomerOrdersPage : IBasePage
+    public interface ICustomerOrdersPage : IBasePage,
+        IHasAccountNavigation<ICustomerOrdersPage>
     {
         /// <summary>
         /// Gets the orders.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<object> GetOrders();
+        IEnumerable<CustomerOrderRowComponent> GetOrders();
     }
 }

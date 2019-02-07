@@ -231,14 +231,35 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// <summary>
         /// Attempts to perform the full checkout process.
         /// </summary>
-        public virtual IOrderDetailsPage FullCheckout()
+        public virtual ICompletedPage FullCheckout()
         {
             if (!TryToProceedToCheckout())
                 throw new Exception("Unable to proceed to the checkout page.");
 
-            var checkoutPage = pageObjectFactory.PreparePage<ICheckoutPage>();
+            var checkoutPage = pageObjectFactory
+                .PreparePage<ICheckoutStepPage>();
 
-            throw new NotImplementedException();
+            checkoutPage.UseExistingBillingAddress(true);
+            checkoutPage.TryGoToStep(
+                stepName: "Shipping method",
+                reject: page => throw new Exception());
+
+            checkoutPage.SelectShippingMethod("Ground");
+            checkoutPage.TryGoToStep(
+                stepName: "Payment method",
+                reject: page => throw new Exception());
+
+            checkoutPage.SelectPaymentMethod("Check / Money Order");
+            checkoutPage.TryGoToStep(
+                stepName: "Payment information",
+                reject: page => throw new Exception());
+
+            checkoutPage.EnterPaymentInformation();
+            checkoutPage.TryGoToStep(
+                stepName: "Confirm order",
+                reject: page => throw new Exception());
+
+            return checkoutPage.Confirm();
         }
 
         /// <summary>
