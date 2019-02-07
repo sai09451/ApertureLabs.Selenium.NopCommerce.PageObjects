@@ -216,7 +216,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.Checkout
         public void EnterShippingAddressTest()
         {
             EnterBillingAddressTest();
-            checkoutPage.TryGoToStep("Shipping address");
+            checkoutPage.TryGoToStep(
+                stepName: "Shipping address",
+                reject: page => throw new Exception());
 
             var address = new AddressModel
             {
@@ -233,6 +235,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.Checkout
             };
 
             checkoutPage.EnterShippingAddress(address);
+            checkoutPage.TryGoToStep(
+                stepName: "Shipping method",
+                reject: page => throw new Exception());
         }
 
         [TestMethod]
@@ -242,8 +247,52 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.Checkout
             checkoutPage.TryGoToStep("Shipping address");
             checkoutPage.UseExistingShippingAddress();
             var address = checkoutPage.GetShippingAddress();
+            checkoutPage.TryGoToStep(
+                stepName: "Shipping method",
+                reject: page => throw new Exception());
 
             Assert.IsFalse(String.IsNullOrEmpty(address.Address1));
+        }
+
+        [Description("Verifies no exceptions are thrown.")]
+        [TestMethod]
+        public void SelectShippingMethodTest()
+        {
+            checkoutPage.UseExistingBillingAddress(true);
+            checkoutPage.TryGoToStep(
+                stepName: "Shipping method",
+                reject: page => throw new Exception());
+            checkoutPage.SelectShippingMethod("Ground");
+            checkoutPage.TryGoToStep("Payment method");
+        }
+
+        [TestMethod]
+        public void SelectPaymentMethodTest()
+        {
+            SelectShippingMethodTest();
+            checkoutPage.SelectPaymentMethod("Check / Money Order");
+            checkoutPage.TryGoToStep(
+                stepName: "Payment information",
+                reject: page => throw new Exception());
+        }
+
+        [TestMethod]
+        public void EnterPaymentInformationTest()
+        {
+            SelectPaymentMethodTest();
+            checkoutPage.EnterPaymentInformation();
+            checkoutPage.TryGoToStep(
+                stepName: "Confirm order",
+                reject: page => throw new Exception());
+        }
+
+        [TestMethod]
+        public void ConfirmTest()
+        {
+            EnterPaymentInformationTest();
+            var orderDetailsPage = checkoutPage.Confirm();
+
+            Assert.IsNotNull(orderDetailsPage);
         }
 
         #endregion

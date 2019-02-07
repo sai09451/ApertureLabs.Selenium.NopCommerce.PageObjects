@@ -150,6 +150,19 @@
             The navigation bar.
             </value>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.BackToProductList">
             <summary>
             Backs to product list.
@@ -385,13 +398,13 @@
             The 'General Info' tab body of the EditPage.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfoComponent.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage,OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfoComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfoComponent"/> class.
             </summary>
+            <param name="selector">The selector.</param>
             <param name="parent">The parent.</param>
             <param name="driver">The driver.</param>
-            <param name="selector">The selector.</param>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent">
             <summary>
@@ -399,12 +412,12 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent"/> class.
             </summary>
-            <param name="driver">The driver.</param>
             <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminAjax.AdminAjaxComponent">
             <summary>
@@ -412,7 +425,7 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminAjax.AdminAjaxComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminAjax.AdminAjaxComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminAjax.AdminAjaxComponent"/> class.
             </summary>
@@ -431,13 +444,13 @@
             should only appear if the current customer is admin accessible.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent.#ctor(OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings,ApertureLabs.Selenium.PageObjects.IPageObjectFactory)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent.#ctor(ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
-            Ctor.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent"/> class.
             </summary>
-            <param name="driver"></param>
-            <param name="pageSettings"></param>
-            <param name="pageObjectFactory"></param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent.GoToAdmin">
             <summary>
@@ -591,7 +604,7 @@
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1.#ctor(OpenQA.Selenium.IWebDriver,`0,OpenQA.Selenium.By)">
             <summary>
-            Initializes a new instance of the <see cref="!:Components.BarNotificationComponent"/> class.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1"/> class.
             </summary>
             <param name="driver">The driver.</param>
             <param name="parent"></param>
@@ -629,12 +642,12 @@
             page.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation.CatalogBlockComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation.CatalogBlockComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
-            Ctor.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation.CatalogBlockComponent"/> class.
             </summary>
-            <param name="driver"></param>
-            <param name="selector"></param>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation.CatalogBlockComponent.HasViewAll">
             <summary>
@@ -665,14 +678,19 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter.CatalogPagingFilterComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter.CatalogPagingFilterComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter.CatalogPagingFilterComponent"/> class.
             </summary>
-            <param name="driver">The driver.</param>
             <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter.CatalogPagingFilterComponent.AdvancedSearch" -->
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter.CatalogPagingFilterComponent.AdvancedSearch">
+            <summary>
+            Gets or sets a value indicating whether the 'Advanced search'
+            option is checked.
+            </summary>
+        </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CatalogPagingFilter.CatalogPagingFilterComponent.AutomaticallySearchSubCategories">
             <summary>
             Gets or sets a value indicating whether the option 'Automatically
@@ -830,12 +848,12 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.DiscountBox.DiscountBoxComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.DiscountBox.DiscountBoxComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.DiscountBox.DiscountBoxComponent"/> class.
             </summary>
-            <param name="driver">The driver.</param>
             <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.DiscountBox.DiscountBoxComponent.GetAppliedDiscountCodes">
             <summary>
@@ -888,7 +906,7 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminAjax.AdminAjaxComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponentConfiguration)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.By,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponentConfiguration,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent"/> class.
             </summary>
@@ -898,8 +916,8 @@
             <param name="settingsButtonSelector">
             The 'Settings' button selector
             </param>
-            <param name="driver">The driver.</param>
             <param name="configuration"></param>
+            <param name="driver">The driver.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.Load">
             <inheritDoc/>
@@ -1007,12 +1025,12 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBox.GiftCardBoxComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBox.GiftCardBoxComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBox.GiftCardBoxComponent"/> class.
             </summary>
-            <param name="driver">The driver.</param>
             <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBox.GiftCardBoxComponent.ApplyGiftCard(System.String,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBox.GiftCardBoxComponent},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCardBox.GiftCardBoxComponent})">
             <summary>
@@ -1107,9 +1125,9 @@
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News.NewsComponent.#ctor(OpenQA.Selenium.IWebDriver)">
             <summary>
-            Ctor.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News.NewsComponent"/> class.
             </summary>
-            <param name="driver"></param>
+            <param name="driver">The driver.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News.NewsComponent.IsExpanded">
             <summary>
@@ -1343,13 +1361,13 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager.PagerComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager.PagerComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager.PagerComponent"/>
             class.
             </summary>
-            <param name="driver">The driver.</param>
             <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager.PagerComponent.IsOnFirstPage">
             <summary>
@@ -1563,13 +1581,25 @@
             </summary>
             <param name="basePage">The base page.</param>
             <param name="driver">The driver.</param>
-            <param name="pageSettings">The page settings.</param>
             <param name="pageObjectFactory">The page object factory.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage.AdminHeaderLinks">
             <summary>
             Gets the admin header links.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage.GetCategories">
             <summary>
@@ -2080,6 +2110,19 @@
             <param name="driver">The driver.</param>
             <param name="settings">The settings.</param>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchPage.Search(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.SearchModel)">
             <summary>
             Searchs for a product.
@@ -2234,6 +2277,105 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage">
+            <summary>
+            CompletedPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICompletedPage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.Continue">
+            <summary>
+            Continues to the home page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.GetOrderNumber">
+            <summary>
+            Gets the order number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.ViewOrderDetails">
+            <summary>
+            Views the order details.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutBillingAddressPage">
             <summary>
             CheckoutBillingAddressPage.
@@ -2323,13 +2465,10 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.EnterPaymentInformation(OpenQA.Selenium.IWebElement)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.EnterPaymentInformation">
             <summary>
             Enters the payment information.
             </summary>
-            <param name="containerElement">
-            The element containing the payment information details.
-            </param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage.TryConfirm(System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICompletedPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.ICheckoutPage})">
             <summary>
@@ -2495,13 +2634,11 @@
             </summary>
             <param name="address">The address.</param>
             <param name="shipToSameAddress">Whether or not to ship to the same address.</param>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.EnterPaymentInformation(OpenQA.Selenium.IWebElement)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.OnePageCheckoutPage.EnterPaymentInformation">
             <summary>
             Enters the payment information.
             </summary>
-            <param name="containerElement">The element containing the payment information details.</param>
             <exception cref="T:System.Exception">
             Couldn't determine payment method name.
             or
@@ -3254,15 +3391,15 @@
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product.ChallengeCodeComponent">
             <summary>
-            DiscountHandler.
+            ChallengeCodeComponent (might also be referred to as the discount).
             </summary>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product.ChallengeCodeComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
             <summary>
             Ctor.
             </summary>
-            <param name="driver"></param>
             <param name="selector"></param>
+            <param name="driver"></param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product.ChallengeCodeComponent.HasAppliedCode">
             <summary>

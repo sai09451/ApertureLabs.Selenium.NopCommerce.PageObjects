@@ -61,17 +61,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Editor
         /// <param name="settingsButtonSelector">
         /// The 'Settings' button selector
         /// </param>
-        /// <param name="driver">The driver.</param>
         /// <param name="configuration"></param>
+        /// <param name="driver">The driver.</param>
         public EditorSettingsComponent(By advancedButtonSelector,
             By settingsButtonSelector,
-            IWebDriver driver,
-            EditorSettingsComponentConfiguration configuration)
-            : base(driver, advancedButtonSelector)
+            EditorSettingsComponentConfiguration configuration,
+            IWebDriver driver)
+            : base(advancedButtonSelector, driver)
         {
-            this.advancedButtonSelector = advancedButtonSelector;
-            this.settingsButtonSelector = settingsButtonSelector;
-            this.configuration = configuration;
+            this.advancedButtonSelector = advancedButtonSelector
+                ?? throw new ArgumentNullException(nameof(advancedButtonSelector));
+            this.settingsButtonSelector = settingsButtonSelector
+                ?? throw new ArgumentNullException(nameof(settingsButtonSelector));
+            this.configuration = configuration
+                ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         #endregion

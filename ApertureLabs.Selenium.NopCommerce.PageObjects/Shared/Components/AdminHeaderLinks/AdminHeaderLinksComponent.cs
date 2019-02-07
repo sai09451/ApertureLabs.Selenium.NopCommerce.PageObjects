@@ -31,15 +31,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         #region Contructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="AdminHeaderLinksComponent"/> class.
         /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="pageSettings"></param>
-        /// <param name="pageObjectFactory"></param>
-        public AdminHeaderLinksComponent(IWebDriver driver,
-            PageSettings pageSettings,
-            IPageObjectFactory pageObjectFactory)
-            : base(driver, By.CssSelector(".admin-header-links"))
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
+        public AdminHeaderLinksComponent(
+            IPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(By.CssSelector(".admin-header-links"), driver)
         {
             this.pageSettings = pageSettings;
             this.pageObjectFactory = pageObjectFactory;

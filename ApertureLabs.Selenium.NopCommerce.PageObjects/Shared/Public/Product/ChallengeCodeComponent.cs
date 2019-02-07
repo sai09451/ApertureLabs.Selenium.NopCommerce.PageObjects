@@ -8,7 +8,7 @@ using System.Linq;
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
 {
     /// <summary>
-    /// DiscountHandler.
+    /// ChallengeCodeComponent (might also be referred to as the discount).
     /// </summary>
     public class ChallengeCodeComponent : PageComponent
     {
@@ -30,10 +30,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Ctor.
         /// </summary>
-        /// <param name="driver"></param>
         /// <param name="selector"></param>
+        /// <param name="driver"></param>
         internal ChallengeCodeComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+            : base(selector, driver)
         { }
 
         #endregion

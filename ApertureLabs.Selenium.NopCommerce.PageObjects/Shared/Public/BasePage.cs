@@ -67,9 +67,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
                 WrappedDriver);
 
             adminHeaderLinks = new AdminHeaderLinksComponent(
+                pageObjectFactory,
                 WrappedDriver,
-                pageSettings,
-                pageObjectFactory);
+                pageSettings);
         }
 
         #endregion

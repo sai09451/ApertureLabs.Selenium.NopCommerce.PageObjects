@@ -34,10 +34,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Discou
         /// <summary>
         /// Initializes a new instance of the <see cref="DiscountBoxComponent"/> class.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="selector">The selector.</param>
-        public DiscountBoxComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        /// <param name="driver">The driver.</param>
+        public DiscountBoxComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion

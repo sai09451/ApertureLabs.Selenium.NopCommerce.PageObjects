@@ -40,7 +40,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Produc
             IWebDriver driver,
             PageSettings pageSettings,
             By selector = null)
-            : base(driver, selector ?? By.CssSelector(".breadcrumb"))
+            : base(selector ?? By.CssSelector(".breadcrumb"), driver)
         {
             if (pageSettings == null)
                 throw new ArgumentNullException(nameof(pageSettings));

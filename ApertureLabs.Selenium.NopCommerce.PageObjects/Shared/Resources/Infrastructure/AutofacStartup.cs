@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using Autofac;
 
@@ -83,51 +82,42 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
                 .SingleInstance();
             builder
                 .RegisterType<Public.Catalog.ProductTagsAllPage>()
-                .As<Public.Catalog.IProductTagsAllPage>()
-                .SingleInstance();
+                .As<Public.Catalog.IProductTagsAllPage>();
             builder
                 .RegisterType<Public.Catalog.ManufacturerAllPage>()
-                .As<Public.Catalog.IManufacturerAllPage>()
-                .SingleInstance();
+                .As<Public.Catalog.IManufacturerAllPage>();
             builder
                 .RegisterType<Public.Catalog.ProductsByManufacturerPage>()
-                .As<Public.Catalog.IProductsByManufacturerPage>()
-                .SingleInstance();
+                .As<Public.Catalog.IProductsByManufacturerPage>();
             builder
                 .RegisterType<Public.Catalog.ProductsByCategoryPage>()
-                .As<Public.Catalog.IProductsByCategoryPage>()
-                .SingleInstance();
+                .As<Public.Catalog.IProductsByCategoryPage>();
             builder
                 .RegisterType<Public.Catalog.ProductsByTagPage>()
-                .As<Public.Catalog.IProductsByTagPage>()
-                .SingleInstance();
+                .As<Public.Catalog.IProductsByTagPage>();
             builder
                 .RegisterType<Public.Catalog.SearchPage>()
-                .As<Public.Catalog.ISearchPage>()
-                .SingleInstance();
+                .As<Public.Catalog.ISearchPage>();
             builder
                 .RegisterType<Public.Customer.LoginPage>()
-                .As<Public.Customer.ILoginPage>()
-                .SingleInstance();
+                .As<Public.Customer.ILoginPage>();
             builder
                 .RegisterType<Public.Home.HomePage>()
-                .As<Public.Home.IHomePage>()
-                .SingleInstance();
+                .As<Public.Home.IHomePage>();
 
             // TODO: Replace this with the different product pages.
             builder
                 .RegisterType<Public.Product.BaseProductPage>()
-                .As<Public.Product.IBaseProductPage>()
-                .SingleInstance();
+                .As<Public.Product.IBaseProductPage>();
 
             builder
                 .RegisterType<Public.ShoppingCart.CartPage>()
-                .As<Public.ShoppingCart.ICartPage>()
-                .SingleInstance();
+                .As<Public.ShoppingCart.ICartPage>();
             builder.RegisterType<Public.Checkout.OnePageCheckoutPage>()
                 .As<Public.Checkout.ICheckoutStepPage>()
-                .As<Public.Checkout.ICheckoutPage>()
-                .SingleInstance();
+                .As<Public.Checkout.ICheckoutPage>();
+            builder.RegisterType<Public.Checkout.CompletedPage>()
+                .As<Public.Checkout.ICompletedPage>();
 
             #endregion
 

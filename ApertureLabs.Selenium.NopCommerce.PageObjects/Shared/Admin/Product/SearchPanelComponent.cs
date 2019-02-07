@@ -23,10 +23,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchPanelComponent"/> class.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="selector">The selector.</param>
-        public SearchPanelComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        /// <param name="driver">The driver.</param>
+        public SearchPanelComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion

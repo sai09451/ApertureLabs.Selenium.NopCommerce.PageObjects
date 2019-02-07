@@ -9,11 +9,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
     /// <summary>
     /// Represents the '#bar-notification' element on the public pages.
     /// </summary>
-    public class BarNotificationComponent<T> : PageComponent
+    public class BarNotificationComponent<T> : FluidPageComponent<T>
     {
         #region Fields
-
-        private readonly T parent;
 
         #region Selectors
 
@@ -28,7 +26,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Components.BarNotificationComponent"/> class.
+        /// Initializes a new instance of the <see cref="BarNotificationComponent{T}"/> class.
         /// </summary>
         /// <param name="driver">The driver.</param>
         /// <param name="parent"></param>
@@ -39,11 +37,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
             IWebDriver driver,
             T parent,
             By selector = null)
-            : base(driver,
-                  selector ?? By.CssSelector("bar-notification"))
-        {
-            this.parent = parent;
-        }
+            : base(selector ?? By.CssSelector("bar-notification"),
+                  driver,
+                  parent)
+        { }
 
         #endregion
 
@@ -69,7 +66,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
         {
             CloseElement.Click();
 
-            return parent;
+            return Parent();
         }
 
         /// <summary>

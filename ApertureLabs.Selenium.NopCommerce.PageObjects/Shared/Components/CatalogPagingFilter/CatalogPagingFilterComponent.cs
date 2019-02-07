@@ -40,10 +40,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Catalo
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogPagingFilterComponent"/> class.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="selector">The selector.</param>
-        public CatalogPagingFilterComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        /// <param name="driver">The driver.</param>
+        public CatalogPagingFilterComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion
@@ -53,6 +53,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Catalo
         /// <summary>
         /// Gets or sets a value indicating whether the 'Advanced search'
         /// option is checked.
+        /// </summary>
         public virtual bool AdvancedSearch
         {
             get => AdvancedSearchCheckboxElement.IsChecked;

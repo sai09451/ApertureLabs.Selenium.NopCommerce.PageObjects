@@ -28,8 +28,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminA
         /// </summary>
         /// <param name="driver">The driver.</param>
         /// <param name="selector">The selector.</param>
-        public AdminAjaxComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        public AdminAjaxComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion

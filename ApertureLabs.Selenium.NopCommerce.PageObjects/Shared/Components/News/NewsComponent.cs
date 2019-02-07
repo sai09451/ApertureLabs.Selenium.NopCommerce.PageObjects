@@ -25,11 +25,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="NewsComponent"/> class.
         /// </summary>
-        /// <param name="driver"></param>
+        /// <param name="driver">The driver.</param>
         public NewsComponent(IWebDriver driver)
-            : base(driver, By.ClassName("#nopcommerce-news-box"))
+            : base(By.ClassName("#nopcommerce-news-box"), driver)
         { }
 
         #endregion

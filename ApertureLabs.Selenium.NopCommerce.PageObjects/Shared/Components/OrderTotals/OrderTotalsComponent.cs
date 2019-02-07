@@ -22,8 +22,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderT
 
         #region Constructor
 
-        public OrderTotalsComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        public OrderTotalsComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion

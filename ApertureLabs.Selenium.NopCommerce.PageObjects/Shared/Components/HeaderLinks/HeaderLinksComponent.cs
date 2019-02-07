@@ -50,9 +50,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// <param name="driver">The driver.</param>
         public HeaderLinksComponent(IPageObjectFactory pageObjectFactory,
             IWebDriver driver)
-            : base(driver, By.CssSelector(".header-links"))
+            : base(By.CssSelector(".header-links"), driver)
         {
-            this.pageObjectFactory = pageObjectFactory;
+            this.pageObjectFactory = pageObjectFactory
+                ?? throw new ArgumentNullException(nameof(pageObjectFactory));
         }
 
         #endregion

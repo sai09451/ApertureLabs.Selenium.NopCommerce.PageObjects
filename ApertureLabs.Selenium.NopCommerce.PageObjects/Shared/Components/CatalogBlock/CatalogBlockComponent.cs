@@ -27,12 +27,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Catego
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="CatalogBlockComponent"/> class.
         /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="selector"></param>
-        public CatalogBlockComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        /// <param name="selector">The selector.</param>
+        /// <param name="driver">The driver.</param>
+        public CatalogBlockComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion

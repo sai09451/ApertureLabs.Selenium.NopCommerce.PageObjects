@@ -32,10 +32,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCa
         /// <summary>
         /// Initializes a new instance of the <see cref="GiftCardBoxComponent"/> class.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="selector">The selector.</param>
-        public GiftCardBoxComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        /// <param name="driver">The driver.</param>
+        public GiftCardBoxComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion

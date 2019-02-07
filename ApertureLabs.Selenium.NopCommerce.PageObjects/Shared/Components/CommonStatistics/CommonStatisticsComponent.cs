@@ -24,7 +24,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Common
         /// </summary>
         /// <param name="driver"></param>
         public CommonStatisticsComponent(IWebDriver driver)
-            : base(driver, By.CssSelector(""))
+            : base(By.CssSelector(""), driver)
         { }
 
         #endregion

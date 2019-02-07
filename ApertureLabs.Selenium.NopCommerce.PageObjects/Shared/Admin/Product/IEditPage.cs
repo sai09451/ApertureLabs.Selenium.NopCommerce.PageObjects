@@ -25,7 +25,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <value>
         /// The tabs.
         /// </value>
-        NavsTabComponent Tabs { get; }
+        NavsTabComponent<IEditPage> Tabs { get; }
 
         /// <summary>
         /// Back to product list.

@@ -6,9 +6,9 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeade
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
 {
@@ -20,18 +20,18 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     {
         #region Fields
 
-        private readonly IBasePage basePage;
-        private readonly IPageObjectFactory pageObjectFactory;
-
         #region Selectors
 
-        private readonly By CategoryNavigationSelector = By.CssSelector(".block.block-category-navigation");
-        private readonly By ManufacturerSelector = By.CssSelector(".block.block-manufacturer-navigation");
-        private readonly By RecentlyViewedProductsSelector = By.CssSelector(".block.block-recently-viewed-products");
-        private readonly By PopularTagsSelector = By.CssSelector(".block.block-popular-tags");
-        private readonly By LinkSelector = By.CssSelector("a:not(.product-picture)");
+        private readonly By categoryNavigationSelector = By.CssSelector(".block.block-category-navigation");
+        private readonly By manufacturerSelector = By.CssSelector(".block.block-manufacturer-navigation");
+        private readonly By recentlyViewedProductsSelector = By.CssSelector(".block.block-recently-viewed-products");
+        private readonly By popularTagsSelector = By.CssSelector(".block.block-popular-tags");
+        private readonly By linkSelector = By.CssSelector("a:not(.product-picture)");
 
         #endregion
+
+        private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
 
         #endregion
 
@@ -42,7 +42,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// </summary>
         /// <param name="basePage">The base page.</param>
         /// <param name="driver">The driver.</param>
-        /// <param name="pageSettings">The page settings.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         public CatalogTemplatePage(
             IBasePage basePage,
@@ -52,6 +51,18 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
+
+            CategoriesComponent = new CatalogBlockComponent(
+                categoryNavigationSelector,
+                WrappedDriver);
+
+            ManufacturersComponent = new CatalogBlockComponent(
+                manufacturerSelector,
+                WrappedDriver);
+
+            PopularTagsComponent = new CatalogBlockComponent(
+                popularTagsSelector,
+                WrappedDriver);
         }
 
         #endregion
@@ -60,25 +71,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
 
         #region Elements
 
-        private CatalogBlockComponent CategoriesComponent => pageObjectFactory.PrepareComponent(
-            new CatalogBlockComponent(
-                WrappedDriver,
-                CategoryNavigationSelector));
+        private CatalogBlockComponent CategoriesComponent { get; set; }
 
-        private CatalogBlockComponent ManufacturersComponent => pageObjectFactory.PrepareComponent(
-            new CatalogBlockComponent(
-                WrappedDriver,
-                ManufacturerSelector));
+        private CatalogBlockComponent ManufacturersComponent { get; set; }
 
-        private CatalogBlockComponent RecentlyViewProductsComponent => pageObjectFactory.PrepareComponent(
-            new CatalogBlockComponent(
-                WrappedDriver,
-                RecentlyViewedProductsSelector));
+        private CatalogBlockComponent RecentlyViewProductsComponent { get; set; }
 
-        private CatalogBlockComponent PopularTagsComponent => pageObjectFactory.PrepareComponent(
-            new CatalogBlockComponent(
-                WrappedDriver,
-                PopularTagsSelector));
+        private CatalogBlockComponent PopularTagsComponent { get; set; }
 
         #endregion
 
@@ -92,6 +91,43 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         #region Methods
 
         /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+
+            pageObjectFactory.PrepareComponent(CategoriesComponent);
+            pageObjectFactory.PrepareComponent(ManufacturersComponent);
+            pageObjectFactory.PrepareComponent(PopularTagsComponent);
+
+            // Verify this is displayed before loading it.
+            if (WrappedDriver.FindElements(recentlyViewedProductsSelector).Any())
+            {
+                RecentlyViewProductsComponent = new CatalogBlockComponent(
+                    recentlyViewedProductsSelector,
+                    WrappedDriver);
+
+                pageObjectFactory.PrepareComponent(RecentlyViewProductsComponent);
+            }
+            else
+            {
+                // Assign to null if not loaded.
+                RecentlyViewProductsComponent = null;
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// Gets the categories.
         /// </summary>
         /// <returns></returns>
@@ -99,7 +135,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         {
             var categories = CategoriesComponent
                 .GetItems()
-                .Select(e => e.FindElement(LinkSelector)
+                .Select(e => e.FindElement(linkSelector)
                     .TextHelper()
                     .InnerText);
 
@@ -126,7 +162,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         {
             var manufacturers = ManufacturersComponent
                 .GetItems()
-                .Select(e => e.FindElement(LinkSelector)
+                .Select(e => e.FindElement(linkSelector)
                     .TextHelper()
                     .InnerText);
 
@@ -144,7 +180,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             ManufacturersComponent.GetItems()
                 .First(e => String.Equals(
                     manufacturer,
-                    e.FindElement(LinkSelector).TextHelper().InnerText,
+                    e.FindElement(linkSelector).TextHelper().InnerText,
                     stringComparison))
                 .Click();
         }
@@ -165,7 +201,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         {
             var recentlyViewedProducts = RecentlyViewProductsComponent
                 .GetItems()
-                .Select(e => e.FindElement(LinkSelector)
+                .Select(e => e.FindElement(linkSelector)
                     .TextHelper()
                     .InnerText);
 
@@ -183,7 +219,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             RecentlyViewProductsComponent.GetItems()
                 .First(e => String.Equals(
                     productName,
-                    e.FindElement(LinkSelector).TextHelper().InnerText,
+                    e.FindElement(linkSelector).TextHelper().InnerText,
                     stringComparison))
                 .Click();
         }
@@ -196,7 +232,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         {
             var popularTags = PopularTagsComponent
                 .GetItems()
-                .Select(e => e.FindElement(LinkSelector)
+                .Select(e => e.FindElement(linkSelector)
                     .TextHelper()
                     .InnerText);
 
@@ -214,7 +250,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             PopularTagsComponent.GetItems()
                 .First(e => String.Equals(
                     tag,
-                    e.FindElement(LinkSelector).TextHelper().InnerText,
+                    e.FindElement(linkSelector).TextHelper().InnerText,
                     stringComparison))
                 .Click();
         }

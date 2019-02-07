@@ -15,20 +15,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
     /// OrderSummaryRowPageComponent.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageComponent" />
-    public class OrderSummaryRowPageComponent : PageComponent
+    public class OrderSummaryRowComponent : OrderSummaryReadOnlyRowComponent
     {
         #region Fields
 
         #region Selectors
 
         private readonly By removeFromCartSelector = By.CssSelector(".remove-from-cart input");
-        private readonly By skuSelector = By.CssSelector(".sku .sku-number");
         private readonly By productPictureSelector = By.CssSelector(".product-picture img");
         private readonly By productInfoSelector = By.CssSelector(".product");
         private readonly By productEditSelector = By.CssSelector(".product .edit a");
-        private readonly By productPriceSelector = By.CssSelector(".unit-price .product-unit-price");
         private readonly By productQtySelector = By.CssSelector(".quantity .qty-input");
-        private readonly By productSubTotalSelector = By.CssSelector(".subtotal .product-subtotal");
 
         #endregion
 
@@ -39,15 +36,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrderSummaryRowPageComponent"/> class.
+        /// Initializes a new instance of the <see cref="OrderSummaryRowComponent"/> class.
         /// </summary>
         /// <param name="selector">The selector.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
-        public OrderSummaryRowPageComponent(By selector,
+        public OrderSummaryRowComponent(By selector,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver)
-            : base(driver, selector)
+            : base(selector, driver)
         {
             this.pageObjectFactory = pageObjectFactory;
         }
@@ -59,13 +56,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         #region Elements
 
         private CheckboxElement RemoveFromCartElement => new CheckboxElement(WrappedElement.FindElement(removeFromCartSelector));
-        private IWebElement SkuElement => WrappedElement.FindElement(skuSelector);
         private IWebElement ProductPictureElement => WrappedElement.FindElement(productPictureSelector);
         private IWebElement ProductInfoElement => WrappedElement.FindElement(productInfoSelector);
         private IWebElement ProductEditElement => WrappedElement.FindElement(productEditSelector);
-        private IWebElement ProductPriceElement => WrappedElement.FindElement(productPriceSelector);
         private InputElement ProductQtyElement => new InputElement(WrappedElement.FindElement(productQtySelector));
-        private IWebElement ProductSubTotalElement => WrappedElement.FindElement(productSubTotalSelector);
 
         #endregion
 
@@ -77,7 +71,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// Gets the quantity.
         /// </summary>
         /// <returns></returns>
-        public virtual int GetQuantity()
+        public override int GetQuantity()
         {
             return ProductQtyElement.GetValue<int>();
         }
@@ -87,7 +81,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// </summary>
         /// <param name="qty">The qty.</param>
         /// <returns></returns>
-        public virtual OrderSummaryRowPageComponent SetQuantity(int qty)
+        public virtual OrderSummaryRowComponent SetQuantity(int qty)
         {
             ProductQtyElement.SetValue(qty);
 
@@ -99,45 +93,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// </summary>
         /// <param name="remove">if set to <c>true</c> [remove].</param>
         /// <returns></returns>
-        public virtual OrderSummaryRowPageComponent MarkForRemoval(bool remove)
+        public virtual OrderSummaryRowComponent MarkForRemoval(bool remove)
         {
             RemoveFromCartElement.Check(remove);
 
             return this;
-        }
-
-        /// <summary>
-        /// Gets the column (zero-based). Returns null if there is no such column.
-        /// </summary>
-        /// <param name="columnIndex">Index of the column.</param>
-        /// <returns></returns>
-        public virtual IWebElement GetColumn(int columnIndex)
-        {
-            var selector = By.CssSelector($"td:nth-child({columnIndex + 1})");
-            var col = WrappedElement.FindElements(selector).FirstOrDefault();
-
-            return col;
-        }
-
-        /// <summary>
-        /// Gets the sku.
-        /// </summary>
-        /// <returns></returns>
-        public virtual string GetSku()
-        {
-            return SkuElement.TextHelper().InnerText;
-        }
-
-        /// <summary>
-        /// Gets the name of the product.
-        /// </summary>
-        /// <returns></returns>
-        public virtual string GetProductName()
-        {
-            return ProductInfoElement
-                .FindElement(By.CssSelector(".product-name"))
-                .TextHelper()
-                .InnerText;
         }
 
         /// <summary>
@@ -169,24 +129,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         }
 
         /// <summary>
-        /// Gets the price.
-        /// </summary>
-        /// <returns></returns>
-        public virtual decimal GetPrice()
-        {
-            return ProductPriceElement.TextHelper().ExtractPrice();
-        }
-
-        /// <summary>
-        /// Gets the total.
-        /// </summary>
-        /// <returns></returns>
-        public virtual decimal GetTotal()
-        {
-            return ProductSubTotalElement.TextHelper().ExtractPrice();
-        }
-
-        /// <summary>
         /// Edits this instance.
         /// </summary>
         /// <returns></returns>
@@ -198,47 +140,5 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         }
 
         #endregion
-
-        public string GetElementProperty(IWebElement element,
-            string propertyName,
-            string defaultValueIfNull = null)
-        {
-            var value = default(string);
-            var driver = element.GetDriver();
-
-            var capabilities = driver.Capabilities();
-            var isChrome = false;
-
-            if (capabilities != null)
-            {
-                var browserName = (string)capabilities.GetCapability(
-                    CapabilityType.BrowserName);
-
-                if (browserName == "chrome")
-                {
-                    isChrome = true;
-                }
-            }
-
-            if (isChrome)
-            {
-                // Use js to get element property.
-                var script =
-                    "var el = arguments[0];" +
-                    "return el['" + propertyName + "'];";
-
-                value = driver
-                    .JavaScriptExecutor()
-                    .ExecuteScript(script, element)
-                    .ToString();
-            }
-            else
-            {
-                // Browser should support get property.
-                value = element.GetProperty(propertyName);
-            }
-
-            return value ?? defaultValueIfNull;
-        }
     }
 }

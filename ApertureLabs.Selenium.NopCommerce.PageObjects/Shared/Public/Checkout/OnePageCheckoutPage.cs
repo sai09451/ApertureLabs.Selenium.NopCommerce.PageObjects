@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
@@ -82,7 +83,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         private readonly By paymentInformationNextStepSelector = By.CssSelector("#payment-info-buttons-container .payment-info-next-step-button");
         private readonly By paymentInformationPleaseWaitSelector = By.CssSelector("#payment-info-please-wait");
 
-        private readonly By confirmSelector = By.CssSelector("#confirm-order-buttons-container > button");
+        private readonly By confirmSelector = By.CssSelector("#confirm-order-buttons-container .confirm-order-next-step-button");
         private readonly By confirmPleaseWaitSelector = By.CssSelector("#confirm-order-please-wait");
         private readonly By messageErrorSelector = By.CssSelector(".message-error");
 
@@ -243,7 +244,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <param name="address">The address.</param>
         /// <param name="shipToSameAddress">Whether or not to ship to the same address.</param>
-        /// <exception cref="NotImplementedException"></exception>
         public void EnterBillingAddress(AddressModel address,
             bool shipToSameAddress = true)
         {
@@ -283,7 +283,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
                     .TrySequentialWait(
                         out var exc,
                         d => BillingAddressStateProvinceLoadingElement.Displayed,
-                        d => !BillingAddressStateProvinceLoadingElement.Displayed);
+                        d => !BillingAddressStateProvinceLoadingElement.Displayed,
+                        d => BillingAddressCountryElement
+                            .Options
+                            .Count > 1);
             }
 
             // State/province.
@@ -310,14 +313,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Enters the payment information.
         /// </summary>
-        /// <param name="containerElement">The element containing the payment information details.</param>
         /// <exception cref="Exception">
         /// Couldn't determine payment method name.
         /// or
         /// No payment handler registered that can " +
         ///                     $"operate on {paymentMethodName}
         /// </exception>
-        public void EnterPaymentInformation(IWebElement containerElement)
+        public void EnterPaymentInformation()
         {
             if (String.IsNullOrEmpty(paymentMethodName))
                 throw new Exception("Couldn't determine payment method name.");
@@ -364,17 +366,26 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
 
             // Country.
             if (!String.Equals(
-                ShippingAddressDropDownElement.SelectedOption.TextHelper().InnerText,
+                ShippingAddressCountryElement.SelectedOption.TextHelper().InnerText,
                 address.Country,
                 StringComparison.Ordinal))
             {
-                ShippingAddressDropDownElement.SelectByText(address.Country);
+                ShippingAddressCountryElement.SelectByText(address.Country);
                 WrappedDriver
                     .Wait(TimeSpan.FromSeconds(30))
                     .TrySequentialWait(
                         out var exc,
                         d => ShippingAddressPleaseWaitElement.Displayed,
-                        d => !ShippingAddressPleaseWaitElement.Displayed);
+                        d => !ShippingAddressPleaseWaitElement.Displayed,
+                        d => ShippingAddressCountryElement
+                            .Options
+                            .Count > 1);
+
+                // This try-catch exists becuase of a bug where the options
+                // of the ShippingAddressStateProvinceElement are set twice.
+                // TODO: Find alternative and RELIABLE way of waiting for this
+                // instead of using sleeps.
+                Thread.Sleep(500);
             }
 
             // State/province.
@@ -551,7 +562,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         public IEnumerable<string> GetShippingMethods()
         {
             return ShippingMethodNameElements
-                .Select(e => e.TextHelper().InnerText);
+                .Select(e => IgnoreLastParenthesis(e.TextHelper().InnerText));
         }
 
         /// <summary>
@@ -665,29 +676,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         public void SelectPaymentMethod(string paymentMethodName,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
-            var radioEls = PaymentMethodRadioElements;
-            var names = GetPaymentMethods().ToList();
-            var foundPaymentMethod = false;
-
-            for (var i = 0; i < names.Count; i++)
-            {
-                var name = names[i];
-                var matches = String.Equals(
-                    name,
+            var indexOfPaymentMethod = GetPaymentMethods().IndexOf(
+                method => String.Equals(
+                    method,
                     paymentMethodName,
-                    stringComparison);
+                    stringComparison));
 
-                if (matches)
-                {
-                    foundPaymentMethod = true;
-                    this.paymentMethodName = name;
-                    radioEls.ElementAt(i).Click();
-                    break;
-                }
-            }
+            if (indexOfPaymentMethod == -1)
+                throw new Exception("Failed to locate the payment method.");
 
-            if (!foundPaymentMethod)
-                throw new NoSuchElementException();
+            this.paymentMethodName = paymentMethodName;
+            PaymentMethodRadioElements
+                .ElementAt(indexOfPaymentMethod)
+                .Click();
         }
 
         /// <summary>
@@ -696,28 +697,18 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         public void SelectShippingMethod(string shippingMethod,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
-            var els = ShippingMethodRadioElements;
-            var shippingMethodNames = GetShippingMethods().ToList();
-            var foundMethod = false;
-
-            for (var i = 0; i < shippingMethodNames.Count; i++)
-            {
-                var name = shippingMethodNames[i];
-                var isMatch = String.Equals(
-                    name,
+            var indexOfShippingMethod = GetShippingMethods().IndexOf(
+                method => String.Equals(
+                    method,
                     shippingMethod,
-                    stringComparison);
+                    stringComparison));
 
-                if (isMatch)
-                {
-                    ShippingMethodRadioElements.ElementAt(i).Click();
-                    foundMethod = true;
-                    break;
-                }
-            }
+            if (indexOfShippingMethod == -1)
+                throw new Exception("Failed to locate the shipping method.");
 
-            if (!foundMethod)
-                throw new Exception("Failed to locate the payment method.");
+            ShippingMethodRadioElements
+                .ElementAt(indexOfShippingMethod)
+                .Click();
         }
 
         /// <summary>
@@ -730,24 +721,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         public bool TryConfirm(Action<ICompletedPage> resolve,
             Action<ICheckoutPage> reject)
         {
+            // Check if on right step.
             if (GetCurrentStepName() != "Confirm order")
                 throw new Exception("Not on correct step.");
-
-            // Check if on right step.
-            if (GetCurrentStep() != 6)
-                throw new Exception("Not on the correct step.");
 
             ConfirmElement.Click();
 
             // Wait until the please wait message appears and then either
-            // dissapears or becomes a stale element (would be null in that
-            // case).
+            // dissapears or becomes null.
             var result = WrappedDriver
-                .Wait(TimeSpan.FromMinutes(5))
+                .Wait(TimeSpan.FromSeconds(60 * 5))
                 .TrySequentialWait(
                     out var exc,
-                    d => ConfirmPleaseWaitElement.Displayed,
-                    d => !ConfirmPleaseWaitElement?.Displayed ?? false);
+                    d => ConfirmPleaseWaitElement?.Displayed ?? true,
+                    d => !ConfirmPleaseWaitElement?.Displayed ?? true);
 
             if (result)
             {
@@ -843,6 +830,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
                             out var exc,
                             d => pleaseWaitEl.Displayed,
                             d => !pleaseWaitEl.Displayed);
+
+                    // Sometimes the next step hasn't fully loaded even though
+                    // the loading indicator has been hidden.
+                    WrappedDriver
+                        .Wait(TimeSpan.FromSeconds(2))
+                        .Until(d => GetCurrentStep() == step);
 
                     // Verify the step changed to the correct one.
                     result = GetCurrentStep() == step;
@@ -963,9 +956,30 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
             if (String.IsNullOrEmpty(stepName))
                 throw new ArgumentNullException(stepName);
 
-            var indexOfStep = GetAllStepNames().IndexOf(stepName);
+            var indexOfStep = GetAllStepNames().IndexOf(
+                name => String.Equals(
+                    name,
+                    stepName,
+                    stringComparison));
 
-            return TryGoToStep(indexOfStep, resolve, reject);
+            var result = TryGoToStep(indexOfStep, resolve, reject);
+
+            if (result)
+            {
+                // For unknown reasons the step is changing correctly but the
+                // step name is being a bit slow to update.
+                WrappedDriver
+                    .Wait(TimeSpan.FromSeconds(1))
+                    .Until(d =>
+                    {
+                        return String.Equals(
+                            GetCurrentStepName(),
+                            stepName,
+                            stringComparison);
+                    });
+            }
+
+            return result;
         }
 
         private IEnumerable<string> GetMessageErrors()

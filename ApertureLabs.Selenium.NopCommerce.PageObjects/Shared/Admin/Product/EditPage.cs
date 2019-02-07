@@ -9,6 +9,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSett
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 {
@@ -20,12 +21,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     public class EditPage : PageObject, IEditPage
     {
         #region Fields
-
-        private readonly IBasePage basePage;
-        private readonly IPageObjectFactory pageObjectFactory;
-        private readonly EditorSettingsComponent settings;
-        private readonly NavsTabComponent navsTabComponent;
-        private readonly ProductInfoComponent generalInfoComponent;
 
         #region Selectors
 
@@ -41,6 +36,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         private readonly By productInfoComponentSelector = By.CssSelector("#tab-info");
 
         #endregion
+
+        private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
 
         #endregion
 
@@ -62,12 +60,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
 
-            settings = new EditorSettingsComponent(advancedSwitchSelector,
+            Settings = new EditorSettingsComponent(advancedSwitchSelector,
                 settingsBySelector,
-                WrappedDriver,
-                EditorSettingsComponentConfiguration.DefaultConfiguration());
+                EditorSettingsComponentConfiguration.DefaultConfiguration(),
+                WrappedDriver);
 
-            navsTabComponent = new NavsTabComponent(
+            Tabs = new NavsTabComponent<IEditPage>(
                 navsTabComponentSelector,
                 WrappedDriver,
                 new NavsTabComponentConfiguration
@@ -77,12 +75,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
                     ActiveTabHeaderNameSelector = By.CssSelector(".navs-tab > .active > a"),
                     TabHeaderElementsSelector = By.CssSelector(".navs-tab > li"),
                     TabHeaderNamesSelector = By.CssSelector(".navs-tab > li > a")
-                });
+                },
+                this);
 
-            generalInfoComponent = new ProductInfoComponent(
+            GeneralInfo = new ProductInfoComponent(
+                productInfoComponentSelector,
                 this,
-                WrappedDriver,
-                productInfoComponentSelector);
+                WrappedDriver);
         }
 
         #endregion
@@ -91,10 +90,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 
         #region Elements
 
+        private ProductInfoComponent GeneralInfo { get; set; }
+
         /// <summary>
         /// Gets the settings.
         /// </summary>
-        public virtual EditorSettingsComponent Settings => pageObjectFactory.PrepareComponent(settings);
+        public virtual EditorSettingsComponent Settings { get; private set; }
 
         /// <summary>
         /// Gets the tabs.
@@ -102,7 +103,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <value>
         /// The tabs.
         /// </value>
-        public virtual NavsTabComponent Tabs => pageObjectFactory.PrepareComponent(navsTabComponent);
+        public virtual NavsTabComponent<IEditPage> Tabs { get; private set; }
 
         /// <summary>
         /// Gets the main side bar.
@@ -132,6 +133,28 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+
+            pageObjectFactory.PrepareComponent(Tabs);
+            pageObjectFactory.PrepareComponent(GeneralInfo);
+            pageObjectFactory.PrepareComponent(Settings);
+
+            return this;
+        }
 
         /// <summary>
         /// Backs to product list.

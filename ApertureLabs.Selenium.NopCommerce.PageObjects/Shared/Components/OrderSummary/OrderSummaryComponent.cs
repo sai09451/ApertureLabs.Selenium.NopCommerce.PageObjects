@@ -50,7 +50,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         public OrderSummaryComponent(
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver)
-            : base(driver, By.CssSelector(".order-summary-content"))
+            : base(By.CssSelector(".order-summary-content"), driver)
         {
             this.pageObjectFactory = pageObjectFactory;
         }
@@ -75,8 +75,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
 
         private IReadOnlyCollection<IWebElement> ErrorMessageElements => WrappedElement.FindElements(errorMessagesSelector);
         private IReadOnlyCollection<IWebElement> CartRowElements => WrappedDriver.FindElements(cartRowSelectors);
-        private IWebElement UpdateShoppintCartElement => WrappedDriver.FindElement(updateShoppingCartSelector);
-        private IWebElement ContinueShoppingElement => WrappedDriver.FindElement(continueShoppingSelector);
+        private IWebElement UpdateShoppintCartElement => WrappedDriver.FindElements(updateShoppingCartSelector).FirstOrDefault();
+        private IWebElement ContinueShoppingElement => WrappedDriver.FindElements(continueShoppingSelector).FirstOrDefault();
         private CheckboxElement TermsOfServiceElement => new CheckboxElement(WrappedDriver.FindElement(termsOfServiceSelector));
         private IWebElement CheckoutElement => WrappedDriver.FindElement(checkoutSelector);
 
@@ -115,11 +115,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual IList<OrderSummaryRowPageComponent> GetCartItems()
+        public virtual IList<OrderSummaryRowComponent> GetCartItems()
         {
             var rowComponents = CartRowElements
                 .Select(e => pageObjectFactory.PrepareComponent(
-                    new OrderSummaryRowPageComponent(
+                    new OrderSummaryRowComponent(
                         ByElement.FromElement(e),
                         pageObjectFactory,
                         WrappedDriver)))
@@ -133,11 +133,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// </summary>
         /// <param name="index">The index.</param>
         /// <returns></returns>
-        public virtual OrderSummaryRowPageComponent GetCartItem(int index)
+        public virtual OrderSummaryRowComponent GetCartItem(int index)
         {
             var el = CartRowElements.ElementAt(index);
             var component = pageObjectFactory.PrepareComponent(
-                new OrderSummaryRowPageComponent(
+                new OrderSummaryRowComponent(
                     ByElement.FromElement(el),
                     pageObjectFactory,
                     WrappedDriver));
@@ -162,7 +162,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
         /// </summary>
         public virtual void UpdateShoppingCart()
         {
-            UpdateShoppintCartElement.Click();
+            UpdateShoppintCartElement?.Click();
 
             // Reload the page.
             Load();

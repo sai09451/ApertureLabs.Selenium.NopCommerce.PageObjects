@@ -94,10 +94,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Enters the payment information.
         /// </summary>
-        /// <param name="containerElement">
-        /// The element containing the payment information details.
-        /// </param>
-        void EnterPaymentInformation(IWebElement containerElement);
+        void EnterPaymentInformation();
 
         /// <summary>
         /// Finalizes and confirms the order.

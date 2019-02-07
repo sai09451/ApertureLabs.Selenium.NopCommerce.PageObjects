@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
 {
@@ -47,13 +49,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the billing address.
         /// </summary>
         /// <returns></returns>
-        object GetBillingAddress();
+        AddressModel GetBillingAddress();
 
         /// <summary>
         /// Gets the shipping address.
         /// </summary>
         /// <returns></returns>
-        object GetShippingAddress();
+        AddressModel GetShippingAddress();
 
         /// <summary>
         /// Gets the shipping method.
@@ -71,7 +73,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the products.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<object> GetProducts();
+        IEnumerable<OrderSummaryReadOnlyRowComponent> GetProducts();
 
         /// <summary>
         /// Determines whether [has gift wrapping].

@@ -33,10 +33,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Pager
         /// Initializes a new instance of the <see cref="PagerComponent"/>
         /// class.
         /// </summary>
-        /// <param name="driver">The driver.</param>
         /// <param name="selector">The selector.</param>
-        public PagerComponent(IWebDriver driver, By selector)
-            : base(driver, selector)
+        /// <param name="driver">The driver.</param>
+        public PagerComponent(By selector, IWebDriver driver)
+            : base(selector, driver)
         { }
 
         #endregion
