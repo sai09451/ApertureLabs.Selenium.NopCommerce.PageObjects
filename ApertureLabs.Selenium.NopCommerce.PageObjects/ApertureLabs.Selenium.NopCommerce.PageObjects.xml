@@ -842,6 +842,43 @@
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CommonStatistics.CommonStatisticsComponent.IsStale">
             <inheritdoc/>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CustomerNavigation.CustomerNavigationComponent`1">
+            <summary>
+            The customer account navigation component.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.FluidPageComponent`1" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CustomerNavigation.CustomerNavigationComponent`1.#ctor(ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,`0,OpenQA.Selenium.By)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CustomerNavigation.CustomerNavigationComponent`1"/> class.
+            </summary>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="parent">The parent.</param>
+            <param name="selector">The selector.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CustomerNavigation.CustomerNavigationComponent`1.GoToTab``1(System.String,System.StringComparison)">
+            <summary>
+            Goes to the tab.
+            </summary>
+            <typeparam name="U"></typeparam>
+            <param name="tabName">Name of the tab.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CustomerNavigation.CustomerNavigationComponent`1.GetActiveTabName">
+            <summary>
+            Gets the name of the active tab.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CustomerNavigation.CustomerNavigationComponent`1.GetAllTabNames">
+            <summary>
+            Gets all tab names.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.DiscountBox.DiscountBoxComponent">
             <summary>
             DiscountBoxComponent.
@@ -2867,6 +2904,944 @@
             </exception>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesAddPage">
+            <summary>
+            AddressesAddPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesAddPage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesAddPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesAddPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1">
+            <summary>
+            Base class for the AddressesAdd and AddressesEdit PageObjects.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesAddPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
+            <exception cref="T:System.ArgumentNullException">
+            basePage
+            or
+            pageObjectFactory
+            or
+            pageSettings
+            </exception>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.AccountNavigation">
+            <summary>
+            Gets the account navigation.
+            </summary>
+            <value>
+            The account navigation.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetAddress1">
+            <summary>
+            Gets the address1.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetAddress2">
+            <summary>
+            Gets the address2.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetCity">
+            <summary>
+            Gets the city.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetCompany">
+            <summary>
+            Gets the company.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetCountry">
+            <summary>
+            Gets the country.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetEmail">
+            <summary>
+            Gets the email.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetFaxNumber">
+            <summary>
+            Gets the fax number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetPhoneNumber">
+            <summary>
+            Gets the phone number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetStateProvince">
+            <summary>
+            Gets the state province.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GetZipCode">
+            <summary>
+            Gets the zip code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="U"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.Save">
+            <summary>
+            Saves the address.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetAddress1(System.String)">
+            <summary>
+            Sets the address1.
+            </summary>
+            <param name="address1">The address1.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetAddress2(System.String)">
+            <summary>
+            Sets the address2.
+            </summary>
+            <param name="address2">The address2.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetCity(System.String)">
+            <summary>
+            Sets the city.
+            </summary>
+            <param name="city">The city.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetCompany(System.String)">
+            <summary>
+            Sets the company.
+            </summary>
+            <param name="company">The company.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetCountry(System.String)">
+            <summary>
+            Sets the country.
+            </summary>
+            <param name="country">The country.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetEmail(System.String)">
+            <summary>
+            Sets the email.
+            </summary>
+            <param name="email">The email.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetFaxNumber(System.String)">
+            <summary>
+            Sets the fax number.
+            </summary>
+            <param name="faxNumber">The fax number.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetFirstName(System.String)">
+            <summary>
+            Sets the first name.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetFromModel(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.AddressModel)">
+            <summary>
+            Sets from model.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">model</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetLastName(System.String)">
+            <summary>
+            Sets the last name.
+            </summary>
+            <param name="lastName">The last name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetPhoneNumber(System.String)">
+            <summary>
+            Sets the phone number.
+            </summary>
+            <param name="phoneNumber">The phone number.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetStateProvince(System.String)">
+            <summary>
+            Sets the state province.
+            </summary>
+            <param name="stateProvince">The state province.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.SetZipCode(System.String)">
+            <summary>
+            Sets the zip code.
+            </summary>
+            <param name="zipCode">The zip code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1.ViewModel">
+            <summary>
+            Retrieves the viewmodel.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesEditPage">
+            <summary>
+            AddressesEditPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesCreateOrUpdatePage`1" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesEditPage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesEditPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesEditPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage">
+            <summary>
+            AddressesPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesPage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
+            <exception cref="T:System.ArgumentNullException">
+            pageSettings
+            or
+            basePage
+            or
+            pageObjectFactory
+            </exception>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.AccountNavigation">
+            <summary>
+            Gets the account navigation.
+            </summary>
+            <value>
+            The account navigation.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.AddNew">
+            <summary>
+            Begins the process of adding a new address.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.GetAddresses">
+            <summary>
+            Gets the addresses.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesPage.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesRowComponent`1">
+            <summary>
+            AddressRowComponent.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.FluidPageComponent`1" />
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.IViewModel`1" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesRowComponent`1.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesRowComponent`1"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="parent">The parent.</param>
+            <exception cref="T:System.ArgumentNullException">pageObjectFactory</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesRowComponent`1.Delete">
+            <summary>
+            Deletes this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesRowComponent`1.Edit">
+            <summary>
+            Edits this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.AddressesRowComponent`1.ViewModel">
+            <summary>
+            Retrieves the viewmodel.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage">
+            <summary>
+            ChangePasswordPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage" />
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.AccountNavigation">
+            <summary>
+            Gets the account navigation.
+            </summary>
+            <value>
+            The account navigation.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.ChangePassword(System.String,System.String)">
+            <summary>
+            Changes the password. Throws an exception if the password fails to
+            update.
+            </summary>
+            <param name="oldPassword">The old password.</param>
+            <param name="newPassword">The new password.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.EnterNewPassword(System.String)">
+            <summary>
+            Enters the new password.
+            </summary>
+            <param name="newPassword">The new password.</param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.EnterOldPassword(System.String)">
+            <summary>
+            Enters the old password.
+            </summary>
+            <param name="oldPassword">The old password.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.Save(System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage})">
+            <summary>
+            Tries to save the changes. Resolve will be called upon success and
+            reject will be called upon failure to update the changes.
+            </summary>
+            <param name="resolve">Can be null.</param>
+            <param name="reject">Can be null.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ChangePasswordPage.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesAddPage">
+            <summary>
+            IAddressesAddPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1" />
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1">
+            <summary>
+            Base interface for the IAddressesAdd and IAddressesEdit interfaces.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IHasAccountNavigation`1" />
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.IViewModel`1" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetFirstName(System.String)">
+            <summary>
+            Sets the first name.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetLastName(System.String)">
+            <summary>
+            Sets the last name.
+            </summary>
+            <param name="lastName">The last name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetEmail">
+            <summary>
+            Gets the email.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetEmail(System.String)">
+            <summary>
+            Sets the email.
+            </summary>
+            <param name="email">The email.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetCompany">
+            <summary>
+            Gets the company.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetCompany(System.String)">
+            <summary>
+            Sets the company.
+            </summary>
+            <param name="company">The company.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetCountry">
+            <summary>
+            Gets the country.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetCountry(System.String)">
+            <summary>
+            Sets the country.
+            </summary>
+            <param name="country">The country.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetStateProvince">
+            <summary>
+            Gets the state province.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetStateProvince(System.String)">
+            <summary>
+            Sets the state province.
+            </summary>
+            <param name="stateProvince">The state province.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetCity">
+            <summary>
+            Gets the city.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetCity(System.String)">
+            <summary>
+            Sets the city.
+            </summary>
+            <param name="city">The city.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetAddress1">
+            <summary>
+            Gets the address1.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetAddress1(System.String)">
+            <summary>
+            Sets the address1.
+            </summary>
+            <param name="address1">The address1.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetAddress2">
+            <summary>
+            Gets the address2.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetAddress2(System.String)">
+            <summary>
+            Sets the address2.
+            </summary>
+            <param name="address2">The address2.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetZipCode">
+            <summary>
+            Gets the zip code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetZipCode(System.String)">
+            <summary>
+            Sets the zip code.
+            </summary>
+            <param name="zipCode">The zip code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetPhoneNumber">
+            <summary>
+            Gets the phone number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetPhoneNumber(System.String)">
+            <summary>
+            Sets the phone number.
+            </summary>
+            <param name="phoneNumber">The phone number.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.GetFaxNumber">
+            <summary>
+            Gets the fax number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetFaxNumber(System.String)">
+            <summary>
+            Sets the fax number.
+            </summary>
+            <param name="faxNumber">The fax number.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.SetFromModel(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.AddressModel)">
+            <summary>
+            Sets from model.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1.Save">
+            <summary>
+            Saves the address.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesEditPage">
+            <summary>
+            IAddressesEditPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesCreateOrUpdatePage`1" />
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesPage">
+            <summary>
+            IAddressesPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesPage.AddNew">
+            <summary>
+            Begins the process of adding a new address.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesPage.GetAddresses">
+            <summary>
+            Gets the addresses.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage">
+            <summary>
+            IChangePasswordPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IHasAccountNavigation`1" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage.ChangePassword(System.String,System.String)">
+            <summary>
+            Changes the password. Throws an exception if the password fails to
+            update.
+            </summary>
+            <param name="oldPassword">The old password.</param>
+            <param name="newPassword">The new password.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage.EnterOldPassword(System.String)">
+            <summary>
+            Enters the old password.
+            </summary>
+            <param name="oldPassword">The old password.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage.EnterNewPassword(System.String)">
+            <summary>
+            Enters the new password.
+            </summary>
+            <param name="newPassword">The new password.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage.Save(System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage},System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage})">
+            <summary>
+            Tries to save the changes. Resolve will be called upon success and
+            reject will be called upon failure to update the changes.
+            </summary>
+            <param name="resolve">Can be null.</param>
+            <param name="reject">Can be null.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage">
+            <summary>
+            IInfoPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.AccountNavigation">
+            <summary>
+            Gets the account navigation.
+            </summary>
+            <value>
+            The account navigation.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.GetGender">
+            <summary>
+            Gets the gender.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.SetGender(System.String,System.StringComparison)">
+            <summary>
+            Sets the gender.
+            </summary>
+            <param name="gender">The gender.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.SetFirstName(System.String)">
+            <summary>
+            Sets the first name.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.SetLastName(System.String)">
+            <summary>
+            Sets the last name.
+            </summary>
+            <param name="lastName">The last name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.GetDateOfBirth">
+            <summary>
+            Gets the date of birth.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.SetDateOfBirth(System.Nullable{System.DateTime})">
+            <summary>
+            Sets the date of birth.
+            </summary>
+            <param name="dateOfBirth">The date of birth.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.GetEmail">
+            <summary>
+            Gets the email.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.SetEmail(System.String)">
+            <summary>
+            Sets the email.
+            </summary>
+            <param name="email">The email.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.GetCompanyName">
+            <summary>
+            Gets the name of the company.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.SetCompanyName(System.String)">
+            <summary>
+            Sets the name of the company.
+            </summary>
+            <param name="companyName">Name of the company.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.GetIsRegisteredForNewsLetter">
+            <summary>
+            Gets the is registered for news letter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.SetIsRegisteredForNewsLetter(System.Boolean)">
+            <summary>
+            Sets the is registered for news letter.
+            </summary>
+            <param name="isRegistered">if set to <c>true</c> [is registered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage.Save">
+            <summary>
+            Saves this instance.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.ILoginPage">
             <summary>
             LoginPage.
@@ -2908,6 +3883,207 @@
             <summary>
             Checks for any errors.
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage">
+            <summary>
+            InfoPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.AccountNavigation">
+            <summary>
+            Gets the account navigation.
+            </summary>
+            <value>
+            The account navigation.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GetCompanyName">
+            <summary>
+            Gets the name of the company.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GetDateOfBirth">
+            <summary>
+            Gets the date of birth.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GetEmail">
+            <summary>
+            Gets the email.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GetGender">
+            <summary>
+            Gets the gender.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GetIsRegisteredForNewsLetter">
+            <summary>
+            Gets the is registered for news letter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.Save">
+            <summary>
+            Saves this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SetCompanyName(System.String)">
+            <summary>
+            Sets the name of the company.
+            </summary>
+            <param name="companyName">Name of the company.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SetDateOfBirth(System.Nullable{System.DateTime})">
+            <summary>
+            Sets the date of birth.
+            </summary>
+            <param name="dateOfBirth">The date of birth.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SetEmail(System.String)">
+            <summary>
+            Sets the email.
+            </summary>
+            <param name="email">The email.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SetFirstName(System.String)">
+            <summary>
+            Sets the first name.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SetGender(System.String,System.StringComparison)">
+            <summary>
+            Sets the gender.
+            </summary>
+            <param name="gender">The gender.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SetIsRegisteredForNewsLetter(System.Boolean)">
+            <summary>
+            Sets the is registered for news letter.
+            </summary>
+            <param name="isRegistered">if set to <c>true</c> [is registered].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.InfoPage.SetLastName(System.String)">
+            <summary>
+            Sets the last name.
+            </summary>
+            <param name="lastName">The last name.</param>
             <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.LoginPage">
@@ -3106,6 +4282,182 @@
             <summary>
             Dismisses the notifications.
             </summary>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IHasAccountNavigation`1">
+            <summary>
+            IHasAccountNavigation.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IHasAccountNavigation`1.AccountNavigation">
+            <summary>
+            Gets the account navigation.
+            </summary>
+            <value>
+            The account navigation.
+            </value>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent">
+            <summary>
+            CustomerOrderRowComponent.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.FluidPageComponent`1" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.ICustomerOrdersPage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="parent">The parent.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <exception cref="T:System.ArgumentNullException">pageObjectFactory</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent.ViewDetails">
+            <summary>
+            Views the details.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent.GetOrderNumber">
+            <summary>
+            Gets the order number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent.GetOrderStatus">
+            <summary>
+            Gets the order status.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent.GetOrderDate">
+            <summary>
+            Gets the order date.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrderRowComponent.GetOrderTotal">
+            <summary>
+            Gets the order total.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage">
+            <summary>
+            CustomerOrdersPage.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.ICustomerOrdersPage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
+            <exception cref="T:System.ArgumentNullException">
+            basePage
+            or
+            pageObjectFactory
+            or
+            pageSettings
+            </exception>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.AccountNavigation">
+            <summary>
+            Gets the account navigation.
+            </summary>
+            <value>
+            The account navigation.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.GetOrders">
+            <summary>
+            Gets the orders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.CustomerOrdersPage.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.ICustomerOrdersPage">
             <summary>
