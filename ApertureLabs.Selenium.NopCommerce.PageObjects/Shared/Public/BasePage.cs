@@ -221,7 +221,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
             SearchBoxElement.SetValue(searchFor);
             SearchBoxButtonElement.Click();
 
-            return pageObjectFactory.PreparePage<SearchPage>();
+            return pageObjectFactory.PreparePage<ISearchPage>();
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         {
             ShoppingCartLinkElement.Click();
 
-            return pageObjectFactory.PreparePage<CartPage>();
+            return pageObjectFactory.PreparePage<ICartPage>();
         }
 
         /// <summary>

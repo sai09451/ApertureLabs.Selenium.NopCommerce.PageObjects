@@ -5,8 +5,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>7.1</LangVersion>
     <Description>Contains default page objects for NopCommerce sites.</Description>
-    <FileVersion>1.0.6.0</FileVersion>
-    <Version>1.0.6</Version>
+    <FileVersion>1.0.7.0</FileVersion>
+    <Version>1.0.7</Version>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <Company>Aperture Labs</Company>
     <Authors>alex.hayes@aperturelabs.biz</Authors>
