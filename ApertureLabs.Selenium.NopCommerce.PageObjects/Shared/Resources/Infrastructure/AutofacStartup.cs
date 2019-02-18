@@ -28,9 +28,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
         /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
-            // Shouldn't register PageSettings here.
-            //builder.RegisterInstance(new PageSettings());
-
             // Register all payment method handlers here.
             var paymentMethodHandlerTypes = AppDomain.CurrentDomain
                 .GetAssemblies()
@@ -77,7 +74,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
                 .RegisterType<Public.BasePage>()
                 .As<Public.IBasePage>()
                 .SingleInstance();
-            builder.RegisterType<Public.Catalog.ParentCategoryPage>()
+            builder
+                .RegisterType<Public.Catalog.ParentCategoryPage>()
                 .As<Public.Catalog.IParentCategoryPage>()
                 .SingleInstance();
             builder
@@ -113,11 +111,34 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
             builder
                 .RegisterType<Public.ShoppingCart.CartPage>()
                 .As<Public.ShoppingCart.ICartPage>();
-            builder.RegisterType<Public.Checkout.OnePageCheckoutPage>()
+            builder
+                .RegisterType<Public.Checkout.OnePageCheckoutPage>()
                 .As<Public.Checkout.ICheckoutStepPage>()
                 .As<Public.Checkout.ICheckoutPage>();
-            builder.RegisterType<Public.Checkout.CompletedPage>()
+            builder
+                .RegisterType<Public.Checkout.CompletedPage>()
                 .As<Public.Checkout.ICompletedPage>();
+            builder
+                .RegisterType<Public.Order.OrderDetailsPage>()
+                .As<Public.Order.IOrderDetailsPage>();
+            builder
+                .RegisterType<Public.Customer.InfoPage>()
+                .As<Public.Customer.IInfoPage>();
+            builder
+                .RegisterType<Public.Customer.AddressesPage>()
+                .As<Public.Customer.IAddressesPage>();
+            builder
+                .RegisterType<Public.Customer.AddressesAddPage>()
+                .As<Public.Customer.IAddressesAddPage>();
+            builder
+                .RegisterType<Public.Customer.AddressesEditPage>()
+                .As<Public.Customer.IAddressesEditPage>();
+            builder
+                .RegisterType<Public.Order.CustomerOrdersPage>()
+                .As<Public.Order.ICustomerOrdersPage>();
+            builder
+                .RegisterType<Public.Customer.ChangePasswordPage>()
+                .As<Public.Customer.IChangePasswordPage>();
 
             #endregion
 

@@ -94,7 +94,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// <summary>
         /// Gets the admin header links.
         /// </summary>
-        public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         #endregion
 
@@ -143,11 +143,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         public virtual DateTime GetOrderDate()
         {
             var text = Regex.Replace(
-                OrderDateElement.TextHelper().InnerText,
-                @".*?:",
-                "");
+                    OrderDateElement.TextHelper().InnerText,
+                    @".*?:",
+                    "")
+                .Trim();
 
-            return DateTime.ParseExact(text,
+            return DateTime.ParseExact(
+                text,
                 "D",
                 CultureInfo.CurrentCulture);
         }
@@ -204,9 +206,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the shipping.
         /// </summary>
         /// <returns></returns>
-        public virtual decimal GetShipping()
+        public virtual decimal GetShippingCost()
         {
-            return ShippingMethodElement.TextHelper().ExtractPrice();
+            return GetCartTotalRowValue("Shipping")
+                .TextHelper()
+                .ExtractPrice();
         }
 
         /// <summary>
