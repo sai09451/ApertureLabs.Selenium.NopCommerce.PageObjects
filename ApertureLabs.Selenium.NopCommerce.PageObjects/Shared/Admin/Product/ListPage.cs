@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 {
@@ -57,6 +59,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </value>
         public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
+        /// <summary>
+        /// Gets the footer.
+        /// </summary>
+        /// <value>
+        /// The footer.
+        /// </value>
+        public virtual AdminFooterComponent Footer => basePage.Footer;
+
         #region Elements
 
         #endregion
@@ -64,6 +74,25 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            basePage.Load();
+
+            return this;
+        }
 
         /// <summary>
         /// Gets the listed products.

@@ -211,7 +211,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         public override ILoadableComponent Load()
         {
             base.Load();
-
             basePage.Load();
 
             return this;

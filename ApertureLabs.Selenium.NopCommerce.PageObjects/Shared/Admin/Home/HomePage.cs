@@ -1,9 +1,11 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
 {
@@ -56,15 +58,58 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         public virtual INewsComponent News => pageObjectFactory
             .PrepareComponent(new NewsComponent(WrappedDriver));
 
-        public IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
+        /// <summary>
+        /// Gets the main side bar.
+        /// </summary>
+        /// <value>
+        /// The main side bar.
+        /// </value>
+        public virtual IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
 
-        public IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
+        /// <summary>
+        /// Gets the navigation bar.
+        /// </summary>
+        /// <value>
+        /// The navigation bar.
+        /// </value>
+        public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
+
+        /// <summary>
+        /// Gets the footer.
+        /// </summary>
+        /// <value>
+        /// The footer.
+        /// </value>
+        public virtual AdminFooterComponent Footer => basePage.Footer;
 
         #endregion
 
         #region Methods
 
-        public void BackToTop()
+        /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+
+            basePage.Load();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Back to top if displayed.
+        /// </summary>
+        public virtual void BackToTop()
         {
             basePage.BackToTop();
         }

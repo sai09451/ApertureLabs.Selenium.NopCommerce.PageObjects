@@ -160,7 +160,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         public override ILoadableComponent Load()
         {
             base.Load();
-
             basePage.Load();
 
             return this;

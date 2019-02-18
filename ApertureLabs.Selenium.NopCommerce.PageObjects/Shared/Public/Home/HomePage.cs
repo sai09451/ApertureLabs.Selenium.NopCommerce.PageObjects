@@ -58,6 +58,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home
 
         #region Methods
 
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            basePage.Load();
+
+            return this;
+        }
+
         public void DismissNotifications()
         {
             basePage.DismissNotifications();

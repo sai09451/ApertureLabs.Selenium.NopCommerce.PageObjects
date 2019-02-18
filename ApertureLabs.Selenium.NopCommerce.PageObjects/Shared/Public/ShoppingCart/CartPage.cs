@@ -69,6 +69,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// </value>
         public virtual OrderSummaryComponent OrderSummary { get; private set; }
 
+        /// <summary>
+        /// Gets the admin header links.
+        /// </summary>
         public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         #endregion
@@ -78,9 +81,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         public override ILoadableComponent Load()
         {
             base.Load();
-
-            OrderSummary.Load();
             basePage.Load();
+            OrderSummary.Load();
 
             return this;
         }

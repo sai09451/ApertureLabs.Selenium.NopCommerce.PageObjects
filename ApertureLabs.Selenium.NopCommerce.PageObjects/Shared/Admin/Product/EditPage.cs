@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.Components.Boostrap.Navs;
 using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings;
@@ -121,6 +122,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </value>
         public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
+        /// <summary>
+        /// Gets the footer.
+        /// </summary>
+        /// <value>
+        /// The footer.
+        /// </value>
+        public AdminFooterComponent Footer => basePage.Footer;
+
         private IWebElement BackToProductListElement => WrappedDriver.FindElement(backToProductListSelector);
         private IWebElement PreviewButtonElement => WrappedDriver.FindElement(previewButtonSelector);
         private IWebElement SaveButtonElement => WrappedDriver.FindElement(saveButtonSelector);
@@ -148,6 +157,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         public override ILoadableComponent Load()
         {
             base.Load();
+            basePage.Load();
 
             pageObjectFactory.PrepareComponent(Tabs);
             pageObjectFactory.PrepareComponent(GeneralInfo);

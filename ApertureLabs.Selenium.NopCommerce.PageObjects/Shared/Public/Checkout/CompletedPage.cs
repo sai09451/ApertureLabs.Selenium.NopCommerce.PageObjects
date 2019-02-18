@@ -8,6 +8,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
 {
@@ -72,6 +73,25 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            basePage.Load();
+
+            return this;
+        }
 
         /// <summary>
         /// Continues to the home page.

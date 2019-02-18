@@ -10,11 +10,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
     public interface IAdminMainSideBarComponent : IPageComponent
     {
         /// <summary>
-        /// Searches the specified search term.
+        /// Searches the specified search term and goes to the first result.
         /// </summary>
+        /// <typeparam name="T"></typeparam>
         /// <param name="searchTerm">The search term.</param>
         /// <returns></returns>
-        IAdminMainSideBarComponent Search(string searchTerm);
+        T Search<T>(string searchTerm) where T : IPageObject;
 
         /// <summary>
         /// Gets the items.

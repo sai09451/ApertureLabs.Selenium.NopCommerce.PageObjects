@@ -1,4 +1,5 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.PageObjects;
 
@@ -25,6 +26,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// The navigation bar.
         /// </value>
         IAdminMainHeaderComponent NavigationBar { get; }
+
+        /// <summary>
+        /// Gets the footer.
+        /// </summary>
+        /// <value>
+        /// The footer.
+        /// </value>
+        AdminFooterComponent Footer { get; }
 
         /// <summary>
         /// Back to top if displayed.

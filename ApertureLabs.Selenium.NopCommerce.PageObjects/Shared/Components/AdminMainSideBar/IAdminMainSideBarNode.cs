@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ApertureLabs.Selenium.PageObjects;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar
@@ -7,7 +8,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
     /// A node present in the admin main sidebar.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.IPageComponent" />
-    public interface IAdminMainSideBarNode : IPageComponent
+    public interface IAdminMainSideBarNode : IFluidPageComponent<IAdminMainSideBarNode>
     {
         /// <summary>
         /// Gets the child items of this node.
@@ -34,16 +35,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         string GetName();
 
         /// <summary>
-        /// Gets the icon.
+        /// Gets the icon class.
         /// </summary>
         /// <returns></returns>
         string GetIcon();
 
         /// <summary>
-        /// Clicks this instance.
+        /// Goes to page. Will throw an exception if the node doesn't point to
+        /// anything.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        T Click<T>() where T : IPageObject;
+        /// <exception cref="UriFormatException">
+        /// Thrown if the elements href attribute doesn't point to a url.
+        /// </exception>
+        T Select<T>() where T : IPageObject;
     }
 }

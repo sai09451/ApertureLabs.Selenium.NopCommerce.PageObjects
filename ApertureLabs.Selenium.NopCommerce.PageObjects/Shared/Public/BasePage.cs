@@ -47,11 +47,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="BasePage"/> class.
         /// </summary>
-        /// <param name="pageObjectFactory"></param>
-        /// <param name="driver"></param>
-        /// <param name="pageSettings"></param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public BasePage(
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,

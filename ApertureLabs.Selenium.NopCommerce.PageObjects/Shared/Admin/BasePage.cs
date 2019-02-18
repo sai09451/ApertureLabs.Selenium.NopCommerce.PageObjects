@@ -1,10 +1,13 @@
 using System;
+using System.Linq;
 using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
 {
@@ -18,26 +21,33 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         #region Selectors
 
         private readonly By backToTopSelector = By.CssSelector("#backTop");
+        private readonly By mainSideBarSelector = By.CssSelector(".main-sidebar");
+        private readonly By navigationBarSelector = By.CssSelector(".main-header");
+        private readonly By footerSelector = By.CssSelector(".main-footer");
 
         #endregion
 
-        /// <summary>
-        /// Settings for the page.
-        /// </summary>
-        public readonly PageSettings PageSettings;
+        private readonly PageSettings pageSettings;
+
+        private readonly IPageObjectFactory pageObjectFactory;
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="BasePage"/> class.
         /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="pageSettings"></param>
-        public BasePage(IWebDriver driver, PageSettings pageSettings) : base(driver)
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
+        public BasePage(IPageObjectFactory pageObjectFactory,
+            IWebDriver driver,
+            PageSettings pageSettings) : base(driver)
         {
-            PageSettings = pageSettings;
+            this.pageObjectFactory = pageObjectFactory;
+            this.pageSettings = pageSettings;
+
             Uri = new Uri(pageSettings.BaseUrl + "/Admin", UriKind.Absolute);
         }
 
@@ -55,11 +65,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// </value>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public virtual IAdminMainSideBarComponent MainSideBar
-        {
-            get => throw new NotImplementedException();
-            private set => throw new NotImplementedException();
-        }
+        public virtual IAdminMainSideBarComponent MainSideBar { get; private set; }
 
         /// <summary>
         /// Gets the navigation bar.
@@ -69,11 +75,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// </value>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public virtual IAdminMainHeaderComponent NavigationBar
-        {
-            get => throw new NotImplementedException();
-            private set => throw new NotImplementedException();
-        }
+        public virtual IAdminMainHeaderComponent NavigationBar { get; private set; }
+
+        /// <summary>
+        /// Gets the footer.
+        /// </summary>
+        /// <value>
+        /// The footer.
+        /// </value>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        public virtual AdminFooterComponent Footer { get; private set; }
 
         #region Elements
 
@@ -84,6 +96,60 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+
+            if (WrappedDriver.FindElements(mainSideBarSelector).Any())
+            {
+                MainSideBar = pageObjectFactory.PrepareComponent(
+                    new AdminMainSideBarComponent(
+                        mainSideBarSelector,
+                        pageObjectFactory,
+                        WrappedDriver));
+            }
+            else
+            {
+                MainSideBar = null;
+            }
+
+            if (WrappedDriver.FindElements(navigationBarSelector).Any())
+            {
+                NavigationBar = pageObjectFactory.PrepareComponent(
+                    new AdminMainHeaderComponent(
+                        navigationBarSelector,
+                        pageObjectFactory,
+                        WrappedDriver));
+            }
+            else
+            {
+                NavigationBar = null;
+            }
+
+            if (WrappedDriver.FindElements(footerSelector).Any())
+            {
+                Footer = pageObjectFactory.PrepareComponent(
+                    new AdminFooterComponent(WrappedDriver));
+            }
+            else
+            {
+                Footer = null;
+            }
+
+            return this;
+        }
 
         /// <summary>
         /// Backs to top.

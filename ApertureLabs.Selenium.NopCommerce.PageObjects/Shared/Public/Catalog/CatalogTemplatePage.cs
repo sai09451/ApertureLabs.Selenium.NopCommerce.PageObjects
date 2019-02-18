@@ -104,6 +104,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         public override ILoadableComponent Load()
         {
             base.Load();
+            basePage.Load();
 
             pageObjectFactory.PrepareComponent(CategoriesComponent);
             pageObjectFactory.PrepareComponent(ManufacturersComponent);

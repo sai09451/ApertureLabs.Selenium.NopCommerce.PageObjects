@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
-using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
 {

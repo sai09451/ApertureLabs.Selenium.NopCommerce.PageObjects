@@ -14,6 +14,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
 {
@@ -23,7 +24,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.IOrderDetailsPage" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
-    public class OrderDetailsPage : PageObject, IOrderDetailsPage, IBasePage
+    public class OrderDetailsPage : PageObject, IOrderDetailsPage
     {
         #region Fields
 
@@ -100,9 +101,28 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         #region Methods
 
         /// <summary>
+        /// If overridding this don't forget to call base.Load().
+        /// NOTE: Will navigate to the pages url if the current drivers url
+        /// is empty.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// If the driver is an EventFiringWebDriver an event listener will
+        /// be added to the 'Navigated' event and uses the url to determine
+        /// if the page is 'stale'.
+        /// </remarks>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            basePage.Load();
+
+            return this;
+        }
+
+        /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
@@ -111,7 +131,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the billing address.
         /// </summary>
         /// <returns></returns>
-        public AddressModel GetBillingAddress()
+        public virtual AddressModel GetBillingAddress()
         {
             return ExtractAddressFromContainer(BillingAddressElement);
         }
@@ -120,7 +140,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order date.
         /// </summary>
         /// <returns></returns>
-        public DateTime GetOrderDate()
+        public virtual DateTime GetOrderDate()
         {
             var text = Regex.Replace(
                 OrderDateElement.TextHelper().InnerText,
@@ -136,7 +156,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order number.
         /// </summary>
         /// <returns></returns>
-        public int GetOrderNumber()
+        public virtual int GetOrderNumber()
         {
             return OrderNumberElement.TextHelper().ExtractInteger();
         }
@@ -145,7 +165,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order status.
         /// </summary>
         /// <returns></returns>
-        public string GetOrderStatus()
+        public virtual string GetOrderStatus()
         {
             var match = Regex.Match(
                 OrderStatusElement.TextHelper().InnerText,
@@ -158,7 +178,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order total.
         /// </summary>
         /// <returns></returns>
-        public decimal GetOrderTotal()
+        public virtual decimal GetOrderTotal()
         {
             return OrderTotalElement.TextHelper().ExtractPrice();
         }
@@ -167,7 +187,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the products.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<OrderSummaryReadOnlyRowComponent> GetProducts()
+        public virtual IEnumerable<OrderSummaryReadOnlyRowComponent> GetProducts()
         {
             var rowEls = WrappedDriver.FindElements(productRowsSelector);
 
@@ -184,7 +204,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the shipping.
         /// </summary>
         /// <returns></returns>
-        public decimal GetShipping()
+        public virtual decimal GetShipping()
         {
             return ShippingMethodElement.TextHelper().ExtractPrice();
         }
@@ -193,7 +213,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the shipping address.
         /// </summary>
         /// <returns></returns>
-        public AddressModel GetShippingAddress()
+        public virtual AddressModel GetShippingAddress()
         {
             return ExtractAddressFromContainer(ShippingAddressElement);
         }
@@ -202,7 +222,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the shipping method.
         /// </summary>
         /// <returns></returns>
-        public string GetShippingMethod()
+        public virtual string GetShippingMethod()
         {
             return ShippingMethodElement.TextHelper().InnerText;
         }
@@ -211,7 +231,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the shipping status.
         /// </summary>
         /// <returns></returns>
-        public string GetShippingStatus()
+        public virtual string GetShippingStatus()
         {
             return ShippingStatusElement.TextHelper().InnerText;
         }
@@ -220,7 +240,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the sub total.
         /// </summary>
         /// <returns></returns>
-        public decimal GetSubTotal()
+        public virtual decimal GetSubTotal()
         {
             return GetCartTotalRowValue("Sub-Total")
                 .TextHelper()
@@ -231,7 +251,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the tax.
         /// </summary>
         /// <returns></returns>
-        public decimal GetTax()
+        public virtual decimal GetTax()
         {
             return GetCartTotalRowValue("Tax")
                 .TextHelper()
@@ -242,7 +262,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gifts the card.
         /// </summary>
         /// <returns></returns>
-        public decimal? GiftCard()
+        public virtual decimal? GiftCard()
         {
             return GetCartTotalRowValue("Gift")
                 ?.TextHelper()
@@ -253,7 +273,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Goes to the shopping cart page.
         /// </summary>
         /// <returns></returns>
-        public ICartPage GoToShoppingCart()
+        public virtual ICartPage GoToShoppingCart()
         {
             return basePage.GoToShoppingCart();
         }
@@ -262,7 +282,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -273,7 +293,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// <returns>
         /// <c>true</c> if [has gift wrapping]; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasGiftWrapping()
+        public virtual bool HasGiftWrapping()
         {
             return SelectedCheckoutAttribute("Gift wrapping") == "Yes";
         }
@@ -284,7 +304,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -293,7 +313,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Checks if a user is logged in.
         /// </summary>
         /// <returns></returns>
-        public bool IsLoggedIn()
+        public virtual bool IsLoggedIn()
         {
             return basePage.IsLoggedIn();
         }
@@ -304,7 +324,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public IHomePage Login(string email, string password)
+        public virtual IHomePage Login(string email, string password)
         {
             return basePage.Login(email, password);
         }
@@ -314,7 +334,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Logout<T>() where T : IPageObject
+        public virtual T Logout<T>() where T : IPageObject
         {
             return basePage.Logout<T>();
         }
@@ -323,7 +343,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Downloads a pdf of the order details.
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
-        public void PdfInvoice()
+        public virtual void PdfInvoice()
         {
             PdfInvoiceButtonElement.Click();
 
@@ -340,7 +360,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// <summary>
         /// Prints the order details.
         /// </summary>
-        public void Print()
+        public virtual void Print()
         {
             var tabHelper = WrappedDriver.TabHelper();
             var initialTabs = tabHelper.GetNumberOfTabs();
@@ -372,7 +392,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Re-orders the order.
         /// </summary>
         /// <returns></returns>
-        public ICartPage ReOrder()
+        public virtual ICartPage ReOrder()
         {
             ReorderButtonElement.Click();
 
@@ -384,7 +404,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// </summary>
         /// <param name="searchFor">Partial or full name of product.</param>
         /// <returns></returns>
-        public ISearchPage Search(string searchFor)
+        public virtual ISearchPage Search(string searchFor)
         {
             return basePage.Search(searchFor);
         }
@@ -395,7 +415,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// </summary>
         /// <param name="searchFor">The search for.</param>
         /// <returns></returns>
-        public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
         }
