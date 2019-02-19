@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using ApertureLabs.Selenium.Components.Kendo;
 using ApertureLabs.Selenium.Components.Kendo.KGrid;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
@@ -11,9 +9,12 @@ using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Sales
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 {
-    public class ListPage : PageObject, IListPage, IBasePage
+    /// <summary>
+    /// The order list page.
+    /// </summary>
+    public class ListPage : PageObject, IListPage
     {
         #region Fields
 
@@ -126,7 +127,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Sales
             basePage.Load();
             Orders.Load();
 
-
             return this;
         }
 
@@ -141,6 +141,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Sales
         }
 
         public IListPage Search(OrderSearchModel orderSearchModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEditPage GoDirectlyToOrderNumber(int orderNumber)
         {
             throw new NotImplementedException();
         }

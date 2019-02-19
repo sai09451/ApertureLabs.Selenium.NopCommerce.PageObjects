@@ -1,7 +1,7 @@
 ﻿using ApertureLabs.Selenium.Components.Kendo.KGrid;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Sales
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 {
     /// <summary>
     /// The order list page.
@@ -23,5 +23,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Sales
         /// <param name="orderSearchModel">The order search model.</param>
         /// <returns></returns>
         IListPage Search(OrderSearchModel orderSearchModel);
+
+        /// <summary>
+        /// Goes the directly to order number.
+        /// </summary>
+        /// <param name="orderNumber">The order number.</param>
+        /// <returns></returns>
+        IEditPage GoDirectlyToOrderNumber(int orderNumber);
     }
 }
