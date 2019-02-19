@@ -1,4 +1,6 @@
-﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
+﻿using System;
+using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News;
@@ -100,8 +102,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         public override ILoadableComponent Load()
         {
             base.Load();
-
             basePage.Load();
+
+            // Wait for the ajax busy to toggle on then off.
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(10))
+                .TrySequentialWait(
+                    out var exception,
+                    d => IsAjaxBusy(),
+                    d => !IsAjaxBusy());
 
             return this;
         }
@@ -112,6 +121,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         public virtual void BackToTop()
         {
             basePage.BackToTop();
+        }
+
+        /// <summary>
+        /// Determines whether the ajax busy element is present and visible.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsAjaxBusy()
+        {
+            return basePage.IsAjaxBusy();
         }
 
         #endregion

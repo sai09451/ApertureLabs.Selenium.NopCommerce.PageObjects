@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
+using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
@@ -14,6 +17,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         #region Fields
 
         #region Selectors
+
+        private readonly By sideBarToggleSelector = By.CssSelector(".sidebar-toggle");
+        private readonly By logoSelector = By.CssSelector(".logo");
+        private readonly By accountInfoSelector = By.CssSelector(".account-info");
+        private readonly By dropDownToggleSelector = By.CssSelector(".dropdown");
+        private readonly By restartApplicationSelector = By.CssSelector("*[action='/Admin/Common/RestartApplication']");
+        private readonly By clearCacheSelector = By.CssSelector("*[action='/Admin/Common/ClearCache']");
+        private readonly By publicStoreSelector = By.LinkText("Public store");
 
         #endregion
 
@@ -43,6 +54,27 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
 
         #region Elements
 
+        private IWebElement SideBarToggleElement => WrappedElement
+            .FindElement(sideBarToggleSelector);
+
+        private IWebElement LogoElement => WrappedElement
+            .FindElement(logoSelector);
+
+        private IWebElement AccountInfoElement => WrappedElement
+            .FindElement(accountInfoSelector);
+
+        private IWebElement DropDownToggleElement => WrappedElement
+            .FindElement(dropDownToggleSelector);
+
+        private IWebElement ClearCacheElement => WrappedElement
+            .FindElement(clearCacheSelector);
+
+        private IWebElement RestartApplicationElement => WrappedElement
+            .FindElement(restartApplicationSelector);
+
+        private IWebElement PublicStoreElement => WrappedElement
+            .FindElement(publicStoreSelector);
+
         #endregion
 
         #endregion
@@ -51,32 +83,74 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
 
         public virtual void ClearCache()
         {
-            throw new NotImplementedException();
+            ExpandDropDown();
+            ClearCacheElement.Click();
+
+            // Wait until stale.
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(10))
+                .Until(d => IsStale());
+
+            Load();
         }
 
         public virtual IAdminMainHeaderComponent CollapseSidebar(bool collapse)
         {
-            throw new NotImplementedException();
+            if (collapse != IsSidebarCollapsed())
+            {
+                SideBarToggleElement.Click();
+
+                // Unsure how to wait on this one. Classes added are added
+                // before the transition finishes.
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+            }
+
+            return this;
         }
 
         public virtual string GetCurrentUserName()
         {
-            throw new NotImplementedException();
+            return AccountInfoElement.TextHelper().InnerText;
         }
 
         public virtual Admin.Home.IHomePage GoHome()
         {
-            throw new NotImplementedException();
+            LogoElement.Click();
+
+            return pageObjectFactory.PreparePage<Admin.Home.IHomePage>();
         }
 
         public virtual Public.Home.IHomePage PublicStore()
         {
-            throw new NotImplementedException();
+            PublicStoreElement.Click();
+
+            return pageObjectFactory.PreparePage<Public.Home.IHomePage>();
         }
 
         public virtual void RestartApplication()
         {
-            throw new NotImplementedException();
+            ExpandDropDown();
+            RestartApplicationElement.Click();
+
+            // Wait until stale.
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(10))
+                .Until(d => IsStale());
+
+            Load();
+        }
+
+        private void ExpandDropDown()
+        {
+            if (!DropDownToggleElement.Classes().Contains("open"))
+                DropDownToggleElement.Click();
+        }
+
+        private bool IsSidebarCollapsed()
+        {
+            return !WrappedDriver
+                .FindElements(By.CssSelector(".sidebar-collapse"))
+                .Any();
         }
 
         #endregion

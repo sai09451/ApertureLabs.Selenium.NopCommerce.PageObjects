@@ -367,17 +367,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         public virtual void Print()
         {
             var tabHelper = WrappedDriver.TabHelper();
-            var initialTabs = tabHelper.GetNumberOfTabs();
+            var initialTabs = tabHelper.GetTabHandles().ToList();
             var initialTab = WrappedDriver.CurrentWindowHandle;
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(30))
                 .Until(
-                    d => tabHelper.GetNumberOfTabs().Count > initialTabs.Count);
+                    d => tabHelper.GetTabHandles().Count() > initialTabs.Count);
 
             WrappedDriver
                 .SwitchTo()
                 .Window(tabHelper
-                    .GetNumberOfTabs()
+                    .GetTabHandles()
                     .Except(initialTabs)
                     .First());
 

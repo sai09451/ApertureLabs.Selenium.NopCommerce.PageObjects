@@ -24,6 +24,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         private readonly By mainSideBarSelector = By.CssSelector(".main-sidebar");
         private readonly By navigationBarSelector = By.CssSelector(".main-header");
         private readonly By footerSelector = By.CssSelector(".main-footer");
+        private readonly By ajaxBusySelector = By.CssSelector("#ajaxBusy");
 
         #endregion
 
@@ -89,7 +90,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
 
         #region Elements
 
-        private IWebElement BackToTopElement => WrappedDriver.FindElement(backToTopSelector);
+        private IWebElement BackToTopElement => WrappedDriver
+            .FindElement(backToTopSelector);
+
+        private IWebElement AjaxBusyElement => WrappedDriver
+            .FindElement(ajaxBusySelector);
 
         #endregion
 
@@ -165,6 +170,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
                     .Wait(TimeSpan.FromSeconds(5))
                     .Until(d => !BackToTopElement.Displayed);
             }
+        }
+
+        /// <summary>
+        /// Determines whether the ajax busy element is present and visible.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+        /// </returns>
+        public virtual bool IsAjaxBusy()
+        {
+            return AjaxBusyElement.Displayed;
         }
 
         #endregion

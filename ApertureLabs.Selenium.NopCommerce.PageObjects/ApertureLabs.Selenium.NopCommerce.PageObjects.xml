@@ -9,17 +9,13 @@
             Base page for all admin pages.
             </summary>
         </member>
-        <member name="F:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.PageSettings">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.#ctor(ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
-            Settings for the page.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage"/> class.
             </summary>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.#ctor(OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
-            <summary>
-            Ctor.
-            </summary>
-            <param name="driver"></param>
-            <param name="pageSettings"></param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.MainSideBar">
             <summary>
@@ -43,10 +39,41 @@
             <exception cref="T:System.NotImplementedException">
             </exception>
         </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.Footer">
+            <summary>
+            Gets the footer.
+            </summary>
+            <value>
+            The footer.
+            </value>
+            <exception cref="T:System.NotImplementedException">
+            </exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.BackToTop">
             <summary>
             Backs to top.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.IsAjaxBusy">
+            <summary>
+            Determines whether the ajax busy element is present and visible.
+            </summary>
+            <returns>
+            <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage">
             <summary>
@@ -65,6 +92,56 @@
             <summary>
             News section of the home page.
             </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.MainSideBar">
+            <summary>
+            Gets the main side bar.
+            </summary>
+            <value>
+            The main side bar.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.NavigationBar">
+            <summary>
+            Gets the navigation bar.
+            </summary>
+            <value>
+            The navigation bar.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.Footer">
+            <summary>
+            Gets the footer.
+            </summary>
+            <value>
+            The footer.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.BackToTop">
+            <summary>
+            Back to top if displayed.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.IsAjaxBusy">
+            <summary>
+            Determines whether the ajax busy element is present and visible.
+            </summary>
+            <returns>
+            <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.IHomePage">
             <summary>
@@ -101,10 +178,26 @@
             The navigation bar.
             </value>
         </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage.Footer">
+            <summary>
+            Gets the footer.
+            </summary>
+            <value>
+            The footer.
+            </value>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage.BackToTop">
             <summary>
             Back to top if displayed.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage.IsAjaxBusy">
+            <summary>
+            Determines whether the ajax busy element is present and visible.
+            </summary>
+            <returns>
+              <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage">
             <summary>
@@ -148,6 +241,14 @@
             </summary>
             <value>
             The navigation bar.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Footer">
+            <summary>
+            Gets the footer.
+            </summary>
+            <value>
+            The footer.
             </value>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Load">
@@ -228,6 +329,14 @@
             <summary>
             Backs to top.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.IsAjaxBusy">
+            <summary>
+            Determines whether the ajax busy element is present and visible.
+            </summary>
+            <returns>
+            <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage">
             <summary>
@@ -346,6 +455,27 @@
             The navigation bar.
             </value>
         </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.Footer">
+            <summary>
+            Gets the footer.
+            </summary>
+            <value>
+            The footer.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.GetListedProducts">
             <summary>
             Gets the listed products.
@@ -357,6 +487,14 @@
             <summary>
             Back to top if displayed.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.IsAjaxBusy">
+            <summary>
+            Determines whether the ajax busy element is present and visible.
+            </summary>
+            <returns>
+            <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductEditTabNames">
             <summary>
@@ -438,6 +576,25 @@
             </summary>
             <param name="timeSpan">The time span.</param>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter.AdminFooterComponent">
+            <summary>
+            Represents the footer component of an admin page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter.AdminFooterComponent.#ctor(OpenQA.Selenium.IWebDriver,OpenQA.Selenium.By)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter.AdminFooterComponent"/> class.
+            </summary>
+            <param name="driver">The driver.</param>
+            <param name="selector">The selector. Defaults to .main-footer.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter.AdminFooterComponent.GetDisplayedDate">
+            <summary>
+            Gets the displayed date.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent">
             <summary>
             Represents the '.admin-header-links' element on the public pages. This
@@ -494,6 +651,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader.AdminMainHeaderComponent">
+            <summary>
+            Represents the navigational header on all admin pages.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader.IAdminMainHeaderComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader.AdminMainHeaderComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader.AdminMainHeaderComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader.IAdminMainHeaderComponent">
             <summary>
             The main header of all admin pages.
@@ -535,16 +707,106 @@
             Restarts the application.
             </summary>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarComponent">
+            <summary>
+            The default implementation of the main sidebar on the admin pages.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarComponent.GetItems">
+            <summary>
+            Gets the items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarComponent.Search``1(System.String)">
+            <summary>
+            Searches the specified search term and goes to the first result.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="searchTerm">The search term.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode">
+            <summary>
+            AdminmainSideBarNode.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="parent">The parent.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Load">
+            <summary>
+            If overloaded don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Collapse">
+            <summary>
+            Tries to collapses the node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Expand">
+            <summary>
+            Tries to expand the node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.GetIcon">
+            <summary>
+            Gets the icon class.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.GetItems">
+            <summary>
+            Gets the child items of this node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.GetName">
+            <summary>
+            Gets the name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Select``1">
+            <summary>
+            Goes to page. Will throw an exception if the node doesn't point to
+            anything.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarComponent">
             <summary>
             The main side bar on all admin pages.
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.IPageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarComponent.Search(System.String)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarComponent.Search``1(System.String)">
             <summary>
-            Searches the specified search term.
+            Searches the specified search term and goes to the first result.
             </summary>
+            <typeparam name="T"></typeparam>
             <param name="searchTerm">The search term.</param>
             <returns></returns>
         </member>
@@ -586,16 +848,20 @@
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.GetIcon">
             <summary>
-            Gets the icon.
+            Gets the icon class.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.Click``1">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.Select``1">
             <summary>
-            Clicks this instance.
+            Goes to page. Will throw an exception if the node doesn't point to
+            anything.
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
+            <exception cref="T:System.UriFormatException">
+            Thrown if the elements href attribute doesn't point to a url.
+            </exception>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNotification.BarNotificationComponent`1">
             <summary>
@@ -1534,11 +1800,11 @@
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage.#ctor(ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
-            Ctor.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage"/> class.
             </summary>
-            <param name="pageObjectFactory"></param>
-            <param name="driver"></param>
-            <param name="pageSettings"></param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage.AdminHeaderLinks">
             <summary>
@@ -2352,6 +2618,19 @@
             <summary>
             Gets the admin header links.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout.CompletedPage.Continue">
             <summary>
@@ -4135,6 +4414,19 @@
             Gets the admin header links.
             </summary>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.LoginPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.LoginPage.HasInvalidEmail">
             <summary>
             Checks if the email is invalid.
@@ -4597,6 +4889,19 @@
             <summary>
             Gets the admin header links.
             </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.OrderDetailsPage.DismissNotifications">
             <summary>
@@ -5113,6 +5418,11 @@
             <value>
             The order summary.
             </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.CartPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.ICartPage">
             <summary>

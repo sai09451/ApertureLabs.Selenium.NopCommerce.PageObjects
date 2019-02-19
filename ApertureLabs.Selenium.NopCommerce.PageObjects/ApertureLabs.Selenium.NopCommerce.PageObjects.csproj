@@ -21,8 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ApertureLabs.Selenium" Version="1.0.68" />
-    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="ApertureLabs.Selenium" Version="1.0.71" />
+    <PackageReference Include="Autofac" Version="4.9.1" />
   </ItemGroup>
 
   <ItemGroup>

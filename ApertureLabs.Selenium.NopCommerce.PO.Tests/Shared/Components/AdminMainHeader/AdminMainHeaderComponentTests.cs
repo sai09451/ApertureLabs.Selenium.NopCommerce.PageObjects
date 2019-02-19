@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,17 +7,17 @@ using OpenQA.Selenium;
 using AdminPO = ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin;
 using PublicPO = ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public;
 
-namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Components.AdminMainSideBar
+namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Components.AdminMainHeader
 {
     [TestClass]
-    public class AdminMainSideBarComponentTests
+    public class AdminMainHeaderComponentTests
     {
         #region Fields
 
         private static WebDriverFactory WebDriverFactory;
 
         private AdminPO.Home.IHomePage homePage;
-        private IAdminMainSideBarComponent adminMainSideBarComponent;
+        private IAdminMainHeaderComponent mainHeaderComponent;
         private IPageObjectFactory pageObjectFactory;
         private IWebDriver driver;
 
@@ -27,7 +25,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Components.AdminMain
 
         #endregion
 
-        #region Setup/Cleanup
+        #region Setup/Teardown
 
         [ClassInitialize]
         public static void Setup(TestContext testContext)
@@ -65,32 +63,60 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Components.AdminMain
                 .AdminHeaderLinks
                 .GoToAdmin();
 
-            adminMainSideBarComponent = this.homePage.MainSideBar;
+            mainHeaderComponent = this.homePage.NavigationBar;
         }
 
         #endregion
 
         #region Tests
 
+        [Description("Verifies no exceptions are thrown.")]
         [TestMethod]
-        public void GetItemsTest()
+        public void ClearCacheTest()
         {
-            var productListPage = adminMainSideBarComponent.GetItems()
-                .FirstOrDefault(item => item.GetName() == "Catalog")
-                .GetItems()
-                .FirstOrDefault(item => item.GetName() == "Products")
-                .Select<AdminPO.Product.IListPage>();
+            mainHeaderComponent.ClearCache();
+        }
 
-            Assert.IsNotNull(productListPage);
+        [Description("Verifies no exceptions are thrown.")]
+        [TestMethod]
+        public void CollapseSidebarTest()
+        {
+            mainHeaderComponent.CollapseSidebar(true);
+            mainHeaderComponent.CollapseSidebar(false);
+            mainHeaderComponent.CollapseSidebar(true);
+            mainHeaderComponent.CollapseSidebar(true);
         }
 
         [TestMethod]
-        public void SearchTest()
+        public void GetCurrentUserNameTest()
         {
-            var productListPage = adminMainSideBarComponent
-                .Search<AdminPO.Product.IListPage>("Products");
+            var expectedUserName = "John Smith";
+            var actualUserName = mainHeaderComponent.GetCurrentUserName();
 
-            Assert.IsNotNull(productListPage);
+            Assert.AreEqual(expectedUserName, actualUserName);
+        }
+
+        [TestMethod]
+        public void GoHomeTest()
+        {
+            var adminHomePage = mainHeaderComponent.GoHome();
+
+            Assert.IsNotNull(adminHomePage);
+        }
+
+        [TestMethod]
+        public void PublicStoreTest()
+        {
+            var publicHomePage = mainHeaderComponent.PublicStore();
+
+            Assert.IsNotNull(publicHomePage);
+        }
+
+        [Description("Verifies no exceptions are thrown.")]
+        [TestMethod]
+        public void RestartApplicationTest()
+        {
+            mainHeaderComponent.RestartApplication();
         }
 
         #endregion

@@ -39,5 +39,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// Back to top if displayed.
         /// </summary>
         void BackToTop();
+
+        /// <summary>
+        /// Determines whether the ajax busy element is present and visible.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+        /// </returns>
+        bool IsAjaxBusy();
     }
 }
