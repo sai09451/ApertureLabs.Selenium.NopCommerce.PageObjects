@@ -1049,30 +1049,31 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
             InputElement phoneElement,
             InputElement faxNumberElement)
         {
-            var model = new AddressModel();
+            var model = new AddressModel
+            {
+                Address1 = firstNameElement.GetValue<string>(),
+                Address2 = lastNameElement.GetValue<string>(),
+                City = cityElement.GetValue<string>(),
+                Company = companyElement.GetValue<string>(),
 
-            model.Address1 = firstNameElement.GetValue<string>();
-            model.Address2 = lastNameElement.GetValue<string>();
-            model.City = cityElement.GetValue<string>();
-            model.Company = companyElement.GetValue<string>();
+                Country = countryElement
+                    .SelectedOption
+                    .TextHelper()
+                    .InnerText,
 
-            model.Country = countryElement
-                .SelectedOption
-                .TextHelper()
-                .InnerText;
+                Email = emailElement.GetValue<string>(),
+                FaxNumber = faxNumberElement.GetValue<string>(),
+                FirstName = firstNameElement.GetValue<string>(),
+                LastName = lastNameElement.GetValue<string>(),
+                PhoneNumber = phoneElement.GetValue<string>(),
 
-            model.Email = emailElement.GetValue<string>();
-            model.FaxNumber = faxNumberElement.GetValue<string>();
-            model.FirstName = firstNameElement.GetValue<string>();
-            model.LastName = lastNameElement.GetValue<string>();
-            model.PhoneNumber = phoneElement.GetValue<string>();
+                StateProvince = stateProvinceElement
+                    .SelectedOption
+                    .TextHelper()
+                    .InnerText,
 
-            model.StateProvince = stateProvinceElement
-                .SelectedOption
-                .TextHelper()
-                .InnerText;
-
-            model.ZipPostalCode = zipPostalCodeElement.GetValue<string>();
+                ZipPostalCode = zipPostalCodeElement.GetValue<string>()
+            };
 
             return model;
         }

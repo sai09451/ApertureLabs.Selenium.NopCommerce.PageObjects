@@ -51,20 +51,28 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
 
             builder
                 .RegisterType<Admin.BasePage>()
-                .As<Admin.IBasePage>()
-                .SingleInstance();
+                .As<Admin.IBasePage>();
             builder
                 .RegisterType<Admin.Home.HomePage>()
-                .As<Admin.Home.IHomePage>()
-                .SingleInstance();
+                .As<Admin.Home.IHomePage>();
             builder
                 .RegisterType<Admin.Product.ListPage>()
-                .As<Admin.Product.IListPage>()
-                .SingleInstance();
+                .As<Admin.Product.IListPage>();
             builder
                 .RegisterType<Admin.Product.EditPage>()
-                .As<Admin.Product.IEditPage>()
-                .SingleInstance();
+                .As<Admin.Product.IEditPage>();
+            builder
+                .RegisterType<Admin.Order.ListPage>()
+                .As<Admin.Order.IListPage>();
+            builder
+                .RegisterType<Admin.Order.EditPage>()
+                .As<Admin.Order.IEditPage>();
+            builder
+                .RegisterType<Admin.Customers.ListPage>()
+                .As<Admin.Customers.IListPage>();
+            builder
+                .RegisterType<Admin.Customers.EditPage>()
+                .As<Admin.Customers.IEditPage>();
 
             #endregion
 
@@ -72,12 +80,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
 
             builder
                 .RegisterType<Public.BasePage>()
-                .As<Public.IBasePage>()
-                .SingleInstance();
+                .As<Public.IBasePage>();
             builder
                 .RegisterType<Public.Catalog.ParentCategoryPage>()
-                .As<Public.Catalog.IParentCategoryPage>()
-                .SingleInstance();
+                .As<Public.Catalog.IParentCategoryPage>();
             builder
                 .RegisterType<Public.Catalog.ProductTagsAllPage>()
                 .As<Public.Catalog.IProductTagsAllPage>();

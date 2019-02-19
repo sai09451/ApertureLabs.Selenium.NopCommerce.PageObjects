@@ -12,6 +12,31 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// Gets the listed products.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<object> GetListedProducts();
+        IEnumerable<ListPageProductRowComponent> GetListedProducts();
+
+        /// <summary>
+        /// Navigates to the create new product page.
+        /// </summary>
+        /// <returns></returns>
+        ICreatePage AddNew();
+
+        /// <summary>
+        /// Locates the export format and begins the export.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        void ExportTo(string format);
+
+        /// <summary>
+        /// Imports the specified file.
+        /// </summary>
+        /// <param name="pathToFile">The path to file.</param>
+        /// <returns></returns>
+        IListPage Import(string pathToFile);
+
+        /// <summary>
+        /// Deletes the selected products.
+        /// </summary>
+        /// <returns></returns>
+        IListPage DeleteSelected();
     }
 }

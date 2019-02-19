@@ -99,7 +99,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual IEnumerable<object> GetListedProducts()
+        public virtual IEnumerable<ListPageProductRowComponent> GetListedProducts()
         {
             throw new NotImplementedException();
         }
@@ -121,6 +121,47 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         public bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
+        }
+
+        /// <summary>
+        /// Navigates to the create new product page.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public ICreatePage AddNew()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Locates the export format and begins the export.
+        /// </summary>
+        /// <param name="format">The format.</param>
+        /// <exception cref="NotImplementedException"></exception>
+        public void ExportTo(string format)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Imports the specified file.
+        /// </summary>
+        /// <param name="pathToFile">The path to file.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IListPage Import(string pathToFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Deletes the selected products.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IListPage DeleteSelected()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
