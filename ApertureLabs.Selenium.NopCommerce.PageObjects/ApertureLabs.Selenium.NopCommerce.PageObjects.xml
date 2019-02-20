@@ -5887,6 +5887,151 @@
             The order summary.
             </value>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.IWishListPage">
+            <summary>
+            Represents the wishlist page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.IWishListPage.GetItems">
+            <summary>
+            Retrieves the wishlist items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.IWishListPage.UpdateWishlist">
+            <summary>
+            Updates the wishlist.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.IWishListPage.AddToCart">
+            <summary>
+            Tries and adds the items marked as 'Add to cart' cart. Should throw
+            an exception if the it fails to add the items to the cart.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.IWishListPage.TryAddToCart``1(System.Exception@,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.ICartPage},System.Action{``0})">
+            <summary>
+            Tries the add the marked items to the cart. After the attempt
+            resolve or reject will be called (if they're not null) upon success
+            or failure respectively.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="exception">The exception.</param>
+            <param name="resolve">Resolve handler. Can be null.</param>
+            <param name="reject">Reject handler. Can be null.</param>
+            <returns></returns>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.AdminHeaderLinks">
+            <summary>
+            Gets the admin header links.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.Load">
+            <summary>
+            If overridding this don't forget to call base.Load().
+            NOTE: Will navigate to the pages url if the current drivers url
+            is empty.
+            </summary>
+            <returns></returns>
+            <remarks>
+            If the driver is an EventFiringWebDriver an event listener will
+            be added to the 'Navigated' event and uses the url to determine
+            if the page is 'stale'.
+            </remarks>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.AddToCart">
+            <summary>
+            Tries and adds the items marked as 'Add to cart' cart. Should throw
+            an exception if the it fails to add the items to the cart.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.Exception">After attempting to add the items to " +
+                                "the cart, the page didn't naviage to the cart.</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.GetItems">
+            <summary>
+            Retrieves the wishlist items.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.GoToShoppingCart">
+            <summary>
+            Goes to the shopping cart page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.IsLoggedIn">
+            <summary>
+            Checks if a user is logged in.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.Login(System.String,System.String)">
+            <summary>
+            Logs a user in.
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.Logout``1">
+            <summary>
+            Logs a user out if logged in.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.Search(System.String)">
+            <summary>
+            Used to search for a product.
+            </summary>
+            <param name="searchFor">Partial or full name of product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.SearchAjax(System.String)">
+            <summary>
+            Similar to <c>Search</c> but waits for the ajax results to resolve
+            and returns those items.
+            </summary>
+            <param name="searchFor">The search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.WishlistPage.TryAddToCart``1(System.Exception@,System.Action{ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.ICartPage},System.Action{``0})">
+            <summary>
+            Tries the add the marked items to the cart. After the attempt
+            resolve or reject will be called (if they're not null) upon success
+            or failure respectively.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="exception">The exception.</param>
+            <param name="resolve">Resolve handler. Can be null.</param>
+            <param name="reject">Reject handler. Can be null.</param>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrastructure.AutofacStartup">
             <summary>
             Creates an Autofac container.

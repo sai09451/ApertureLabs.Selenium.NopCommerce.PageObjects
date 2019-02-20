@@ -5,11 +5,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <LangVersion>7.1</LangVersion>
     <Description>Contains default page objects for NopCommerce sites.</Description>
-    <FileVersion>1.0.7.0</FileVersion>
-    <Version>1.0.8</Version>
+    <FileVersion>1.0.9.0</FileVersion>
+    <Version>1.0.9</Version>
     <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <Company>Aperture Labs</Company>
     <Authors>alex.hayes@aperturelabs.biz</Authors>
+    <PackageReleaseNotes>Added the wishlist page.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -118,6 +118,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Infrast
                 .RegisterType<Public.ShoppingCart.CartPage>()
                 .As<Public.ShoppingCart.ICartPage>();
             builder
+                .RegisterType<Public.ShoppingCart.WishlistPage>()
+                .As<Public.ShoppingCart.IWishListPage>();
+            builder
                 .RegisterType<Public.Checkout.OnePageCheckoutPage>()
                 .As<Public.Checkout.ICheckoutStepPage>()
                 .As<Public.Checkout.ICheckoutPage>();
