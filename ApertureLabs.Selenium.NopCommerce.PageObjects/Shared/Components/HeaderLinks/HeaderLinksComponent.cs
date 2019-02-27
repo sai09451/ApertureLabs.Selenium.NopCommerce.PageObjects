@@ -89,7 +89,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
 
         #region Methods
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Retrieves the viewmodel.
+        /// </summary>
+        /// <returns></returns>
         public HeaderLinksModel ViewModel()
         {
             var wait = WrappedDriver.Wait(TimeSpan.FromSeconds(30));
@@ -238,6 +241,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
                     String.Join(", ", _loginPage.Errors)));
 
             return homePage;
+        }
+
+        /// <summary>
+        /// Goes to the customer info page.
+        /// </summary>
+        /// <returns></returns>
+        public IInfoPage CustomerInfo()
+        {
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(2))
+                .UntilPageReloads(CustomerInfoElement, e => e.Click());
+
+            return pageObjectFactory.PreparePage<IInfoPage>();
         }
 
         #endregion
