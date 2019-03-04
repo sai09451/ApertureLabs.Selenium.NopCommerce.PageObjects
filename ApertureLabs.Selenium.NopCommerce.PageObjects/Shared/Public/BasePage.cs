@@ -2,6 +2,7 @@
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
@@ -80,7 +81,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// </summary>
         public IAdminHeaderLinksComponent AdminHeaderLinks { get; private set; }
 
-        private HeaderLinksComponent HeaderLinks { get; set; }
+        /// <summary>
+        /// Gets the header links.
+        /// </summary>
+        /// <value>
+        /// The header links.
+        /// </value>
+        public HeaderLinksComponent HeaderLinks { get; private set; }
 
         #region Elements
 
@@ -285,6 +292,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
             {
                 throw new NotImplementedException();
             }
+        }
+
+        /// <summary>
+        /// Goes to the customer info page.
+        /// </summary>
+        /// <returns></returns>
+        public IInfoPage CustomerInfo()
+        {
+            return HeaderLinks.CustomerInfo();
         }
 
         #endregion

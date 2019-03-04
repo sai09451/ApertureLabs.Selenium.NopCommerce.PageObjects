@@ -89,7 +89,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order number.
         /// </summary>
         /// <returns></returns>
-        public int GetOrderNumber()
+        public virtual int GetOrderNumber()
         {
             return OrderNumberElement.TextHelper().ExtractInteger();
         }
@@ -98,7 +98,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order status.
         /// </summary>
         /// <returns></returns>
-        public string GetOrderStatus()
+        public virtual string GetOrderStatus()
         {
             return OrderStatusElement.TextHelper().InnerText;
         }
@@ -107,7 +107,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order date.
         /// </summary>
         /// <returns></returns>
-        public DateTime GetOrderDate()
+        public virtual DateTime GetOrderDate()
         {
             return OrderDateElement.TextHelper().ExtractDateTime();
         }
@@ -116,7 +116,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Gets the order total.
         /// </summary>
         /// <returns></returns>
-        public decimal GetOrderTotal()
+        public virtual decimal GetOrderTotal()
         {
             return OrderTotalElement.TextHelper().ExtractPrice();
         }
