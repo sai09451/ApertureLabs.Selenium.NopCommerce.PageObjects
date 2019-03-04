@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
@@ -48,7 +49,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
             serviceCollection.AddSingleton(driver);
             serviceCollection.AddSingleton(new PageSettings
             {
-                BaseUrl = "http://nopcommerce410.local/"
+                BaseUrl = new Uri("http://nopcommerce410.local/")
             });
 
             pageObjectFactory = new PageObjectFactory(serviceCollection);

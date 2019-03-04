@@ -1,12 +1,19 @@
 ﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using System;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
 {
-    public class EditPage : PageObject, IEditPage
+    /// <summary>
+    /// The admin customer edit page.
+    /// </summary>
+    /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
+    /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IEditPage" />
+    public class EditPage : ParameterPageObject, IEditPage
     {
         #region Fields
 
@@ -21,10 +28,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditPage"/> class.
+        /// </summary>
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public EditPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                new Uri(pageSettings.BaseUrl, "/Admin"),
+                new UriTemplate("Customer/Edit/{id}"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
@@ -38,42 +55,89 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
 
         #endregion
 
-        public IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
+        /// <summary>
+        /// Gets the main side bar.
+        /// </summary>
+        /// <value>
+        /// The main side bar.
+        /// </value>
+        public virtual IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
 
-        public IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
+        /// <summary>
+        /// Gets the navigation bar.
+        /// </summary>
+        /// <value>
+        /// The navigation bar.
+        /// </value>
+        public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
-        public AdminFooterComponent Footer => basePage.Footer;
+        /// <summary>
+        /// Gets the footer.
+        /// </summary>
+        /// <value>
+        /// The footer.
+        /// </value>
+        public virtual AdminFooterComponent Footer => basePage.Footer;
 
         #endregion
 
         #region Methods
 
-        public IListPage BackToCustomerList()
+        /// <summary>
+        /// Returns to the customer list.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public virtual IListPage BackToCustomerList()
         {
             throw new System.NotImplementedException();
         }
 
-        public void BackToTop()
+        /// <summary>
+        /// Back to top if displayed.
+        /// </summary>
+        public virtual void BackToTop()
         {
             basePage.BackToTop();
         }
 
-        public IListPage Delete()
+        /// <summary>
+        /// Deletes the customer.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public virtual IListPage Delete()
         {
             throw new System.NotImplementedException();
         }
 
-        public bool IsAjaxBusy()
+        /// <summary>
+        /// Determines whether the ajax busy element is present and visible.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+        /// </returns>
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
 
-        public IListPage Save()
+        /// <summary>
+        /// Saves the customer and returns to the customer list.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public virtual IListPage Save()
         {
             throw new System.NotImplementedException();
         }
 
-        public IEditPage SaveAndContinueEdit()
+        /// <summary>
+        /// Saves the customer and continues to edit.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        public virtual IEditPage SaveAndContinueEdit()
         {
             throw new System.NotImplementedException();
         }

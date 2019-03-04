@@ -6,6 +6,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeade
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CategoryNavigation;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -16,7 +17,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// Abstract base class for the Catalog pages.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home.HomePage" />
-    public abstract class CatalogTemplatePage : PageObject, ICatalogTemplatePage
+    public abstract class CatalogTemplatePage : ParameterPageObject,
+        ICatalogTemplatePage
     {
         #region Fields
 
@@ -43,11 +45,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <param name="basePage">The base page.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="pageSettings">The page settings.</param>
+        /// <param name="template">The template.</param>
         public CatalogTemplatePage(
             IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings,
+            UriTemplate template)
+            : base(driver,
+                  pageSettings.BaseUrl,
+                  template)
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;

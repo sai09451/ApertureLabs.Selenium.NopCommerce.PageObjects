@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using System;
 
 namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.ShoppingCart
 {
@@ -50,7 +48,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.ShoppingCart
             serviceCollection.AddSingleton(driver);
             serviceCollection.AddSingleton(new PageSettings
             {
-                BaseUrl = "http://nopcommerce410.local/"
+                BaseUrl = new Uri("http://nopcommerce410.local/")
             });
 
             pageObjectFactory = new PageObjectFactory(serviceCollection);

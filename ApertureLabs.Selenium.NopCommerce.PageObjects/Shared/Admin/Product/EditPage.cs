@@ -19,7 +19,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     /// Corresponds to the "Admin/Views/Product/Edit.cshtml" page.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage" />
-    public class EditPage : PageObject, IEditPage
+    public class EditPage : ParameterPageObject, IEditPage
     {
         #region Fields
 
@@ -56,7 +56,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver)
+            : base(driver,
+                  pageSettings.AdminBaseUrl,
+                  new UriTemplate("Product/Edit/{id}"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;

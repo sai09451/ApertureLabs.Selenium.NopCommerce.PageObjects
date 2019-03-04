@@ -30,12 +30,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             : base(basePage,
                   pageObjectFactory,
                   driver,
-                  pageSettings)
+                  pageSettings,
+                  new UriTemplate("customer/addressedit/{id}"))
         {
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "customer/addressedit/");
-
             AccountNavigation = new CustomerNavigationComponent<IAddressesEditPage>(
                 pageObjectFactory,
                 WrappedDriver,

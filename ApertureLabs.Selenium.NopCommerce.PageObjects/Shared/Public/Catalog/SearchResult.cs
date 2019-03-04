@@ -38,12 +38,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         #region Constructor
 
         /// <summary>
-        /// Ctor.
+        /// Initializes a new instance of the <see cref="SearchResult"/> class.
         /// </summary>
-        /// <param name="selector"></param>
-        /// <param name="pageObjectFactory"></param>
-        /// <param name="element"></param>
-        /// <param name="pageSettings"></param>
+        /// <param name="selector">The selector.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="element">The element.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public SearchResult(By selector,
             IPageObjectFactory pageObjectFactory,
             IWebElement element,

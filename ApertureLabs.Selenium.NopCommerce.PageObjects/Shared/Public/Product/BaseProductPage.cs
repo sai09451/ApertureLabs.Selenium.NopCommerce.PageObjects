@@ -21,7 +21,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
     /// <summary>
     /// Base class for the product pages.
     /// </summary>
-    public class BaseProductPage : PageObject, IBaseProductPage
+    public class BaseProductPage : ParameterPageObject, IBaseProductPage
     {
         #region Fields
 
@@ -64,7 +64,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver)
+            : base(driver,
+                  pageSettings.BaseUrl,
+                  new UriTemplate("{productname}"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
@@ -77,21 +79,56 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
 
         #region Elements
 
-        private IWebElement AddToCartButtonElement => WrappedDriver.FindElement(addToCartSelector);
-        private SelectElement PaymentPlanSelectElement => new SelectElement(WrappedDriver.FindElement(paymentPlanSelector));
-        private IReadOnlyCollection<IWebElement> InstallmentPlanElements => WrappedDriver.FindElements(installmentPlansSelector);
-        private SelectElement SubscriptionPlanElement => new SelectElement(WrappedDriver.FindElement(subscriptionPlanSelector));
-        private IReadOnlyCollection<IWebElement> SubscriptionDetailElements => WrappedDriver.FindElements(subscriptionDetailsSelector);
-        private IWebElement OpenedRemodalElement => WrappedDriver.FindElement(openRemodalSelector);
-        private IWebElement ProductNameElement => WrappedDriver.FindElement(productNameSelector);
-        private IWebElement FullDescriptionElement => WrappedDriver.FindElement(fullDescriptionSelector);
-        private IWebElement ShortDescriptionElement => WrappedDriver.FindElement(shortDescriptionSelector);
-        private MetaElement MetaDescriptionElement => new MetaElement(WrappedDriver.FindElement(metaDescriptionSelector));
-        private MetaElement MetaKeywordsElement => new MetaElement(WrappedDriver.FindElement(metaKeywordsSelector));
-        private IWebElement ProductFormElement => WrappedDriver.FindElement(productFormSelector);
-        private DescriptionListElement Attributes => new DescriptionListElement(WrappedDriver.FindElement(attributesSelector));
-        private IReadOnlyCollection<IWebElement> TagElements => WrappedDriver.FindElements(tagsSelector);
-        private InputElement QuantityElement => new InputElement(WrappedDriver.FindElement(quantitySelector));
+        private IWebElement AddToCartButtonElement => WrappedDriver
+            .FindElement(addToCartSelector);
+
+        private SelectElement PaymentPlanSelectElement => new SelectElement(
+            WrappedDriver.FindElement(
+                paymentPlanSelector));
+
+        private IReadOnlyCollection<IWebElement> InstallmentPlanElements => WrappedDriver
+            .FindElements(installmentPlansSelector);
+
+        private SelectElement SubscriptionPlanElement => new SelectElement(
+            WrappedDriver.FindElement(
+                subscriptionPlanSelector));
+
+        private IReadOnlyCollection<IWebElement> SubscriptionDetailElements => WrappedDriver
+            .FindElements(subscriptionDetailsSelector);
+
+        private IWebElement OpenedRemodalElement => WrappedDriver
+            .FindElement(openRemodalSelector);
+
+        private IWebElement ProductNameElement => WrappedDriver
+            .FindElement(productNameSelector);
+
+        private IWebElement FullDescriptionElement => WrappedDriver
+            .FindElement(fullDescriptionSelector);
+
+        private IWebElement ShortDescriptionElement => WrappedDriver
+            .FindElement(shortDescriptionSelector);
+
+        private MetaElement MetaDescriptionElement => new MetaElement(
+            WrappedDriver.FindElement(
+                metaDescriptionSelector));
+
+        private MetaElement MetaKeywordsElement => new MetaElement(
+            WrappedDriver.FindElement(
+                metaKeywordsSelector));
+
+        private IWebElement ProductFormElement => WrappedDriver
+            .FindElement(productFormSelector);
+
+        private DescriptionListElement Attributes => new DescriptionListElement(
+            WrappedDriver.FindElement(
+                attributesSelector));
+
+        private IReadOnlyCollection<IWebElement> TagElements => WrappedDriver
+            .FindElements(tagsSelector);
+
+        private InputElement QuantityElement => new InputElement(
+            WrappedDriver.FindElement(
+                quantitySelector));
 
         #endregion
 

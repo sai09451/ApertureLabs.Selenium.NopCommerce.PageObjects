@@ -14,7 +14,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
     /// <summary>
     /// The admin home page.
     /// </summary>
-    public class HomePage : PageObject, IHomePage
+    public class HomePage : StaticPageObject, IHomePage
     {
         #region Fields
 
@@ -37,10 +37,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public HomePage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  pageSettings.BaseUrl)
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;

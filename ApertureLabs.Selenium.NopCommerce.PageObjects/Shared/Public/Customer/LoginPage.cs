@@ -16,7 +16,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
     /// <summary>
     /// LoginPage.
     /// </summary>
-    public class LoginPage : PageObject, ILoginPage
+    public class LoginPage : StaticPageObject, ILoginPage
     {
         #region Fields
 
@@ -49,15 +49,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "login"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
             this.pageSettings = pageSettings;
-
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "login");
 
             emailSelector = By.CssSelector(".email");
             emailValidatorSelector = By.CssSelector(".email + .field-validation-error");
@@ -164,22 +161,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         }
 
         /// <summary>
-        /// Will first set the IWebDrivers Url to the login page before calling
-        /// base.Load().
-        /// </summary>
-        /// <param name="navigateToUrl"></param>
-        /// <returns></returns>
-        public virtual ILoadableComponent Load(bool navigateToUrl)
-        {
-            if (navigateToUrl)
-            {
-                WrappedDriver.Navigate().GoToUrl(Uri);
-            }
-
-            return base.Load();
-        }
-
-        /// <summary>
         /// Enters the users email.
         /// </summary>
         /// <param name="email"></param>
@@ -224,46 +205,89 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             }
         }
 
+        /// <summary>
+        /// Goes to the shopping cart page.
+        /// </summary>
+        /// <returns></returns>
         public ICartPage GoToShoppingCart()
         {
             return basePage.GoToShoppingCart();
         }
 
+        /// <summary>
+        /// Checks if a user is logged in.
+        /// </summary>
+        /// <returns></returns>
         public bool IsLoggedIn()
         {
             return basePage.IsLoggedIn();
         }
 
+        /// <summary>
+        /// Logs a user in.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public IHomePage Login(string email, string password)
         {
             return basePage.Login(email, password);
         }
 
+        /// <summary>
+        /// Logs a user out if logged in.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Logout<T>() where T : IPageObject
         {
             return basePage.Logout<T>();
         }
 
+        /// <summary>
+        /// Used to search for a product.
+        /// </summary>
+        /// <param name="searchFor">Partial or full name of product.</param>
+        /// <returns></returns>
         public ISearchPage Search(string searchFor)
         {
             return basePage.Search(searchFor);
         }
 
+        /// <summary>
+        /// Similar to <c>Search</c> but waits for the ajax results to resolve
+        /// and returns those items.
+        /// </summary>
+        /// <param name="searchFor">The search for.</param>
+        /// <returns></returns>
         public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
         }
 
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
         public bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
 
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
         public void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
 
+        /// <summary>
+        /// Dismisses the notifications.
+        /// </summary>
         public void DismissNotifications()
         {
             basePage.DismissNotifications();

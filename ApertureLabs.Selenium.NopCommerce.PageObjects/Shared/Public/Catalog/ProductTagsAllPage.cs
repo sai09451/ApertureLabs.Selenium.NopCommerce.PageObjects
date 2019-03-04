@@ -40,12 +40,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             PageSettings pageSettings)
             : base(basePage,
                   pageObjectFactory,
-                  driver)
-        {
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "producttag/all");
-        }
+                  driver,
+                  pageSettings,
+                  new UriTemplate("producttag/all"))
+        { }
 
         #endregion
 

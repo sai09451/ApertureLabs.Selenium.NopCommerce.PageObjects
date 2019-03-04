@@ -81,6 +81,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
 
         #region Methods
 
+        /// <summary>
+        /// Clears the cache.
+        /// </summary>
         public virtual void ClearCache()
         {
             ExpandDropDown();
@@ -94,6 +97,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
             Load();
         }
 
+        /// <summary>
+        /// Collapses or expandes the sidebar depending on <c>collapse</c>.
+        /// </summary>
+        /// <param name="collapse">if set to <c>true</c> [collapse].</param>
+        /// <returns></returns>
         public virtual IAdminMainHeaderComponent CollapseSidebar(bool collapse)
         {
             if (collapse != IsSidebarCollapsed())
@@ -108,11 +116,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
             return this;
         }
 
+        /// <summary>
+        /// Gets the name of the current user.
+        /// </summary>
+        /// <returns></returns>
         public virtual string GetCurrentUserName()
         {
             return AccountInfoElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Goes to the admin home page.
+        /// </summary>
+        /// <returns></returns>
         public virtual Admin.Home.IHomePage GoHome()
         {
             LogoElement.Click();
@@ -120,6 +136,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
             return pageObjectFactory.PreparePage<Admin.Home.IHomePage>();
         }
 
+        /// <summary>
+        /// Goes to the public home page.
+        /// </summary>
+        /// <returns></returns>
         public virtual Public.Home.IHomePage PublicStore()
         {
             PublicStoreElement.Click();
@@ -127,6 +147,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
             return pageObjectFactory.PreparePage<Public.Home.IHomePage>();
         }
 
+        /// <summary>
+        /// Restarts the application.
+        /// </summary>
         public virtual void RestartApplication()
         {
             ExpandDropDown();

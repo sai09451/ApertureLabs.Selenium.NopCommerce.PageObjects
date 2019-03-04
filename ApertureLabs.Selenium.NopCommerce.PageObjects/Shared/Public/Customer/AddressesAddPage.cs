@@ -8,6 +8,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
 {
@@ -35,16 +36,40 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             : base(basePage,
                   pageObjectFactory,
                   driver,
-                  pageSettings)
+                  pageSettings,
+                  new UriTemplate("customer/addressadd"))
         {
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "customer/addressadd");
-
             AccountNavigation = new CustomerNavigationComponent<IAddressesAddPage>(
                 pageObjectFactory,
                 WrappedDriver,
                 this);
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Loads the component. Checks to see if the current url matches
+        /// the Route and if not an exception is thrown. If the WrappedDriver
+        /// is an <see cref="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver" /> event listeners will be
+        /// added to the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigated" /> event
+        /// which will call <see cref="M:ApertureLabs.Selenium.PageObjects.PageObject.Dispose" /> on this instance.
+        /// NOTE:
+        /// If overriding don't forget to either call base.Load() or make sure
+        /// the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.Uri" /> and the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.WindowHandle" /> are
+        /// assigned to.
+        /// </summary>
+        /// <returns>
+        /// A reference to this
+        /// <see cref="T:OpenQA.Selenium.Support.UI.ILoadableComponent" />.
+        /// </returns>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            AccountNavigation.Load();
+
+            return this;
         }
 
         #endregion

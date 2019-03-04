@@ -18,7 +18,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
     /// <summary>
     /// BasePage for all public pages.
     /// </summary>
-    public class BasePage : PageObject, IBasePage
+    public class BasePage : BasePageObject, IBasePage
     {
         #region Fields
 
@@ -60,7 +60,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         {
             this.pageObjectFactory = pageObjectFactory;
             this.pageSettings = pageSettings;
-            Uri = new Uri(pageSettings.BaseUrl, UriKind.Absolute);
 
             HeaderLinks = new HeaderLinksComponent(
                 pageObjectFactory,

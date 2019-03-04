@@ -41,14 +41,18 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
+        /// <param name="template">The template.</param>
         public SearchResultsTemplatePage(
             IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
-            PageSettings pageSettings)
+            PageSettings pageSettings,
+            UriTemplate template)
             : base(basePage,
                   pageObjectFactory,
-                  driver)
+                  driver,
+                  pageSettings,
+                  template)
         {
             this.pageObjectFactory = pageObjectFactory;
             this.pageSettings = pageSettings;

@@ -4,13 +4,19 @@ using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart
 {
-    public class WishlistPage : PageObject, IWishListPage
+    /// <summary>
+    /// The wishlist page.
+    /// </summary>
+    /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
+    /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart.IWishListPage" />
+    public class WishlistPage : StaticPageObject, IWishListPage
     {
         #region Fields
 
@@ -29,10 +35,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WishlistPage"/> class.
+        /// </summary>
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public WishlistPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "wishlist"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
@@ -253,6 +268,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
             return exception == null;
         }
 
+        /// <summary>
+        /// Updates the wishlist.
+        /// </summary>
+        /// <returns></returns>
         public IWishListPage UpdateWishlist()
         {
             WrappedDriver

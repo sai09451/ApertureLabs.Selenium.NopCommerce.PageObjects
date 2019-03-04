@@ -26,7 +26,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Tries and adds the items marked as 'Add to cart' cart. Should throw
         /// an exception if the it fails to add the items to the cart.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         ICartPage AddToCart();
 

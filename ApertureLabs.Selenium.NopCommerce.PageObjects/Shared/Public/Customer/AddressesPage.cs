@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
+﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.CustomerNavigation;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
@@ -10,6 +7,8 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
 {
@@ -18,7 +17,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IAddressesPage" />
-    public class AddressesPage : PageObject, IAddressesPage
+    public class AddressesPage : StaticPageObject, IAddressesPage
     {
         #region Fields
 
@@ -54,14 +53,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "customer/addresses"))
         {
             if (pageSettings == null)
                 throw new ArgumentNullException(nameof(pageSettings));
-
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "customer/addresses");
 
             this.basePage = basePage
                 ?? throw new ArgumentNullException(nameof(basePage));
@@ -116,7 +112,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         public override ILoadableComponent Load()
         {
             base.Load();
-
             pageObjectFactory.PrepareComponent(AccountNavigation);
 
             return this;

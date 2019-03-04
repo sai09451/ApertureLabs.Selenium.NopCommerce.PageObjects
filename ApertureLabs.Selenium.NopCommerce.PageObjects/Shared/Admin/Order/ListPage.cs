@@ -4,6 +4,7 @@ using ApertureLabs.Selenium.Components.Kendo.KGrid;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
@@ -14,7 +15,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
     /// <summary>
     /// The order list page.
     /// </summary>
-    public class ListPage : PageObject, IListPage
+    public class ListPage : StaticPageObject, IListPage
     {
         #region Fields
 
@@ -44,10 +45,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListPage"/> class.
+        /// </summary>
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public ListPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "Admin/Order/List"))
         {
             this.basePage = basePage;
 
@@ -109,18 +119,57 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 
         #endregion
 
+        /// <summary>
+        /// Gets the main side bar.
+        /// </summary>
+        /// <value>
+        /// The main side bar.
+        /// </value>
         public IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
 
+        /// <summary>
+        /// Gets the navigation bar.
+        /// </summary>
+        /// <value>
+        /// The navigation bar.
+        /// </value>
         public IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
+        /// <summary>
+        /// Gets the footer.
+        /// </summary>
+        /// <value>
+        /// The footer.
+        /// </value>
         public AdminFooterComponent Footer => basePage.Footer;
 
+        /// <summary>
+        /// Gets the orders.
+        /// </summary>
+        /// <value>
+        /// The orders.
+        /// </value>
         public KGridComponent<IListPage> Orders { get; }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// Loads the component. Checks to see if the current url matches
+        /// the Route and if not an exception is thrown. If the WrappedDriver
+        /// is an <see cref="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver" /> event listeners will be
+        /// added to the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigated" /> event
+        /// which will call <see cref="M:ApertureLabs.Selenium.PageObjects.PageObject.Dispose" /> on this instance.
+        /// NOTE:
+        /// If overriding don't forget to either call base.Load() or make sure
+        /// the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.Uri" /> and the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.WindowHandle" /> are
+        /// assigned to.
+        /// </summary>
+        /// <returns>
+        /// A reference to this
+        /// <see cref="T:OpenQA.Selenium.Support.UI.ILoadableComponent" />.
+        /// </returns>
         public override ILoadableComponent Load()
         {
             base.Load();
@@ -130,21 +179,42 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
             return this;
         }
 
+        /// <summary>
+        /// Back to top if displayed.
+        /// </summary>
         public void BackToTop()
         {
             basePage.BackToTop();
         }
 
+        /// <summary>
+        /// Determines whether the ajax busy element is present and visible.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
 
+        /// <summary>
+        /// Searches the specified order search model.
+        /// </summary>
+        /// <param name="orderSearchModel">The order search model.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IListPage Search(OrderSearchModel orderSearchModel)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Goes the directly to order number.
+        /// </summary>
+        /// <param name="orderNumber">The order number.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IEditPage GoDirectlyToOrderNumber(int orderNumber)
         {
             throw new NotImplementedException();

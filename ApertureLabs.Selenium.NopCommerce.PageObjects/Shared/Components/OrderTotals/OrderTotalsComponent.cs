@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ApertureLabs.Selenium.PageObjects;
+﻿using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderTotals
 {
     /// <summary>
+    /// TODO: Finish component.
     /// OrderTotalsComponent.
     /// </summary>
     /// <seealso cref="PageComponent" />
@@ -22,6 +20,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderT
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderTotalsComponent"/> class.
+        /// </summary>
+        /// <param name="selector">The selector.</param>
+        /// <param name="driver">The driver.</param>
         public OrderTotalsComponent(By selector, IWebDriver driver)
             : base(selector, driver)
         { }

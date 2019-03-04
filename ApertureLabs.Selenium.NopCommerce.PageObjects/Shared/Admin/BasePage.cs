@@ -42,14 +42,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
+        /// <param name="route">The route.</param>
         public BasePage(IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
-            PageSettings pageSettings) : base(driver)
+            PageSettings pageSettings,
+            UriTemplate route)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "/Admin"),
+                  route)
         {
             this.pageObjectFactory = pageObjectFactory;
             this.pageSettings = pageSettings;
-
-            Uri = new Uri(pageSettings.BaseUrl + "/Admin", UriKind.Absolute);
         }
 
         #endregion
@@ -64,8 +67,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// <value>
         /// The navigation bar.
         /// </value>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public virtual IAdminMainSideBarComponent MainSideBar { get; private set; }
 
         /// <summary>
@@ -74,8 +75,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// <value>
         /// The navigation bar.
         /// </value>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public virtual IAdminMainHeaderComponent NavigationBar { get; private set; }
 
         /// <summary>
@@ -84,8 +83,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// <value>
         /// The footer.
         /// </value>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public virtual AdminFooterComponent Footer { get; private set; }
 
         #region Elements

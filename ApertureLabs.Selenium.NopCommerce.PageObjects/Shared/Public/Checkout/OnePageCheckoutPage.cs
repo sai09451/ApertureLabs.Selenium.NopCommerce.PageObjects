@@ -109,11 +109,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// The payment method handlers.
         /// </param>
         /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public OnePageCheckoutPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
             IEnumerable<IPaymentMethodHandler> paymentMethodHandlers,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  pageSettings.BaseUrl,
+                  new UriTemplate("onepagecheckout"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
@@ -899,8 +903,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
                 .Where(e => !String.IsNullOrEmpty(e.GetElementProperty("value")))
                 .SelectRandom();
 
-            var index = dropDown.Options.IndexOf(opt);
-            dropDown.SelectByIndex(index);
+            dropDown.SelectByIndex(opt.GetIndexRelativeToSiblings());
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using ApertureLabs.Selenium.WebElements.Inputs;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
 {
@@ -19,7 +20,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IChangePasswordPage" />
-    public class ChangePasswordPage : PageObject, IChangePasswordPage
+    public class ChangePasswordPage : StaticPageObject, IChangePasswordPage
     {
         #region Fields
 
@@ -40,21 +41,33 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChangePasswordPage"/> class.
+        /// </summary>
+        /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
+        /// <exception cref="ArgumentNullException">
+        /// basePage
+        /// or
+        /// pageSettings
+        /// </exception>
         public ChangePasswordPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "customer/changepassword"))
         {
             this.basePage = basePage
                 ?? throw new ArgumentNullException(nameof(basePage));
 
+            this.pageObjectFactory = pageObjectFactory
+                ?? throw new ArgumentNullException(nameof(pageObjectFactory));
+
             if (pageSettings == null)
                 throw new ArgumentNullException(nameof(pageSettings));
-
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "customer/changepassword");
 
             AccountNavigation = new CustomerNavigationComponent<IChangePasswordPage>(
                 pageObjectFactory,
@@ -104,6 +117,30 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Loads the component. Checks to see if the current url matches
+        /// the Route and if not an exception is thrown. If the WrappedDriver
+        /// is an <see cref="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver" /> event listeners will be
+        /// added to the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigated" /> event
+        /// which will call <see cref="M:ApertureLabs.Selenium.PageObjects.PageObject.Dispose" /> on this instance.
+        /// NOTE:
+        /// If overriding don't forget to either call base.Load() or make sure
+        /// the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.Uri" /> and the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.WindowHandle" /> are
+        /// assigned to.
+        /// </summary>
+        /// <returns>
+        /// A reference to this
+        /// <see cref="T:OpenQA.Selenium.Support.UI.ILoadableComponent" />.
+        /// </returns>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            pageObjectFactory.PrepareComponent(AccountNavigation);
+            pageObjectFactory.PrepareComponent(basePage);
+
+            return this;
+        }
 
         /// <summary>
         /// Changes the password. Throws an exception if the password fails to

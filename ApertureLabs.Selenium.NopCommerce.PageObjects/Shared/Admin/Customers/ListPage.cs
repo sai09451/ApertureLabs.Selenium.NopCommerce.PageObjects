@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using ApertureLabs.Selenium.Components.Boostrap.DropDown;
 using ApertureLabs.Selenium.Components.Kendo;
@@ -10,6 +11,7 @@ using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers;
 using ApertureLabs.Selenium.PageObjects;
 using ApertureLabs.Selenium.WebElements.Inputs;
@@ -23,7 +25,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage" />
-    public class ListPage : PageObject, IListPage
+    public class ListPage : StaticPageObject, IListPage
     {
         #region Fields
 
@@ -56,10 +58,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public ListPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "Admin/Customer/List"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
@@ -70,7 +75,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
                 new KMultiSelectConfiguration(),
                 this);
 
-            CustomersGrid = new KGridComponent<ListPage>(
+            CustomersGrid = new KGridComponent<IListPage>(
                 new BaseKendoConfiguration(),
                 By.CssSelector("#customers-grid"),
                 pageObjectFactory,
@@ -129,9 +134,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
 
         private KMultiSelectComponent<IListPage> CustomerRoles { get; }
 
-        private KGridComponent<ListPage> CustomersGrid { get; }
-
         private DropDownComponent ExportDropDownComponent { get; }
+
+        /// <summary>
+        /// Gets the customers grid.
+        /// </summary>
+        /// <value>
+        /// The customers grid.
+        /// </value>
+        public KGridComponent<IListPage> CustomersGrid { get; }
 
         /// <summary>
         /// Gets the main side bar.
@@ -215,28 +226,32 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Locates and selects the format to export to.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void ExportTo(string type)
+        /// <param name="downloadsPath">The downloads path.</param>
+        /// <param name="expectedFileName">The expected file name.</param>
+        /// <param name="stringComparison">The string comparison.</param>
+        /// <exception cref="NoSuchElementException"></exception>
+        public void ExportTo(string type,
+            string downloadsPath,
+            string expectedFileName,
+            StringComparison stringComparison = StringComparison.Ordinal)
         {
+            var fullPath = Path.Combine(downloadsPath, expectedFileName);
             var element = ExportDropDownComponent
                 .Expand()
                 .GetEnabledItems()
-                .FirstOrDefault();
+                .FirstOrDefault(e => String.Equals(
+                    e.TextHelper().InnerText,
+                    type,
+                    StringComparison.Ordinal));
 
             if (element == null)
                 throw new NoSuchElementException();
 
             element.Click();
-        }
 
-        /// <summary>
-        /// Gets the customers.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<ListPageCustomerRowComponent> GetCustomers()
-        {
-            throw new NotImplementedException();
+            WrappedDriver
+                .Wait(TimeSpan.FromMinutes(5))
+                .Until(d => File.Exists(fullPath));
         }
 
         /// <summary>
@@ -293,6 +308,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
             Load();
 
             return this;
+        }
+
+        /// <summary>
+        /// Gets the listed customers.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ListPageCustomerRowComponent> GetListedCustomers()
+        {
+            foreach (var row in CustomersGrid.Rows)
         }
 
         #endregion

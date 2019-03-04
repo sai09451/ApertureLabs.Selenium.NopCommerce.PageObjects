@@ -6,6 +6,10 @@ using OpenQA.Selenium;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 {
+    /// <summary>
+    /// The order details info component.
+    /// </summary>
+    /// <seealso cref="ApertureLabs.Selenium.PageObjects.FluidPageComponent{T}" />
     public class OrderDetailsInfoComponent : FluidPageComponent<IEditPage>
     {
         #region Fields
@@ -33,6 +37,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 
         #region Constructor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderDetailsInfoComponent"/> class.
+        /// </summary>
+        /// <param name="selector">The selector.</param>
+        /// <param name="driver">The driver.</param>
+        /// <param name="parent">The parent. Can be null.</param>
         public OrderDetailsInfoComponent(By selector,
             IWebDriver driver,
             IEditPage parent)
@@ -95,71 +105,127 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 
         #region Methods
 
+        /// <summary>
+        /// Gets the order status.
+        /// </summary>
+        /// <returns></returns>
         public string GetOrderStatus()
         {
             return OrderStatusElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the order number.
+        /// </summary>
+        /// <returns></returns>
         public int GetOrderNumber()
         {
             return OrderNumberElement.TextHelper().ExtractInteger();
         }
 
+        /// <summary>
+        /// Gets the order unique identifier.
+        /// </summary>
+        /// <returns></returns>
         public string GetOrderGuid()
         {
             return OrderGuidElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the store name.
+        /// </summary>
+        /// <returns></returns>
         public string GetStore()
         {
             return StoreElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the customer email address.
+        /// </summary>
+        /// <returns></returns>
         public string GetCustomerEmailAddress()
         {
             return CustomerEmailAddressElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the customer ip address.
+        /// </summary>
+        /// <returns></returns>
         public string GetCustomerIpAddress()
         {
             return CustomerIpAddressElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the order sub total.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetOrderSubTotal()
         {
             return OrderSubTotalElement.TextHelper().ExtractPrice();
         }
 
+        /// <summary>
+        /// Gets the order shipping cost.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetOrderShipping()
         {
             return OrderShippingElement.TextHelper().ExtractPrice();
         }
 
+        /// <summary>
+        /// Gets the order tax.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetOrderTax()
         {
             return OrderTaxElement.TextHelper().ExtractPrice();
         }
 
+        /// <summary>
+        /// Gets the order total.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetOrderTotal()
         {
             return OrderTotalElement.TextHelper().ExtractPrice();
         }
 
+        /// <summary>
+        /// Gets the profit.
+        /// </summary>
+        /// <returns></returns>
         public decimal GetProfit()
         {
             return ProfitElement.TextHelper().ExtractPrice();
         }
 
+        /// <summary>
+        /// Gets the payment method.
+        /// </summary>
+        /// <returns></returns>
         public string GetPaymentMethod()
         {
             return PaymentMethodElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the paid status.
+        /// </summary>
+        /// <returns></returns>
         public string GetPaidStatus()
         {
             return PaymentStatusElement.TextHelper().InnerText;
         }
 
+        /// <summary>
+        /// Gets the date the order was created on.
+        /// </summary>
+        /// <returns></returns>
         public DateTime GetCreatedOn()
         {
             var dateTimeStr = CreatedOnElement.TextHelper().InnerText;

@@ -59,6 +59,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
+        /// <param name="template">The template.</param>
         /// <exception cref="ArgumentNullException">
         /// basePage
         /// or
@@ -69,8 +70,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         public AddressesCreateOrUpdatePage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
-            PageSettings pageSettings)
-            : base(driver)
+            PageSettings pageSettings,
+            UriTemplate template)
+            : base(driver,
+                  pageSettings.BaseUrl,
+                  template)
         {
             this.basePage = basePage
                 ?? throw new ArgumentNullException(nameof(basePage));

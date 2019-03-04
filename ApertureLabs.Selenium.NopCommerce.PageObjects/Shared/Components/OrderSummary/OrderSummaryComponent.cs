@@ -59,16 +59,52 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderS
 
         #region Properties
 
+        /// <summary>
+        /// Gets the tax shipping information.
+        /// </summary>
+        /// <value>
+        /// The tax shipping information.
+        /// </value>
         public virtual object TaxShippingInfo { get; private set; }
 
+        /// <summary>
+        /// Gets the checkout attributes.
+        /// </summary>
+        /// <value>
+        /// The checkout attributes.
+        /// </value>
         public virtual object CheckoutAttributes { get; private set; }
 
+        /// <summary>
+        /// Gets the discount box.
+        /// </summary>
+        /// <value>
+        /// The discount box.
+        /// </value>
         public virtual DiscountBoxComponent DiscountBox { get; private set; }
 
+        /// <summary>
+        /// Gets the gift card box.
+        /// </summary>
+        /// <value>
+        /// The gift card box.
+        /// </value>
         public virtual GiftCardBoxComponent GiftCardBox { get; private set; }
 
+        /// <summary>
+        /// Gets the estimate shipping.
+        /// </summary>
+        /// <value>
+        /// The estimate shipping.
+        /// </value>
         public virtual object EstimateShipping { get; private set; }
 
+        /// <summary>
+        /// Gets the order totals.
+        /// </summary>
+        /// <value>
+        /// The order totals.
+        /// </value>
         public virtual OrderTotalsComponent OrderTotals { get; private set; }
 
         #region Elements

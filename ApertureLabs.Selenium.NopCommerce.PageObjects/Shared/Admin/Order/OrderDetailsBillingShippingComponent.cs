@@ -9,7 +9,7 @@ using OpenQA.Selenium.Support.UI;
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 {
     /// <summary>
-    /// The 'Billing & shipping' tab of the order edit page.
+    /// The 'Billing and shipping' tab of the order edit page.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.FluidPageComponent{T}" />
     public class OrderDetailsBillingShippingComponent : FluidPageComponent<IEditPage>

@@ -21,7 +21,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer.IInfoPage" />
-    public class InfoPage : PageObject, IInfoPage
+    public class InfoPage : StaticPageObject, IInfoPage
     {
         #region Fields
 
@@ -57,14 +57,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "customer/info"))
         {
             if (pageSettings == null)
                 throw new ArgumentNullException(nameof(pageSettings));
-
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "customer/info");
 
             this.basePage = basePage
                 ?? throw new ArgumentNullException(nameof(basePage));
@@ -125,7 +122,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         public override ILoadableComponent Load()
         {
             base.Load();
-
+            basePage.Load();
             AccountNavigation.Load();
 
             return this;

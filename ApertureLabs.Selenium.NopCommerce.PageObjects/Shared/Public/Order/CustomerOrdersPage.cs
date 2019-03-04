@@ -17,7 +17,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.ICustomerOrdersPage" />
-    public class CustomerOrdersPage : PageObject,
+    public class CustomerOrdersPage : StaticPageObject,
         ICustomerOrdersPage
     {
         #region Fields
@@ -53,7 +53,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
-            : base(driver)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "order/history"))
         {
             this.basePage = basePage
                 ?? throw new ArgumentNullException(nameof(basePage));
@@ -62,10 +63,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
 
             if (pageSettings == null)
                 throw new ArgumentNullException(nameof(pageSettings));
-
-            Uri = new Uri(
-                new Uri(pageSettings.BaseUrl),
-                "order/history");
 
             AccountNavigation = new CustomerNavigationComponent<ICustomerOrdersPage>(
                 pageObjectFactory,
@@ -114,7 +111,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         public override ILoadableComponent Load()
         {
             base.Load();
-
             pageObjectFactory.PrepareComponent(AccountNavigation);
 
             return this;

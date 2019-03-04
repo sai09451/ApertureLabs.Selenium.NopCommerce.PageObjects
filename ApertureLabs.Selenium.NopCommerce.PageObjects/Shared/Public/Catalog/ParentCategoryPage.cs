@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.Extensions;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 
@@ -34,10 +36,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public ParentCategoryPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(basePage, pageObjectFactory, driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(basePage,
+                  pageObjectFactory,
+                  driver,
+                  pageSettings,
+                  new UriTemplate("{category}"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;

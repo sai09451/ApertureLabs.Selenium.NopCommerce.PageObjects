@@ -6,6 +6,7 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Home;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCart;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -42,10 +43,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public CompletedPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  pageSettings.BaseUrl,
+                  new UriTemplate("checkout/completed/"))
         {
             this.basePage = basePage
                 ?? throw new ArgumentNullException(nameof(basePage));

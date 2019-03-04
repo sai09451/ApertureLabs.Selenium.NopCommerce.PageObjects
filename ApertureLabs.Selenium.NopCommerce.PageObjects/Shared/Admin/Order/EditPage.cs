@@ -4,6 +4,7 @@ using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -15,7 +16,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.IEditPage" />
-    public class EditPage : PageObject, IEditPage
+    public class EditPage : ParameterPageObject, IEditPage
     {
         #region Fields
 
@@ -40,10 +41,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public EditPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  new Uri(pageSettings.BaseUrl, "Admin"),
+                  new UriTemplate("Order/Edit/{id}"))
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;

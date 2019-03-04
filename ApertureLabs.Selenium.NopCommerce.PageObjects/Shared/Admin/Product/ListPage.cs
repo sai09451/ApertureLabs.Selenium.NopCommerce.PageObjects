@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -34,7 +35,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <param name="basePage">The base page.</param>
         /// <param name="driver">The driver.</param>
-        public ListPage(IBasePage basePage, IWebDriver driver) : base(driver)
+        /// <param name="pageSettings">The page settings.</param>
+        public ListPage(IBasePage basePage,
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  pageSettings.AdminBaseUrl,
+                  new UriTemplate("Product/List"))
         {
             this.basePage = basePage;
         }

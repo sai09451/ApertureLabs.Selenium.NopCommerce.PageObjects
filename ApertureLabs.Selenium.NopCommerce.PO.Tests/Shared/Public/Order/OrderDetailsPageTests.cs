@@ -44,7 +44,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Public.Order
             serviceCollection.AddSingleton(driver);
             serviceCollection.AddSingleton(new PageSettings
             {
-                BaseUrl = "http://nopcommerce410.local/"
+                BaseUrl = new Uri("http://nopcommerce410.local/")
             });
 
             pageObjectFactory = new PageObjectFactory(serviceCollection);

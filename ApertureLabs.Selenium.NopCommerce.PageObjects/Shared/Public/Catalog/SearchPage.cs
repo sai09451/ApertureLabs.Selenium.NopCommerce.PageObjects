@@ -52,13 +52,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             : base(basePage,
                   pageObjectFactory,
                   driver,
-                  settings)
+                  settings,
+                  new UriTemplate("search?q={searchterm}"))
         {
             this.pageObjectFactory = pageObjectFactory;
-
-            Uri = new Uri(
-                new Uri(settings.BaseUrl),
-                "search");
         }
 
         #endregion

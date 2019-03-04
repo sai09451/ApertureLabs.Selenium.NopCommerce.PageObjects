@@ -4,6 +4,7 @@ using ApertureLabs.Selenium.PageObjects;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using System;
 using AdminPO = ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin;
 using PublicPO = ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public;
 
@@ -51,7 +52,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PO.Tests.Shared.Components.AdminMain
             serviceCollection.AddSingleton(driver);
             serviceCollection.AddSingleton(new PageSettings
             {
-                BaseUrl = "http://nopcommerce410.local/"
+                BaseUrl = new Uri("http://nopcommerce410.local/")
             });
 
             pageObjectFactory = new PageObjectFactory(serviceCollection);

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using ApertureLabs.Selenium.Extensions;
+﻿using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.OrderSummary;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog;
@@ -15,16 +8,22 @@ using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
 {
     /// <summary>
     /// OrderDetailsPage.
     /// </summary>
-    /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
+    /// <seealso cref="ApertureLabs.Selenium.PageObjects.ParameterPageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order.IOrderDetailsPage" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.IBasePage" />
-    public class OrderDetailsPage : PageObject, IOrderDetailsPage
+    public class OrderDetailsPage : ParameterPageObject, IOrderDetailsPage
     {
         #region Fields
 
@@ -59,10 +58,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
+        /// <param name="pageSettings">The page settings.</param>
         public OrderDetailsPage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
-            IWebDriver driver)
-            : base(driver)
+            IWebDriver driver,
+            PageSettings pageSettings)
+            : base(driver,
+                  pageSettings.BaseUrl,
+                  new UriTemplate("orderdetails/{id}"))
         {
             this.basePage = basePage
                 ?? throw new ArgumentNullException(nameof(basePage));

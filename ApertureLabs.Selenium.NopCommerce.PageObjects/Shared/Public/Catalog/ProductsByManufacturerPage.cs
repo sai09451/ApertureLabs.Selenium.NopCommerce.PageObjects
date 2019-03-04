@@ -1,6 +1,7 @@
 ﻿using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using System;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
 {
@@ -29,10 +30,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
             : base(basePage,
                   pageObjectFactory,
                   driver,
-                  pageSettings)
-        {
-            Uri = new System.Uri(pageSettings.BaseUrl);
-        }
+                  pageSettings,
+                  new UriTemplate("{manufacturer}"))
+        { }
 
         #endregion
     }
