@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
@@ -14,7 +15,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
     /// <summary>
     /// Base page for all admin pages.
     /// </summary>
-    public class BasePage : PageObject, IBasePage
+    public class BasePage : BasePageObject, IBasePage
     {
         #region Fields
 
@@ -25,11 +26,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         private readonly By navigationBarSelector = By.CssSelector(".main-header");
         private readonly By footerSelector = By.CssSelector(".main-footer");
         private readonly By ajaxBusySelector = By.CssSelector("#ajaxBusy");
+        private readonly By alertSelector = By.CssSelector(".alert-dismissable");
+        private readonly By alertDismissSelector = By.CssSelector(".alert-dismissable .close");
 
         #endregion
 
         private readonly PageSettings pageSettings;
-
         private readonly IPageObjectFactory pageObjectFactory;
 
         #endregion
@@ -42,14 +44,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
-        /// <param name="route">The route.</param>
         public BasePage(IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
-            PageSettings pageSettings,
-            UriTemplate route)
-            : base(driver,
-                  new Uri(pageSettings.BaseUrl, "/Admin"),
-                  route)
+            PageSettings pageSettings)
+            : base(driver)
         {
             this.pageObjectFactory = pageObjectFactory;
             this.pageSettings = pageSettings;
@@ -92,6 +90,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
 
         private IWebElement AjaxBusyElement => WrappedDriver
             .FindElement(ajaxBusySelector);
+
+        private IReadOnlyCollection<IWebElement> AlertElements => WrappedDriver
+            .FindElements(alertSelector);
+
+        private IReadOnlyCollection<IWebElement> AlertDismissElements => WrappedDriver
+            .FindElements(alertDismissSelector);
 
         #endregion
 
@@ -178,6 +182,36 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         public virtual bool IsAjaxBusy()
         {
             return AjaxBusyElement.Displayed;
+        }
+
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasNotifications()
+        {
+            return AlertElements.Any();
+        }
+
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        public void HandleNotification(Action<IWebElement> element)
+        {
+            foreach (var el in AlertElements)
+                element(el);
+        }
+
+        /// <summary>
+        /// Dismisses the notifications.
+        /// </summary>
+        public void DismissNotifications()
+        {
+            foreach (var el in AlertDismissElements)
+                el.Click();
         }
 
         #endregion

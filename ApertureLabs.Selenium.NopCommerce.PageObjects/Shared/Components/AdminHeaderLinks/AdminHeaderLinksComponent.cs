@@ -16,15 +16,16 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
     {
         #region Fields
 
-        private readonly IPageObjectFactory pageObjectFactory;
-        private readonly PageSettings pageSettings;
-
         #region Selectors
 
-        private readonly By LinkToAdministrationSelector = By.CssSelector(".administration");
-        private readonly By LinkToManagePageSelector = By.CssSelector(".manage-page");
+        private readonly By linkToAdministrationSelector = By.CssSelector(".administration");
+        private readonly By linkToManagePageSelector = By.CssSelector(".manage-page");
+        private readonly By finishImpersonatingSelector = By.CssSelector(".impersonate .finish-impersonation");
 
         #endregion
+
+        private readonly IPageObjectFactory pageObjectFactory;
+        private readonly PageSettings pageSettings;
 
         #endregion
 
@@ -52,14 +53,32 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
 
         #region Elements
 
-        private IWebElement LinkToAdministrationElement => WrappedElement.FindElement(LinkToAdministrationSelector);
-        private IWebElement LinkToManagePageElement => WrappedElement.FindElement(LinkToManagePageSelector);
+        private IWebElement LinkToAdministrationElement => WrappedElement
+            .FindElement(linkToAdministrationSelector);
+
+        private IWebElement LinkToManagePageElement => WrappedElement
+            .FindElement(linkToManagePageSelector);
+
+        private IWebElement FinishImpersonatingElement => WrappedElement
+            .FindElements(finishImpersonatingSelector)
+            .FirstOrDefault();
 
         #endregion
 
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Determines whether this customer being impersonating.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if this instance is impersonating; otherwise, <c>false</c>.
+        /// </returns>
+        public virtual bool IsImpersonating()
+        {
+            return FinishImpersonatingElement != null;
+        }
 
         /// <summary>
         /// Goes to the admin page.
@@ -78,7 +97,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
         /// <returns></returns>
         public virtual bool CanManagePage()
         {
-            return WrappedElement.FindElements(LinkToManagePageSelector).Any();
+            return WrappedElement.FindElements(linkToManagePageSelector).Any();
         }
 
         /// <summary>
@@ -90,6 +109,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminH
             LinkToManagePageElement.Click();
 
             return pageObjectFactory.PreparePage<EditPage>();
+        }
+
+        /// <summary>
+        /// Finishes the impersonation.
+        /// </summary>
+        /// <returns></returns>
+        public virtual Admin.Customers.IEditPage FinishImpersonation()
+        {
+            FinishImpersonatingElement.Click();
+
+            return pageObjectFactory.PreparePage<Admin.Customers.IEditPage>();
         }
 
         #endregion

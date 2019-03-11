@@ -9,6 +9,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.
     public class CustomerSearchModel
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerSearchModel"/> class.
+        /// </summary>
+        public CustomerSearchModel()
+        {
+            CustomerRoles = new[] { "Registered" };
+        }
+
+        /// <summary>
         /// Gets or sets the email.
         /// </summary>
         /// <value>
@@ -38,7 +46,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.
         /// <value>
         /// The date of birth.
         /// </value>
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets the company.

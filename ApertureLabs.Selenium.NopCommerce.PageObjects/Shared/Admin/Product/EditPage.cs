@@ -298,6 +298,34 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             return basePage.IsAjaxBusy();
         }
 
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasNotifications()
+        {
+            return basePage.HasNotifications();
+        }
+
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        public void HandleNotification(Action<IWebElement> element)
+        {
+            basePage.HandleNotification(element);
+        }
+
+        /// <summary>
+        /// Dismisses the notifications.
+        /// </summary>
+        public void DismissNotifications()
+        {
+            basePage.DismissNotifications();
+        }
+
         #endregion
     }
 }

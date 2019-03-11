@@ -1,72 +1,71 @@
-﻿using System;
-using ApertureLabs.Selenium.Components.Kendo;
-using ApertureLabs.Selenium.Components.Kendo.KGrid;
+﻿using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
-using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
 {
     /// <summary>
-    /// The order list page.
+    /// Default implementation of the admin create customer page.
     /// </summary>
-    public class ListPage : StaticPageObject, IListPage
+    /// <seealso cref="ApertureLabs.Selenium.PageObjects.StaticPageObject" />
+    /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ICreatePage" />
+    public class CreatePage : StaticPageObject, ICreatePage
     {
         #region Fields
 
         #region Selectors
 
-        private readonly By startDateSelector = By.CssSelector("#StartDate");
-        private readonly By endDateSelector = By.CssSelector("#EndDate");
-        private readonly By productNameSelector = By.CssSelector("#search-product-name");
-        private readonly By orderStatusesSelector = By.CssSelector("#OrderStatusIds");
-        private readonly By paymentStatusesSelector = By.CssSelector("#PaymentStatusIds");
-        private readonly By shippingStatusesSelector = By.CssSelector("#ShippingStatusIds");
-        private readonly By vendorSelector = By.CssSelector("#VendorId");
-        private readonly By billingPhoneNumberSelector = By.CssSelector("#BillingPhone");
-        private readonly By billingEmailAddressSelector = By.CssSelector("#BillingEmail");
-        private readonly By billingLastNameSelector = By.CssSelector("#BillingLastName");
-        private readonly By billingCountrySelector = By.CssSelector("#BillingCountryId");
-        private readonly By paymentMethodSelector = By.CssSelector("#PaymentMethodSystemName");
-        private readonly By orderNotesSelector = By.CssSelector("#OrderNotes");
-        private readonly By goDirectlyToOrderNumberSelector = By.CssSelector("#GoDirectlyToCustomOrderNumber");
-        private readonly By goDirectlyToOrderNumberSubmitSelector = By.CssSelector("#go-to-order-by-number");
+        private readonly By backToCustomerListSelector = By.CssSelector("*[href='/Admin/Customer/List']");
+        private readonly By saveSelector = By.CssSelector("*[name='save']");
+        private readonly By saveAndContinueSelector = By.CssSelector("*[name='save-continue']");
 
         #endregion
 
         private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ListPage"/> class.
+        /// Initializes a new instance of the <see cref="CreatePage"/> class.
         /// </summary>
         /// <param name="basePage">The base page.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
-        public ListPage(IBasePage basePage,
+        /// <exception cref="ArgumentNullException">
+        /// basePage
+        /// or
+        /// pageObjectFactory
+        /// </exception>
+        public CreatePage(IBasePage basePage,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
             : base(driver,
-                  new Uri(pageSettings.BaseUrl, "Admin/Order/List"))
+                  new Uri(pageSettings.AdminBaseUrl, "Customer/Create"))
         {
-            this.basePage = basePage;
+            this.basePage = basePage
+                ?? throw new ArgumentNullException(nameof(basePage));
 
-            Orders = new KGridComponent<IListPage>(
-                BaseKendoConfiguration.DefaultBaseKendoOptions(),
-                By.CssSelector("#orders-grid"),
+            this.pageObjectFactory = pageObjectFactory
+                ?? throw new ArgumentNullException(nameof(pageObjectFactory));
+
+            Info = new _CreateOrUpdateInfoComponent(
+                By.CssSelector(""),
                 pageObjectFactory,
-                WrappedDriver,
-                this);
+                WrappedDriver);
         }
 
         #endregion
@@ -75,47 +74,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 
         #region Elements
 
-        private IWebElement StartDateElement => WrappedDriver
-            .FindElement(startDateSelector);
+        private IWebElement BackToCustomerListElement => WrappedDriver
+            .FindElement(backToCustomerListSelector);
 
-        private IWebElement EndDateElement => WrappedDriver
-            .FindElement(endDateSelector);
+        private IWebElement SaveElement => WrappedDriver
+            .FindElement(saveSelector);
 
-        private IWebElement ProductNameElement => WrappedDriver
-            .FindElement(productNameSelector);
-
-        private IWebElement OrderStatusesElement => WrappedDriver
-            .FindElement(orderStatusesSelector);
-
-        private IWebElement PaymentStatusesElement => WrappedDriver
-            .FindElement(paymentStatusesSelector);
-
-        private IWebElement ShippingStatusesElement => WrappedDriver
-            .FindElement(shippingStatusesSelector);
-
-        private IWebElement VendorElement => WrappedDriver
-            .FindElement(vendorSelector);
-
-        private IWebElement BillingPhoneNumberElement => WrappedDriver
-            .FindElement(billingPhoneNumberSelector);
-
-        private IWebElement BillingEmailAddressElement => WrappedDriver
-            .FindElement(billingEmailAddressSelector);
-
-        private IWebElement BillingLastNameElement => WrappedDriver
-            .FindElement(billingLastNameSelector);
-
-        private IWebElement PaymentMethodElement => WrappedDriver
-            .FindElement(paymentMethodSelector);
-
-        private IWebElement OrderNotesElement => WrappedDriver
-            .FindElement(orderNotesSelector);
-
-        private IWebElement GoDirectlyToOrderNumberElement => WrappedDriver
-            .FindElement(goDirectlyToOrderNumberSelector);
-
-        private IWebElement GoDirectlyToOrderNumberSubmitElement => WrappedDriver
-            .FindElement(goDirectlyToOrderNumberSubmitSelector);
+        private IWebElement SaveAndContinueElement => WrappedDriver
+            .FindElement(saveAndContinueSelector);
 
         #endregion
 
@@ -144,12 +110,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         public AdminFooterComponent Footer => basePage.Footer;
 
         /// <summary>
-        /// Gets the orders.
+        /// Gets the Info tab.
         /// </summary>
         /// <value>
-        /// The orders.
+        /// The information.
         /// </value>
-        public KGridComponent<IListPage> Orders { get; }
+        public _CreateOrUpdateInfoComponent Info { get; }
 
         #endregion
 
@@ -173,10 +139,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         public override ILoadableComponent Load()
         {
             base.Load();
-            basePage.Load();
-            Orders.Load();
+            pageObjectFactory.PrepareComponent(Info);
 
             return this;
+        }
+
+        /// <summary>
+        /// Cancels creating the customer and returns to the customer list.
+        /// </summary>
+        /// <returns></returns>
+        public IListPage BackToCustomerList()
+        {
+            BackToCustomerListElement.Click();
+
+            return pageObjectFactory.PreparePage<IListPage>();
         }
 
         /// <summary>
@@ -185,6 +161,34 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         public void BackToTop()
         {
             basePage.BackToTop();
+        }
+
+        /// <summary>
+        /// Enters the models info.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">model</exception>
+        public ICreatePage EnterInformation(CustomerCreateModel model)
+        {
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            Info.EnterEmail(model.Email)
+                .EnterPassword(model.Password)
+                .SetCustomerRoles(model.CustomerRoles)
+                .SetManagerOfVendor(model.ManagerOfVendor)
+                .SetGender(model.Gender)
+                .EnterFirstName(model.FirstName)
+                .EnterLastName(model.LastName)
+                .EnterDateOfBirth(model.DateOfBirth)
+                .EnterCompanyName(model.CompanyName)
+                .EnterAdminComment(model.AdminComment)
+                .SetTaxExcempt(model.IsTaxExempt)
+                .SetNewsLetters(model.NewsLetters)
+                .SetIsActive(model.Active);
+
+            return this;
         }
 
         /// <summary>
@@ -199,25 +203,30 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         }
 
         /// <summary>
-        /// Searches the specified order search model.
+        /// Saves the customer and returns to the list page.
         /// </summary>
-        /// <param name="orderSearchModel">The order search model.</param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public IListPage Search(OrderSearchModel orderSearchModel)
+        public IListPage Save()
         {
-            throw new NotImplementedException();
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(2))
+                .UntilPageReloads(SaveElement, el => el.Click());
+
+            return pageObjectFactory.PreparePage<IListPage>();
         }
 
         /// <summary>
-        /// Goes the directly to order number.
+        /// Saves the customer and continues to edit them on the
+        /// <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IEditPage" />.
         /// </summary>
-        /// <param name="orderNumber">The order number.</param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public IEditPage GoDirectlyToOrderNumber(int orderNumber)
+        public IEditPage SaveAndContinue()
         {
-            throw new NotImplementedException();
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(2))
+                .UntilPageReloads(SaveAndContinueElement, el => el.Click());
+
+            return pageObjectFactory.PreparePage<IEditPage>();
         }
 
         /// <summary>

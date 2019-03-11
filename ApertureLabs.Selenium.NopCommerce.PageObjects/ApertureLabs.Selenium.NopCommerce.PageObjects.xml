@@ -9,14 +9,13 @@
             Base page for all admin pages.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.#ctor(ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings,System.UriTemplate)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.#ctor(ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage"/> class.
             </summary>
             <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
             <param name="pageSettings">The page settings.</param>
-            <param name="route">The route.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.MainSideBar">
             <summary>
@@ -193,17 +192,28 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage" />
         </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage.CustomersGrid">
+            <summary>
+            Gets the customers grid.
+            </summary>
+            <value>
+            The customers grid.
+            </value>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage.AddNew">
             <summary>
             Navigates to the customer creation page.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage.ExportTo(System.String)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage.ExportTo(System.String,System.String,System.String,System.StringComparison)">
             <summary>
             Locates and selects the format to export to.
             </summary>
             <param name="type">The type.</param>
+            <param name="downloadsPath">The downloads path.</param>
+            <param name="expectedFileName">The expected file name.</param>
+            <param name="stringComparison">The string comparison.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage.Search(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerSearchModel)">
             <summary>
@@ -212,9 +222,9 @@
             <param name="searchModel">The search model.</param>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage.GetCustomers">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IListPage.GetListedCustomers">
             <summary>
-            Gets the customers.
+            Gets the listed customers.
             </summary>
             <returns></returns>
         </member>
@@ -233,6 +243,14 @@
             <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
             <param name="pageSettings">The page settings.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.CustomersGrid">
+            <summary>
+            Gets the customers grid.
+            </summary>
+            <value>
+            The customers grid.
+            </value>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.MainSideBar">
             <summary>
@@ -282,19 +300,16 @@
             Back to top if displayed.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.ExportTo(System.String)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.ExportTo(System.String,System.String,System.String,System.StringComparison)">
             <summary>
-            Locates and selects the format to export to.
+            Locates and selects the format to export to. Will only work when
+            running tests locally.
             </summary>
             <param name="type">The type.</param>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.GetCustomers">
-            <summary>
-            Gets the customers.
-            </summary>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="downloadsPath">The downloads path.</param>
+            <param name="expectedFileName">The expected file name.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.IsAjaxBusy">
             <summary>
@@ -312,18 +327,90 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">searchModel</exception>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.GetListedCustomers">
+            <summary>
+            Gets the listed customers.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent">
             <summary>
-            TODO: Finish this component.
+            The row component of the admin customer list page grid.
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent"/> class.
             </summary>
             <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.Check(System.Boolean)">
+            <summary>
+            Checks/unchecks this row.
+            </summary>
+            <param name="check">if set to <c>true</c> [check].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.IsChecked">
+            <summary>
+            Determines whether this row is checked.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is checked; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.GetEmail">
+            <summary>
+            Gets the email.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.GetName">
+            <summary>
+            Gets the name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.GetCustomerRoles">
+            <summary>
+            Gets the customer roles.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.GetCompanyName">
+            <summary>
+            Gets the name of the company.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.IsActive">
+            <summary>
+            Determines whether the customer is active.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is active; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.GetCreatedOn">
+            <summary>
+            Gets the <see cref="T:System.DateTime"/> the customer was created on.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.LastActivity">
+            <summary>
+            Lasts the activity <see cref="T:System.DateTime"/> of the customer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent.Edit">
+            <summary>
+            Clicks the edit button.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage">
             <summary>
@@ -2270,7 +2357,10 @@
             </summary>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.ViewModel">
-            <inheritdoc/>
+            <summary>
+            Retrieves the viewmodel.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.SetCurrency(System.String,System.StringComparison)">
             <summary>
@@ -2308,6 +2398,12 @@
             </summary>
             <param name="email"></param>
             <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.HeaderLinks.HeaderLinksComponent.CustomerInfo">
+            <summary>
+            Goes to the customer info page.
+            </summary>
             <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News.INewsComponent">
@@ -2775,6 +2871,14 @@
             Gets the admin header links.
             </summary>
         </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage.HeaderLinks">
+            <summary>
+            Gets the header links.
+            </summary>
+            <value>
+            The header links.
+            </value>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage.Load">
             <summary>
             If overridding this don't forget to call base.Load().
@@ -2854,6 +2958,12 @@
             Dismisses the notifications.
             </summary>
             <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.BasePage.CustomerInfo">
+            <summary>
+            Goes to the customer info page.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.CatalogTemplatePage">
             <summary>
@@ -3426,12 +3536,12 @@
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebElement,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
-            Ctor.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult"/> class.
             </summary>
-            <param name="selector"></param>
-            <param name="pageObjectFactory"></param>
-            <param name="element"></param>
-            <param name="pageSettings"></param>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="element">The element.</param>
+            <param name="pageSettings">The page settings.</param>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.WrappedDriver">
             <inheritdoc/>
@@ -7270,6 +7380,11 @@
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerSearchModel">
             <summary>
             Model used on the admin customer list page for searching for customers.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerSearchModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerSearchModel"/> class.
             </summary>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerSearchModel.Email">

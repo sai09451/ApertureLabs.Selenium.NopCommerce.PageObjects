@@ -70,7 +70,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
             this.pageObjectFactory = pageObjectFactory;
 
             CustomerRoles = new KMultiSelectComponent<IListPage>(
-                By.CssSelector("#SearchCustomerRoleIds"),
+                By.CssSelector("#SelectedCustomerRoleIds"),
                 WrappedDriver,
                 new KMultiSelectConfiguration(),
                 this);
@@ -130,6 +130,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
             WrappedDriver.FindElement(
                 ipAddressSelector));
 
+        private IWebElement SearchElement => WrappedDriver
+            .FindElement(searchSelector);
+
         #endregion
 
         private KMultiSelectComponent<IListPage> CustomerRoles { get; }
@@ -186,9 +189,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         public override ILoadableComponent Load()
         {
             base.Load();
-            basePage.Load();
-            CustomersGrid.Load();
-            ExportDropDownComponent.Load();
+
+            pageObjectFactory.PrepareComponent(basePage);
 
             // Wait for the ajax loading element to toggle.
             WrappedDriver
@@ -197,6 +199,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
                     out var exc,
                     d => basePage.IsAjaxBusy(),
                     d => !basePage.IsAjaxBusy());
+
+            pageObjectFactory.PrepareComponent(CustomersGrid);
+            pageObjectFactory.PrepareComponent(ExportDropDownComponent);
+            pageObjectFactory.PrepareComponent(CustomerRoles);
 
             return this;
         }
@@ -223,7 +229,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         }
 
         /// <summary>
-        /// Locates and selects the format to export to.
+        /// Locates and selects the format to export to. Will only work when
+        /// running tests locally.
         /// </summary>
         /// <param name="type">The type.</param>
         /// <param name="downloadsPath">The downloads path.</param>
@@ -280,29 +287,50 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
             FirstNameElement.SetValue(searchModel.FirstName);
             LastNameElement.SetValue(searchModel.LastName);
 
-            DateOfBirthMonthElement.SelectByValue(
-                searchModel.DateOfBirth.Month.ToString());
+            if (searchModel.DateOfBirth.HasValue)
+            {
+                DateOfBirthMonthElement.SelectByValue(
+                    searchModel.DateOfBirth.Value.Month.ToString());
 
-            DateOfBirthDayElement.SelectByValue(
-                searchModel.DateOfBirth.Day.ToString());
+                DateOfBirthDayElement.SelectByValue(
+                    searchModel.DateOfBirth.Value.Day.ToString());
+            }
+            else
+            {
+                DateOfBirthMonthElement.SelectByIndex(0);
+                DateOfBirthDayElement.SelectByIndex(0);
+            }
 
             CompanyElement.SetValue(searchModel.Company);
             IpAddressElement.SetValue(searchModel.IpAddress);
 
             var currentlySelectedItems = CustomerRoles.GetSelectedOptions();
 
-            foreach (var opt in currentlySelectedItems)
+            if (searchModel.CustomerRoles != null)
             {
-                if (!searchModel.CustomerRoles?.Contains(opt) ?? true)
-                    CustomerRoles.DeselectItem(opt);
-
-                // Check if there are items that have yet to be selected.
-                if (searchModel.CustomerRoles?.Except(currentlySelectedItems).Any() ?? false)
+                foreach (var opt in currentlySelectedItems)
                 {
-                    foreach (var _opt in searchModel.CustomerRoles)
-                        CustomerRoles.SelectItem(_opt);
+                    if (!searchModel.CustomerRoles?.Contains(opt) ?? true)
+                        CustomerRoles.DeselectItem(opt);
+
+                    // Check if there are items that have yet to be selected.
+                    if (searchModel.CustomerRoles?.Except(currentlySelectedItems).Any() ?? false)
+                    {
+                        foreach (var _opt in searchModel.CustomerRoles)
+                            CustomerRoles.SelectItem(_opt);
+                    }
                 }
             }
+
+            SearchElement.Click();
+
+            // Wait for the ajax indicator to toggle.
+            WrappedDriver
+                .Wait(TimeSpan.FromSeconds(10))
+                .TrySequentialWait(
+                    out var exception,
+                    d => IsAjaxBusy(),
+                    d => !IsAjaxBusy());
 
             // Page should reload.
             Load();
@@ -316,7 +344,46 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns></returns>
         public IEnumerable<ListPageCustomerRowComponent> GetListedCustomers()
         {
-            foreach (var row in CustomersGrid.Rows)
+            var rowCount = CustomersGrid.GetNumberOfRows();
+
+            for (var i = 0; i < rowCount; i++)
+            {
+                var rowEl = CustomersGrid.GetRow(i);
+
+                yield return pageObjectFactory.PrepareComponent(
+                    new ListPageCustomerRowComponent(
+                        new ByElement(rowEl),
+                        pageObjectFactory,
+                        WrappedDriver));
+            }
+        }
+
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasNotifications()
+        {
+            return basePage.HasNotifications();
+        }
+
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        public void HandleNotification(Action<IWebElement> element)
+        {
+            basePage.HandleNotification(element);
+        }
+
+        /// <summary>
+        /// Dismisses the notifications.
+        /// </summary>
+        public void DismissNotifications()
+        {
+            basePage.DismissNotifications();
         }
 
         #endregion

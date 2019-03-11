@@ -2,6 +2,8 @@
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.PageObjects;
+using OpenQA.Selenium;
+using System;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
 {
@@ -47,5 +49,24 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         ///   <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
         bool IsAjaxBusy();
+
+        /// <summary>
+        /// Determines whether this instance has notifications.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+        /// </returns>
+        bool HasNotifications();
+
+        /// <summary>
+        /// Handles the notification.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        void HandleNotification(Action<IWebElement> element);
+
+        /// <summary>
+        /// Dismisses the notifications.
+        /// </summary>
+        void DismissNotifications();
     }
 }
