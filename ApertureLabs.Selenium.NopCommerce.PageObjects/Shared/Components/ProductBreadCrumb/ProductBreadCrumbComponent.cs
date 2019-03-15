@@ -78,7 +78,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Produc
         /// Retrieves the names of the categories (doens't include 'Home').
         /// </summary>
         /// <returns></returns>
-        public IList<string> GetCategories()
+        public virtual IList<string> GetCategories()
         {
             return CategoryElements.Select(el => el.Text).ToList();
         }
@@ -88,7 +88,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Produc
         /// </summary>
         /// <param name="categoryName"></param>
         /// <returns></returns>
-        public SearchPage ViewCategory(string categoryName)
+        public virtual SearchPage ViewCategory(string categoryName)
         {
             CategoryElements
                 .First(el => string.Equals(

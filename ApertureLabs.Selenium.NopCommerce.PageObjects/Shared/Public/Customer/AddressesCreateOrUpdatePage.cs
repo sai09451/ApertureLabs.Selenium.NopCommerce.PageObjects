@@ -150,7 +150,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <summary>
         /// Gets the admin header links.
         /// </summary>
-        public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         /// <summary>
         /// Gets the account navigation.
@@ -158,7 +158,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <value>
         /// The account navigation.
         /// </value>
-        public CustomerNavigationComponent<T> AccountNavigation { get; protected set; }
+        public virtual CustomerNavigationComponent<T> AccountNavigation { get; protected set; }
 
         #endregion
 
@@ -167,7 +167,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
@@ -176,7 +176,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the address1.
         /// </summary>
         /// <returns></returns>
-        public string GetAddress1()
+        public virtual string GetAddress1()
         {
             return Address1Element.GetValue<string>();
         }
@@ -185,7 +185,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the address2.
         /// </summary>
         /// <returns></returns>
-        public string GetAddress2()
+        public virtual string GetAddress2()
         {
             return Address2Element.GetValue<string>();
         }
@@ -194,7 +194,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the city.
         /// </summary>
         /// <returns></returns>
-        public string GetCity()
+        public virtual string GetCity()
         {
             return CityElement.GetValue<string>();
         }
@@ -203,7 +203,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the company.
         /// </summary>
         /// <returns></returns>
-        public string GetCompany()
+        public virtual string GetCompany()
         {
             return CompanyElement.GetValue<string>();
         }
@@ -212,7 +212,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the country.
         /// </summary>
         /// <returns></returns>
-        public string GetCountry()
+        public virtual string GetCountry()
         {
             return CountryElement.SelectedOption.TextHelper().InnerText;
         }
@@ -221,7 +221,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the email.
         /// </summary>
         /// <returns></returns>
-        public string GetEmail()
+        public virtual string GetEmail()
         {
             return EmailElement.GetValue<string>();
         }
@@ -230,7 +230,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the fax number.
         /// </summary>
         /// <returns></returns>
-        public string GetFaxNumber()
+        public virtual string GetFaxNumber()
         {
             return FaxNumberElement.GetValue<string>();
         }
@@ -239,7 +239,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the first name.
         /// </summary>
         /// <returns></returns>
-        public string GetFirstName()
+        public virtual string GetFirstName()
         {
             return FirstNameElement.GetValue<string>();
         }
@@ -248,7 +248,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the last name.
         /// </summary>
         /// <returns></returns>
-        public string GetLastName()
+        public virtual string GetLastName()
         {
             return LastNameElement.GetValue<string>();
         }
@@ -257,7 +257,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the phone number.
         /// </summary>
         /// <returns></returns>
-        public string GetPhoneNumber()
+        public virtual string GetPhoneNumber()
         {
             return PhoneNumberElement.GetValue<string>();
         }
@@ -266,7 +266,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the state province.
         /// </summary>
         /// <returns></returns>
-        public string GetStateProvince()
+        public virtual string GetStateProvince()
         {
             return StateProvinceElement.SelectedOption
                 .TextHelper()
@@ -277,7 +277,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Gets the zip code.
         /// </summary>
         /// <returns></returns>
-        public string GetZipCode()
+        public virtual string GetZipCode()
         {
             return ZipCodeElement.GetValue<string>();
         }
@@ -286,7 +286,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Goes to the shopping cart page.
         /// </summary>
         /// <returns></returns>
-        public ICartPage GoToShoppingCart()
+        public virtual ICartPage GoToShoppingCart()
         {
             return basePage.GoToShoppingCart();
         }
@@ -295,7 +295,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -306,7 +306,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -315,7 +315,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Checks if a user is logged in.
         /// </summary>
         /// <returns></returns>
-        public bool IsLoggedIn()
+        public virtual bool IsLoggedIn()
         {
             return basePage.IsLoggedIn();
         }
@@ -326,7 +326,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public IHomePage Login(string email, string password)
+        public virtual IHomePage Login(string email, string password)
         {
             return basePage.Login(email, password);
         }
@@ -336,7 +336,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <typeparam name="U"></typeparam>
         /// <returns></returns>
-        public U Logout<U>() where U : IPageObject
+        public virtual U Logout<U>() where U : IPageObject
         {
             return basePage.Logout<U>();
         }
@@ -345,7 +345,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Saves the address.
         /// </summary>
         /// <returns></returns>
-        public IAddressesPage Save()
+        public virtual IAddressesPage Save()
         {
             SaveElement.Click();
 
@@ -358,7 +358,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="searchFor">Partial or full name of product.</param>
         /// <returns></returns>
-        public ISearchPage Search(string searchFor)
+        public virtual ISearchPage Search(string searchFor)
         {
             return basePage.Search(searchFor);
         }
@@ -369,7 +369,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="searchFor">The search for.</param>
         /// <returns></returns>
-        public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
         }
@@ -379,7 +379,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="address1">The address1.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetAddress1(string address1)
+        public virtual IAddressesCreateOrUpdatePage<T> SetAddress1(string address1)
         {
             Address1Element.SetValue(address1);
 
@@ -391,7 +391,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="address2">The address2.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetAddress2(string address2)
+        public virtual IAddressesCreateOrUpdatePage<T> SetAddress2(string address2)
         {
             Address2Element.SetValue(address2);
 
@@ -403,7 +403,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="city">The city.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetCity(string city)
+        public virtual IAddressesCreateOrUpdatePage<T> SetCity(string city)
         {
             CityElement.SetValue(city);
 
@@ -415,7 +415,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="company">The company.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetCompany(string company)
+        public virtual IAddressesCreateOrUpdatePage<T> SetCompany(string company)
         {
             CompanyElement.SetValue(company);
 
@@ -427,7 +427,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="country">The country.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetCountry(string country)
+        public virtual IAddressesCreateOrUpdatePage<T> SetCountry(string country)
         {
             CountryElement.SelectByText(country);
 
@@ -446,7 +446,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="email">The email.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetEmail(string email)
+        public virtual IAddressesCreateOrUpdatePage<T> SetEmail(string email)
         {
             EmailElement.SetValue(email);
 
@@ -458,7 +458,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="faxNumber">The fax number.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetFaxNumber(string faxNumber)
+        public virtual IAddressesCreateOrUpdatePage<T> SetFaxNumber(string faxNumber)
         {
             FaxNumberElement.SetValue(faxNumber);
 
@@ -470,7 +470,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="firstName">The first name.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetFirstName(string firstName)
+        public virtual IAddressesCreateOrUpdatePage<T> SetFirstName(string firstName)
         {
             FirstNameElement.SetValue(firstName);
 
@@ -483,7 +483,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <param name="model">The model.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">model</exception>
-        public IAddressesCreateOrUpdatePage<T> SetFromModel(AddressModel model)
+        public virtual IAddressesCreateOrUpdatePage<T> SetFromModel(AddressModel model)
         {
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
@@ -507,7 +507,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="lastName">The last name.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetLastName(string lastName)
+        public virtual IAddressesCreateOrUpdatePage<T> SetLastName(string lastName)
         {
             LastNameElement.SetValue(lastName);
 
@@ -519,7 +519,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="phoneNumber">The phone number.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetPhoneNumber(string phoneNumber)
+        public virtual IAddressesCreateOrUpdatePage<T> SetPhoneNumber(string phoneNumber)
         {
             PhoneNumberElement.SetValue(phoneNumber);
 
@@ -531,7 +531,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="stateProvince">The state province.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetStateProvince(string stateProvince)
+        public virtual IAddressesCreateOrUpdatePage<T> SetStateProvince(string stateProvince)
         {
             StateProvinceElement.SelectByText(stateProvince);
 
@@ -543,7 +543,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// </summary>
         /// <param name="zipCode">The zip code.</param>
         /// <returns></returns>
-        public IAddressesCreateOrUpdatePage<T> SetZipCode(string zipCode)
+        public virtual IAddressesCreateOrUpdatePage<T> SetZipCode(string zipCode)
         {
             ZipCodeElement.SetValue(zipCode);
 
@@ -554,7 +554,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// Retrieves the viewmodel.
         /// </summary>
         /// <returns></returns>
-        public AddressModel ViewModel()
+        public virtual AddressModel ViewModel()
         {
             var model = new AddressModel
             {

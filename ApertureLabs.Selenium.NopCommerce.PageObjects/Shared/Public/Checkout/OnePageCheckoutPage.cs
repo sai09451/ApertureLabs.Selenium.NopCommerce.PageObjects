@@ -195,7 +195,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Gets the admin header links.
         /// </summary>
-        public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         #endregion
 
@@ -224,7 +224,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Finalizes and confirms the order.
         /// </summary>
         /// <returns></returns>
-        public ICompletedPage Confirm()
+        public virtual ICompletedPage Confirm()
         {
             var page = default(ICompletedPage);
             TryConfirm(
@@ -237,7 +237,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
@@ -247,7 +247,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <param name="address">The address.</param>
         /// <param name="shipToSameAddress">Whether or not to ship to the same address.</param>
-        public void EnterBillingAddress(AddressModel address,
+        public virtual void EnterBillingAddress(AddressModel address,
             bool shipToSameAddress = true)
         {
             if (GetCurrentStepName() != "Billing address")
@@ -332,7 +332,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// No payment handler registered that can " +
         ///                     $"operate on {paymentMethodName}
         /// </exception>
-        public void EnterPaymentInformation()
+        public virtual void EnterPaymentInformation()
         {
             if (String.IsNullOrEmpty(paymentMethodName))
                 throw new Exception("Couldn't determine payment method name.");
@@ -353,7 +353,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Enters the shipping address.
         /// </summary>
         /// <param name="address">The address.</param>
-        public void EnterShippingAddress(AddressModel address)
+        public virtual void EnterShippingAddress(AddressModel address)
         {
             if (GetCurrentStepName() != "Shipping address")
                 throw new Exception("Not on correct step.");
@@ -427,7 +427,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public AddressModel GetBillingAddress()
+        public virtual AddressModel GetBillingAddress()
         {
             if (GetCurrentStepName() != "Billing address")
                 throw new Exception("Not on the correct step");
@@ -477,7 +477,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the current step.
         /// </summary>
         /// <returns></returns>
-        public int GetCurrentStep()
+        public virtual int GetCurrentStep()
         {
             return ActiveTabNumberElement.GetIndexRelativeToSiblings();
         }
@@ -486,7 +486,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the name of the current step.
         /// </summary>
         /// <returns></returns>
-        public string GetCurrentStepName()
+        public virtual string GetCurrentStepName()
         {
             return ActiveTabTitleElement.TextHelper().InnerText;
         }
@@ -495,7 +495,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the names of payment methods listed on the page.
         /// </summary>
         /// <returns></returns>
-        public string GetSelectedPaymentMethod()
+        public virtual string GetSelectedPaymentMethod()
         {
             if (GetCurrentStepName() != "Payment method")
                 throw new Exception("Not on correct step.");
@@ -509,7 +509,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the shipping address.
         /// </summary>
         /// <returns></returns>
-        public AddressModel GetShippingAddress()
+        public virtual AddressModel GetShippingAddress()
         {
             if (GetCurrentStepName() != "Shipping address")
                 throw new Exception("Not on the correct step.");
@@ -557,7 +557,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the shipping method.
         /// </summary>
         /// <returns></returns>
-        public string GetSelectedShippingMethod()
+        public virtual string GetSelectedShippingMethod()
         {
             var name = ShippingMethodSelectedNameElement
                 .TextHelper()
@@ -572,7 +572,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the shipping methods.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetShippingMethods()
+        public virtual IEnumerable<string> GetShippingMethods()
         {
             return ShippingMethodNameElements
                 .Select(e => IgnoreLastParenthesis(e.TextHelper().InnerText));
@@ -583,7 +583,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public int GetTotalSteps()
+        public virtual int GetTotalSteps()
         {
             return GetAllStepNames().Count;
         }
@@ -592,7 +592,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets all step names.
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<string> GetAllStepNames()
+        public virtual IReadOnlyList<string> GetAllStepNames()
         {
             return TabNameElements
                 .Select(e => e.TextHelper().InnerText)
@@ -604,7 +604,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Goes to the shopping cart page.
         /// </summary>
         /// <returns></returns>
-        public ICartPage GoToShoppingCart()
+        public virtual ICartPage GoToShoppingCart()
         {
             return basePage.GoToShoppingCart();
         }
@@ -613,7 +613,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -624,7 +624,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -633,7 +633,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Checks if a user is logged in.
         /// </summary>
         /// <returns></returns>
-        public bool IsLoggedIn()
+        public virtual bool IsLoggedIn()
         {
             return basePage.IsLoggedIn();
         }
@@ -644,7 +644,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public IHomePage Login(string email, string password)
+        public virtual IHomePage Login(string email, string password)
         {
             return basePage.Login(email, password);
         }
@@ -654,7 +654,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Logout<T>() where T : IPageObject
+        public virtual T Logout<T>() where T : IPageObject
         {
             return basePage.Logout<T>();
         }
@@ -664,7 +664,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <param name="searchFor">Partial or full name of product.</param>
         /// <returns></returns>
-        public ISearchPage Search(string searchFor)
+        public virtual ISearchPage Search(string searchFor)
         {
             return basePage.Search(searchFor);
         }
@@ -675,7 +675,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <param name="searchFor">The search for.</param>
         /// <returns></returns>
-        public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
         }
@@ -686,7 +686,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <param name="paymentMethodName">The payment method name.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <exception cref="NoSuchElementException"></exception>
-        public void SelectPaymentMethod(string paymentMethodName,
+        public virtual void SelectPaymentMethod(string paymentMethodName,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             var indexOfPaymentMethod = GetPaymentMethods().IndexOf(
@@ -707,7 +707,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Selects the shipping method.
         /// </summary>
-        public void SelectShippingMethod(string shippingMethod,
+        public virtual void SelectShippingMethod(string shippingMethod,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             var indexOfShippingMethod = GetShippingMethods().IndexOf(
@@ -731,7 +731,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <param name="reject"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public bool TryConfirm(Action<ICompletedPage> resolve,
+        public virtual bool TryConfirm(Action<ICompletedPage> resolve,
             Action<ICheckoutPage> reject)
         {
             // Check if on right step.
@@ -778,7 +778,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// or
         /// reject
         /// </exception>
-        public bool TryGoToStep(int step,
+        public virtual bool TryGoToStep(int step,
             Action<ICheckoutStepPage> resolve = null,
             Action<ICheckoutStepPage> reject = null)
         {
@@ -888,7 +888,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// or
         /// No existing addresses to choose from.
         /// </exception>
-        public void UseExistingBillingAddress(bool shipToSameAddress = true)
+        public virtual void UseExistingBillingAddress(bool shipToSameAddress = true)
         {
             if (GetCurrentStepName() != "Billing address")
                 throw new Exception("Not on correct step.");
@@ -914,7 +914,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// or
         /// No existing addresses to choose from.
         /// </exception>
-        public void UseExistingShippingAddress()
+        public virtual void UseExistingShippingAddress()
         {
             if (GetCurrentStepName() != "Shipping address")
                 throw new Exception("Not on correct step.");
@@ -935,7 +935,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the payment methods.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetPaymentMethods()
+        public virtual IEnumerable<string> GetPaymentMethods()
         {
             if (GetCurrentStepName() != "Payment method")
                 throw new Exception("Not on correct step.");
@@ -960,7 +960,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// reject
         /// </exception>
         /// <exception cref="NotImplementedException"></exception>
-        public bool TryGoToStep(string stepName,
+        public virtual bool TryGoToStep(string stepName,
             Action<ICheckoutStepPage> resolve = null,
             Action<ICheckoutStepPage> reject = null,
             StringComparison stringComparison = StringComparison.Ordinal)

@@ -51,7 +51,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminF
         /// Gets the displayed date.
         /// </summary>
         /// <returns></returns>
-        public DateTime GetDisplayedDate()
+        public virtual DateTime GetDisplayedDate()
         {
             var innerText = DisplayedDateTimeElement.TextHelper().InnerText;
 

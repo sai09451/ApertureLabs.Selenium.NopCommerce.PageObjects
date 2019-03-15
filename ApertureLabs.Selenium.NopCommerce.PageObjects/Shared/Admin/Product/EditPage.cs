@@ -19,7 +19,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     /// Corresponds to the "Admin/Views/Product/Edit.cshtml" page.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage" />
-    public class EditPage : ParameterPageObject, IEditPage
+    public class EditPage : ParameterPageObject, IEditPage,
+        IHasAdvancedOptionsPage
     {
         #region Fields
 
@@ -63,13 +64,18 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
 
-            Settings = new EditorSettingsComponent(advancedSwitchSelector,
+            AdvancedOptions = new EditorSettingsComponent(
+                advancedSwitchSelector,
                 settingsBySelector,
-                EditorSettingsComponentConfiguration.DefaultConfiguration(),
+                new EditorSettingsComponentConfiguration(),
                 WrappedDriver);
 
             Tabs = new NavsTabComponent<IEditPage>(
                 navsTabComponentSelector,
+                new ILoadableComponent[]
+                {
+                    GeneralInfoTab
+                },
                 WrappedDriver,
                 new NavsTabComponentConfiguration
                 {
@@ -81,7 +87,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
                 },
                 this);
 
-            GeneralInfo = new ProductInfoComponent(
+            GeneralInfoTab = new ProductInfoComponent(
                 productInfoComponentSelector,
                 this,
                 WrappedDriver);
@@ -93,12 +99,22 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 
         #region Elements
 
-        private ProductInfoComponent GeneralInfo { get; set; }
+        private IWebElement BackToProductListElement => WrappedDriver.FindElement(backToProductListSelector);
+        private IWebElement PreviewButtonElement => WrappedDriver.FindElement(previewButtonSelector);
+        private IWebElement SaveButtonElement => WrappedDriver.FindElement(saveButtonSelector);
+        private IWebElement SaveAndContinueButtonElement => WrappedDriver.FindElement(saveAndContinueEditButtonSelector);
+        private IWebElement CopyProductButtonElement => WrappedDriver.FindElement(copyProductButtonSelector);
+        private IWebElement DeleteButtonElement => WrappedDriver.FindElement(deleteButtonSelector);
+
+        #endregion
 
         /// <summary>
-        /// Gets the settings.
+        /// Gets the general information tab.
         /// </summary>
-        public virtual EditorSettingsComponent Settings { get; private set; }
+        /// <value>
+        /// The general information tab.
+        /// </value>
+        public virtual ProductInfoComponent GeneralInfoTab { get; private set; }
 
         /// <summary>
         /// Gets the tabs.
@@ -130,16 +146,15 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <value>
         /// The footer.
         /// </value>
-        public AdminFooterComponent Footer => basePage.Footer;
+        public virtual AdminFooterComponent Footer => basePage.Footer;
 
-        private IWebElement BackToProductListElement => WrappedDriver.FindElement(backToProductListSelector);
-        private IWebElement PreviewButtonElement => WrappedDriver.FindElement(previewButtonSelector);
-        private IWebElement SaveButtonElement => WrappedDriver.FindElement(saveButtonSelector);
-        private IWebElement SaveAndContinueButtonElement => WrappedDriver.FindElement(saveAndContinueEditButtonSelector);
-        private IWebElement CopyProductButtonElement => WrappedDriver.FindElement(copyProductButtonSelector);
-        private IWebElement DeleteButtonElement => WrappedDriver.FindElement(deleteButtonSelector);
-
-        #endregion
+        /// <summary>
+        /// Gets the advanced options component.
+        /// </summary>
+        /// <value>
+        /// The advanced options component.
+        /// </value>
+        public virtual EditorSettingsComponent AdvancedOptions { get; }
 
         #endregion
 
@@ -161,9 +176,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             base.Load();
             basePage.Load();
 
-            pageObjectFactory.PrepareComponent(Tabs);
-            pageObjectFactory.PrepareComponent(GeneralInfo);
-            pageObjectFactory.PrepareComponent(Settings);
+            AdvancedOptions.Load();
+            Tabs.Load();
+            GeneralInfoTab.Load();
 
             return this;
         }
@@ -293,7 +308,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns>
         /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAjaxBusy()
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
@@ -304,7 +319,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -313,7 +328,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -321,7 +336,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }

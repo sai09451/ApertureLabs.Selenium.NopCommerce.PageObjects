@@ -79,7 +79,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// <summary>
         /// Gets the admin header links.
         /// </summary>
-        public IAdminHeaderLinksComponent AdminHeaderLinks { get; private set; }
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks { get; private set; }
 
         /// <summary>
         /// Gets the header links.
@@ -87,7 +87,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// <value>
         /// The header links.
         /// </value>
-        public HeaderLinksComponent HeaderLinks { get; private set; }
+        public virtual HeaderLinksComponent HeaderLinks { get; private set; }
 
         #region Elements
 
@@ -247,7 +247,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return DialogNotificationsErrorElement.Displayed
                 || DialogNotificationsSuccessElement.Displayed
@@ -259,7 +259,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// Handles the notification.
         /// </summary>
         /// <param name="dialogHandler">The element.</param>
-        public void HandleNotification(Action<IWebElement> dialogHandler)
+        public virtual void HandleNotification(Action<IWebElement> dialogHandler)
         {
             if (DialogNotificationsErrorElement.Displayed)
                 dialogHandler(DialogNotificationsErrorElement);
@@ -277,7 +277,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// Dismisses the notifications.
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             if (BarNotificationElement.Displayed)
             {
@@ -298,7 +298,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public
         /// Goes to the customer info page.
         /// </summary>
         /// <returns></returns>
-        public IInfoPage CustomerInfo()
+        public virtual IInfoPage CustomerInfo()
         {
             return HeaderLinks.CustomerInfo();
         }

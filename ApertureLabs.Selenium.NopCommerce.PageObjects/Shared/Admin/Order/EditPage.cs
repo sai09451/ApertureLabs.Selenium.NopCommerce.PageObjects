@@ -53,13 +53,17 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
 
-            Info = new OrderDetailsInfoComponent(
+            InfoTab = new OrderDetailsInfoComponent(
                 By.CssSelector("#tab-info"),
                 WrappedDriver,
                 this);
 
             Tabs = new NavsTabComponent<IEditPage>(
                 By.CssSelector(".nav-tabs.nav"),
+                new ILoadableComponent[]
+                {
+                    InfoTab
+                },
                 WrappedDriver,
                 new NavsTabComponentConfiguration(),
                 this);
@@ -88,7 +92,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The information.
         /// </value>
-        public OrderDetailsInfoComponent Info { get; }
+        public virtual OrderDetailsInfoComponent InfoTab { get; }
 
         /// <summary>
         /// Gets the tabs.
@@ -96,7 +100,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The tabs.
         /// </value>
-        public NavsTabComponent<IEditPage> Tabs { get; }
+        public virtual NavsTabComponent<IEditPage> Tabs { get; }
 
         /// <summary>
         /// Gets the main side bar.
@@ -104,7 +108,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The main side bar.
         /// </value>
-        public IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
+        public virtual IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
 
         /// <summary>
         /// Gets the navigation bar.
@@ -112,7 +116,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The navigation bar.
         /// </value>
-        public IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
+        public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
         /// <summary>
         /// Gets the footer.
@@ -120,7 +124,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The footer.
         /// </value>
-        public AdminFooterComponent Footer => basePage.Footer;
+        public virtual AdminFooterComponent Footer => basePage.Footer;
 
         #endregion
 
@@ -142,7 +146,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
             base.Load();
             basePage.Load();
             Tabs.Load();
-            Info.Load();
+            InfoTab.Load();
 
             // Wait for the loading indicator.
             WrappedDriver
@@ -159,7 +163,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Backs to order list.
         /// </summary>
         /// <returns></returns>
-        public IListPage BackToOrderList()
+        public virtual IListPage BackToOrderList()
         {
             var backToOrderListEl = BackToOrderListElement;
             backToOrderListEl.Click();
@@ -175,7 +179,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <summary>
         /// Back to top if displayed.
         /// </summary>
-        public void BackToTop()
+        public virtual void BackToTop()
         {
             basePage.BackToTop();
         }
@@ -186,7 +190,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <returns>
         /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAjaxBusy()
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
@@ -194,7 +198,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <summary>
         /// Downloads an invoice of the order.
         /// </summary>
-        public void InvoicePdf()
+        public virtual void InvoicePdf()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(5))
@@ -205,7 +209,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Deletes this order.
         /// </summary>
         /// <returns></returns>
-        public IListPage Delete()
+        public virtual IListPage Delete()
         {
             var deleteEl = DeleteElement;
             deleteEl.Click();
@@ -223,7 +227,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -232,7 +236,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -240,7 +244,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }

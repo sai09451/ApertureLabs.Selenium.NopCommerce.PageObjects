@@ -156,7 +156,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="email">The email.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent EnterEmail(string email)
+        public virtual _CreateOrUpdateInfoComponent EnterEmail(string email)
         {
             EmailElement.SetValue(email);
 
@@ -167,7 +167,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the email.
         /// </summary>
         /// <returns></returns>
-        public string GetEmail()
+        public virtual string GetEmail()
         {
             return EmailElement.GetValue<string>();
         }
@@ -177,7 +177,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="password">The password.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent EnterPassword(string password)
+        public virtual _CreateOrUpdateInfoComponent EnterPassword(string password)
         {
             PasswordElement.SetValue(password);
             var changePasswordEl = ChangePasswordElement;
@@ -197,7 +197,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="customerRoles">The customer roles.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent SetCustomerRoles(
+        public virtual _CreateOrUpdateInfoComponent SetCustomerRoles(
             IEnumerable<string> customerRoles)
         {
             var selectedItems = CustomerRolesElement.GetSelectedOptions();
@@ -233,7 +233,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the customer roles.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetCustomerRoles()
+        public virtual IEnumerable<string> GetCustomerRoles()
         {
             return CustomerRolesElement.GetSelectedOptions();
         }
@@ -243,7 +243,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="manager">The manager.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent SetManagerOfVendor(string manager)
+        public virtual _CreateOrUpdateInfoComponent SetManagerOfVendor(string manager)
         {
             ManagerOfVendorElement.SelectByText(manager);
 
@@ -254,7 +254,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the manager of vendor.
         /// </summary>
         /// <returns></returns>
-        public string GetManagerOfVendor()
+        public virtual string GetManagerOfVendor()
         {
             return ManagerOfVendorElement.SelectedOption
                 .TextHelper()
@@ -268,7 +268,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
         /// <exception cref="NoSuchElementException"></exception>
-        public _CreateOrUpdateInfoComponent SetGender(string gender,
+        public virtual _CreateOrUpdateInfoComponent SetGender(string gender,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             // Convert gender string to value of radio buttons.
@@ -296,7 +296,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the gender.
         /// </summary>
         /// <returns></returns>
-        public string GetGender()
+        public virtual string GetGender()
         {
             return GenderElements.SelectedOption
                 .GetParentElement()
@@ -309,7 +309,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="firstName">The first name.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent EnterFirstName(string firstName)
+        public virtual _CreateOrUpdateInfoComponent EnterFirstName(string firstName)
         {
             FirstNameElement.SetValue(firstName);
 
@@ -320,7 +320,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the first name.
         /// </summary>
         /// <returns></returns>
-        public string GetFirstName()
+        public virtual string GetFirstName()
         {
             return FirstNameElement.GetValue<string>();
         }
@@ -330,7 +330,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="lastName">The last name.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent EnterLastName(string lastName)
+        public virtual _CreateOrUpdateInfoComponent EnterLastName(string lastName)
         {
             LastNameElement.SetValue(lastName);
 
@@ -341,7 +341,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the last name.
         /// </summary>
         /// <returns></returns>
-        public string GetLastName()
+        public virtual string GetLastName()
         {
             return LastNameElement.GetValue<string>();
         }
@@ -351,7 +351,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="dateOfBirth">The date of birth.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent EnterDateOfBirth(
+        public virtual _CreateOrUpdateInfoComponent EnterDateOfBirth(
             DateTime? dateOfBirth)
         {
             DateOfBirthElement.SetValue(dateOfBirth);
@@ -363,7 +363,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the date of birth.
         /// </summary>
         /// <returns></returns>
-        public DateTime? GetDateOfBirth()
+        public virtual DateTime? GetDateOfBirth()
         {
             return DateOfBirthElement.GetValue();
         }
@@ -373,7 +373,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="companyName">Name of the company.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent EnterCompanyName(
+        public virtual _CreateOrUpdateInfoComponent EnterCompanyName(
             string companyName)
         {
             CompanyNameElement.SetValue(companyName);
@@ -385,7 +385,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the name of the company.
         /// </summary>
         /// <returns></returns>
-        public string GetCompanyName()
+        public virtual string GetCompanyName()
         {
             return CompanyNameElement.GetValue<string>();
         }
@@ -395,7 +395,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="comment">The comment.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent EnterAdminComment(string comment)
+        public virtual _CreateOrUpdateInfoComponent EnterAdminComment(string comment)
         {
             AdminCommentElement.SetValue(comment);
 
@@ -406,7 +406,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the admin comment.
         /// </summary>
         /// <returns></returns>
-        public string GetAdminComment()
+        public virtual string GetAdminComment()
         {
             return AdminCommentElement.GetValue<string>();
         }
@@ -416,7 +416,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="excempt">if set to <c>true</c> [excempt].</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent SetTaxExcempt(bool excempt)
+        public virtual _CreateOrUpdateInfoComponent SetTaxExcempt(bool excempt)
         {
             TaxExemptElement.Check(excempt);
 
@@ -427,7 +427,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the tax excempt.
         /// </summary>
         /// <returns></returns>
-        public bool GetTaxExcempt()
+        public virtual bool GetTaxExcempt()
         {
             return TaxExemptElement.IsChecked;
         }
@@ -437,7 +437,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="newsLetters">The news letters.</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent SetNewsLetters(IEnumerable<string> newsLetters)
+        public virtual _CreateOrUpdateInfoComponent SetNewsLetters(IEnumerable<string> newsLetters)
         {
             foreach (var newsLetterEl in NewsLetterElements)
             {
@@ -457,7 +457,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the news letters.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetNewsLetters()
+        public virtual IEnumerable<string> GetNewsLetters()
         {
             foreach (var newsLetterEl in NewsLetterElements)
             {
@@ -472,7 +472,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="active">if set to <c>true</c> [active].</param>
         /// <returns></returns>
-        public _CreateOrUpdateInfoComponent SetIsActive(bool active)
+        public virtual _CreateOrUpdateInfoComponent SetIsActive(bool active)
         {
             ActiveElement.Check(active);
 
@@ -483,7 +483,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the is active.
         /// </summary>
         /// <returns></returns>
-        public bool GetIsActive()
+        public virtual bool GetIsActive()
         {
             return ActiveElement.IsChecked;
         }

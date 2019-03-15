@@ -37,7 +37,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Retrieves the items listed.
         /// </summary>
         /// <returns></returns>
-        IList<SearchResult> GetResults();
+        IList<SearchResultComponent> GetResults();
 
         /// <summary>
         /// Gets the sort options.

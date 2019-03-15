@@ -69,7 +69,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Gets the sub categories.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetSubCategories()
+        public virtual IEnumerable<string> GetSubCategories()
         {
             return CategoryElements.Select(e => e.TextHelper().InnerText);
         }

@@ -22,7 +22,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The information.
         /// </value>
-        OrderDetailsInfoComponent Info { get; }
+        OrderDetailsInfoComponent InfoTab { get; }
 
         /// <summary>
         /// Backs to order list.

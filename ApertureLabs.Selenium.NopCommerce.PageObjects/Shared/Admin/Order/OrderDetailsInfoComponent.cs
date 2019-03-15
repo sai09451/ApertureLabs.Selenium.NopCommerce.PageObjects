@@ -109,7 +109,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the order status.
         /// </summary>
         /// <returns></returns>
-        public string GetOrderStatus()
+        public virtual string GetOrderStatus()
         {
             return OrderStatusElement.TextHelper().InnerText;
         }
@@ -118,7 +118,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the order number.
         /// </summary>
         /// <returns></returns>
-        public int GetOrderNumber()
+        public virtual int GetOrderNumber()
         {
             return OrderNumberElement.TextHelper().ExtractInteger();
         }
@@ -127,7 +127,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the order unique identifier.
         /// </summary>
         /// <returns></returns>
-        public string GetOrderGuid()
+        public virtual string GetOrderGuid()
         {
             return OrderGuidElement.TextHelper().InnerText;
         }
@@ -136,7 +136,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the store name.
         /// </summary>
         /// <returns></returns>
-        public string GetStore()
+        public virtual string GetStore()
         {
             return StoreElement.TextHelper().InnerText;
         }
@@ -145,7 +145,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the customer email address.
         /// </summary>
         /// <returns></returns>
-        public string GetCustomerEmailAddress()
+        public virtual string GetCustomerEmailAddress()
         {
             return CustomerEmailAddressElement.TextHelper().InnerText;
         }
@@ -154,7 +154,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the customer ip address.
         /// </summary>
         /// <returns></returns>
-        public string GetCustomerIpAddress()
+        public virtual string GetCustomerIpAddress()
         {
             return CustomerIpAddressElement.TextHelper().InnerText;
         }
@@ -163,7 +163,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the order sub total.
         /// </summary>
         /// <returns></returns>
-        public decimal GetOrderSubTotal()
+        public virtual decimal GetOrderSubTotal()
         {
             return OrderSubTotalElement.TextHelper().ExtractPrice();
         }
@@ -172,7 +172,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the order shipping cost.
         /// </summary>
         /// <returns></returns>
-        public decimal GetOrderShipping()
+        public virtual decimal GetOrderShipping()
         {
             return OrderShippingElement.TextHelper().ExtractPrice();
         }
@@ -181,7 +181,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the order tax.
         /// </summary>
         /// <returns></returns>
-        public decimal GetOrderTax()
+        public virtual decimal GetOrderTax()
         {
             return OrderTaxElement.TextHelper().ExtractPrice();
         }
@@ -190,7 +190,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the order total.
         /// </summary>
         /// <returns></returns>
-        public decimal GetOrderTotal()
+        public virtual decimal GetOrderTotal()
         {
             return OrderTotalElement.TextHelper().ExtractPrice();
         }
@@ -199,7 +199,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the profit.
         /// </summary>
         /// <returns></returns>
-        public decimal GetProfit()
+        public virtual decimal GetProfit()
         {
             return ProfitElement.TextHelper().ExtractPrice();
         }
@@ -208,7 +208,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the payment method.
         /// </summary>
         /// <returns></returns>
-        public string GetPaymentMethod()
+        public virtual string GetPaymentMethod()
         {
             return PaymentMethodElement.TextHelper().InnerText;
         }
@@ -217,7 +217,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the paid status.
         /// </summary>
         /// <returns></returns>
-        public string GetPaidStatus()
+        public virtual string GetPaidStatus()
         {
             return PaymentStatusElement.TextHelper().InnerText;
         }
@@ -226,7 +226,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Gets the date the order was created on.
         /// </summary>
         /// <returns></returns>
-        public DateTime GetCreatedOn()
+        public virtual DateTime GetCreatedOn()
         {
             var dateTimeStr = CreatedOnElement.TextHelper().InnerText;
             var dateTime = DateTime.ParseExact(

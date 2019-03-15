@@ -125,7 +125,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns>
         /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAjaxBusy()
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
@@ -135,7 +135,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public ICreatePage AddNew()
+        public virtual ICreatePage AddNew()
         {
             throw new NotImplementedException();
         }
@@ -145,7 +145,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <param name="format">The format.</param>
         /// <exception cref="NotImplementedException"></exception>
-        public void ExportTo(string format)
+        public virtual void ExportTo(string format)
         {
             throw new NotImplementedException();
         }
@@ -156,7 +156,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <param name="pathToFile">The path to file.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IListPage Import(string pathToFile)
+        public virtual IListPage Import(string pathToFile)
         {
             throw new NotImplementedException();
         }
@@ -166,7 +166,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IListPage DeleteSelected()
+        public virtual IListPage DeleteSelected()
         {
             throw new NotImplementedException();
         }
@@ -177,7 +177,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -186,7 +186,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -194,7 +194,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }

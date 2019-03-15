@@ -62,7 +62,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
         /// Closes this component and returns the parent page.
         /// </summary>
         /// <returns></returns>
-        public T Close()
+        public virtual T Close()
         {
             CloseElement.Click();
 
@@ -73,7 +73,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
         /// Retrieves the InnerText of the content.
         /// </summary>
         /// <returns></returns>
-        public string GetContent()
+        public virtual string GetContent()
         {
             return ContentElement.TextHelper().InnerText;
         }
@@ -82,7 +82,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
         /// Retrieves all link elements in the content.
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<IWebElement> GetLinks()
+        public virtual IReadOnlyList<IWebElement> GetLinks()
         {
             return LinkElements;
         }
@@ -91,7 +91,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.BarNot
         /// Determines whether this bar was displayed in response to a
         /// successfull action or an error action.
         /// </summary>
-        public bool IsSuccessNotification()
+        public virtual bool IsSuccessNotification()
         {
             return WrappedElement.Classes().Contains("success");
         }

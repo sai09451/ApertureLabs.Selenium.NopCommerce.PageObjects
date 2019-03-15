@@ -62,7 +62,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.GiftCa
         /// <param name="resolve">The resolve.</param>
         /// <param name="reject">The reject.</param>
         /// <exception cref="Exception">Failed to determine result of operation.</exception>
-        public void ApplyGiftCard(string code,
+        public virtual void ApplyGiftCard(string code,
             Action<GiftCardBoxComponent> resolve,
             Action<GiftCardBoxComponent> reject)
         {

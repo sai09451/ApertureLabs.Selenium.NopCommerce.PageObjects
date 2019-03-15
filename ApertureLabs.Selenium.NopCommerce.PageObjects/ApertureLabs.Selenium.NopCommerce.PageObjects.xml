@@ -69,6 +69,154 @@
             <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.BasePage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage">
+            <summary>
+            Default implementation of the admin create customer page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.StaticPageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ICreatePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <param name="pageSettings">The page settings.</param>
+            <exception cref="T:System.ArgumentNullException">
+            basePage
+            or
+            pageObjectFactory
+            </exception>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.MainSideBar">
+            <summary>
+            Gets the main side bar.
+            </summary>
+            <value>
+            The main side bar.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.NavigationBar">
+            <summary>
+            Gets the navigation bar.
+            </summary>
+            <value>
+            The navigation bar.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.Footer">
+            <summary>
+            Gets the footer.
+            </summary>
+            <value>
+            The footer.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.Info">
+            <summary>
+            Gets the Info tab.
+            </summary>
+            <value>
+            The information.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.Load">
+            <summary>
+            Loads the component. Checks to see if the current url matches
+            the Route and if not an exception is thrown. If the WrappedDriver
+            is an <see cref="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver" /> event listeners will be
+            added to the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigated" /> event
+            which will call <see cref="M:ApertureLabs.Selenium.PageObjects.PageObject.Dispose" /> on this instance.
+            NOTE:
+            If overriding don't forget to either call base.Load() or make sure
+            the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.Uri" /> and the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.WindowHandle" /> are
+            assigned to.
+            </summary>
+            <returns>
+            A reference to this
+            <see cref="T:OpenQA.Selenium.Support.UI.ILoadableComponent" />.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.BackToCustomerList">
+            <summary>
+            Cancels creating the customer and returns to the customer list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.BackToTop">
+            <summary>
+            Back to top if displayed.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.EnterInformation(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel)">
+            <summary>
+            Enters the models info.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">model</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.IsAjaxBusy">
+            <summary>
+            Determines whether the ajax busy element is present and visible.
+            </summary>
+            <returns>
+            <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.Save">
+            <summary>
+            Saves the customer and returns to the list page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.SaveAndContinue">
+            <summary>
+            Saves the customer and continues to edit them on the
+            <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IEditPage" />.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.CreatePage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage">
             <summary>
             The admin customer edit page.
@@ -108,6 +256,31 @@
             <value>
             The footer.
             </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage.Tabs">
+            <summary>
+            Gets the tabs.
+            </summary>
+            <value>
+            The tabs.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage.Load">
+            <summary>
+            Loads the component. Checks to see if the current url matches
+            the Route and if not an exception is thrown. If the WrappedDriver
+            is an <see cref="T:OpenQA.Selenium.Support.Events.EventFiringWebDriver" /> event listeners will be
+            added to the <see cref="E:OpenQA.Selenium.Support.Events.EventFiringWebDriver.Navigated" /> event
+            which will call <see cref="M:ApertureLabs.Selenium.PageObjects.PageObject.Dispose" /> on this instance.
+            NOTE:
+            If overriding don't forget to either call base.Load() or make sure
+            the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.Uri" /> and the <see cref="P:ApertureLabs.Selenium.PageObjects.PageObject.WindowHandle" /> are
+            assigned to.
+            </summary>
+            <returns>
+            A reference to this
+            <see cref="T:OpenQA.Selenium.Support.UI.ILoadableComponent" />.
+            </returns>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage.BackToCustomerList">
             <summary>
@@ -150,11 +323,94 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage.ImpersonateCustomer">
+            <summary>
+            Impersonates the customer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.EditPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IAddressCreatePage">
+            <summary>
+            Represents the AddressCreate.cshtml page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IAddressCreatePage.EnterAddress(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.AddressModel)">
+            <summary>
+            Enters the address.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IAddressCreatePage.GetAddress">
+            <summary>
+            Gets the address.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IAddressCreatePage.BackToCustomerDetails">
+            <summary>
+            Returns to the customer details.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IAddressCreatePage.Save">
+            <summary>
+            Saves the address. Should check for any notifications after
+            calling this method.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ICreatePage">
             <summary>
             The admin customer create page.
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ICreatePage.BackToCustomerList">
+            <summary>
+            Cancels creating the customer and returns to the customer list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ICreatePage.EnterInformation(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel)">
+            <summary>
+            Enters the inforamation.
+            </summary>
+            <param name="model">The model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ICreatePage.Save">
+            <summary>
+            Saves the customer and returns to the list page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ICreatePage.SaveAndContinue">
+            <summary>
+            Saves the customer and continues to edit them on the
+            <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IEditPage"/>.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IEditPage">
             <summary>
@@ -333,6 +589,25 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.ListPageCustomerRowComponent">
             <summary>
             The row component of the admin customer list page grid.
@@ -412,6 +687,346 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateActivityLogComponent">
+            <summary>
+            Represents the _CreateOrUpdate.ActivityLog.cshtml partial view.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateActivityLogComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateActivityLogComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateActivityLogComponent.ActivityLog">
+            <summary>
+            Gets the activity log.
+            </summary>
+            <value>
+            The activity log.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateActivityLogComponent.Load">
+            <summary>
+            If overloaded don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateAddressesComponent">
+            <summary>
+            Represents the _CreateOrUpdate.Addresses.cshtml page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateAddressesComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateAddressesComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <exception cref="T:System.ArgumentNullException">pageObjectFactory</exception>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateAddressesComponent.AddressesGrid">
+            <summary>
+            Gets the addresses grid.
+            </summary>
+            <value>
+            The addresses grid.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateAddressesComponent.Load">
+            <summary>
+            If overloaded don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateAddressesComponent.AddNewAddress">
+            <summary>
+            Goes to the create new address page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateCurrentShoppingCartComponent">
+            <summary>
+            Represents the _CreateOrUpdate.CurrentShoppingCart.cshtml page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateCurrentShoppingCartComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateCurrentShoppingCartComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <exception cref="T:System.ArgumentNullException">pageObjectFactory</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateCurrentShoppingCartComponent.Load">
+            <summary>
+            If overloaded don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateCurrentShoppingCartComponent.SetShoppingCartType(System.String,System.StringComparison)">
+            <summary>
+            Sets the type of the shopping cart (Defaults are 'Shopping cart' 
+            and 'Wishlist').
+            </summary>
+            <param name="shoppingCartType">Type of the shopping cart.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateImpersonateComponent">
+            <summary>
+            Represents the _CreateOrUpdate.Impersonate.cshtml partial view.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateImpersonateComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateImpersonateComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateImpersonateComponent.PlaceOrder">
+            <summary>
+            Begins the impersonation session.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent">
+            <summary>
+            Corresponds to the _CreateOrUpdate.Info.cshtml view.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.Load">
+            <summary>
+            If overloaded don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.EnterEmail(System.String)">
+            <summary>
+            Enters the email.
+            </summary>
+            <param name="email">The email.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetEmail">
+            <summary>
+            Gets the email.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.EnterPassword(System.String)">
+            <summary>
+            Enters the password.
+            </summary>
+            <param name="password">The password.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.SetCustomerRoles(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Sets the customer roles.
+            </summary>
+            <param name="customerRoles">The customer roles.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetCustomerRoles">
+            <summary>
+            Gets the customer roles.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.SetManagerOfVendor(System.String)">
+            <summary>
+            Sets the manager of vendor.
+            </summary>
+            <param name="manager">The manager.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetManagerOfVendor">
+            <summary>
+            Gets the manager of vendor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.SetGender(System.String,System.StringComparison)">
+            <summary>
+            Sets the gender.
+            </summary>
+            <param name="gender">The gender.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetGender">
+            <summary>
+            Gets the gender.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.EnterFirstName(System.String)">
+            <summary>
+            Enters the first name.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.EnterLastName(System.String)">
+            <summary>
+            Enters the last name.
+            </summary>
+            <param name="lastName">The last name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.EnterDateOfBirth(System.Nullable{System.DateTime})">
+            <summary>
+            Enters the date of birth.
+            </summary>
+            <param name="dateOfBirth">The date of birth.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetDateOfBirth">
+            <summary>
+            Gets the date of birth.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.EnterCompanyName(System.String)">
+            <summary>
+            Enters the name of the company.
+            </summary>
+            <param name="companyName">Name of the company.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetCompanyName">
+            <summary>
+            Gets the name of the company.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.EnterAdminComment(System.String)">
+            <summary>
+            Enters the admin comment.
+            </summary>
+            <param name="comment">The comment.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetAdminComment">
+            <summary>
+            Gets the admin comment.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.SetTaxExcempt(System.Boolean)">
+            <summary>
+            Sets the tax excempt.
+            </summary>
+            <param name="excempt">if set to <c>true</c> [excempt].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetTaxExcempt">
+            <summary>
+            Gets the tax excempt.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.SetNewsLetters(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Sets the news letters.
+            </summary>
+            <param name="newsLetters">The news letters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetNewsLetters">
+            <summary>
+            Gets the news letters.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.SetIsActive(System.Boolean)">
+            <summary>
+            Sets the is active.
+            </summary>
+            <param name="active">if set to <c>true</c> [active].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateInfoComponent.GetIsActive">
+            <summary>
+            Gets the is active.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateOrdersComponent">
+            <summary>
+            Represents the _CreateOrUpdate.Orders.cshtml page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateOrdersComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateOrdersComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateOrdersComponent.OrdersGrid">
+            <summary>
+            Gets the orders grid.
+            </summary>
+            <value>
+            The orders grid.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateOrdersComponent.Load">
+            <summary>
+            If overloaded don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers._CreateOrUpdateOrdersComponent.ViewOrder(OpenQA.Selenium.IWebElement)">
+            <summary>
+            Views the order. Need to pass in a row from the OrdersGrids.
+            </summary>
+            <param name="gridRow">The grid row.</param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage">
             <summary>
             The admin home page.
@@ -481,6 +1096,25 @@
             <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.HomePage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home.IHomePage">
             <summary>
             The home page of the Admin area.
@@ -537,6 +1171,39 @@
               <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+              <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IHasTabsPage`1">
+            <summary>
+            The interface for pages that have a 'tab' based interface.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IHasTabsPage`1.Tabs">
+            <summary>
+            Gets the tabs.
+            </summary>
+            <value>
+            The tabs.
+            </value>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.EditPage">
             <summary>
             The order edit page.
@@ -553,7 +1220,7 @@
             <param name="driver">The driver.</param>
             <param name="pageSettings">The page settings.</param>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.EditPage.Info">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.EditPage.InfoTab">
             <summary>
             Gets the information tab.
             </summary>
@@ -636,6 +1303,25 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.EditPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.EditPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.EditPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.IEditPage">
             <summary>
             The order edit page.
@@ -650,7 +1336,7 @@
             The tabs.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.IEditPage.Info">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.IEditPage.InfoTab">
             <summary>
             Gets the information tab.
             </summary>
@@ -794,6 +1480,25 @@
             <param name="orderNumber">The order number.</param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.ListPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.ListPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.ListPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order.OrderDetailsBillingShippingComponent">
             <summary>
@@ -1090,6 +1795,25 @@
             <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ICreatePage">
             <summary>
             The create new product page.
@@ -1374,6 +2098,25 @@
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent">
             <summary>
             TODO: Finish component.
@@ -1569,6 +2312,14 @@
             <param name="driver">The driver.</param>
             <param name="pageSettings">The page settings.</param>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent.IsImpersonating">
+            <summary>
+            Determines whether this customer being impersonating.
+            </summary>
+            <returns>
+            <c>true</c> if this instance is impersonating; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent.GoToAdmin">
             <summary>
             Goes to the admin page.
@@ -1587,6 +2338,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.AdminHeaderLinksComponent.FinishImpersonation">
+            <summary>
+            Finishes the impersonation.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.IAdminHeaderLinksComponent">
             <summary>
             Represents the '.admin-header-links' element on the public pages. This
@@ -1599,6 +2356,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.IAdminHeaderLinksComponent.IsImpersonating">
+            <summary>
+            Determines whether this customer being impersonating.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is impersonating; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.IAdminHeaderLinksComponent.GoToAdmin">
             <summary>
             Goes to the admin page.
@@ -1608,6 +2373,12 @@
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.IAdminHeaderLinksComponent.ManagePage">
             <summary>
             Navigates to the edit product page on the admin.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminHeaderLinks.IAdminHeaderLinksComponent.FinishImpersonation">
+            <summary>
+            Finishes the impersonation.
             </summary>
             <returns></returns>
         </member>
@@ -7376,6 +8147,115 @@
             <summary>
             A value indicating whether "allow search by vendor" is enabled.
             </summary>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel">
+            <summary>
+            The model used to create new customers.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>
+            The password.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.CustomerRoles">
+            <summary>
+            Gets or sets the customer roles.
+            </summary>
+            <value>
+            The customer roles.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.ManagerOfVendor">
+            <summary>
+            Gets or sets the manager of vendor.
+            </summary>
+            <value>
+            The manager of vendor.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.Gender">
+            <summary>
+            Gets or sets the gender.
+            </summary>
+            <value>
+            The gender.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.DateOfBirth">
+            <summary>
+            Gets or sets the date of birth.
+            </summary>
+            <value>
+            The date of birth.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.CompanyName">
+            <summary>
+            Gets or sets the name of the company.
+            </summary>
+            <value>
+            The name of the company.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.AdminComment">
+            <summary>
+            Gets or sets the admin comment.
+            </summary>
+            <value>
+            The admin comment.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.IsTaxExempt">
+            <summary>
+            Gets or sets a value indicating whether this instance is tax exempt.
+            </summary>
+            <value>
+              <c>true</c> if this instance is tax exempt; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.NewsLetters">
+            <summary>
+            Creates new sletters.
+            </summary>
+            <value>
+            The news letters.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel.Active">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel"/> is active.
+            </summary>
+            <value>
+              <c>true</c> if active; otherwise, <c>false</c>.
+            </value>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerSearchModel">
             <summary>

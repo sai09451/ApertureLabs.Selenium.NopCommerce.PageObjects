@@ -95,7 +95,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// </summary>
         /// <param name="check">if set to <c>true</c> [check].</param>
         /// <returns></returns>
-        public ListPageCustomerRowComponent Check(bool check)
+        public virtual ListPageCustomerRowComponent Check(bool check)
         {
             CheckboxElement.Check(check);
 
@@ -108,7 +108,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns>
         ///   <c>true</c> if this instance is checked; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsChecked()
+        public virtual bool IsChecked()
         {
             return CheckboxElement.IsChecked;
         }
@@ -117,7 +117,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the email.
         /// </summary>
         /// <returns></returns>
-        public string GetEmail()
+        public virtual string GetEmail()
         {
             return EmailElement.TextHelper().InnerText;
         }
@@ -126,7 +126,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the name.
         /// </summary>
         /// <returns></returns>
-        public string GetName()
+        public virtual string GetName()
         {
             return NameElement.TextHelper().InnerText;
         }
@@ -135,7 +135,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the customer roles.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetCustomerRoles()
+        public virtual IEnumerable<string> GetCustomerRoles()
         {
             return CustomerRolesElement
                 .TextHelper()
@@ -148,7 +148,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the name of the company.
         /// </summary>
         /// <returns></returns>
-        public string GetCompanyName()
+        public virtual string GetCompanyName()
         {
             return CompanyNameElement.TextHelper().InnerText;
         }
@@ -159,7 +159,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns>
         ///   <c>true</c> if this instance is active; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsActive()
+        public virtual bool IsActive()
         {
             return ActiveElement.Classes().Contains("fa-check");
         }
@@ -168,7 +168,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the <see cref="DateTime"/> the customer was created on.
         /// </summary>
         /// <returns></returns>
-        public DateTime GetCreatedOn()
+        public virtual DateTime GetCreatedOn()
         {
             return CreatedOnElement
                 .TextHelper()
@@ -179,7 +179,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Lasts the activity <see cref="DateTime"/> of the customer.
         /// </summary>
         /// <returns></returns>
-        public DateTime LastActivity()
+        public virtual DateTime LastActivity()
         {
             return LastActiveOnElement
                 .TextHelper()
@@ -190,7 +190,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Clicks the edit button.
         /// </summary>
         /// <returns></returns>
-        public IEditPage Edit()
+        public virtual IEditPage Edit()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(2))

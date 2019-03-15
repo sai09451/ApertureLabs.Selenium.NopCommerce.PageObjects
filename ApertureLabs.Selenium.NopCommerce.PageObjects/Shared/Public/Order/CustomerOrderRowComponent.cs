@@ -78,7 +78,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Order
         /// Views the details.
         /// </summary>
         /// <returns></returns>
-        public IOrderDetailsPage ViewDetails()
+        public virtual IOrderDetailsPage ViewDetails()
         {
             DetailsElement.Click();
 

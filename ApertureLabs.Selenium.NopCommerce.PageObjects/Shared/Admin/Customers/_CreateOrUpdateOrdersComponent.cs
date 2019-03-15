@@ -62,7 +62,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The orders grid.
         /// </value>
-        public KGridComponent<_CreateOrUpdateOrdersComponent> OrdersGrid { get; }
+        public virtual KGridComponent<_CreateOrUpdateOrdersComponent> OrdersGrid { get; }
 
         #endregion
 
@@ -87,7 +87,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <param name="gridRow">The grid row.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Order.IEditPage ViewOrder(IWebElement gridRow)
+        public virtual Order.IEditPage ViewOrder(IWebElement gridRow)
         {
             if (gridRow == null)
                 throw new ArgumentException(nameof(gridRow));

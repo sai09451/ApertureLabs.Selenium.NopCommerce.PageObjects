@@ -190,7 +190,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return AlertElements.Any();
         }
@@ -199,7 +199,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             foreach (var el in AlertElements)
                 element(el);
@@ -208,7 +208,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             foreach (var el in AlertDismissElements)
                 el.Click();

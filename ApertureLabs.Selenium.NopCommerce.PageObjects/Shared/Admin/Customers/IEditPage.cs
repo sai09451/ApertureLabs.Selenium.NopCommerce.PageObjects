@@ -1,10 +1,13 @@
-﻿namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
+﻿using System;
+
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
 {
     /// <summary>
     /// The admin customer edit page.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage" />
-    public interface IEditPage : IBasePage
+    public interface IEditPage : IBasePage,
+        IHasTabsPage<IEditPage>
     {
         /// <summary>
         /// Returns to the customer list.

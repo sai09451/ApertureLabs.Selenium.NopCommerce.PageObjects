@@ -52,7 +52,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Checks if the product page has a discount applied to it.
         /// </summary>
-        public bool HasAppliedCode
+        public virtual bool HasAppliedCode
         {
             get
             {
@@ -69,7 +69,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <exception cref="NullReferenceException">
         /// Thrown if there is no applied discount.
         /// </exception>
-        public string AppliedCode
+        public virtual string AppliedCode
         {
             get
             {
@@ -85,7 +85,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// Enters a discount.
         /// </summary>
         /// <param name="code"></param>
-        public void EnterDiscount(string code)
+        public virtual void EnterDiscount(string code)
         {
             ChallengeCodeInputElement.SetValue(code);
 
@@ -102,7 +102,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// Alias for EnterDiscount.
         /// </summary>
         /// <param name="code"></param>
-        public void EnterCode(string code)
+        public virtual void EnterCode(string code)
         {
             EnterDiscount(code);
         }
@@ -111,7 +111,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// Alias for EnterDiscount.
         /// </summary>
         /// <param name="code"></param>
-        public void EnterCouponCode(string code)
+        public virtual void EnterCouponCode(string code)
         {
             EnterDiscount(code);
         }
@@ -119,7 +119,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Removes the discount.
         /// </summary>
-        public void RemoveDiscount()
+        public virtual void RemoveDiscount()
         {
             RemoveAppliedDisountElement.Click();
         }
@@ -127,7 +127,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Alias for RemoveDiscount.
         /// </summary>
-        public void RemoveCode()
+        public virtual void RemoveCode()
         {
             RemoveDiscount();
         }
@@ -135,7 +135,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
         /// <summary>
         /// Alias for EnterDiscount.
         /// </summary>
-        public void RemoveCouponCode()
+        public virtual void RemoveCouponCode()
         {
             RemoveDiscount();
         }

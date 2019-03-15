@@ -92,7 +92,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Gets the admin header links.
         /// </summary>
-        public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         #endregion
 
@@ -340,7 +340,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -349,7 +349,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -357,7 +357,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
@@ -368,7 +368,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <param name="category">The category.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
-        public IProductsByCategoryPage SelectCategory(string category,
+        public virtual IProductsByCategoryPage SelectCategory(string category,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             SelectCategoryHelper(category, stringComparison);
@@ -382,7 +382,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <param name="category">The category.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
-        public IParentCategoryPage SelectParentCategory(string category,
+        public virtual IParentCategoryPage SelectParentCategory(string category,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             SelectCategoryHelper(category, stringComparison);

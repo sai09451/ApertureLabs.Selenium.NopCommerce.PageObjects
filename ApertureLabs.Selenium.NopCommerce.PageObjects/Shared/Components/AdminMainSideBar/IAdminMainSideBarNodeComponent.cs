@@ -8,25 +8,25 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
     /// A node present in the admin main sidebar.
     /// </summary>
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.IPageComponent" />
-    public interface IAdminMainSideBarNode : IFluidPageComponent<IAdminMainSideBarNode>
+    public interface IAdminMainSideBarNodeComponent : IFluidPageComponent<IAdminMainSideBarNodeComponent>
     {
         /// <summary>
         /// Gets the child items of this node.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<IAdminMainSideBarNode> GetItems();
+        IEnumerable<IAdminMainSideBarNodeComponent> GetItems();
 
         /// <summary>
         /// Tries to expand the node.
         /// </summary>
         /// <returns></returns>
-        IAdminMainSideBarNode Expand();
+        IAdminMainSideBarNodeComponent Expand();
 
         /// <summary>
         /// Tries to collapses the node.
         /// </summary>
         /// <returns></returns>
-        IAdminMainSideBarNode Collapse();
+        IAdminMainSideBarNodeComponent Collapse();
 
         /// <summary>
         /// Gets the name.

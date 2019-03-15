@@ -83,7 +83,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// <summary>
         /// Returns true if a user is signed into the site.
         /// </summary>
-        public bool IsLoggedIn => WrappedDriver.FindElements(LogoutSelector).Any();
+        public virtual bool IsLoggedIn => WrappedDriver.FindElements(LogoutSelector).Any();
 
         #endregion
 
@@ -93,7 +93,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// Retrieves the viewmodel.
         /// </summary>
         /// <returns></returns>
-        public HeaderLinksModel ViewModel()
+        public virtual HeaderLinksModel ViewModel()
         {
             var wait = WrappedDriver.Wait(TimeSpan.FromSeconds(30));
 
@@ -134,7 +134,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
         /// <exception cref="NoSuchElementException"></exception>
-        public HeaderLinksComponent SetCurrency(string currency,
+        public virtual HeaderLinksComponent SetCurrency(string currency,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             var alreadySelected = String.Equals(
@@ -164,7 +164,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// Gets the currency.
         /// </summary>
         /// <returns></returns>
-        public string GetCurrency()
+        public virtual string GetCurrency()
         {
             return CurrencyElement.SelectedOption.TextHelper().InnerText;
         }
@@ -176,7 +176,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
         /// <exception cref="NoSuchElementException"></exception>
-        public HeaderLinksComponent SetLanguage(string language,
+        public virtual HeaderLinksComponent SetLanguage(string language,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             var alreadySelected = String.Equals(
@@ -206,7 +206,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// Gets the language.
         /// </summary>
         /// <returns></returns>
-        public string GetLanguage()
+        public virtual string GetLanguage()
         {
             return LanguageElement.SelectedOption.TextHelper().InnerText;
         }
@@ -217,7 +217,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public HomePage Login(string email, string password)
+        public virtual HomePage Login(string email, string password)
         {
             //var cookie = WrappedDriver.Manage().Cookies
             //    .GetCookieNamed("Nop.Authentication");
@@ -247,7 +247,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Header
         /// Goes to the customer info page.
         /// </summary>
         /// <returns></returns>
-        public IInfoPage CustomerInfo()
+        public virtual IInfoPage CustomerInfo()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(2))

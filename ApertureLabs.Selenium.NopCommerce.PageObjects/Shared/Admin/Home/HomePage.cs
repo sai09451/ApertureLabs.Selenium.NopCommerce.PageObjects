@@ -43,7 +43,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
             IWebDriver driver,
             PageSettings pageSettings)
             : base(driver,
-                  pageSettings.BaseUrl)
+                  pageSettings.AdminBaseUrl)
         {
             this.basePage = basePage;
             this.pageObjectFactory = pageObjectFactory;
@@ -132,7 +132,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         /// <returns>
         /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAjaxBusy()
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
@@ -143,7 +143,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -152,7 +152,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -160,7 +160,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Home
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }

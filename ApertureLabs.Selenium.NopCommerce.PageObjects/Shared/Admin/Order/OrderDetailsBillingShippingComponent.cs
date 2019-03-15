@@ -66,7 +66,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The shipments.
         /// </value>
-        public KGridComponent<OrderDetailsBillingShippingComponent> Shipments { get; }
+        public virtual KGridComponent<OrderDetailsBillingShippingComponent> Shipments { get; }
 
         #endregion
 
@@ -90,7 +90,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public AddressModel GetBillingAddress()
+        public virtual AddressModel GetBillingAddress()
         {
             throw new NotImplementedException();
         }
@@ -100,7 +100,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public AddressModel GetShippingAddress()
+        public virtual AddressModel GetShippingAddress()
         {
             throw new NotImplementedException();
         }
@@ -110,7 +110,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public string GetShippingMethod()
+        public virtual string GetShippingMethod()
         {
             throw new NotImplementedException();
         }
@@ -120,7 +120,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public string GetShippingStatus()
+        public virtual string GetShippingStatus()
         {
             throw new NotImplementedException();
         }

@@ -13,7 +13,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
     /// <summary>
     /// SearchResult model.
     /// </summary>
-    public class SearchResult : IPageComponent
+    public class SearchResultComponent : IPageComponent
     {
         #region Fields
 
@@ -38,13 +38,13 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SearchResult"/> class.
+        /// Initializes a new instance of the <see cref="SearchResultComponent"/> class.
         /// </summary>
         /// <param name="selector">The selector.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="element">The element.</param>
         /// <param name="pageSettings">The page settings.</param>
-        public SearchResult(By selector,
+        public SearchResultComponent(By selector,
             IPageObjectFactory pageObjectFactory,
             IWebElement element,
             PageSettings pageSettings)
@@ -130,7 +130,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// <summary>
         /// Adds to cart.
         /// </summary>
-        public virtual BarNotificationComponent<SearchResult> AddToCart()
+        public virtual BarNotificationComponent<SearchResultComponent> AddToCart()
         {
             AddToCartElement.Click();
 
@@ -142,7 +142,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
                     d => !AjaxLoadingElement.Displayed);
 
             return pageObjectFactory.PrepareComponent(
-                new BarNotificationComponent<SearchResult>(
+                new BarNotificationComponent<SearchResultComponent>(
                     WrappedDriver,
                     this));
         }

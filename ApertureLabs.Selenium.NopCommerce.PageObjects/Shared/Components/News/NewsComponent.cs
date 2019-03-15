@@ -39,7 +39,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News
         /// <summary>
         /// Used to get/set if the news element box is expanded.
         /// </summary>
-        public bool IsExpanded
+        public virtual bool IsExpanded
         {
             get
             {
@@ -66,7 +66,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.News
         /// Returns a list of news items.
         /// </summary>
         /// <returns></returns>
-        public IReadOnlyList<NewsItem> NewsItems()
+        public virtual IReadOnlyList<NewsItem> NewsItems()
         {
             return WrappedElement.FindElements(panelHeadingSelector)
                 .Select(e => new NewsItem(e))

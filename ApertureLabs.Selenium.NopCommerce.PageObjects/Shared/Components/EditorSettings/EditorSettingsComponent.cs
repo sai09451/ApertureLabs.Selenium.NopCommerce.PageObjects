@@ -100,7 +100,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Editor
 
         #region Methods
 
-        /// <inheritDoc/>
+        /// <summary>
+        /// If overriding don't forget to call base.Load() or make sure to
+        /// assign the WrappedElement.
+        /// </summary>
+        /// <returns></returns>
         public override ILoadableComponent Load()
         {
             base.Load();
@@ -115,7 +119,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Editor
         /// Gets the mode ("Basic" or "Advanced").
         /// </summary>
         /// <returns>Basic or Advanced.</returns>
-        public EditorMode GetMode()
+        public virtual EditorMode GetMode()
         {
             return AdvancedCheckboxElement.IsChecked
                 ? EditorMode.Advanced
@@ -128,7 +132,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Editor
         /// <param name="mode">The mode.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
-        public EditorSettingsComponent SetMode(EditorMode mode,
+        public virtual EditorSettingsComponent SetMode(EditorMode mode,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             if (GetMode() != mode)
@@ -146,7 +150,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Editor
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns></returns>
-        public EditorSettingsComponent Settings(
+        public virtual EditorSettingsComponent Settings(
             Action<IEnumerable<SettingGroup>> action)
         {
             OpenModal();

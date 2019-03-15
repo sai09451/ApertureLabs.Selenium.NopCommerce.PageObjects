@@ -91,7 +91,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <c>false</c> unmarks the product for removal.
         /// </param>
         /// <returns></returns>
-        public WishlistRowComponent MarkForRemoval(bool remove)
+        public virtual WishlistRowComponent MarkForRemoval(bool remove)
         {
             RemoveFromCartElement.Check(remove);
 
@@ -104,7 +104,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <returns>
         ///   <c>true</c> if the product is marked for removal; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsMarkedForRemoval()
+        public virtual bool IsMarkedForRemoval()
         {
             return RemoveFromCartElement.IsChecked;
         }
@@ -115,7 +115,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <param name="addToCart">if set to <c>true</c> [add to cart].</param>
         /// <returns></returns>
         /// <exception cref="ElementNotVisibleException"></exception>
-        public WishlistRowComponent MarkForAddToCart(bool addToCart)
+        public virtual WishlistRowComponent MarkForAddToCart(bool addToCart)
         {
             if (!AddToCartElement.Displayed)
                 throw new ElementNotVisibleException();
@@ -129,7 +129,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Gets the image URL.
         /// </summary>
         /// <returns></returns>
-        public string GetImageUrl()
+        public virtual string GetImageUrl()
         {
             return ImageElement.GetAttribute("href");
         }
@@ -138,7 +138,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Gets the name of the product.
         /// </summary>
         /// <returns></returns>
-        public string GetProductName()
+        public virtual string GetProductName()
         {
             return ProductTitleElement.TextHelper().InnerText;
         }
@@ -147,7 +147,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Gets the price.
         /// </summary>
         /// <returns></returns>
-        public decimal GetPrice()
+        public virtual decimal GetPrice()
         {
             return PriceElement.TextHelper().ExtractPrice();
         }
@@ -156,7 +156,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Gets the quantity.
         /// </summary>
         /// <returns></returns>
-        public int GetQuantity()
+        public virtual int GetQuantity()
         {
             return int.Parse(QuantityElement.GetValue<string>());
         }
@@ -166,7 +166,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// </summary>
         /// <param name="quantity">The quantity.</param>
         /// <returns></returns>
-        public WishlistRowComponent SetQuantity(int quantity)
+        public virtual WishlistRowComponent SetQuantity(int quantity)
         {
             QuantityElement.SetValue(quantity);
 
@@ -177,7 +177,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Gets the total.
         /// </summary>
         /// <returns></returns>
-        public decimal GetTotal()
+        public virtual decimal GetTotal()
         {
             return SubTotalElement.TextHelper().ExtractPrice();
         }
@@ -186,7 +186,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Goes to the product.
         /// </summary>
         /// <returns></returns>
-        public IBaseProductPage GoToProduct()
+        public virtual IBaseProductPage GoToProduct()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(5))

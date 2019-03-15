@@ -74,12 +74,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// Gets the items.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IAdminMainSideBarNode> GetItems()
+        public virtual IEnumerable<IAdminMainSideBarNodeComponent> GetItems()
         {
             foreach (var el in ParentTreeElement.Children())
             {
                 yield return pageObjectFactory.PrepareComponent(
-                    new AdminMainSideBarNode(
+                    new AdminMainSideBarNodeComponent(
                         ByElement.FromElement(el),
                         null,
                         pageObjectFactory,
@@ -94,7 +94,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// <param name="searchTerm">The search term.</param>
         /// <returns></returns>
         /// <exception cref="NoSuchElementException"></exception>
-        public T Search<T>(string searchTerm) where T : IPageObject
+        public virtual T Search<T>(string searchTerm) where T : IPageObject
         {
             SearchBoxElement.SetValue(searchTerm);
 

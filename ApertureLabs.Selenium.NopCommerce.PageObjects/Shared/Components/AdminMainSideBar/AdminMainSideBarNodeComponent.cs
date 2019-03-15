@@ -11,9 +11,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
     /// <summary>
     /// AdminmainSideBarNode.
     /// </summary>
-    /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode" />
-    public class AdminMainSideBarNode : FluidPageComponent<IAdminMainSideBarNode>,
-        IAdminMainSideBarNode
+    /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent" />
+    public class AdminMainSideBarNodeComponent : FluidPageComponent<IAdminMainSideBarNodeComponent>,
+        IAdminMainSideBarNodeComponent
     {
         #region Fields
 
@@ -31,14 +31,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         #region Constructor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AdminMainSideBarNode"/> class.
+        /// Initializes a new instance of the <see cref="AdminMainSideBarNodeComponent"/> class.
         /// </summary>
         /// <param name="selector">The selector.</param>
         /// <param name="parent">The parent.</param>
         /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
-        public AdminMainSideBarNode(By selector,
-            IAdminMainSideBarNode parent,
+        public AdminMainSideBarNodeComponent(By selector,
+            IAdminMainSideBarNodeComponent parent,
             IPageObjectFactory pageObjectFactory,
             IWebDriver driver)
             : base(selector, driver, parent)
@@ -84,7 +84,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// Tries to collapses the node.
         /// </summary>
         /// <returns></returns>
-        public IAdminMainSideBarNode Collapse()
+        public virtual IAdminMainSideBarNodeComponent Collapse()
         {
             if (CanBeExpanded && IsExpanded())
             {
@@ -103,7 +103,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// Tries to expand the node.
         /// </summary>
         /// <returns></returns>
-        public IAdminMainSideBarNode Expand()
+        public virtual IAdminMainSideBarNodeComponent Expand()
         {
             if (CanBeExpanded && !IsExpanded())
             {
@@ -122,7 +122,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// Gets the icon class.
         /// </summary>
         /// <returns></returns>
-        public string GetIcon()
+        public virtual string GetIcon()
         {
             var firstChildEl = NodeTitleElement.Children().FirstOrDefault();
 
@@ -144,12 +144,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// Gets the child items of this node.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IAdminMainSideBarNode> GetItems()
+        public virtual IEnumerable<IAdminMainSideBarNodeComponent> GetItems()
         {
             foreach (var el in SubMenuElement.Children())
             {
                 yield return pageObjectFactory.PrepareComponent(
-                    new AdminMainSideBarNode(
+                    new AdminMainSideBarNodeComponent(
                         ByElement.FromElement(el),
                         this,
                         pageObjectFactory,
@@ -161,7 +161,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// Gets the name.
         /// </summary>
         /// <returns></returns>
-        public string GetName()
+        public virtual string GetName()
         {
             return NodeTitleElement.TextHelper().InnerText;
         }
@@ -172,7 +172,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Select<T>() where T : IPageObject
+        public virtual T Select<T>() where T : IPageObject
         {
             if (CanBeExpanded)
                 throw new UriFormatException();

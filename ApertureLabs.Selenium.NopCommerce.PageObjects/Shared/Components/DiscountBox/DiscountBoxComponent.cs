@@ -62,7 +62,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Discou
         /// Gets the applied coupon codes.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetAppliedDiscountCodes()
+        public virtual IEnumerable<string> GetAppliedDiscountCodes()
         {
             return CurrentCodeContainers
                 .Select(e => GetCouponCodeOfCurrentCode(e))
@@ -75,7 +75,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Discou
         /// <param name="discount">The discount.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <exception cref="NoSuchElementException"></exception>
-        public void RemoveAppliedDiscount(string discount,
+        public virtual void RemoveAppliedDiscount(string discount,
             StringComparison stringComparison = StringComparison.Ordinal)
         {
             foreach (var currentCodeEl in CurrentCodeContainers)
@@ -109,7 +109,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Discou
         /// <exception cref="Exception">
         /// Failed to identify if the operation succeeded or failed.
         /// </exception>
-        public void ApplyDiscount(string couponCode,
+        public virtual void ApplyDiscount(string couponCode,
             Action<DiscountBoxComponent> resolve,
             Action<DiscountBoxComponent> reject)
         {

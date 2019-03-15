@@ -68,7 +68,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The addresses grid.
         /// </value>
-        public KGridComponent<_CreateOrUpdateAddressesComponent> AddressesGrid { get; }
+        public virtual KGridComponent<_CreateOrUpdateAddressesComponent> AddressesGrid { get; }
 
         #endregion
 
@@ -91,7 +91,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Goes to the create new address page.
         /// </summary>
         /// <returns></returns>
-        public IAddressCreatePage AddNewAddress()
+        public virtual IAddressCreatePage AddNewAddress()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(2))

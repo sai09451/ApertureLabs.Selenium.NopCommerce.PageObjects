@@ -145,7 +145,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The customers grid.
         /// </value>
-        public KGridComponent<IListPage> CustomersGrid { get; }
+        public virtual KGridComponent<IListPage> CustomersGrid { get; }
 
         /// <summary>
         /// Gets the main side bar.
@@ -153,7 +153,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The main side bar.
         /// </value>
-        public IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
+        public virtual IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
 
         /// <summary>
         /// Gets the navigation bar.
@@ -161,7 +161,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The navigation bar.
         /// </value>
-        public IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
+        public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
         /// <summary>
         /// Gets the footer.
@@ -169,7 +169,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The footer.
         /// </value>
-        public AdminFooterComponent Footer => basePage.Footer;
+        public virtual AdminFooterComponent Footer => basePage.Footer;
 
         #endregion
 
@@ -211,7 +211,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Navigates to the customer creation page.
         /// </summary>
         /// <returns></returns>
-        public ICreatePage AddNew()
+        public virtual ICreatePage AddNew()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(2))
@@ -223,7 +223,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <summary>
         /// Back to top if displayed.
         /// </summary>
-        public void BackToTop()
+        public virtual void BackToTop()
         {
             basePage.BackToTop();
         }
@@ -237,7 +237,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <param name="expectedFileName">The expected file name.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <exception cref="NoSuchElementException"></exception>
-        public void ExportTo(string type,
+        public virtual void ExportTo(string type,
             string downloadsPath,
             string expectedFileName,
             StringComparison stringComparison = StringComparison.Ordinal)
@@ -267,7 +267,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns>
         /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAjaxBusy()
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
@@ -278,7 +278,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <param name="searchModel">The search model.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">searchModel</exception>
-        public IListPage Search(CustomerSearchModel searchModel)
+        public virtual IListPage Search(CustomerSearchModel searchModel)
         {
             if (searchModel == null)
                 throw new ArgumentNullException(nameof(searchModel));
@@ -342,7 +342,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Gets the listed customers.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ListPageCustomerRowComponent> GetListedCustomers()
+        public virtual IEnumerable<ListPageCustomerRowComponent> GetListedCustomers()
         {
             var rowCount = CustomersGrid.GetNumberOfRows();
 
@@ -364,7 +364,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -373,7 +373,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -381,7 +381,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }

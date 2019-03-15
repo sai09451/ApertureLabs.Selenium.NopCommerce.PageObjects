@@ -9,16 +9,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     /// <summary>
     /// Corresponds to the "Admin/Views/Product/Edit.cshtml" page.
     /// </summary>
-    public interface IEditPage : IBasePage
+    public interface IEditPage : IBasePage, IHasAdvancedOptionsPage
     {
-        /// <summary>
-        /// Gets the settings.
-        /// </summary>
-        /// <value>
-        /// The settings.
-        /// </value>
-        EditorSettingsComponent Settings { get; }
-
         /// <summary>
         /// Gets the tabs.
         /// </summary>

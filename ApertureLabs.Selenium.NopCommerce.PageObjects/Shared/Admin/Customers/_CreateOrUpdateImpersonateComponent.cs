@@ -59,7 +59,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Begins the impersonation session.
         /// </summary>
         /// <returns></returns>
-        public Public.Home.IHomePage PlaceOrder()
+        public virtual Public.Home.IHomePage PlaceOrder()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(10))

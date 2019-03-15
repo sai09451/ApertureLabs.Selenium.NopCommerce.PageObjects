@@ -43,7 +43,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The activity log.
         /// </value>
-        public KGridComponent<_CreateOrUpdateActivityLogComponent> ActivityLog { get; }
+        public virtual KGridComponent<_CreateOrUpdateActivityLogComponent> ActivityLog { get; }
 
         #endregion
 

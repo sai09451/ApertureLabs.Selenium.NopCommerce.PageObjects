@@ -91,7 +91,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The main side bar.
         /// </value>
-        public IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
+        public virtual IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
 
         /// <summary>
         /// Gets the navigation bar.
@@ -99,7 +99,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The navigation bar.
         /// </value>
-        public IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
+        public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
         /// <summary>
         /// Gets the footer.
@@ -107,7 +107,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The footer.
         /// </value>
-        public AdminFooterComponent Footer => basePage.Footer;
+        public virtual AdminFooterComponent Footer => basePage.Footer;
 
         /// <summary>
         /// Gets the Info tab.
@@ -115,7 +115,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <value>
         /// The information.
         /// </value>
-        public _CreateOrUpdateInfoComponent Info { get; }
+        public virtual _CreateOrUpdateInfoComponent Info { get; }
 
         #endregion
 
@@ -148,7 +148,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Cancels creating the customer and returns to the customer list.
         /// </summary>
         /// <returns></returns>
-        public IListPage BackToCustomerList()
+        public virtual IListPage BackToCustomerList()
         {
             BackToCustomerListElement.Click();
 
@@ -158,7 +158,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <summary>
         /// Back to top if displayed.
         /// </summary>
-        public void BackToTop()
+        public virtual void BackToTop()
         {
             basePage.BackToTop();
         }
@@ -169,7 +169,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">model</exception>
-        public ICreatePage EnterInformation(CustomerCreateModel model)
+        public virtual ICreatePage EnterInformation(CustomerCreateModel model)
         {
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
@@ -197,7 +197,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns>
         /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAjaxBusy()
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
@@ -206,7 +206,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Saves the customer and returns to the list page.
         /// </summary>
         /// <returns></returns>
-        public IListPage Save()
+        public virtual IListPage Save()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(2))
@@ -220,7 +220,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IEditPage" />.
         /// </summary>
         /// <returns></returns>
-        public IEditPage SaveAndContinue()
+        public virtual IEditPage SaveAndContinue()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(2))
@@ -235,7 +235,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -244,7 +244,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -252,7 +252,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }

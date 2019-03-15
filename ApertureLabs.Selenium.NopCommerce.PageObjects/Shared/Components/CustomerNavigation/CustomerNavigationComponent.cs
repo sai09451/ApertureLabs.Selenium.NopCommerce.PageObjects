@@ -105,7 +105,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.Custom
         /// Gets all tab names.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetAllTabNames()
+        public virtual IEnumerable<string> GetAllTabNames()
         {
             foreach (var tab in AllTabElements)
             {

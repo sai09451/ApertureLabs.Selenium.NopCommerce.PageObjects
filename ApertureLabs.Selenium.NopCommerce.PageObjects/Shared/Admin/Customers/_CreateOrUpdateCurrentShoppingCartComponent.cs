@@ -93,7 +93,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
         /// <exception cref="NoSuchElementException"></exception>
-        public _CreateOrUpdateCurrentShoppingCartComponent SetShoppingCartType(
+        public virtual _CreateOrUpdateCurrentShoppingCartComponent SetShoppingCartType(
             string shoppingCartType,
             StringComparison stringComparison = StringComparison.Ordinal)
         {

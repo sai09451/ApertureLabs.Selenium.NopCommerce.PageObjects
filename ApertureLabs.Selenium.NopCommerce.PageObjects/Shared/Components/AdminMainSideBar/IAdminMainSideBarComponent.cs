@@ -21,6 +21,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminM
         /// Gets the items.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<IAdminMainSideBarNode> GetItems();
+        IEnumerable<IAdminMainSideBarNodeComponent> GetItems();
     }
 }

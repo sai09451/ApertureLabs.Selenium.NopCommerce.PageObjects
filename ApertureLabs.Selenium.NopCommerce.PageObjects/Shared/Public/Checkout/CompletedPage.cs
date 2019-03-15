@@ -73,7 +73,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Gets the admin header links.
         /// </summary>
-        public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         #endregion
 
@@ -102,7 +102,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Continues to the home page.
         /// </summary>
         /// <returns></returns>
-        public IHomePage Continue()
+        public virtual IHomePage Continue()
         {
             ContinueElement.Click();
 
@@ -112,7 +112,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
@@ -121,7 +121,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Gets the order number.
         /// </summary>
         /// <returns></returns>
-        public int GetOrderNumber()
+        public virtual int GetOrderNumber()
         {
             return OrderNumberElement.TextHelper().ExtractInteger();
         }
@@ -130,7 +130,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Goes to the shopping cart page.
         /// </summary>
         /// <returns></returns>
-        public ICartPage GoToShoppingCart()
+        public virtual ICartPage GoToShoppingCart()
         {
             return basePage.GoToShoppingCart();
         }
@@ -139,7 +139,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -150,7 +150,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -159,7 +159,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Checks if a user is logged in.
         /// </summary>
         /// <returns></returns>
-        public bool IsLoggedIn()
+        public virtual bool IsLoggedIn()
         {
             return basePage.IsLoggedIn();
         }
@@ -170,7 +170,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public IHomePage Login(string email, string password)
+        public virtual IHomePage Login(string email, string password)
         {
             return basePage.Login(email, password);
         }
@@ -180,7 +180,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Logout<T>() where T : IPageObject
+        public virtual T Logout<T>() where T : IPageObject
         {
             return basePage.Logout<T>();
         }
@@ -190,7 +190,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <param name="searchFor">Partial or full name of product.</param>
         /// <returns></returns>
-        public ISearchPage Search(string searchFor)
+        public virtual ISearchPage Search(string searchFor)
         {
             return basePage.Search(searchFor);
         }
@@ -201,7 +201,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// </summary>
         /// <param name="searchFor">The search for.</param>
         /// <returns></returns>
-        public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
         }
@@ -210,7 +210,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Checkout
         /// Views the order details.
         /// </summary>
         /// <returns></returns>
-        public IOrderDetailsPage ViewOrderDetails()
+        public virtual IOrderDetailsPage ViewOrderDetails()
         {
             OrderDetailsElement.Click();
 

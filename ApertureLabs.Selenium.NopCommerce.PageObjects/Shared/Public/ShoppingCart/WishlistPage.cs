@@ -73,7 +73,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <summary>
         /// Gets the admin header links.
         /// </summary>
-        public IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
+        public virtual IAdminHeaderLinksComponent AdminHeaderLinks => basePage.AdminHeaderLinks;
 
         #endregion
 
@@ -105,7 +105,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <returns></returns>
         /// <exception cref="Exception">After attempting to add the items to " +
         ///                     "the cart, the page didn't naviage to the cart.</exception>
-        public ICartPage AddToCart()
+        public virtual ICartPage AddToCart()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(5))
@@ -125,7 +125,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
@@ -135,7 +135,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<WishlistRowComponent> GetItems()
+        public virtual IEnumerable<WishlistRowComponent> GetItems()
         {
             foreach (var item in RowElements)
             {
@@ -151,7 +151,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Goes to the shopping cart page.
         /// </summary>
         /// <returns></returns>
-        public ICartPage GoToShoppingCart()
+        public virtual ICartPage GoToShoppingCart()
         {
             return basePage.GoToShoppingCart();
         }
@@ -160,7 +160,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -171,7 +171,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -180,7 +180,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Checks if a user is logged in.
         /// </summary>
         /// <returns></returns>
-        public bool IsLoggedIn()
+        public virtual bool IsLoggedIn()
         {
             return basePage.IsLoggedIn();
         }
@@ -191,7 +191,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public IHomePage Login(string email, string password)
+        public virtual IHomePage Login(string email, string password)
         {
             return basePage.Login(email, password);
         }
@@ -201,7 +201,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T Logout<T>() where T : IPageObject
+        public virtual T Logout<T>() where T : IPageObject
         {
             return basePage.Logout<T>();
         }
@@ -211,7 +211,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// </summary>
         /// <param name="searchFor">Partial or full name of product.</param>
         /// <returns></returns>
-        public ISearchPage Search(string searchFor)
+        public virtual ISearchPage Search(string searchFor)
         {
             return basePage.Search(searchFor);
         }
@@ -222,7 +222,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// </summary>
         /// <param name="searchFor">The search for.</param>
         /// <returns></returns>
-        public IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
+        public virtual IReadOnlyCollection<IWebElement> SearchAjax(string searchFor)
         {
             return basePage.SearchAjax(searchFor);
         }
@@ -238,7 +238,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// <param name="resolve">Resolve handler. Can be null.</param>
         /// <param name="reject">Reject handler. Can be null.</param>
         /// <returns></returns>
-        public bool TryAddToCart<T>(out Exception exception,
+        public virtual bool TryAddToCart<T>(out Exception exception,
             Action<ICartPage> resolve = null,
             Action<T> reject = null)
             where T : IPageObject
@@ -272,7 +272,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.ShoppingCa
         /// Updates the wishlist.
         /// </summary>
         /// <returns></returns>
-        public IWishListPage UpdateWishlist()
+        public virtual IWishListPage UpdateWishlist()
         {
             WrappedDriver
                 .Wait(TimeSpan.FromSeconds(5))

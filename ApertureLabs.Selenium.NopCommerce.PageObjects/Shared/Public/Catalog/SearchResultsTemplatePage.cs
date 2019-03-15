@@ -218,11 +218,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog
         /// Retrieves the items listed.
         /// </summary>
         /// <returns></returns>
-        public virtual IList<SearchResult> GetResults()
+        public virtual IList<SearchResultComponent> GetResults()
         {
             return SearchResultItemElements
                 .Select(element => pageObjectFactory
-                    .PrepareComponent(new SearchResult(
+                    .PrepareComponent(new SearchResultComponent(
                         SearchResultsSelector,
                         pageObjectFactory,
                         element,

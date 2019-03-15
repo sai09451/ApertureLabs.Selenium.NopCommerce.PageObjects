@@ -17,8 +17,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
     /// <seealso cref="ApertureLabs.Selenium.PageObjects.PageObject" />
     /// <seealso cref="ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers.IEditPage" />
     public class EditPage : ParameterPageObject,
-        IEditPage,
-        IHasTabsPage<IEditPage>
+        IEditPage
     {
         #region Fields
 
@@ -61,12 +60,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
             this.pageObjectFactory = pageObjectFactory
                 ?? throw new ArgumentNullException(nameof(pageObjectFactory));
 
-            Tabs = new NavsTabComponent<IEditPage>(
-                By.CssSelector("#customer-edit"),
-                WrappedDriver,
-                new NavsTabComponentConfiguration(),
-                this);
-
             InfoTab = new _CreateOrUpdateInfoComponent(
                 By.CssSelector("#tab-info"),
                 pageObjectFactory,
@@ -96,6 +89,29 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
                 By.CssSelector("#tab-impersonate"),
                 pageObjectFactory,
                 driver);
+
+            Tabs = new NavsTabComponent<IEditPage>(
+                By.CssSelector("#customer-edit"),
+                new ILoadableComponent[]
+                {
+                    InfoTab,
+                    OrdersTab,
+                    AddressesTab,
+                    CurrentShoppingCartAndWishlistTab,
+                    ActivityLogTab,
+                    ImpersonateTab
+                },
+                WrappedDriver,
+                new NavsTabComponentConfiguration
+                {
+                    ActiveTabContentElementSelector = By.CssSelector(".tab-content .tab-pane.active"),
+                    ActiveTabHeaderElementSelector = By.CssSelector(".nav-tabs li.active"),
+                    ActiveTabHeaderNameSelector = By.CssSelector(".nav-tabs li.active"),
+                    TabContentElementsSelector = By.CssSelector(".tab-content .tab-pane"),
+                    TabHeaderElementsSelector = By.CssSelector(".nav-tabs li"),
+                    TabHeaderNamesSelector = By.CssSelector(".nav-tabs li")
+                },
+                this);
         }
 
         #endregion
@@ -301,7 +317,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -310,7 +326,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -318,7 +334,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Customers
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }

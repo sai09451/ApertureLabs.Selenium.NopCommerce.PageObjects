@@ -102,7 +102,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Customer
         /// <value>
         /// The account navigation.
         /// </value>
-        public CustomerNavigationComponent<IInfoPage> AccountNavigation { get; private set; }
+        public virtual CustomerNavigationComponent<IInfoPage> AccountNavigation { get; private set; }
 
         #endregion
 

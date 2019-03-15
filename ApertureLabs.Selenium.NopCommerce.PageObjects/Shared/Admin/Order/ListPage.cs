@@ -125,7 +125,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The main side bar.
         /// </value>
-        public IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
+        public virtual IAdminMainSideBarComponent MainSideBar => basePage.MainSideBar;
 
         /// <summary>
         /// Gets the navigation bar.
@@ -133,7 +133,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The navigation bar.
         /// </value>
-        public IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
+        public virtual IAdminMainHeaderComponent NavigationBar => basePage.NavigationBar;
 
         /// <summary>
         /// Gets the footer.
@@ -141,7 +141,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The footer.
         /// </value>
-        public AdminFooterComponent Footer => basePage.Footer;
+        public virtual AdminFooterComponent Footer => basePage.Footer;
 
         /// <summary>
         /// Gets the orders.
@@ -149,7 +149,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <value>
         /// The orders.
         /// </value>
-        public KGridComponent<IListPage> Orders { get; }
+        public virtual KGridComponent<IListPage> Orders { get; }
 
         #endregion
 
@@ -182,7 +182,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <summary>
         /// Back to top if displayed.
         /// </summary>
-        public void BackToTop()
+        public virtual void BackToTop()
         {
             basePage.BackToTop();
         }
@@ -193,7 +193,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <returns>
         /// <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsAjaxBusy()
+        public virtual bool IsAjaxBusy()
         {
             return basePage.IsAjaxBusy();
         }
@@ -204,7 +204,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <param name="orderSearchModel">The order search model.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IListPage Search(OrderSearchModel orderSearchModel)
+        public virtual IListPage Search(OrderSearchModel orderSearchModel)
         {
             throw new NotImplementedException();
         }
@@ -215,7 +215,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <param name="orderNumber">The order number.</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEditPage GoDirectlyToOrderNumber(int orderNumber)
+        public virtual IEditPage GoDirectlyToOrderNumber(int orderNumber)
         {
             throw new NotImplementedException();
         }
@@ -226,7 +226,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <returns>
         /// <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
         /// </returns>
-        public bool HasNotifications()
+        public virtual bool HasNotifications()
         {
             return basePage.HasNotifications();
         }
@@ -235,7 +235,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// Handles the notification.
         /// </summary>
         /// <param name="element">The element.</param>
-        public void HandleNotification(Action<IWebElement> element)
+        public virtual void HandleNotification(Action<IWebElement> element)
         {
             basePage.HandleNotification(element);
         }
@@ -243,7 +243,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <summary>
         /// Dismisses the notifications.
         /// </summary>
-        public void DismissNotifications()
+        public virtual void DismissNotifications()
         {
             basePage.DismissNotifications();
         }
