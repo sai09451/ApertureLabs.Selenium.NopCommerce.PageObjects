@@ -62,6 +62,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             Prices = new PricesComponent(
                 By.CssSelector("#group-prices"),
                 WrappedDriver);
+
+            TierPrices = new TierPricesComponent(
+                By.CssSelector("#tier-prices"),
+                pageObjectFactory,
+                WrappedDriver);
+
+            Inventory = new InventoryComponent(
+                By.CssSelector("#group-inventory"),
+                WrappedDriver);
+
+            Shipping = new ShippingComponent(
+                By.CssSelector("#group-shipping"),
+                WrappedDriver);
         }
 
         #endregion
@@ -120,6 +133,38 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </value>
         public virtual PricesComponent Prices { get; }
 
+        /// <summary>
+        /// Gets the tier prices.
+        /// </summary>
+        /// <value>
+        /// The tier prices.
+        /// </value>
+        public virtual TierPricesComponent TierPrices { get; }
+
+        /// <summary>
+        /// Gets the associated products.
+        /// </summary>
+        /// <value>
+        /// The associated products.
+        /// </value>
+        public virtual AssociatedProductsVariantsComponent AssociatedProducts { get; }
+
+        /// <summary>
+        /// Gets the inventory.
+        /// </summary>
+        /// <value>
+        /// The inventory.
+        /// </value>
+        public virtual InventoryComponent Inventory { get; }
+
+        /// <summary>
+        /// Gets the shipping.
+        /// </summary>
+        /// <value>
+        /// The shipping.
+        /// </value>
+        public virtual ShippingComponent Shipping { get; }
+
         #endregion
 
         #region Methods
@@ -138,6 +183,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             RecurringProduct.Load();
             Rental.Load();
             Prices.Load();
+            TierPrices.Load();
+            AssociatedProducts.Load();
+            Inventory.Load();
 
             return this;
         }
