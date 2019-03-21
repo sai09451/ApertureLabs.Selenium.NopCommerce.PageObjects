@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo
 {
     /// <summary>
     /// The 'Shipping' component on the product info tab of the admin product

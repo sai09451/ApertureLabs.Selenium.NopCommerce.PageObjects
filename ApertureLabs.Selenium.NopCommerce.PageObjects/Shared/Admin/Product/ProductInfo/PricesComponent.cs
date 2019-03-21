@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo
 {
     /// <summary>
     /// The 'Prices' on the info tab of the admin product edit page.
@@ -109,6 +109,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// If overriding don't forget to call base.Load() or make sure to
+        /// assign the WrappedElement.
+        /// </summary>
+        /// <returns></returns>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            DiscountsComponent.Load();
+
+            return this;
+        }
 
         /// <summary>
         /// Gets the price.

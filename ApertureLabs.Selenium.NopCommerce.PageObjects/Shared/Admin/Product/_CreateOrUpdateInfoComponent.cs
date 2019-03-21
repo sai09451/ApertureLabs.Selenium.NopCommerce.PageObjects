@@ -1,4 +1,5 @@
 ﻿using ApertureLabs.Selenium.PageObjects;
+using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -82,6 +83,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 
             AccessControlList = new AccessControlListComponent(
                 By.CssSelector("#group-shipping + div + div"),
+                WrappedDriver);
+
+            RequireOtherProducts = new RequireOtherProductsComponent(
+                By.CssSelector("#group-required-other-products"),
+                WrappedDriver);
+
+            RelatedProducts = new RelatedProductsComponent(
+                By.CssSelector("#group-required-other-products + div"),
+                pageObjectFactory,
+                WrappedDriver);
+
+            CrossSells = new CrossSellsComponent(
+                By.CssSelector("#group-required-other-products + div + div"),
+                pageObjectFactory,
                 WrappedDriver);
         }
 
@@ -189,6 +204,30 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </value>
         public virtual AccessControlListComponent AccessControlList { get; }
 
+        /// <summary>
+        /// Gets the require other products.
+        /// </summary>
+        /// <value>
+        /// The require other products.
+        /// </value>
+        public virtual RequireOtherProductsComponent RequireOtherProducts { get; }
+
+        /// <summary>
+        /// Gets the related products.
+        /// </summary>
+        /// <value>
+        /// The related products.
+        /// </value>
+        public virtual RelatedProductsComponent RelatedProducts { get; }
+
+        /// <summary>
+        /// Gets the cross sells.
+        /// </summary>
+        /// <value>
+        /// The cross sells.
+        /// </value>
+        public virtual CrossSellsComponent CrossSells { get; }
+
         #endregion
 
         #region Methods
@@ -213,6 +252,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             Shipping.Load();
             Mapping.Load();
             AccessControlList.Load();
+            RequireOtherProducts.Load();
+            RelatedProducts.Load();
 
             return this;
         }

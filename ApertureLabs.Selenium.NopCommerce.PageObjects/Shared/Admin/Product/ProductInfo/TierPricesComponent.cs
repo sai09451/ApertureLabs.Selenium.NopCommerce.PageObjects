@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo
 {
     /// <summary>
     /// Represents the 'Tier prices' component of the info tab of the admin
@@ -109,8 +109,20 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 
         #endregion
 
+        /// <summary>
+        /// Gets the start date component. Don't load in <see cref="Load"/>!.
+        /// </summary>
+        /// <value>
+        /// The start date component.
+        /// </value>
         private KDatePickerComponent<TierPricesComponent> StartDateComponent { get; }
 
+        /// <summary>
+        /// Gets the end date component. Don't load in <see cref="Load"/>!.
+        /// </summary>
+        /// <value>
+        /// The end date component.
+        /// </value>
         private KDatePickerComponent<TierPricesComponent> EndDateComponent { get; }
 
         /// <summary>

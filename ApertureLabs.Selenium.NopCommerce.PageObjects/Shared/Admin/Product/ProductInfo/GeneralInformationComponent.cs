@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using ApertureLabs.Selenium.WebElements.Option;
 using ApertureLabs.Selenium.Components.Kendo.KDatePicker;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo
 {
     /// <summary>
     /// The 'General Info' widget on the 'Info' tab.
@@ -166,6 +166,22 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// If overriding don't forget to call base.Load() or make sure to
+        /// assign the WrappedElement.
+        /// </summary>
+        /// <returns></returns>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            FullDescriptionComponent.Load();
+            ProductTagsComponent.Load();
+            AvailableStartDateComponent.Load();
+            AvailableEndDateComponent.Load();
+
+            return this;
+        }
 
         /// <summary>
         /// Gets the product id.

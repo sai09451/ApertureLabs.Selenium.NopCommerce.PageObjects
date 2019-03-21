@@ -2,7 +2,7 @@
 using ApertureLabs.Selenium.WebElements.Inputs;
 using OpenQA.Selenium;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo
 {
     /// <summary>
     /// The 'Rental' component on the info tab of the admin product edit page.

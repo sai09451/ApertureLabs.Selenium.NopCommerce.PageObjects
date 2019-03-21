@@ -3,7 +3,7 @@ using ApertureLabs.Selenium.WebElements.Inputs;
 using OpenQA.Selenium;
 using System;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo
 {
     /// <summary>
     /// The 'Gift card' component on the product edit page info tab.

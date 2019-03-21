@@ -1,10 +1,11 @@
 ﻿using ApertureLabs.Selenium.Components.Kendo.KMultiSelect;
 using ApertureLabs.Selenium.PageObjects;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
+namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo
 {
     /// <summary>
     /// The 'Access control list' component on the product info tab of the
@@ -39,6 +40,19 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// If overriding don't forget to call base.Load() or make sure to
+        /// assign the WrappedElement.
+        /// </summary>
+        /// <returns></returns>
+        public override ILoadableComponent Load()
+        {
+            base.Load();
+            CustomerRolesComponent.Load();
+
+            return this;
+        }
 
         /// <summary>
         /// Gets the customer roles.
