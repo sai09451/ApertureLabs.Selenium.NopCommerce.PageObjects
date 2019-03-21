@@ -75,6 +75,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             Shipping = new ShippingComponent(
                 By.CssSelector("#group-shipping"),
                 WrappedDriver);
+
+            Mapping = new MappingComponent(
+                By.CssSelector("#group-shipping + div"),
+                WrappedDriver);
+
+            AccessControlList = new AccessControlListComponent(
+                By.CssSelector("#group-shipping + div + div"),
+                WrappedDriver);
         }
 
         #endregion
@@ -165,6 +173,22 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </value>
         public virtual ShippingComponent Shipping { get; }
 
+        /// <summary>
+        /// Gets the mapping.
+        /// </summary>
+        /// <value>
+        /// The mapping.
+        /// </value>
+        public virtual MappingComponent Mapping { get; }
+
+        /// <summary>
+        /// Gets the access control list.
+        /// </summary>
+        /// <value>
+        /// The access control list.
+        /// </value>
+        public virtual AccessControlListComponent AccessControlList { get; }
+
         #endregion
 
         #region Methods
@@ -186,6 +210,9 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             TierPrices.Load();
             AssociatedProducts.Load();
             Inventory.Load();
+            Shipping.Load();
+            Mapping.Load();
+            AccessControlList.Load();
 
             return this;
         }
