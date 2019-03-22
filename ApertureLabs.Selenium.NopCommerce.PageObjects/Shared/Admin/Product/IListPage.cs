@@ -9,6 +9,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     public interface IListPage : IBasePage
     {
         /// <summary>
+        /// Gets the search panel.
+        /// </summary>
+        /// <value>
+        /// The search panel.
+        /// </value>
+        ISearchPanelComponent SearchPanel { get; }
+
+        /// <summary>
         /// Gets the listed products.
         /// </summary>
         /// <returns></returns>

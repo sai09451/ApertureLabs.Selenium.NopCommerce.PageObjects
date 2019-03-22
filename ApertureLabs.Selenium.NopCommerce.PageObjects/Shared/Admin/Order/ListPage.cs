@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Linq;
 using ApertureLabs.Selenium.Components.Kendo;
+using ApertureLabs.Selenium.Components.Kendo.KDatePicker;
 using ApertureLabs.Selenium.Components.Kendo.KGrid;
+using ApertureLabs.Selenium.Components.Kendo.KMultiSelect;
+using ApertureLabs.Selenium.Extensions;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders;
 using ApertureLabs.Selenium.PageObjects;
+using ApertureLabs.Selenium.WebElements.Inputs;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -27,6 +32,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         private readonly By orderStatusesSelector = By.CssSelector("#OrderStatusIds");
         private readonly By paymentStatusesSelector = By.CssSelector("#PaymentStatusIds");
         private readonly By shippingStatusesSelector = By.CssSelector("#ShippingStatusIds");
+        private readonly By storeSelector = By.CssSelector("#StoreId");
         private readonly By vendorSelector = By.CssSelector("#VendorId");
         private readonly By billingPhoneNumberSelector = By.CssSelector("#BillingPhone");
         private readonly By billingEmailAddressSelector = By.CssSelector("#BillingEmail");
@@ -40,6 +46,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         #endregion
 
         private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
 
         #endregion
 
@@ -59,13 +66,47 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
             : base(driver,
                   new Uri(pageSettings.BaseUrl, "Admin/Order/List"))
         {
-            this.basePage = basePage;
+            this.basePage = basePage
+                ?? throw new ArgumentNullException(nameof(basePage));
+
+            this.pageObjectFactory = pageObjectFactory
+                ?? throw new ArgumentNullException(nameof(pageObjectFactory));
+
+            StartDateComponent = new KDatePickerComponent<IListPage>(
+                new KDatePickerConfiguration(),
+                startDateSelector,
+                WrappedDriver,
+                this);
+
+            EndDateComponent = new KDatePickerComponent<IListPage>(
+                new KDatePickerConfiguration(),
+                endDateSelector,
+                WrappedDriver,
+                this);
 
             Orders = new KGridComponent<IListPage>(
-                BaseKendoConfiguration.DefaultBaseKendoOptions(),
+                new BaseKendoConfiguration(),
                 By.CssSelector("#orders-grid"),
                 pageObjectFactory,
                 WrappedDriver,
+                this);
+
+            OrderStatusesComponent = new KMultiSelectComponent<IListPage>(
+                orderStatusesSelector,
+                WrappedDriver,
+                new KMultiSelectConfiguration(),
+                this);
+
+            PaymentStatusesComponent = new KMultiSelectComponent<IListPage>(
+                paymentStatusesSelector,
+                WrappedDriver,
+                new KMultiSelectConfiguration(),
+                this);
+
+            ShippingStatusesComponent = new KMultiSelectComponent<IListPage>(
+                shippingStatusesSelector,
+                WrappedDriver,
+                new KMultiSelectConfiguration(),
                 this);
         }
 
@@ -75,49 +116,60 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
 
         #region Elements
 
-        private IWebElement StartDateElement => WrappedDriver
-            .FindElement(startDateSelector);
+        private InputElement ProductNameElement => new InputElement(
+            WrappedDriver.FindElement(
+                productNameSelector));
 
-        private IWebElement EndDateElement => WrappedDriver
-            .FindElement(endDateSelector);
+        private SelectElement StoreElement => new SelectElement(
+            WrappedDriver.FindElement(
+                storeSelector));
 
-        private IWebElement ProductNameElement => WrappedDriver
-            .FindElement(productNameSelector);
+        private SelectElement VendorElement => new SelectElement(
+            WrappedDriver.FindElement(
+                vendorSelector));
 
-        private IWebElement OrderStatusesElement => WrappedDriver
-            .FindElement(orderStatusesSelector);
+        private InputElement BillingPhoneNumberElement => new InputElement(
+            WrappedDriver.FindElement(
+                billingPhoneNumberSelector));
 
-        private IWebElement PaymentStatusesElement => WrappedDriver
-            .FindElement(paymentStatusesSelector);
+        private InputElement BillingEmailAddressElement => new InputElement(
+            WrappedDriver.FindElement(
+                billingEmailAddressSelector));
 
-        private IWebElement ShippingStatusesElement => WrappedDriver
-            .FindElement(shippingStatusesSelector);
+        private InputElement BillingLastNameElement => new InputElement(
+            WrappedDriver.FindElement(
+                billingLastNameSelector));
 
-        private IWebElement VendorElement => WrappedDriver
-            .FindElement(vendorSelector);
+        private SelectElement BillingCountryElement => new SelectElement(
+            WrappedDriver.FindElement(
+                billingCountrySelector));
 
-        private IWebElement BillingPhoneNumberElement => WrappedDriver
-            .FindElement(billingPhoneNumberSelector);
+        private SelectElement PaymentMethodElement => new SelectElement(
+            WrappedDriver.FindElement(
+                paymentMethodSelector));
 
-        private IWebElement BillingEmailAddressElement => WrappedDriver
-            .FindElement(billingEmailAddressSelector);
+        private InputElement OrderNotesElement => new InputElement(
+            WrappedDriver.FindElement(
+                orderNotesSelector));
 
-        private IWebElement BillingLastNameElement => WrappedDriver
-            .FindElement(billingLastNameSelector);
-
-        private IWebElement PaymentMethodElement => WrappedDriver
-            .FindElement(paymentMethodSelector);
-
-        private IWebElement OrderNotesElement => WrappedDriver
-            .FindElement(orderNotesSelector);
-
-        private IWebElement GoDirectlyToOrderNumberElement => WrappedDriver
-            .FindElement(goDirectlyToOrderNumberSelector);
+        private InputElement GoDirectlyToOrderNumberElement => new InputElement(
+            WrappedDriver.FindElement(
+                goDirectlyToOrderNumberSelector));
 
         private IWebElement GoDirectlyToOrderNumberSubmitElement => WrappedDriver
             .FindElement(goDirectlyToOrderNumberSubmitSelector);
 
         #endregion
+
+        private KDatePickerComponent<IListPage> StartDateComponent { get; }
+
+        private KDatePickerComponent<IListPage> EndDateComponent { get; }
+
+        private KMultiSelectComponent<IListPage> OrderStatusesComponent { get; }
+
+        private KMultiSelectComponent<IListPage> PaymentStatusesComponent { get; }
+
+        private KMultiSelectComponent<IListPage> ShippingStatusesComponent { get; }
 
         /// <summary>
         /// Gets the main side bar.
@@ -175,6 +227,11 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
             base.Load();
             basePage.Load();
             Orders.Load();
+            StartDateComponent.Load();
+            EndDateComponent.Load();
+            OrderStatusesComponent.Load();
+            PaymentStatusesComponent.Load();
+            ShippingStatusesComponent.Load();
 
             return this;
         }
@@ -206,7 +263,76 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <exception cref="NotImplementedException"></exception>
         public virtual IListPage Search(OrderSearchModel orderSearchModel)
         {
-            throw new NotImplementedException();
+            StartDateComponent.SetValue(orderSearchModel.StartDate);
+            EndDateComponent.SetValue(orderSearchModel.EndDate);
+            ProductNameElement.SetValue(orderSearchModel.ProductName);
+            OrderStatusesComponent.SelectOptions(orderSearchModel.OrderStatuses);
+            PaymentStatusesComponent.SelectOptions(orderSearchModel.PaymentStatuses);
+            ShippingStatusesComponent.SelectOptions(orderSearchModel.ShippingStatuses);
+
+            if (!String.IsNullOrEmpty(orderSearchModel.StoreName))
+            {
+                var storeIndex = StoreElement.Options.IndexOf(
+                el => String.Equals(
+                    el.TextHelper().InnerText,
+                    orderSearchModel.StoreName,
+                    StringComparison.Ordinal));
+
+                if (storeIndex == -1)
+                    throw new NoSuchElementException();
+
+                StoreElement.SelectByIndex(storeIndex);
+            }
+
+            if (!String.IsNullOrEmpty(orderSearchModel.VendorName))
+            {
+                var vendorIndex = StoreElement.Options.IndexOf(
+                el => String.Equals(
+                    el.TextHelper().InnerText,
+                    orderSearchModel.VendorName,
+                    StringComparison.Ordinal));
+
+                if (vendorIndex == -1)
+                    throw new NoSuchElementException();
+
+                VendorElement.SelectByIndex(vendorIndex);
+            }
+
+            BillingPhoneNumberElement.SetValue(orderSearchModel.BillingPhone);
+            BillingEmailAddressElement.SetValue(orderSearchModel.BillingEmail);
+            BillingLastNameElement.SetValue(orderSearchModel.BillingLastName);
+
+            if (!String.IsNullOrEmpty(orderSearchModel.BillingCountryName))
+            {
+                var billingCountryIndex = BillingCountryElement.Options.IndexOf(
+                    el => String.Equals(
+                        el.TextHelper().InnerText,
+                        orderSearchModel.BillingCountryName,
+                        StringComparison.Ordinal));
+
+                if (billingCountryIndex == -1)
+                    throw new NoSuchElementException();
+
+                BillingCountryElement.SelectByIndex(billingCountryIndex);
+            }
+
+            if (!String.IsNullOrEmpty(orderSearchModel.PaymentMethodName))
+            {
+                var paymentMethodIndex = PaymentMethodElement.Options.IndexOf(
+                    el => String.Equals(
+                        el.TextHelper().InnerText,
+                        orderSearchModel.PaymentMethodName,
+                        StringComparison.Ordinal));
+
+                if (paymentMethodIndex == -1)
+                    throw new NoSuchElementException();
+
+                PaymentMethodElement.SelectByIndex(paymentMethodIndex);
+            }
+
+            OrderNotesElement.SetValue(orderSearchModel.OrderNotes);
+
+            return this;
         }
 
         /// <summary>
@@ -217,7 +343,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Order
         /// <exception cref="NotImplementedException"></exception>
         public virtual IEditPage GoDirectlyToOrderNumber(int orderNumber)
         {
-            throw new NotImplementedException();
+            GoDirectlyToOrderNumberElement.SetValue(orderNumber);
+            GoDirectlyToOrderNumberSubmitElement.Click();
+
+            return pageObjectFactory.PreparePage<IEditPage>();
         }
 
         /// <summary>

@@ -9,16 +9,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     /// <summary>
     /// Corresponds to the "Admin/Views/Product/Edit.cshtml" page.
     /// </summary>
-    public interface IEditPage : IBasePage, IHasAdvancedOptionsPage
+    public interface IEditPage : IBasePage,
+        IHasAdvancedOptionsPage,
+        IHasTabsPage<IEditPage>
     {
-        /// <summary>
-        /// Gets the tabs.
-        /// </summary>
-        /// <value>
-        /// The tabs.
-        /// </value>
-        NavsTabComponent<IEditPage> Tabs { get; }
-
         /// <summary>
         /// Back to product list.
         /// </summary>
@@ -36,25 +30,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </summary>
         /// <returns></returns>
         IListPage Delete();
-
-        /// <summary>
-        /// Gets the name of the active tab.
-        /// </summary>
-        /// <returns></returns>
-        string GetActiveTabName();
-
-        /// <summary>
-        /// Gets the tab names.
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<string> GetTabNames();
-
-        /// <summary>
-        /// Goes to tab.
-        /// </summary>
-        /// <param name="tabName">Name of the tab.</param>
-        /// <param name="stringComparison">The string comparison.</param>
-        void GoToTab(string tabName, StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
         /// Previews the specified switch to new window.

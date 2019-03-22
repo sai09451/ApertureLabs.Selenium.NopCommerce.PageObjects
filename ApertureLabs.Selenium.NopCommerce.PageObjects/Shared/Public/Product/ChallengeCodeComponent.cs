@@ -140,12 +140,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product
             RemoveDiscount();
         }
 
-        /// <inheritdoc/>
-        public override bool IsStale()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
     }
 }

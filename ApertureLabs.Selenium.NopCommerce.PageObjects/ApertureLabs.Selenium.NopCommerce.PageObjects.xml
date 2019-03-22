@@ -1190,6 +1190,20 @@
             Dismisses the notifications.
             </summary>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IHasAdvancedOptionsPage">
+            <summary>
+            Standard way of declaring that a page has the 'Advanced' and 'Settings'
+            options available to them.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IHasAdvancedOptionsPage.AdvancedOptions">
+            <summary>
+            Gets the advanced options component.
+            </summary>
+            <value>
+            The advanced options component.
+            </value>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IHasTabsPage`1">
             <summary>
             The interface for pages that have a 'tab' based interface.
@@ -1671,10 +1685,13 @@
             <param name="driver"></param>
             <param name="pageSettings"></param>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Settings">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.GeneralInfoTab">
             <summary>
-            Gets the settings.
+            Gets the general information tab.
             </summary>
+            <value>
+            The general information tab.
+            </value>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Tabs">
             <summary>
@@ -1706,6 +1723,14 @@
             </summary>
             <value>
             The footer.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.AdvancedOptions">
+            <summary>
+            Gets the advanced options component.
+            </summary>
+            <value>
+            The advanced options component.
             </value>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.Load">
@@ -1761,27 +1786,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.GoToTab(System.String,System.StringComparison)">
-            <summary>
-            Goes to tab.
-            </summary>
-            <param name="tabName">Name of the tab.</param>
-            <param name="stringComparison"></param>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.GetTabNames">
-            <summary>
-            Gets the tab names.
-            </summary>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.GetActiveTabName">
-            <summary>
-            Gets the name of the active tab.
-            </summary>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.EditPage.BackToTop">
             <summary>
             Backs to top.
@@ -1825,22 +1829,6 @@
             Corresponds to the "Admin/Views/Product/Edit.cshtml" page.
             </summary>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage.Settings">
-            <summary>
-            Gets the settings.
-            </summary>
-            <value>
-            The settings.
-            </value>
-        </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage.Tabs">
-            <summary>
-            Gets the tabs.
-            </summary>
-            <value>
-            The tabs.
-            </value>
-        </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage.BackToProductList">
             <summary>
             Back to product list.
@@ -1858,25 +1846,6 @@
             Deletes this instance.
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage.GetActiveTabName">
-            <summary>
-            Gets the name of the active tab.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage.GetTabNames">
-            <summary>
-            Gets the tab names.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage.GoToTab(System.String,System.StringComparison)">
-            <summary>
-            Goes to tab.
-            </summary>
-            <param name="tabName">Name of the tab.</param>
-            <param name="stringComparison">The string comparison.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IEditPage.Preview(System.Boolean)">
             <summary>
@@ -1902,6 +1871,14 @@
             The product list page.
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage" />
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IListPage.SearchPanel">
+            <summary>
+            Gets the search panel.
+            </summary>
+            <value>
+            The search panel.
+            </value>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.IListPage.GetListedProducts">
             <summary>
@@ -2004,11 +1981,12 @@
             Product list page.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage"/> class.
             </summary>
             <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
             <param name="pageSettings">The page settings.</param>
         </member>
@@ -2034,6 +2012,22 @@
             </summary>
             <value>
             The footer.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.ProductsGrid">
+            <summary>
+            Gets the products grid.
+            </summary>
+            <value>
+            The products grid.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.SearchPanel">
+            <summary>
+            Gets the search panel.
+            </summary>
+            <value>
+            The search panel.
             </value>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPage.Load">
@@ -2119,17 +2113,80 @@
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent">
             <summary>
-            TODO: Finish component.
             A component that represents a 'row' on the admin product list page.
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent"/> class.
             </summary>
             <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.Check(System.Boolean)">
+            <summary>
+            Checks the specified check.
+            </summary>
+            <param name="check">if set to <c>true</c> [check].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.IsChecked">
+            <summary>
+            Determines whether this instance is checked.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is checked; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.GetImageUrl">
+            <summary>
+            Gets the image URL.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.GetProductName">
+            <summary>
+            Gets the name of the product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.GetSku">
+            <summary>
+            Gets the sku.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.GetPrice">
+            <summary>
+            Gets the price.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.GetStockQuantity">
+            <summary>
+            Gets the stock quantity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.GetProductType">
+            <summary>
+            Gets the type of the product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.GetIsPublished">
+            <summary>
+            Checks if the product is published.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ListPageProductRowComponent.Edit">
+            <summary>
+            Edits this instance.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductEditTabNames">
             <summary>
@@ -2179,6 +2236,1371 @@
             <param name="parent">The parent.</param>
             <param name="driver">The driver.</param>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AccessControlListComponent">
+            <summary>
+            The 'Access control list' component on the product info tab of the
+            admin product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AccessControlListComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AccessControlListComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AccessControlListComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AccessControlListComponent.GetCustomerRoles">
+            <summary>
+            Gets the customer roles.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AccessControlListComponent.GetAvailableCustomerRoles">
+            <summary>
+            Gets the available customer roles.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AccessControlListComponent.SetCustomerRoles(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Sets the customer roles.
+            </summary>
+            <param name="roles">The roles.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AssociatedProductsVariantsComponent">
+            <summary>
+            Represents the 'Associated products' component on the product info tab
+            of the admin product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AssociatedProductsVariantsComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AssociatedProductsVariantsComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AssociatedProductsVariantsComponent.AssociatedProductsGridComponent">
+            <summary>
+            Gets the associated products grid component.
+            </summary>
+            <value>
+            The associated products grid component.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AssociatedProductsVariantsComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.AssociatedProductsVariantsComponent.AddNewAssociatedProducts(System.String)">
+            <summary>
+            Adds the new associated products.
+            </summary>
+            <param name="productName">Name of the product.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.CrossSellsComponent">
+            <summary>
+            The 'Cross-sells' component on the product info tab of the admin
+            product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.CrossSellsComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.CrossSellsComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <exception cref="T:System.ArgumentNullException">pageObjectFactory</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.CrossSellsComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.CrossSellsComponent.AddNewCrossSellProduct(System.String)">
+            <summary>
+            Adds the new cross sell product.
+            </summary>
+            <param name="productName">Name of the product.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.DownloadableProductComponent">
+            <summary>
+            The 'Downloadable product' component on the info tab of the admin
+            product page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.DownloadableProductComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.DownloadableProductComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.DownloadableProductComponent.GetIsDownloadableProduct">
+            <summary>
+            Gets the is downloadable product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.DownloadableProductComponent.SetIsDownloadableProduct(System.Boolean)">
+            <summary>
+            Sets the is downloadable product.
+            </summary>
+            <param name="isDownload">if set to <c>true</c> [is download].</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent">
+            <summary>
+            The 'General Info' widget on the 'Info' tab.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetId">
+            <summary>
+            Gets the product id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetProductType">
+            <summary>
+            Gets the type of the product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetAvailableProductTypes">
+            <summary>
+            Gets the available product types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetProductType(System.String,System.StringComparison)">
+            <summary>
+            Sets the type of the product.
+            </summary>
+            <param name="productType">Type of the product.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException">
+            No option found matching that productType.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            productType cannot be null or empty.
+            </exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetVisibleIndividually">
+            <summary>
+            Gets the value of visible individually.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetVisibleIndividually(System.Boolean)">
+            <summary>
+            Sets the visible individually.
+            </summary>
+            <param name="visible">if set to <c>true</c> [visible].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetProductName">
+            <summary>
+            Gets the name of the product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetProductName(System.String)">
+            <summary>
+            Sets the name of the product.
+            </summary>
+            <param name="productName">Name of the product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetShortDescription">
+            <summary>
+            Gets the short description.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetShortDescription(System.String)">
+            <summary>
+            Sets the short description.
+            </summary>
+            <param name="description">The description.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetFullDescription">
+            <summary>
+            Gets the full description.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetFullDescription(System.String)">
+            <summary>
+            Sets the full description.
+            </summary>
+            <param name="fullDescription">The full description.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetSku">
+            <summary>
+            Gets the sku.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetSku(System.String)">
+            <summary>
+            Sets the sku.
+            </summary>
+            <param name="sku">The sku.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetPublished">
+            <summary>
+            Checks if the product is marked as published.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetPublished(System.Boolean)">
+            <summary>
+            Sets the published.
+            </summary>
+            <param name="published">if set to <c>true</c> [published].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetGTIN">
+            <summary>
+            Gets the global trade item number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetGTIN(System.String)">
+            <summary>
+            Sets the global trade item number.
+            </summary>
+            <param name="gtin">The gtin.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetManufacturerPartNumber">
+            <summary>
+            Gets the manufacturer part number.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetManufacturerPartNumber(System.String)">
+            <summary>
+            Sets the manufacturer part number.
+            </summary>
+            <param name="partNumber">The part number.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetShowOnHomePage">
+            <summary>
+            Gets the value of if the product is shown on home page.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetShowOnHomePage(System.Boolean)">
+            <summary>
+            Sets the value of if the product is shown on home page.
+            </summary>
+            <param name="show">if set to <c>true</c> [show].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetDisplayOrder">
+            <summary>
+            Gets the display order.
+            </summary>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.InvalidElementStateException">In order to use " +
+                                "this the product must be shown on the homepage.</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetDisplayOrder(System.Int32)">
+            <summary>
+            Sets the display order.
+            </summary>
+            <param name="displayOrder">The display order.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.InvalidElementStateException">
+            In order to use this the product must be shown on the homepage.
+            </exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetAllowCustomerReviews">
+            <summary>
+            Gets the allow customer reviews.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetAllowCustomerReviews(System.Boolean)">
+            <summary>
+            Sets the allow customer reviews.
+            </summary>
+            <param name="allowReviews">if set to <c>true</c> [allow reviews].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetAvailableStartDate">
+            <summary>
+            Gets the available start date.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetAvailableStartDate(System.Nullable{System.DateTime})">
+            <summary>
+            Sets the available start date.
+            </summary>
+            <param name="startDate">The start date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetAvailableEndDate">
+            <summary>
+            Gets the available end date.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetAvailableEndDate(System.Nullable{System.DateTime})">
+            <summary>
+            Sets the available end date.
+            </summary>
+            <param name="endDate">The end date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetMarkAsNew">
+            <summary>
+            Gets the mark as new.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetMarkAsNew(System.Boolean)">
+            <summary>
+            Sets the mark as new.
+            </summary>
+            <param name="markAsNew">if set to <c>true</c> [mark as new].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetAdminComment">
+            <summary>
+            Gets the admin comment.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.SetAdminComment(System.String)">
+            <summary>
+            Sets the admin comment.
+            </summary>
+            <param name="adminComment">The admin comment.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetCreatedOn">
+            <summary>
+            Gets the created on.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GeneralInformationComponent.GetUpdatedOn">
+            <summary>
+            Gets the updated on.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GroupGiftCardComponent">
+            <summary>
+            The 'Gift card' component on the product edit page info tab.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GroupGiftCardComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GroupGiftCardComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+            <exception cref="T:System.ArgumentNullException">pageObjectFactory</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GroupGiftCardComponent.GetIsGiftCard">
+            <summary>
+            Determines whether the product is a gift card.
+            </summary>
+            <returns>
+              <c>true</c> if the product is a gift card; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.GroupGiftCardComponent.SetIsGiftCard(System.Boolean)">
+            <summary>
+            Sets the product is gift card value.
+            </summary>
+            <param name="isGiftCard">if set to <c>true</c> [is gift card].</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent">
+            <summary>
+            The 'Inventory' component on the admin product edit page > product info
+            > inventory.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetInventoryMethod">
+            <summary>
+            Gets the inventory method.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetAvailableInventoryMethods">
+            <summary>
+            Gets the available inventory methods.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetInventoryMethod(System.String,System.StringComparison)">
+            <summary>
+            Sets the inventory method.
+            </summary>
+            <param name="method">The method.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetStockQuantity">
+            <summary>
+            Gets the stock quantity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetStockQuantity(System.Int32)">
+            <summary>
+            Sets the stock quantity.
+            </summary>
+            <param name="quantity">The quantity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetWarehouse">
+            <summary>
+            Gets the warehouse.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetAvailableWarehouses">
+            <summary>
+            Gets the available warehouses.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetWarehouse(System.String,System.StringComparison)">
+            <summary>
+            Sets the warehouse.
+            </summary>
+            <param name="warehouse">The warehouse.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetHasMultipleWarehouses">
+            <summary>
+            Gets the has multiple warehouses.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetHasMultipleWarehouses(System.Boolean)">
+            <summary>
+            Sets the has multiple warehouses.
+            </summary>
+            <param name="hasMultiple">if set to <c>true</c> [has multiple].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetDisplayAvailability">
+            <summary>
+            Gets the display availability.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetDisplayAvailability(System.Boolean)">
+            <summary>
+            Sets the display availability.
+            </summary>
+            <param name="display">if set to <c>true</c> [display].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetDisplayStockQuantity">
+            <summary>
+            Gets the display stock quantity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetDisplayStockQuantity(System.Boolean)">
+            <summary>
+            Sets the display stock quantity.
+            </summary>
+            <param name="display">if set to <c>true</c> [display].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetMinimumStockQuantity">
+            <summary>
+            Gets the minimum stock quantity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetMinimumStockQuantity(System.Int32)">
+            <summary>
+            Sets the minimum stock quantity.
+            </summary>
+            <param name="minimumStockQty">The minimum stock qty.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetLowStockActivity">
+            <summary>
+            Gets the low stock activity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetAvailableOptionsForLowStockActivity">
+            <summary>
+            Gets the available options for low stock activity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetLowStockActivity(System.String,System.StringComparison)">
+            <summary>
+            Sets the low stock activity.
+            </summary>
+            <param name="option">The option.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetNotifyForQtyBelow">
+            <summary>
+            Gets the notify for qty below.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetNotifyForQtyBelow(System.Int32)">
+            <summary>
+            Sets the notify for qty below.
+            </summary>
+            <param name="quantity">The quantity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetBackorders">
+            <summary>
+            Gets the backorders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetAvailableOptionsForBackorders">
+            <summary>
+            Gets the available options for backorders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetBackorders(System.String,System.StringComparison)">
+            <summary>
+            Sets the backorders.
+            </summary>
+            <param name="option">The option.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetAllowBackInStockSubscriptions">
+            <summary>
+            Gets the allow back in stock subscriptions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetAllowBackInStockSubscriptions(System.Boolean)">
+            <summary>
+            Sets the allow back in stock subscriptions.
+            </summary>
+            <param name="allow">if set to <c>true</c> [allow].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetProductAvailabilityRange">
+            <summary>
+            Gets the product availability range.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetAvailableOptionsForProductAvailabilityRange">
+            <summary>
+            Gets the available options for product availability range.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetProductAvailabilityRange(System.String,System.StringComparison)">
+            <summary>
+            Sets the product availability range.
+            </summary>
+            <param name="option">The option.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetMinimumCartQuantity">
+            <summary>
+            Gets the minimum cart quantity.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetMinimumCartQuantity(System.Int32)">
+            <summary>
+            Sets the minimum cart quantity.
+            </summary>
+            <param name="minQty">The minimum qty.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetAllowedQuantities">
+            <summary>
+            Gets the allowed quantities.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetAllowedQuantities(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Sets the allowed quantities.
+            </summary>
+            <param name="allowedQuantities">The allowed quantities.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.GetNotReturnable">
+            <summary>
+            Gets the not returnable.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.InventoryComponent.SetNotReturnable(System.Boolean)">
+            <summary>
+            Sets the not returnable.
+            </summary>
+            <param name="notReturnable">if set to <c>true</c> [not returnable].</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent">
+            <summary>
+            Represents the 'Mapping' component on the product info tab of the
+            admin product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetCategories">
+            <summary>
+            Gets the categories.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetAvailableOptionsForCategories">
+            <summary>
+            Gets the available options for categories.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.SetCategories(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Sets the categories.
+            </summary>
+            <param name="categories">The categories.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetManufacturers">
+            <summary>
+            Gets the manufacturers.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetAvailableOptionsForManufacturers">
+            <summary>
+            Gets the available options for manufacturers.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.SetManufacturers(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Sets the manufacturers.
+            </summary>
+            <param name="manufacturers">The manufacturers.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetStores">
+            <summary>
+            Gets the stores.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetAvailableOptionsForStores">
+            <summary>
+            Gets the available options for stores.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.SetStores(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Sets the stores.
+            </summary>
+            <param name="stores">The stores.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetVendor">
+            <summary>
+            Gets the vendor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.GetAvailableOptionsForVendors">
+            <summary>
+            Gets the available options for vendors.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.MappingComponent.SetVendor(System.String,System.StringComparison)">
+            <summary>
+            Sets the vendor.
+            </summary>
+            <param name="vendor">The vendor.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent">
+            <summary>
+            The 'Prices' on the info tab of the admin product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetPrice">
+            <summary>
+            Gets the price.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetPrice(System.Decimal)">
+            <summary>
+            Sets the price.
+            </summary>
+            <param name="price">The price.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetOldPrice">
+            <summary>
+            Gets the old price.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetOldPrice(System.Decimal)">
+            <summary>
+            Sets the old price.
+            </summary>
+            <param name="oldPrice">The old price.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetProductCost">
+            <summary>
+            Gets the product cost.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetProductCost(System.Decimal)">
+            <summary>
+            Sets the product cost.
+            </summary>
+            <param name="productCost">The product cost.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetIsBuyButtonDisabled">
+            <summary>
+            Gets the is buy button disabled.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetIsBuyButtonDisabled(System.Boolean)">
+            <summary>
+            Sets the is buy button disabled.
+            </summary>
+            <param name="disable">if set to <c>true</c> [disable].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetIsWishlistButtonDisabled">
+            <summary>
+            Gets the is wishlist button disabled.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetIsWishlistButtonDisabled(System.Boolean)">
+            <summary>
+            Sets the is wishlist button disabled.
+            </summary>
+            <param name="disable">if set to <c>true</c> [disable].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetIsAvailableForPreOrder">
+            <summary>
+            Gets the is available for pre order.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetIsAvailableForPreOrder(System.Boolean)">
+            <summary>
+            Sets the is available for pre order.
+            </summary>
+            <param name="isAvailable">if set to <c>true</c> [is available].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetIsCallForPrice">
+            <summary>
+            Gets the is call for price.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetIsCallForPrice(System.Boolean)">
+            <summary>
+            Sets the is call for price.
+            </summary>
+            <param name="isCallForPrice">if set to <c>true</c> [is call for price].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetDoesCustomerEnterPrice">
+            <summary>
+            Gets the does customer enter price.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetDoesCustomerEnterPrice(System.Boolean)">
+            <summary>
+            Sets the does customer enter price.
+            </summary>
+            <param name="entersPrice">if set to <c>true</c> [enters price].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetBasePriceEnabled(System.Boolean)">
+            <summary>
+            Sets the base price enabled.
+            </summary>
+            <param name="basePriceEnabled">if set to <c>true</c> [base price enabled].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetDiscounts">
+            <summary>
+            Gets the discounts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetAllDiscounts">
+            <summary>
+            Gets all discounts.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.AddDiscount(System.String,System.StringComparison)">
+            <summary>
+            Adds the discount.
+            </summary>
+            <param name="discountName">Name of the discount.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.RemoveDiscount(System.String,System.StringComparison)">
+            <summary>
+            Removes the discount.
+            </summary>
+            <param name="discountName">Name of the discount.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetIsTaxExempt">
+            <summary>
+            Gets the is tax exempt.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetIsTaxExempt(System.Boolean)">
+            <summary>
+            Sets the is tax exempt.
+            </summary>
+            <param name="exempt">if set to <c>true</c> [exempt].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetTaxCategory">
+            <summary>
+            Gets the tax category.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetAllTaxCategories">
+            <summary>
+            Gets all tax categories.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.SetTaxCategory(System.String,System.StringComparison)">
+            <summary>
+            Sets the tax category.
+            </summary>
+            <param name="taxCategory">The tax category.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetIsTelecommBroadcastingAndElectricServices">
+            <summary>
+            Gets the is telecomm broadcasting and electric services.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.PricesComponent.GetIsTelecommBroadcastingAndElectricServices(System.Boolean)">
+            <summary>
+            Gets the is telecomm broadcasting and electric services.
+            </summary>
+            <param name="value">if set to <c>true</c> [value].</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RecurringProductComponent">
+            <summary>
+            The 'Recurring product' component on the 'info' tab of the admin
+            product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RecurringProductComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RecurringProductComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RecurringProductComponent.GetIsRecurringProduct">
+            <summary>
+            Gets the is recurring product.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RecurringProductComponent.SetIsRecurringproduct(System.Boolean)">
+            <summary>
+            Sets the is recurringproduct.
+            </summary>
+            <param name="isRecurring">if set to <c>true</c> [is recurring].</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent">
+            <summary>
+            The 'Related products' component of the product info tab on the admin
+            product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent.RelatedProductsGrid">
+            <summary>
+            Gets the related products grid.
+            </summary>
+            <value>
+            The related products grid.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent.AddNewRelatedProduct(System.String)">
+            <summary>
+            Adds the new related product.
+            </summary>
+            <param name="productName">Name of the product.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent.RemoveRelatedProduct(System.String,System.StringComparison)">
+            <summary>
+            Removes the related product.
+            </summary>
+            <param name="productName">Name of the product.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RelatedProductsComponent.GetRelatedProductNames">
+            <summary>
+            Gets the related product names.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RentalComponent">
+            <summary>
+            The 'Rental' component on the info tab of the admin product edit page.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RentalComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RentalComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RentalComponent.GetIsRental">
+            <summary>
+            Determines whether this instance is rental.
+            </summary>
+            <returns>
+              <c>true</c> if this instance is rental; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RentalComponent.SetIsRental(System.Boolean)">
+            <summary>
+            Sets the is rental.
+            </summary>
+            <param name="isRental">if set to <c>true</c> [is rental].</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent">
+            <summary>
+            Represents the 'Require other products' component on the product info
+            tab of the admin product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent.GetRequireOtherProducts">
+            <summary>
+            Gets the require other products.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent.SetRequireOtherProducts(System.Boolean)">
+            <summary>
+            Sets the require other products.
+            </summary>
+            <param name="requireOtherProducts">if set to <c>true</c> [require other products].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent.GetRequiredProductIds">
+            <summary>
+            Gets the required product ids.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent.SetRequiredProductIds(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Sets the required product ids.
+            </summary>
+            <param name="productIds">The product ids.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent.GetAutoAddTheseProductsToCart">
+            <summary>
+            Gets the automatic add these products to cart.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.RequireOtherProductsComponent.SetAutoAddTheseProductsToCart(System.Boolean)">
+            <summary>
+            Sets the automatic add these products to cart.
+            </summary>
+            <param name="autoAdd">if set to <c>true</c> [automatic add].</param>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.SearchProductPopUpComponent">
+            <summary>
+            Wrapper for the product search pop-up window.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.SearchProductPopUpComponent.#ctor(ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.SearchProductPopUpComponent"/> class.
+            </summary>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.SearchProductPopUpComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.SearchProductPopUpComponent.SearchForProduct(System.String)">
+            <summary>
+            Searches for product.
+            </summary>
+            <param name="productName">Name of the product.</param>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent">
+            <summary>
+            The 'Shipping' component on the product info tab of the admin product
+            edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetIsShippingEnabled">
+            <summary>
+            Gets the is shipping enabled.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetIsShippingEnabled(System.Boolean)">
+            <summary>
+            Sets the is shipping enabled.
+            </summary>
+            <param name="isEnabled">if set to <c>true</c> [is enabled].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetWeight">
+            <summary>
+            Gets the weight.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetWeight(System.Double)">
+            <summary>
+            Sets the weight.
+            </summary>
+            <param name="weight">The weight.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetLength">
+            <summary>
+            Gets the length.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetLength(System.Double)">
+            <summary>
+            Sets the length.
+            </summary>
+            <param name="length">The length.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetWidth">
+            <summary>
+            Gets the width.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetWidth(System.Double)">
+            <summary>
+            Sets the width.
+            </summary>
+            <param name="width">The width.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetHeight">
+            <summary>
+            Gets the height.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetHeight(System.Double)">
+            <summary>
+            Sets the height.
+            </summary>
+            <param name="height">The height.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetHasFreeShipping">
+            <summary>
+            Gets the has free shipping.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetHasFreeShipping(System.Boolean)">
+            <summary>
+            Sets the has free shipping.
+            </summary>
+            <param name="freeShipping">if set to <c>true</c> [free shipping].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetShippedSeperately">
+            <summary>
+            Gets the shipped seperately.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetShippedSeperately(System.Boolean)">
+            <summary>
+            Sets the shipped seperately.
+            </summary>
+            <param name="shippedSeperatley">if set to <c>true</c> [shipped seperatley].</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetAdditionalShippingCharge">
+            <summary>
+            Gets the additional shipping charge.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetAdditionalShippingCharge(System.Double)">
+            <summary>
+            Sets the additional shipping charge.
+            </summary>
+            <param name="charge">The charge.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetDeliveryDate">
+            <summary>
+            Gets the delivery date.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.GetAvailableOptionsForDeliveryDate">
+            <summary>
+            Gets the available options for delivery date.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.ShippingComponent.SetDeliveryDate(System.String,System.StringComparison)">
+            <summary>
+            Sets the delivery date.
+            </summary>
+            <param name="deliveryDate">The delivery date.</param>
+            <param name="stringComparison">The string comparison.</param>
+            <returns></returns>
+            <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent">
+            <summary>
+            Represents the 'Tier prices' component of the info tab of the admin
+            product edit page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.StartDateComponent">
+            <summary>
+            Gets the start date component. Don't load in <see cref="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.Load"/>!.
+            </summary>
+            <value>
+            The start date component.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.EndDateComponent">
+            <summary>
+            Gets the end date component. Don't load in <see cref="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.Load"/>!.
+            </summary>
+            <value>
+            The end date component.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.TierPricesGrid">
+            <summary>
+            Gets the tier prices grid.
+            </summary>
+            <value>
+            The tier prices grid.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.AddNewTierPrice(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel)">
+            <summary>
+            Adds the new tier price.
+            </summary>
+            <param name="tierPricingModel">The tier pricing model.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">tierPricingModel</exception>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.ProductInfo.TierPricesComponent.GetListedTierPrices">
+            <summary>
+            Gets the listed tier prices.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent">
             <summary>
             TODO: Finish component.
@@ -2186,11 +3608,12 @@
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.#ctor(OpenQA.Selenium.By,OpenQA.Selenium.IWebDriver)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
             <summary>
             Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent"/> class.
             </summary>
             <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.EnterProductName(System.String)">
@@ -2199,7 +3622,6 @@
             </summary>
             <param name="productName">Name of the product.</param>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.SelectCategory(System.String,System.StringComparison)">
             <summary>
@@ -2208,7 +3630,6 @@
             <param name="categoryName">Name of the category.</param>
             <param name="stringComparison">The string comparison.</param>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.SetSearchSubCategories(System.Boolean)">
             <summary>
@@ -2216,7 +3637,6 @@
             </summary>
             <param name="searchSubCats">if set to <c>true</c> [search sub cats].</param>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.SelectStore(System.String,System.StringComparison)">
             <summary>
@@ -2225,7 +3645,6 @@
             <param name="storeName">Name of the store.</param>
             <param name="stringComparison">The string comparison.</param>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.SelectProductType(System.String,System.StringComparison)">
             <summary>
@@ -2243,14 +3662,12 @@
             <param name="publishedStatus">The published status.</param>
             <param name="stringComparison">The string comparison.</param>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.Search">
             <summary>
             Searches this instance.
             </summary>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product.SearchPanelComponent.GoDirectlyToSku(System.String)">
             <summary>
@@ -2258,7 +3675,233 @@
             </summary>
             <param name="sku">The sku.</param>
             <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent">
+            <summary>
+            Correlates to the Admin/Views/Product/_CreateOrUpdate.Info.cshtml view.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.PageComponent" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent"/> class.
+            </summary>
+            <param name="selector">The selector.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <exception cref="T:System.ArgumentNullException">pageObjectFactory</exception>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.GeneralInformation">
+            <summary>
+            Gets the general information.
+            </summary>
+            <value>
+            The general information.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.GiftCard">
+            <summary>
+            Gets the gift card.
+            </summary>
+            <value>
+            The gift card.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.DownloadableProduct">
+            <summary>
+            Gets the downloadable product.
+            </summary>
+            <value>
+            The downloadable product.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.RecurringProduct">
+            <summary>
+            Gets the recurring product.
+            </summary>
+            <value>
+            The recurring product.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.Rental">
+            <summary>
+            Gets the rental.
+            </summary>
+            <value>
+            The rental.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.Prices">
+            <summary>
+            Gets the prices.
+            </summary>
+            <value>
+            The prices.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.TierPrices">
+            <summary>
+            Gets the tier prices.
+            </summary>
+            <value>
+            The tier prices.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.AssociatedProducts">
+            <summary>
+            Gets the associated products.
+            </summary>
+            <value>
+            The associated products.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.Inventory">
+            <summary>
+            Gets the inventory.
+            </summary>
+            <value>
+            The inventory.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.Shipping">
+            <summary>
+            Gets the shipping.
+            </summary>
+            <value>
+            The shipping.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.Mapping">
+            <summary>
+            Gets the mapping.
+            </summary>
+            <value>
+            The mapping.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.AccessControlList">
+            <summary>
+            Gets the access control list.
+            </summary>
+            <value>
+            The access control list.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.RequireOtherProducts">
+            <summary>
+            Gets the require other products.
+            </summary>
+            <value>
+            The require other products.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.RelatedProducts">
+            <summary>
+            Gets the related products.
+            </summary>
+            <value>
+            The related products.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.CrossSells">
+            <summary>
+            Gets the cross sells.
+            </summary>
+            <value>
+            The cross sells.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdateInfoComponent.Load">
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage">
+            <summary>
+            Represents the _CreateOrUpdate.cshtml page.
+            </summary>
+            <seealso cref="T:ApertureLabs.Selenium.PageObjects.BasePageObject" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IHasTabsPage`1" />
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.#ctor(ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.IBasePage,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage"/> class.
+            </summary>
+            <param name="basePage">The base page.</param>
+            <param name="pageObjectFactory">The page object factory.</param>
+            <param name="driver">The driver.</param>
+            <exception cref="T:System.ArgumentNullException">
+            basePage
+            or
+            pageObjectFactory
+            </exception>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.Tabs">
+            <summary>
+            Gets the tabs.
+            </summary>
+            <value>
+            The tabs.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.MainSideBar">
+            <summary>
+            Gets the main side bar.
+            </summary>
+            <value>
+            The main side bar.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.NavigationBar">
+            <summary>
+            Gets the navigation bar.
+            </summary>
+            <value>
+            The navigation bar.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.Footer">
+            <summary>
+            Gets the footer.
+            </summary>
+            <value>
+            The footer.
+            </value>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.BackToTop">
+            <summary>
+            Back to top if displayed.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.DismissNotifications">
+            <summary>
+            Dismisses the notifications.
+            </summary>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.HandleNotification(System.Action{OpenQA.Selenium.IWebElement})">
+            <summary>
+            Handles the notification.
+            </summary>
+            <param name="element">The element.</param>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.HasNotifications">
+            <summary>
+            Determines whether this instance has notifications.
+            </summary>
+            <returns>
+            <c>true</c> if this instance has notifications; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product._CreateOrUpdatePage.IsAjaxBusy">
+            <summary>
+            Determines whether the ajax busy element is present and visible.
+            </summary>
+            <returns>
+            <c>true</c> if [is ajax busy]; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminAjax.AdminAjaxComponent">
             <summary>
@@ -2502,59 +4145,59 @@
             <returns></returns>
             <exception cref="T:OpenQA.Selenium.NoSuchElementException"></exception>
         </member>
-        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode">
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent">
             <summary>
             AdminmainSideBarNode.
             </summary>
-            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode" />
+            <seealso cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebDriver)">
             <summary>
-            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode"/> class.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent"/> class.
             </summary>
             <param name="selector">The selector.</param>
             <param name="parent">The parent.</param>
             <param name="pageObjectFactory">The page object factory.</param>
             <param name="driver">The driver.</param>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Load">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.Load">
             <summary>
             If overloaded don't forget to call base.Load() or make sure to
             assign the WrappedElement.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Collapse">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.Collapse">
             <summary>
             Tries to collapses the node.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Expand">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.Expand">
             <summary>
             Tries to expand the node.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.GetIcon">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.GetIcon">
             <summary>
             Gets the icon class.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.GetItems">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.GetItems">
             <summary>
             Gets the child items of this node.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.GetName">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.GetName">
             <summary>
             Gets the name.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNode.Select``1">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.AdminMainSideBarNodeComponent.Select``1">
             <summary>
             Goes to page. Will throw an exception if the node doesn't point to
             anything.
@@ -2582,43 +4225,43 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode">
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent">
             <summary>
             A node present in the admin main sidebar.
             </summary>
             <seealso cref="T:ApertureLabs.Selenium.PageObjects.IPageComponent" />
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.GetItems">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent.GetItems">
             <summary>
             Gets the child items of this node.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.Expand">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent.Expand">
             <summary>
             Tries to expand the node.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.Collapse">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent.Collapse">
             <summary>
             Tries to collapses the node.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.GetName">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent.GetName">
             <summary>
             Gets the name.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.GetIcon">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent.GetIcon">
             <summary>
             Gets the icon class.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNode.Select``1">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar.IAdminMainSideBarNodeComponent.Select``1">
             <summary>
             Goes to page. Will throw an exception if the node doesn't point to
             anything.
@@ -2989,7 +4632,11 @@
             <param name="driver">The driver.</param>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.Load">
-            <inheritDoc/>
+            <summary>
+            If overriding don't forget to call base.Load() or make sure to
+            assign the WrappedElement.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.EditorSettings.EditorSettingsComponent.GetMode">
             <summary>
@@ -4300,74 +5947,74 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult">
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent">
             <summary>
             SearchResult model.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebElement,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.#ctor(OpenQA.Selenium.By,ApertureLabs.Selenium.PageObjects.IPageObjectFactory,OpenQA.Selenium.IWebElement,ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.PageSettings)">
             <summary>
-            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult"/> class.
+            Initializes a new instance of the <see cref="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent"/> class.
             </summary>
             <param name="selector">The selector.</param>
             <param name="pageObjectFactory">The page object factory.</param>
             <param name="element">The element.</param>
             <param name="pageSettings">The page settings.</param>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.WrappedDriver">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.WrappedDriver">
             <inheritdoc/>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.WrappedElement">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.WrappedElement">
             <inheritdoc/>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.By">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.By">
             <inheritdoc/>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.Name">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.Name">
             <summary>
             Name of the product.
             </summary>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.Price">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.Price">
             <summary>
             Price of the product.
             </summary>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.ImageUrl">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.ImageUrl">
             <summary>
             Url of the image.
             </summary>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.Rating">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.Rating">
             <summary>
             Gets the rating. Returns a percentage.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.Load">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.Load">
             <inheritdoc/>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.GoToProductPage">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.GoToProductPage">
             <summary>
             Navigates to the product page.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.AddToCart">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.AddToCart">
             <summary>
             Adds to cart.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.AddToWishList">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.AddToWishList">
             <summary>
             Adds to wish list.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.AddToCompareList">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.AddToCompareList">
             <summary>
             Adds to compare list.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResult.IsStale">
+        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultComponent.IsStale">
             <inheritdoc/>
         </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Catalog.SearchResultsTemplatePage">
@@ -7367,9 +9014,6 @@
             Alias for EnterDiscount.
             </summary>
         </member>
-        <member name="M:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product.ChallengeCodeComponent.IsStale">
-            <inheritdoc/>
-        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Public.Product.IBaseProductPage">
             <summary>
             Base class for the product pages.
@@ -8148,6 +9792,60 @@
             A value indicating whether "allow search by vendor" is enabled.
             </summary>
         </member>
+        <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel">
+            <summary>
+            Represents the tier pricing info used in the admin edit product >
+            general info tab > tier pricing.
+            </summary>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel.Quantity">
+            <summary>
+            Gets or sets the quantity.
+            </summary>
+            <value>
+            The quantity.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel.Price">
+            <summary>
+            Gets or sets the price.
+            </summary>
+            <value>
+            The price.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel.Store">
+            <summary>
+            Gets or sets the store.
+            </summary>
+            <value>
+            The store.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel.CustomerRole">
+            <summary>
+            Gets or sets the customer role.
+            </summary>
+            <value>
+            The customer role.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel.StartDate">
+            <summary>
+            Gets or sets the start date.
+            </summary>
+            <value>
+            The start date.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Catalog.TierPriceModel.EndDate">
+            <summary>
+            Gets or sets the end date.
+            </summary>
+            <value>
+            The end date.
+            </value>
+        </member>
         <member name="T:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Customers.CustomerCreateModel">
             <summary>
             The model used to create new customers.
@@ -8449,31 +10147,39 @@
             The end date.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.OrderStatusIds">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.ProductName">
             <summary>
-            Gets or sets the order status ids.
+            Gets or sets the name of the product.
             </summary>
             <value>
-            The order status ids.
+            The name of the product.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.PaymentStatusIds">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.OrderStatuses">
             <summary>
-            Gets or sets the payment status ids.
+            Gets or sets the order statuses.
             </summary>
             <value>
-            The payment status ids.
+            The order statuses.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.ShippingStatusIds">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.PaymentStatuses">
             <summary>
-            Gets or sets the shipping status ids.
+            Gets or sets the payment statuses.
             </summary>
             <value>
-            The shipping status ids.
+            The payment statuses.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.PaymentMethodSystemName">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.ShippingStatuses">
+            <summary>
+            Gets or sets the shipping statuses.
+            </summary>
+            <value>
+            The shipping statuses.
+            </value>
+        </member>
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.PaymentMethodName">
             <summary>
             Gets or sets the name of the payment method system.
             </summary>
@@ -8481,20 +10187,20 @@
             The name of the payment method system.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.StoreId">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.StoreName">
             <summary>
-            Gets or sets the store identifier.
+            Gets or sets the store name.
             </summary>
             <value>
-            The store identifier.
+            The store name.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.VendorId">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.VendorName">
             <summary>
-            Gets or sets the vendor identifier.
+            Gets or sets the vendor name.
             </summary>
             <value>
-            The vendor identifier.
+            The vendor name.
             </value>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.WarehouseId">
@@ -8545,12 +10251,12 @@
             The last name of the billing.
             </value>
         </member>
-        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.BillingCountryId">
+        <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.BillingCountryName">
             <summary>
-            Gets or sets the billing country identifier.
+            Gets or sets the billing country name.
             </summary>
             <value>
-            The billing country identifier.
+            The billing country name.
             </value>
         </member>
         <member name="P:ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.Orders.OrderSearchModel.OrderNotes">

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ApertureLabs.Selenium.Components.Kendo;
+using ApertureLabs.Selenium.Components.Kendo.KGrid;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminFooter;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainHeader;
 using ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Components.AdminMainSideBar;
@@ -25,6 +27,7 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         #endregion
 
         private readonly IBasePage basePage;
+        private readonly IPageObjectFactory pageObjectFactory;
 
         #endregion
 
@@ -34,21 +37,43 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// Initializes a new instance of the <see cref="ListPage"/> class.
         /// </summary>
         /// <param name="basePage">The base page.</param>
+        /// <param name="pageObjectFactory">The page object factory.</param>
         /// <param name="driver">The driver.</param>
         /// <param name="pageSettings">The page settings.</param>
         public ListPage(IBasePage basePage,
+            IPageObjectFactory pageObjectFactory,
             IWebDriver driver,
             PageSettings pageSettings)
             : base(driver,
                   pageSettings.AdminBaseUrl,
                   new UriTemplate("Product/List"))
         {
-            this.basePage = basePage;
+            this.basePage = basePage
+                ?? throw new ArgumentNullException(nameof(basePage));
+
+            this.pageObjectFactory = pageObjectFactory
+                ?? throw new ArgumentNullException(nameof(pageObjectFactory));
+
+            ProductsGrid = new KGridComponent<IListPage>(
+                new BaseKendoConfiguration(),
+                By.CssSelector("#products-grid"),
+                pageObjectFactory,
+                WrappedDriver,
+                this);
+
+            SearchPanel = new SearchPanelComponent(
+                By.CssSelector(".panel-search"),
+                pageObjectFactory,
+                WrappedDriver);
         }
 
         #endregion
 
         #region Properties
+
+        #region Elements
+
+        #endregion
 
         /// <summary>
         /// Gets the main side bar.
@@ -74,9 +99,21 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// </value>
         public virtual AdminFooterComponent Footer => basePage.Footer;
 
-        #region Elements
+        /// <summary>
+        /// Gets the products grid.
+        /// </summary>
+        /// <value>
+        /// The products grid.
+        /// </value>
+        public virtual KGridComponent<IListPage> ProductsGrid { get; }
 
-        #endregion
+        /// <summary>
+        /// Gets the search panel.
+        /// </summary>
+        /// <value>
+        /// The search panel.
+        /// </value>
+        public virtual ISearchPanelComponent SearchPanel { get; }
 
         #endregion
 
@@ -97,6 +134,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         {
             base.Load();
             basePage.Load();
+            ProductsGrid.Load();
+            SearchPanel.Load();
 
             return this;
         }
@@ -108,7 +147,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <exception cref="NotImplementedException"></exception>
         public virtual IEnumerable<ListPageProductRowComponent> GetListedProducts()
         {
-            throw new NotImplementedException();
+            foreach (var rowElement in ProductsGrid.EnumerateOverAllRows())
+            {
+                yield return pageObjectFactory.PrepareComponent(
+                    new ListPageProductRowComponent(
+                        new ByElement(rowElement),
+                        pageObjectFactory,
+                        WrappedDriver));
+            }
         }
 
         /// <summary>

@@ -80,10 +80,10 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
                 new NavsTabComponentConfiguration
                 {
                     ActiveTabContentElementSelector = By.CssSelector(".tab-content .tab-pane.active"),
-                    ActiveTabHeaderElementSelector = By.CssSelector(".navs-tab > .active"),
-                    ActiveTabHeaderNameSelector = By.CssSelector(".navs-tab > .active > a"),
-                    TabHeaderElementsSelector = By.CssSelector(".navs-tab > li"),
-                    TabHeaderNamesSelector = By.CssSelector(".navs-tab > li > a")
+                    ActiveTabHeaderElementSelector = By.CssSelector(".nav-tabs > .active"),
+                    ActiveTabHeaderNameSelector = By.CssSelector(".nav-tabs > .active > a"),
+                    TabHeaderElementsSelector = By.CssSelector(".nav-tabs > li"),
+                    TabHeaderNamesSelector = By.CssSelector(".nav-tabs > li > a")
                 },
                 this);
 
@@ -261,37 +261,6 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
             DeleteButtonElement.Click();
 
             return pageObjectFactory.PreparePage<ListPage>();
-        }
-
-        /// <summary>
-        /// Goes to tab.
-        /// </summary>
-        /// <param name="tabName">Name of the tab.</param>
-        /// <param name="stringComparison"></param>
-        public virtual void GoToTab(string tabName,
-            StringComparison stringComparison = StringComparison.Ordinal)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Gets the tab names.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public virtual IEnumerable<string> GetTabNames()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Gets the name of the active tab.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public virtual string GetActiveTabName()
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -25,28 +25,36 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.
         public DateTime? EndDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the order status ids.
+        /// Gets or sets the name of the product.
         /// </summary>
         /// <value>
-        /// The order status ids.
+        /// The name of the product.
         /// </value>
-        public IList<int> OrderStatusIds { get; set; }
+        public string ProductName { get; set; }
 
         /// <summary>
-        /// Gets or sets the payment status ids.
+        /// Gets or sets the order statuses.
         /// </summary>
         /// <value>
-        /// The payment status ids.
+        /// The order statuses.
         /// </value>
-        public IList<int> PaymentStatusIds { get; set; }
+        public IList<string> OrderStatuses { get; set; }
 
         /// <summary>
-        /// Gets or sets the shipping status ids.
+        /// Gets or sets the payment statuses.
         /// </summary>
         /// <value>
-        /// The shipping status ids.
+        /// The payment statuses.
         /// </value>
-        public IList<int> ShippingStatusIds { get; set; }
+        public IList<string> PaymentStatuses { get; set; }
+
+        /// <summary>
+        /// Gets or sets the shipping statuses.
+        /// </summary>
+        /// <value>
+        /// The shipping statuses.
+        /// </value>
+        public IList<string> ShippingStatuses { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the payment method system.
@@ -54,23 +62,23 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.
         /// <value>
         /// The name of the payment method system.
         /// </value>
-        public string PaymentMethodSystemName { get; set; }
+        public string PaymentMethodName { get; set; }
 
         /// <summary>
-        /// Gets or sets the store identifier.
+        /// Gets or sets the store name.
         /// </summary>
         /// <value>
-        /// The store identifier.
+        /// The store name.
         /// </value>
-        public int StoreId { get; set; }
+        public string StoreName { get; set; }
 
         /// <summary>
-        /// Gets or sets the vendor identifier.
+        /// Gets or sets the vendor name.
         /// </summary>
         /// <value>
-        /// The vendor identifier.
+        /// The vendor name.
         /// </value>
-        public int VendorId { get; set; }
+        public string VendorName { get; set; }
 
         /// <summary>
         /// Gets or sets the warehouse identifier.
@@ -121,12 +129,12 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Resources.Models.
         public string BillingLastName { get; set; }
 
         /// <summary>
-        /// Gets or sets the billing country identifier.
+        /// Gets or sets the billing country name.
         /// </summary>
         /// <value>
-        /// The billing country identifier.
+        /// The billing country name.
         /// </value>
-        public int BillingCountryId { get; set; }
+        public string BillingCountryName { get; set; }
 
         /// <summary>
         /// Gets or sets the order notes.

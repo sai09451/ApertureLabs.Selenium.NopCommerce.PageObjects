@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApertureLabs.Selenium.PageObjects;
+using System;
 
 namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
 {
@@ -6,14 +7,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
     /// The interface for the search panel component on the admin product
     /// search page.
     /// </summary>
-    public interface ISearchPanelComponent
+    public interface ISearchPanelComponent : IPageComponent
     {
         /// <summary>
         /// Enters the name of the product.
         /// </summary>
         /// <param name="productName">Name of the product.</param>
         /// <returns></returns>
-        SearchPanelComponent EnterProductName(string productName);
+        ISearchPanelComponent EnterProductName(string productName);
 
         /// <summary>
         /// Goes the directly to sku.
@@ -34,7 +35,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <param name="categoryName">Name of the category.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
-        SearchPanelComponent SelectCategory(string categoryName, StringComparison stringComparison = StringComparison.Ordinal);
+        ISearchPanelComponent SelectCategory(string categoryName,
+            StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
         /// Selects the type of the product.
@@ -42,7 +44,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <param name="productType">Type of the product.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
-        SearchPanelComponent SelectProductType(string productType, StringComparison stringComparison = StringComparison.Ordinal);
+        ISearchPanelComponent SelectProductType(string productType,
+            StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
         /// Selects the published.
@@ -50,7 +53,8 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <param name="publishedStatus">The published status.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
-        SearchPanelComponent SelectPublished(string publishedStatus, StringComparison stringComparison = StringComparison.Ordinal);
+        ISearchPanelComponent SelectPublished(string publishedStatus,
+            StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
         /// Selects the store.
@@ -58,13 +62,14 @@ namespace ApertureLabs.Selenium.NopCommerce.PageObjects.Shared.Admin.Product
         /// <param name="storeName">Name of the store.</param>
         /// <param name="stringComparison">The string comparison.</param>
         /// <returns></returns>
-        SearchPanelComponent SelectStore(string storeName, StringComparison stringComparison = StringComparison.Ordinal);
+        ISearchPanelComponent SelectStore(string storeName,
+            StringComparison stringComparison = StringComparison.Ordinal);
 
         /// <summary>
         /// Sets the search sub categories.
         /// </summary>
         /// <param name="searchSubCats">if set to <c>true</c> [search sub cats].</param>
         /// <returns></returns>
-        SearchPanelComponent SetSearchSubCategories(bool searchSubCats);
+        ISearchPanelComponent SetSearchSubCategories(bool searchSubCats);
     }
 }
